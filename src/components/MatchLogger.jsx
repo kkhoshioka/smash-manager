@@ -25,9 +25,22 @@ export default function MatchLogger() {
         setGsp('');
     }, [prefs.lastMyFighter]);
 
-    const latestGspPlaceholder = prefs.lastMyFighter && prefs.fighterGsp?.[prefs.lastMyFighter]
-        ? prefs.fighterGsp[prefs.lastMyFighter].toString()
-        : "例: 14000000";
+    const latestGspPlaceholder = useMemo(() => {
+        if (!prefs.lastMyFighter) return "例: 14000000";
+
+        // Check if there is an actively saved GSP in preferences
+        if (prefs.fighterGsp?.[prefs.lastMyFighter]) {
+            return prefs.fighterGsp[prefs.lastMyFighter].toString();
+        }
+
+        // Fallback: search history for the most recent match data for this fighter
+        const recentMatch = [...history].reverse().find(m => m.myFighter === prefs.lastMyFighter && m.gsp);
+        if (recentMatch) {
+            return recentMatch.gsp.toString();
+        }
+
+        return "例: 14000000";
+    }, [prefs.lastMyFighter, prefs.fighterGsp, history]);
 
     const frequentOpponents = useMemo(() => {
         const counts = {};
