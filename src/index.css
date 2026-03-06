@@ -51,7 +51,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('/bg_stage.png');
+  background-image: var(--bg-image, url('/bg_stage.png'));
   background-size: cover;
   background-position: center;
   filter: brightness(0.6) blur(2px);

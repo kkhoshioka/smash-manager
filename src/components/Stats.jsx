@@ -1,12 +1,11 @@
 import React, { useMemo, useState, useRef } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Download, Upload, Cloud, Flame, CalendarDays, Sun, Moon, Calendar } from 'lucide-react';
+import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar } from 'lucide-react';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart } from 'recharts';
 
 export default function Stats() {
-    const { history, removeMatch, editMatch, prefs, importData, syncId, handleSetSyncId, isSyncing, syncError } = useMatchHistory();
-    const fileInputRef = useRef(null);
+    const { history, removeMatch, editMatch, prefs } = useMatchHistory();
 
     const [editingMatchId, setEditingMatchId] = useState(null);
     const [editForm, setEditForm] = useState({});
@@ -45,38 +44,6 @@ export default function Stats() {
         setEditForm(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleExport = () => {
-        const data = { history, prefs };
-        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `smash_logger_backup_${new Date().toISOString().slice(0, 10)}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    };
-
-    const handleImportClick = () => {
-        if (fileInputRef.current) fileInputRef.current.click();
-    };
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            const success = importData(event.target.result);
-            if (success) {
-                alert('データの読み込み（復元）が完了しました！');
-            } else {
-                alert('エラー：データの読み込みに失敗しました。正しいバックアップファイル形式か確認してください。');
-            }
-        };
-        reader.readAsText(file);
-    };
 
     const [selectedMyFighter, setSelectedMyFighter] = useState(prefs.lastMyFighter || 'all');
 
@@ -655,63 +622,6 @@ export default function Stats() {
                     </div>
                 )}
             </div>
-
-            <div className="smash-divider" />
-
-            {/* Config & Data Section */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '2rem' }}>
-                {/* Cloud Sync */}
-                <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)' }}>
-                    <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
-                        <Cloud size={24} /> クラウド同期
-                    </h2>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.5rem', fontWeight: 'bold' }}>
-                        合言葉を設定して、スマートフォンとPC間でデータを同期します。
-                    </p>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <input
-                            type="text"
-                            placeholder="合言葉（4文字以上）"
-                            defaultValue={syncId}
-                            onBlur={(e) => handleSetSyncId(e.target.value)}
-                            style={{ padding: '1rem', fontSize: '1.1rem', textAlign: 'center' }}
-                        />
-                        <button
-                            onClick={() => {
-                                const val = document.querySelector('input[placeholder="合言葉（4文字以上）"]').value;
-                                handleSetSyncId(val);
-                            }}
-                            disabled={isSyncing}
-                            className="btn-smash"
-                            style={{ padding: '1rem', fontSize: '1.2rem', background: isSyncing ? '#555' : 'var(--win-color)', width: '100%', clipPath: 'none', fontFamily: 'var(--font-jp)' }}
-                        >
-                            {isSyncing ? '通信中...' : (syncId ? '合言葉を変更・更新' : '合言葉を設定して同期')}
-                        </button>
-                        {syncId && <div style={{ color: 'var(--win-color)', fontSize: '0.9rem', fontWeight: 'bold', textAlign: 'center' }}>✓ 同期オン: {syncId}</div>}
-                        {syncError && <div style={{ color: 'var(--smash-red)', fontSize: '0.9rem', fontWeight: 'bold', textAlign: 'center' }}>⚠ {syncError}</div>}
-                    </div>
-                </div>
-
-                {/* Local Backup */}
-                <div className="stat-card" style={{ borderBottomColor: 'var(--text-muted)' }}>
-                    <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-main)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
-                        <Download size={24} /> ローカルバックアップ
-                    </h2>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.5rem', fontWeight: 'bold' }}>
-                        ファイル形式でデータを直接ダウンロード、または復元します。
-                    </p>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <button onClick={handleExport} className="btn-smash" style={{ padding: '1rem', fontSize: '1.1rem', background: '#333', color: '#fff', width: '100%', clipPath: 'none', fontFamily: 'var(--font-jp)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><Download size={20} /> バックアップを保存</div>
-                        </button>
-                        <input type="file" accept=".json" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
-                        <button onClick={handleImportClick} className="btn-smash" style={{ padding: '1rem', fontSize: '1.1rem', background: '#333', color: '#fff', width: '100%', clipPath: 'none', fontFamily: 'var(--font-jp)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><Upload size={20} /> データを読み込む</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     );
 }
