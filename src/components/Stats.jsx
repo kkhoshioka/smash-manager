@@ -9,6 +9,7 @@ export default function Stats() {
 
     const [editingMatchId, setEditingMatchId] = useState(null);
     const [editForm, setEditForm] = useState({});
+    const [showAllMatchups, setShowAllMatchups] = useState(false);
 
     const handleEditClick = (match) => {
         setEditingMatchId(match.id);
@@ -391,7 +392,7 @@ export default function Stats() {
                         <div className="stat-card" style={{ borderBottomColor: 'var(--text-muted)', padding: '1.5rem' }}>
                             <h3 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>よく戦う相手</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {[...opponentStats].sort((a, b) => b.total - a.total).slice(0, 5).map((stat, i) => (
+                                {[...opponentStats].sort((a, b) => b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
                                     <div key={`freq-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: '#111', borderLeft: '4px solid var(--text-muted)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <span style={{ fontWeight: '900', color: 'var(--text-muted)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
@@ -413,7 +414,7 @@ export default function Stats() {
                         <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '1.5rem' }}>
                             <h3 style={{ fontSize: '1.4rem', color: 'var(--win-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>得意な相手</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {[...opponentStats].sort((a, b) => b.winRate - a.winRate || b.total - a.total).slice(0, 5).map((stat, i) => (
+                                {[...opponentStats].sort((a, b) => b.winRate - a.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
                                     <div key={`best-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(0, 204, 255, 0.1)', borderLeft: '4px solid var(--win-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <span style={{ fontWeight: '900', color: 'var(--win-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
@@ -435,7 +436,7 @@ export default function Stats() {
                         <div className="stat-card" style={{ borderBottomColor: 'var(--lose-color)', padding: '1.5rem' }}>
                             <h3 style={{ fontSize: '1.4rem', color: 'var(--lose-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>苦手な相手</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {[...opponentStats].sort((a, b) => a.winRate - b.winRate || b.total - a.total).slice(0, 5).map((stat, i) => (
+                                {[...opponentStats].sort((a, b) => a.winRate - b.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
                                     <div key={`worst-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(255, 51, 51, 0.1)', borderLeft: '4px solid var(--lose-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <span style={{ fontWeight: '900', color: 'var(--lose-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
@@ -453,6 +454,37 @@ export default function Stats() {
                             </div>
                         </div>
                     </div>
+
+                    {/* Show All Matchups Button */}
+                    {opponentStats.length > 5 && (
+                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+                            <button
+                                onClick={() => setShowAllMatchups(!showAllMatchups)}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    color: 'var(--smash-yellow)',
+                                    border: '2px solid var(--smash-yellow)',
+                                    padding: '0.8rem 2rem',
+                                    fontSize: '1.1rem',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer',
+                                    clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                                    transition: 'all 0.2s',
+                                    fontFamily: 'var(--font-jp)'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.backgroundColor = 'var(--smash-yellow)';
+                                    e.currentTarget.style.color = '#000';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.backgroundColor = 'transparent';
+                                    e.currentTarget.style.color = 'var(--smash-yellow)';
+                                }}
+                            >
+                                {showAllMatchups ? '▲ 一部のみ表示 (TOP 5)' : '▼ すべてのファイターを表示'}
+                            </button>
+                        </div>
+                    )}
 
                     {/* Kill Move Rankings */}
                     {myKillMoveRanking.length > 0 && (

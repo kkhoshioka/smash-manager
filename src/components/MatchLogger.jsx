@@ -208,8 +208,21 @@ export default function MatchLogger() {
                                     {myFighterObj?.name || '未選択'}
                                 </span>
                                 {currentStreak > 0 && (
-                                    <span style={{ color: 'var(--win-color)', fontWeight: '900', fontSize: '1.2rem', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.3rem', animation: 'pulse 2s infinite' }}>
-                                        <Flame size={20} color="var(--win-color)" /> 現在 {currentStreak} 連勝中！
+                                    <span style={{
+                                        color: currentStreak >= 5 ? '#ff00ff' : currentStreak >= 3 ? '#ffcc00' : 'var(--win-color)',
+                                        fontWeight: '900',
+                                        fontSize: currentStreak >= 10 ? '1.8rem' : currentStreak >= 5 ? '1.5rem' : '1.2rem',
+                                        marginTop: '0.2rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.3rem',
+                                        animation: currentStreak >= 5 ? 'pulse 0.5s infinite' : currentStreak >= 3 ? 'pulse 1s infinite' : 'pulse 2s infinite',
+                                        textShadow: currentStreak >= 5 ? '0 0 10px #ff00ff, 2px 2px 0 #000' : currentStreak >= 3 ? '0 0 10px #ffcc00, 2px 2px 0 #000' : '2px 2px 0 #000',
+                                        transition: 'all 0.3s'
+                                    }}>
+                                        <Flame size={currentStreak >= 5 ? 28 : currentStreak >= 3 ? 24 : 20}
+                                            color={currentStreak >= 5 ? '#ff00ff' : currentStreak >= 3 ? '#ffcc00' : 'var(--win-color)'} />
+                                        現在 {currentStreak} 連勝中！
                                     </span>
                                 )}
                             </div>
