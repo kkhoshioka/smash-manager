@@ -51,7 +51,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('https://www.ssbwiki.com/images/8/87/FDdark.png');
+  background-image: url('/bg_stage.png');
   background-size: cover;
   background-position: center;
   filter: brightness(0.35) blur(3px);
