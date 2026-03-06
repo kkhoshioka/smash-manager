@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useRef } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Download, Upload, Cloud } from 'lucide-react';
+import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Download, Upload, Cloud, Flame, CalendarDays, Sun, Moon, Calendar } from 'lucide-react';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart } from 'recharts';
 
 export default function Stats() {
@@ -165,6 +165,77 @@ export default function Stats() {
             .slice(0, 5);
     }, [filteredHistory]);
 
+    const advancedStats = useMemo(() => {
+        if (filteredHistory.length === 0) return null;
+
+        const chronologicalHistory = [...filteredHistory].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+        let currentStreak = 0;
+        let maxStreak = 0;
+        let currentLossStreak = 0;
+        let maxLossStreak = 0;
+
+        const timeStats = {
+            morning: { label: '朝', icon: <Sun size={20} />, total: 0, wins: 0 },
+            afternoon: { label: '昼', icon: <Sun size={20} />, total: 0, wins: 0 },
+            evening: { label: '夜', icon: <Moon size={20} />, total: 0, wins: 0 },
+            night: { label: '深夜', icon: <Moon size={20} />, total: 0, wins: 0 },
+        };
+
+        const dailyMap = {};
+
+        chronologicalHistory.forEach(m => {
+            // Streaks
+            if (m.result === 'win') {
+                currentStreak++;
+                currentLossStreak = 0;
+                if (currentStreak > maxStreak) maxStreak = currentStreak;
+            } else {
+                currentLossStreak++;
+                currentStreak = 0;
+                if (currentLossStreak > maxLossStreak) maxLossStreak = currentLossStreak;
+            }
+
+            const dateObj = new Date(m.timestamp);
+            const hour = dateObj.getHours();
+
+            // Time of day
+            if (hour >= 6 && hour < 12) { timeStats.morning.total++; if (m.result === 'win') timeStats.morning.wins++; }
+            else if (hour >= 12 && hour < 18) { timeStats.afternoon.total++; if (m.result === 'win') timeStats.afternoon.wins++; }
+            else if (hour >= 18 && hour <= 23) { timeStats.evening.total++; if (m.result === 'win') timeStats.evening.wins++; }
+            else { timeStats.night.total++; if (m.result === 'win') timeStats.night.wins++; }
+
+            // Daily Stats
+            const dateStr = dateObj.toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' });
+            if (!dailyMap[dateStr]) {
+                dailyMap[dateStr] = { date: dateStr, total: 0, wins: 0, startGsp: m.gsp || null, endGsp: m.gsp || null };
+            }
+            dailyMap[dateStr].total++;
+            if (m.result === 'win') dailyMap[dateStr].wins++;
+            if (m.gsp) {
+                if (dailyMap[dateStr].startGsp === null) dailyMap[dateStr].startGsp = m.gsp;
+                dailyMap[dateStr].endGsp = m.gsp;
+            }
+        });
+
+        const recentDays = Object.values(dailyMap).slice(-7).reverse();
+
+        const getWinRate = (wins, total) => total > 0 ? Math.round((wins / total) * 100) : 0;
+
+        const bestTime = Object.values(timeStats)
+            .filter(t => t.total >= 3)
+            .sort((a, b) => getWinRate(b.wins, b.total) - getWinRate(a.wins, a.total))[0];
+
+        return {
+            maxStreak,
+            maxLossStreak,
+            currentStreak,
+            timeStats,
+            bestTime,
+            recentDays
+        };
+    }, [filteredHistory]);
+
     return (
         <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {/* Fighter Filter */}
@@ -208,6 +279,91 @@ export default function Stats() {
             </div>
 
             <div className="smash-divider" />
+
+            {/* Advanced Stats */}
+            {advancedStats && (
+                <>
+                    <h2 className="section-title">詳細データ分析</h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+                        {/* 1. Win Streak */}
+                        <div className="stat-card" style={{ borderBottomColor: 'var(--smash-red)', padding: '1.5rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                <Flame size={20} /> 連勝記録
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                                <span style={{ color: 'var(--text-muted)' }}>最大連勝</span>
+                                <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{advancedStats.maxStreak}</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                                <span style={{ color: 'var(--text-muted)' }}>現在の連勝</span>
+                                <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)', color: advancedStats.currentStreak > 0 ? 'var(--smash-yellow)' : 'inherit' }}>{advancedStats.currentStreak}</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>最大連敗</span>
+                                <span style={{ fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-en)', color: 'var(--lose-color)' }}>{advancedStats.maxLossStreak}</span>
+                            </div>
+                        </div>
+
+                        {/* 2. Best Time to Play */}
+                        {advancedStats.bestTime && (
+                            <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', padding: '1.5rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-yellow)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                    <Clock size={20} /> 勝率の最も高い時間帯
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    <div style={{ backgroundColor: '#222', padding: '0.8rem', borderRadius: '50%', color: 'var(--smash-yellow)' }}>
+                                        {advancedStats.bestTime.icon}
+                                    </div>
+                                    <div>
+                                        <div style={{ fontSize: '1.5rem', fontWeight: '900', fontFamily: 'var(--font-jp)' }}>{advancedStats.bestTime.label}</div>
+                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>勝率: {Math.round((advancedStats.bestTime.wins / advancedStats.bestTime.total) * 100)}% ({advancedStats.bestTime.total}戦)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* 3. Daily Performance */}
+                    {advancedStats.recentDays.length > 0 && (
+                        <div className="stat-card" style={{ borderBottomColor: 'var(--text-main)', padding: '1.5rem', marginBottom: '2rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                <CalendarDays size={20} /> 最近の日毎データ (直近7日)
+                            </div>
+                            <div style={{ overflowX: 'auto' }}>
+                                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '600px' }}>
+                                    <thead>
+                                        <tr style={{ backgroundColor: '#1a1a1a', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>日付</th>
+                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>試合数</th>
+                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>勝率</th>
+                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>戦闘力 最終推移</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {advancedStats.recentDays.map((day, i) => {
+                                            const winRate = day.total > 0 ? Math.round((day.wins / day.total) * 100) : 0;
+                                            const gspDiff = (day.endGsp && day.startGsp) ? day.endGsp - day.startGsp : 0;
+                                            const gspColor = gspDiff > 0 ? 'var(--win-color)' : (gspDiff < 0 ? 'var(--lose-color)' : 'var(--text-muted)');
+                                            return (
+                                                <tr key={i} style={{ borderBottom: '1px solid #333', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
+                                                    <td style={{ padding: '1rem', fontWeight: 'bold' }}>{day.date}</td>
+                                                    <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold' }}>{day.total} 戦</td>
+                                                    <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: winRate >= 60 ? 'var(--smash-yellow)' : 'inherit' }}>{winRate}%</td>
+                                                    <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: gspColor }}>
+                                                        {gspDiff > 0 ? '+' : ''}{gspDiff !== 0 ? gspDiff.toLocaleString() : '-'}
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="smash-divider" />
+                </>
+            )}
 
             {/* GSP History Chart */}
             {gspChartData.length > 0 && (
