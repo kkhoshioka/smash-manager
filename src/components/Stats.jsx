@@ -129,7 +129,7 @@ export default function Stats() {
         return Object.entries(counts)
             .sort((a, b) => b[1] - a[1])
             .map(([name, count]) => ({ name, count }))
-            .slice(0, 5);
+            .slice(0, 10);
     }, [filteredHistory]);
 
     const advancedStats = useMemo(() => {
