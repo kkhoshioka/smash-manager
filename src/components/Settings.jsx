@@ -8,7 +8,12 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
     const bgUploadRef = useRef(null);
 
     const backgrounds = [
-        { id: 'bg-symbol', url: '/bg_stage.png', name: 'スマブラ・シンボル (特大)', type: 'preset' },
+        { id: 'bg-symbol', url: '/bg_stage.png', name: '特大シンボル (レッド)', type: 'preset' },
+        { id: 'bg-symbol-blue', url: '/bg_symbol_blue.png', name: 'サイバーブルー', type: 'preset' },
+        { id: 'bg-symbol-gold', url: '/bg_symbol_gold.png', name: 'ゴールドエンブレム', type: 'preset' },
+        { id: 'bg-symbol-glitch', url: '/bg_symbol_glitch.png', name: 'グリッチハック', type: 'preset' },
+        { id: 'bg-symbol-stealth', url: '/bg_symbol_stealth.png', name: 'ダークステルス', type: 'preset' },
+        { id: 'bg-symbol-fire', url: '/bg_symbol_fire.png', name: 'バーニング', type: 'preset' },
         { id: 'bg-neon', url: '/bg_neon.png', name: 'ネオン・シティ', type: 'preset' },
         { id: 'bg-calm', url: '/bg_calm.png', name: '天空の島', type: 'preset' },
         { id: 'bg-fiery', url: '/bg_fiery.png', name: '灼熱の闘技場', type: 'preset' },
