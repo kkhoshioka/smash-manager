@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair } from 'lucide-react';
+import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair, Flame } from 'lucide-react';
 
 export default function MatchLogger() {
     const { addMatch, prefs, setPrefs, history } = useMatchHistory();
@@ -61,6 +61,20 @@ export default function MatchLogger() {
             f.name.toLowerCase().includes(fighterSearch.toLowerCase())
         );
     }, [fighterSearch]);
+
+    const currentStreak = useMemo(() => {
+        if (!prefs.lastMyFighter) return 0;
+        const myFighterHistory = history.filter(m => m.myFighter === prefs.lastMyFighter);
+        let streak = 0;
+        for (const m of myFighterHistory) {
+            if (m.result === 'win') {
+                streak++;
+            } else if (m.result === 'lose') {
+                break;
+            }
+        }
+        return streak;
+    }, [history, prefs.lastMyFighter]);
 
     const saveMatch = (result) => {
         if (!prefs.lastMyFighter) {
@@ -189,9 +203,16 @@ export default function MatchLogger() {
                     ) : (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', backgroundColor: '#111', padding: '1rem', border: '2px solid var(--smash-yellow)', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)' }}>
                             <img src={myFighterObj?.imageUrl} alt={myFighterObj?.name} style={{ width: '80px', height: '80px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                            <span style={{ fontSize: '2rem', fontWeight: '900', fontStyle: 'italic', textShadow: '3px 3px 0 #000' }}>
-                                {myFighterObj?.name || '未選択'}
-                            </span>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <span style={{ fontSize: '2rem', fontWeight: '900', fontStyle: 'italic', textShadow: '3px 3px 0 #000' }}>
+                                    {myFighterObj?.name || '未選択'}
+                                </span>
+                                {currentStreak > 0 && (
+                                    <span style={{ color: 'var(--win-color)', fontWeight: '900', fontSize: '1.2rem', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.3rem', animation: 'pulse 2s infinite' }}>
+                                        <Flame size={20} color="var(--win-color)" /> 現在 {currentStreak} 連勝中！
+                                    </span>
+                                )}
+                            </div>
                         </div>
                     )}
                 </div>
