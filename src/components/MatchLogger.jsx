@@ -22,12 +22,12 @@ export default function MatchLogger() {
     const myFighterObj = fighters.find(f => f.id === prefs.lastMyFighter);
 
     useEffect(() => {
-        if (prefs.lastMyFighter && prefs.fighterGsp?.[prefs.lastMyFighter]) {
-            setGsp(prefs.fighterGsp[prefs.lastMyFighter].toString());
-        } else {
-            setGsp('');
-        }
+        setGsp('');
     }, [prefs.lastMyFighter]);
+
+    const latestGspPlaceholder = prefs.lastMyFighter && prefs.fighterGsp?.[prefs.lastMyFighter]
+        ? prefs.fighterGsp[prefs.lastMyFighter].toString()
+        : "例: 14000000";
 
     const frequentOpponents = useMemo(() => {
         const counts = {};
@@ -87,8 +87,8 @@ export default function MatchLogger() {
 
         setSelectedOpponent(null);
         setFighterSearch('');
-        // Do NOT reset GSP box. The user requested: "WINかLOSEを押した時に表示してある戦闘力も更新して"
-        // setGsp(''); 
+        // Clear input so the updated placeholder shows the new latest GSP
+        setGsp('');
         setNotes('');
         setMyKillMoves([]);
         setOpponentKillMoves([]);
@@ -335,7 +335,7 @@ export default function MatchLogger() {
                                         }));
                                     }
                                 }}
-                                placeholder="例: 14000000"
+                                placeholder={latestGspPlaceholder}
                                 style={{ width: '100%', fontSize: '1.5rem', padding: '1rem' }}
                             />
                         </div>
