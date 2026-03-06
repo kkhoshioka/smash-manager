@@ -97,6 +97,14 @@ export default function Stats() {
     const wins = filteredHistory.filter(m => m.result === 'win').length;
     const winRate = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 0;
 
+    // Latest GSP for selected fighter
+    const latestGsp = useMemo(() => {
+        if (selectedMyFighter !== 'all' && prefs.fighterGsp?.[selectedMyFighter]) {
+            return prefs.fighterGsp[selectedMyFighter];
+        }
+        return null;
+    }, [selectedMyFighter, prefs.fighterGsp]);
+
     const opponentStats = useMemo(() => {
         const stats = {};
         filteredHistory.forEach(m => {
@@ -189,6 +197,14 @@ export default function Stats() {
                         {totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 0}%
                     </div>
                 </div>
+                {selectedMyFighter !== 'all' && latestGsp && (
+                    <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--win-color)' }}>
+                        <div style={{ fontSize: '1.2rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最新戦闘力</div>
+                        <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
+                            {(latestGsp / 10000).toFixed(0)}<span style={{ fontSize: '1.5rem' }}>万</span>
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="smash-divider" />
@@ -235,7 +251,7 @@ export default function Stats() {
                                     }}
                                 />
                                 <Legend wrapperStyle={{ paddingTop: '15px' }} />
-                                <Line type="monotone" dataKey="GSP" stroke="var(--win-color)" strokeWidth={4} dot={{ r: 5, fill: '#111', strokeWidth: 3 }} activeDot={{ r: 8, fill: 'var(--win-color)' }} />
+                                <Line type="monotone" dataKey="GSP" stroke="var(--win-color)" strokeWidth={4} dot={{ r: 2, fill: '#111', strokeWidth: 2 }} activeDot={{ r: 6, fill: 'var(--win-color)' }} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -247,6 +263,29 @@ export default function Stats() {
                 <>
                     <h2 className="section-title">対戦カード分析</h2>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+
+                        {/* Frequent Matchups */}
+                        <div className="stat-card" style={{ borderBottomColor: 'var(--text-muted)', padding: '1.5rem' }}>
+                            <h3 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>よく戦う相手</h3>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                {[...opponentStats].sort((a, b) => b.total - a.total).slice(0, 5).map((stat, i) => (
+                                    <div key={`freq-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: '#111', borderLeft: '4px solid var(--text-muted)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <span style={{ fontWeight: '900', color: 'var(--text-muted)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
+                                            <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
+                                            <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--text-muted)', fontSize: '1.2rem' }}>
+                                                {stat.winRate}%
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Best Matchups */}
                         <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '1.5rem' }}>
                             <h3 style={{ fontSize: '1.4rem', color: 'var(--win-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>得意な相手</h3>

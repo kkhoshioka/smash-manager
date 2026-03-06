@@ -102,16 +102,18 @@ button {
 
 .main-content {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   background:
     radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 12px 12px,
-    var(--bg-panel);
+    rgba(31, 31, 31, 0.85);
+  /* Semi-transparent panel background */
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-main);
   position: relative;
   overflow: visible;
   padding: 2.5rem;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  backdrop-filter: blur(5px);
 }
 
 .main-content::before {
@@ -183,8 +185,8 @@ button {
 /* Character Grid */
 .fighter-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+  gap: 0.4rem;
   padding: 1rem;
   background: var(--bg-panel-light);
   border: 1px solid #333;
@@ -272,12 +274,14 @@ button {
 .stat-card {
   background:
     linear-gradient(45deg, rgba(255, 255, 255, 0.01) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0.01) 75%, transparent 75%, transparent) 0 0 / 8px 8px,
-    var(--bg-panel-light);
+    rgba(42, 42, 42, 0.85);
+  /* Semi-transparent stat card */
   border: 1px solid #333;
   padding: 1.5rem;
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
   border-bottom: 3px solid var(--smash-red);
+  backdrop-filter: blur(5px);
 }
 
 /* Specialized Tabs */

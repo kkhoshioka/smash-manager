@@ -74,9 +74,21 @@ export default function MatchLogger() {
             opponentKillMoves: finalOpponentKillMoves
         });
 
+        // Ensure we save the latest GSP immediately.
+        if (gsp) {
+            setPrefs(p => ({
+                ...p,
+                fighterGsp: {
+                    ...(p.fighterGsp || {}),
+                    [prefs.lastMyFighter]: parseInt(gsp, 10)
+                }
+            }));
+        }
+
         setSelectedOpponent(null);
         setFighterSearch('');
-        setGsp('');
+        // Do NOT reset GSP box. The user requested: "WINかLOSEを押した時に表示してある戦闘力も更新して"
+        // setGsp(''); 
         setNotes('');
         setMyKillMoves([]);
         setOpponentKillMoves([]);
@@ -127,7 +139,7 @@ export default function MatchLogger() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                         <h2 className="section-title" style={{ borderColor: 'var(--smash-yellow)', margin: 0 }}>
                             <User size={28} style={{ marginRight: '0.8rem', color: 'var(--smash-yellow)' }} />
-                            1Pファイター
+                            使用ファイター
                         </h2>
                         {myFighterObj && !isSelectingMine && (
                             <button
@@ -213,7 +225,7 @@ export default function MatchLogger() {
                 <div style={{ flex: '1 1 300px', minWidth: 0 }}>
                     <h2 className="section-title" style={{ margin: 0, marginBottom: '1rem' }}>
                         <Swords size={28} style={{ marginRight: '0.8rem', color: 'var(--smash-red)' }} />
-                        挑戦者
+                        対戦相手
                     </h2>
 
                     {selectedOpponent ? (
@@ -310,7 +322,19 @@ export default function MatchLogger() {
                             <input
                                 type="number"
                                 value={gsp}
-                                onChange={e => setGsp(e.target.value)}
+                                onChange={e => {
+                                    setGsp(e.target.value);
+                                    if (e.target.value && prefs.lastMyFighter) {
+                                        // Automatically update the preference when typing so we don't lose it
+                                        setPrefs(p => ({
+                                            ...p,
+                                            fighterGsp: {
+                                                ...(p.fighterGsp || {}),
+                                                [prefs.lastMyFighter]: parseInt(e.target.value, 10)
+                                            }
+                                        }));
+                                    }
+                                }}
                                 placeholder="例: 14000000"
                                 style={{ width: '100%', fontSize: '1.5rem', padding: '1rem' }}
                             />
