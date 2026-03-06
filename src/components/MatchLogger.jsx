@@ -26,20 +26,20 @@ export default function MatchLogger() {
     }, [prefs.lastMyFighter]);
 
     const latestGspPlaceholder = useMemo(() => {
-        if (!prefs.lastMyFighter) return "例: 14000000";
+        if (!prefs.lastMyFighter) return "例: 14,000,000";
 
         // Check if there is an actively saved GSP in preferences
         if (prefs.fighterGsp?.[prefs.lastMyFighter]) {
-            return prefs.fighterGsp[prefs.lastMyFighter].toString();
+            return prefs.fighterGsp[prefs.lastMyFighter].toLocaleString();
         }
 
         // Fallback: search history for the most recent match data for this fighter
         const recentMatch = [...history].reverse().find(m => m.myFighter === prefs.lastMyFighter && m.gsp);
         if (recentMatch) {
-            return recentMatch.gsp.toString();
+            return recentMatch.gsp.toLocaleString();
         }
 
-        return "例: 14000000";
+        return "例: 14,000,000";
     }, [prefs.lastMyFighter, prefs.fighterGsp, history]);
 
     const frequentOpponents = useMemo(() => {
@@ -120,8 +120,8 @@ export default function MatchLogger() {
                     style={selectedId === f.id ? { borderColor: 'var(--smash-yellow)' } : { borderColor: 'var(--smash-red)' }}
                 >
                     <img src={f.imageUrl} alt={f.name} loading="lazy" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.textContent = f.name.substring(0, 2); }} />
-                    <div style={{ position: 'absolute', bottom: 0, width: '100%', background: 'rgba(0,0,0,0.8)', fontSize: '0.65rem', textAlign: 'center', padding: '2px 0', fontFamily: 'var(--font-jp)' }}>
-                        {f.name.substring(0, 6)}
+                    <div style={{ position: 'absolute', top: '-4px', right: '-4px', background: 'linear-gradient(45deg, #ff0000, #ff6b00)', color: 'white', fontSize: '0.6rem', padding: '2px 4px', borderRadius: '3px', fontWeight: '900', fontFamily: 'var(--font-en)', border: '1px solid #000', boxShadow: '1px 1px 0 rgba(0,0,0,0.5)', zIndex: 2, transform: 'skewX(-10deg)' }}>
+                        HOT
                     </div>
                 </button>
             ))}

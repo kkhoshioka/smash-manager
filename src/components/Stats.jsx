@@ -201,7 +201,7 @@ export default function Stats() {
                     <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--win-color)' }}>
                         <div style={{ fontSize: '1.2rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最新戦闘力</div>
                         <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
-                            {(latestGsp / 10000).toFixed(0)}<span style={{ fontSize: '1.5rem' }}>万</span>
+                            {latestGsp.toLocaleString()}
                         </div>
                     </div>
                 )}
@@ -377,7 +377,7 @@ export default function Stats() {
                                         flexDirection: 'column',
                                         gap: '1rem',
                                         padding: '1.5rem',
-                                        backgroundColor: '#111',
+                                        backgroundColor: isWin ? 'rgba(0, 204, 255, 0.1)' : 'rgba(255, 51, 51, 0.1)',
                                         border: `2px solid ${isWin ? 'var(--win-color)' : 'var(--lose-color)'}`,
                                         borderLeftWidth: '8px',
                                         clipPath: 'polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
@@ -441,9 +441,9 @@ export default function Stats() {
 
                                                 {/* GSP Box */}
                                                 {match.gsp && (
-                                                    <div style={{ backgroundColor: 'var(--bg-panel-light)', padding: '0.5rem 1.5rem', border: '2px solid #555', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', textAlign: 'center' }}>
-                                                        <div style={{ fontSize: '0.8rem', color: 'var(--smash-yellow)', fontWeight: 'bold' }}>GSP</div>
-                                                        <div style={{ fontFamily: 'var(--font-en)', fontSize: '1.5rem', fontWeight: '900', color: 'var(--text-main)' }}>
+                                                    <div style={{ backgroundColor: '#111', padding: '0.5rem 1.5rem', border: '2px solid #555', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', textAlign: 'center' }}>
+                                                        <div style={{ fontSize: '0.9rem', color: 'var(--smash-yellow)', fontWeight: 'bold' }}>GSP</div>
+                                                        <div style={{ fontFamily: 'var(--font-en)', fontSize: '2.2rem', fontWeight: '900', color: 'var(--text-main)' }}>
                                                             {match.gsp.toLocaleString()}
                                                         </div>
                                                     </div>
