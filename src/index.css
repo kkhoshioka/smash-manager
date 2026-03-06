@@ -36,35 +36,26 @@
 body {
   margin: 0;
   font-family: var(--font-jp);
-  background-color: var(--bg-color);
-  background-image:
-    /* Smash thick cross slashes */
-    linear-gradient(110deg,
-      transparent 35%,
-      rgba(223, 36, 38, 0.15) 35%,
-      rgba(223, 36, 38, 0.15) 42%,
-      transparent 42%,
-      transparent 46%,
-      rgba(255, 255, 255, 0.05) 46%,
-      rgba(255, 255, 255, 0.05) 48%,
-      transparent 48%),
-    linear-gradient(-70deg,
-      transparent 60%,
-      rgba(255, 255, 255, 0.03) 60%,
-      rgba(255, 255, 255, 0.03) 65%,
-      transparent 65%),
-    repeating-linear-gradient(-45deg,
-      rgba(255, 255, 255, 0.02),
-      rgba(255, 255, 255, 0.02) 2px,
-      transparent 2px,
-      transparent 12px),
-    radial-gradient(circle at 50% 0%, #222222 0%, #0a0a0a 100%);
-  background-attachment: fixed;
+  background-color: #000;
   color: var(--text-main);
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/bg_stage.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) blur(3px);
+  z-index: -1;
 }
 
 h1,

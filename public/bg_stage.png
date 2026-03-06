@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>SmashWiki, the Super Smash Bros. wiki</title>
+<script>document.documentElement.className="client-js";RLCONF={"wgBreakFrames":false,"wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"mdy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgRequestId":"6d88db049c1c8a1c228c5795","wgCSPNonce":false,"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Main_Page","wgTitle":"Main Page","wgCurRevisionId":1969888,"wgRevisionId":1969888,"wgArticleId":1,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["SmashWiki"],"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgRelevantPageName":"Main_Page","wgRelevantArticleId":1,"wgIsProbablyEditable":false,"wgRelevantPageIsProbablyEditable":false,"wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"],"wgIsMainPage":true,"wgMFDisplayWikibaseDescriptions":{"search":false,"nearby":false,"watchlist":false,"tagline":false},"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":false,"wgPopupsFlags":4,"wgSiteNoticeId":"1.38"};
+RLSTATE={"ext.gadget.ResponsiveDesktop":"ready","ext.gadget.StaffHighlights":"ready","ext.gadget.ResponsiveStyle":"ready","ext.gadget.MainPageStyle":"ready","ext.gadget.NavboxStyle":"ready","ext.gadget.GlobalStyle":"ready","ext.gadget.ExternalLinkIcons":"ready","site.styles":"ready","user.styles":"ready","user":"ready","user.options":"loading","ext.dismissableSiteNotice.styles":"ready","ext.inputBox.styles":"ready","mediawiki.ui.input":"ready","mediawiki.ui.checkbox":"ready","skins.monobook.styles":"ready","mediawiki.ui.button":"ready"};RLPAGEMODULES=["ext.dismissableSiteNotice","site","mediawiki.page.ready","skins.monobook.scripts","mmv.head","mmv.bootstrap.autostart","ext.gadget.GlobalScript","ext.gadget.Countdown","ext.gadget.VideoResizer","ext.gadget.ExplainTooltips","ext.gadget.RecentChangesRefresh","ext.gadget.DarkToggle","ext.gadget.Tabber","ext.popups"];</script>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@12s5i",function($,jQuery,require,module){mw.user.tokens.set({"patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});});});</script>
+<link rel="stylesheet" href="/load.php?lang=en&amp;modules=ext.dismissableSiteNotice.styles%7Cext.inputBox.styles%7Cmediawiki.ui.button%2Ccheckbox%2Cinput%7Cskins.monobook.styles&amp;only=styles&amp;skin=monobook"/>
+<script async="" src="/load.php?lang=en&amp;modules=startup&amp;only=scripts&amp;raw=1&amp;skin=monobook"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/load.php?lang=en&amp;modules=ext.gadget.ExternalLinkIcons%2CGlobalStyle%2CMainPageStyle%2CNavboxStyle%2CResponsiveDesktop%2CResponsiveStyle%2CStaffHighlights&amp;only=styles&amp;skin=monobook"/>
+<link rel="stylesheet" href="/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=monobook"/>
+<meta name="generator" content="MediaWiki 1.39.17"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="theme-color" content="#6E88B5"/>
+<meta name="description" content="SmashWiki is a comprehensive wiki and encyclopedia dedicated to the Super Smash Bros. video game series from Nintendo, with 25,392 articles."/>
+<meta name="twitter:site" content="@SSBWikiOfficial"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="apple-touch-icon" href="https://ssb.wiki.gallery/images/apple-touch-icon.png"/>
+<link rel="icon" href="https://ssb.wiki.gallery/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/opensearch_desc.php" title="SmashWiki"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.ssbwiki.com/api.php?action=rsd"/>
+<link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"/>
+<link rel="alternate" type="application/atom+xml" title="SmashWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom"/>
+<link rel="canonical" href="https://www.ssbwiki.com/"/>
+<meta property="og:image" content="https://ssb.wiki.gallery/images/b/bc/Wiki.png"/>
+<link rel="stylesheet" href="https://wiki.gallery/1_39/css/global.css">
+<link rel="stylesheet" href="https://wiki.gallery/1_39/css/desktop.css">
+<link rel="stylesheet" href="https://wiki.gallery/1_39/css/responsive.css">
+<style type="text/css">
+@import url(https://wiki.gallery/1_39/css/dark/all.css) (prefers-color-scheme: dark);
+@import url(https://wiki.gallery/1_39/css/dark/niwa.css) (prefers-color-scheme: dark);
+@import url(/MediaWiki:Dark.css?action=raw&ctype=text/css) (prefers-color-scheme: dark);
+@import url(https://wiki.gallery/1_39/css/dark/monobook.css) (prefers-color-scheme: dark);
+@import url(/MediaWiki:DarkMonobook.css?action=raw&ctype=text/css) (prefers-color-scheme: dark);
+</style>
+<style type="text/css">.mediawiki .mw-dismissable-notice { display: block; }</style>
+<link rel="preconnect" href="https://a.pub.network/" crossorigin />
+<link rel="preconnect" href="https://b.pub.network/" crossorigin />
+<link rel="preconnect" href="https://c.pub.network/" crossorigin />
+<link rel="preconnect" href="https://d.pub.network/" crossorigin />
+<link rel="preconnect" href="https://c.amazon-adsystem.com" crossorigin />
+<link rel="preconnect" href="https://s.amazon-adsystem.com" crossorigin />
+<link rel="preconnect" href="https://btloader.com/" crossorigin />
+<link rel="preconnect" href="https://api.btloader.com/" crossorigin />
+<link rel="preconnect" href="https://confiant-integrations.global.ssl.fastly.net" crossorigin />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XHFVQF2RTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XHFVQF2RTC');
+</script>
+<!-- InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
+<script type="text/javascript" async=true>
+(function() {
+  var host = 'www.ssbwiki.com';
+  var element = document.createElement('script');
+  var firstScript = document.getElementsByTagName('script')[0];
+  var url = 'https://cmp.inmobi.com'
+    .concat('/choice/', 'v0NnnH1M4W081', '/', host, '/choice.js?tag_version=V3');
+  var uspTries = 0;
+  var uspTriesLimit = 3;
+  element.async = true;
+  element.type = 'text/javascript';
+  element.src = url;
+
+  firstScript.parentNode.insertBefore(element, firstScript);
+
+  function makeStub() {
+    var TCF_LOCATOR_NAME = '__tcfapiLocator';
+    var queue = [];
+    var win = window;
+    var cmpFrame;
+
+    function addFrame() {
+      var doc = win.document;
+      var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+      if (!otherCMP) {
+        if (doc.body) {
+          var iframe = doc.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = TCF_LOCATOR_NAME;
+          doc.body.appendChild(iframe);
+        } else {
+          setTimeout(addFrame, 5);
+        }
+      }
+      return !otherCMP;
+    }
+
+    function tcfAPIHandler() {
+      var gdprApplies;
+      var args = arguments;
+
+      if (!args.length) {
+        return queue;
+      } else if (args[0] === 'setGdprApplies') {
+        if (
+          args.length > 3 &&
+          args[2] === 2 &&
+          typeof args[3] === 'boolean'
+        ) {
+          gdprApplies = args[3];
+          if (typeof args[2] === 'function') {
+            args[2]('set', true);
+          }
+        }
+      } else if (args[0] === 'ping') {
+        var retr = {
+          gdprApplies: gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: 'stub'
+        };
+
+        if (typeof args[2] === 'function') {
+          args[2](retr);
+        }
+      } else {
+        if(args[0] === 'init' && typeof args[3] === 'object') {
+          args[3] = Object.assign(args[3], { tag_version: 'V3' });
+        }
+        queue.push(args);
+      }
+    }
+
+    function postMessageEventHandler(event) {
+      var msgIsString = typeof event.data === 'string';
+      var json = {};
+
+      try {
+        if (msgIsString) {
+          json = JSON.parse(event.data);
+        } else {
+          json = event.data;
+        }
+      } catch (ignore) {}
+
+      var payload = json.__tcfapiCall;
+
+      if (payload) {
+        window.__tcfapi(
+          payload.command,
+          payload.version,
+          function(retValue, success) {
+            var returnMsg = {
+              __tcfapiReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: payload.callId
+              }
+            };
+            if (msgIsString) {
+              returnMsg = JSON.stringify(returnMsg);
+            }
+            if (event && event.source && event.source.postMessage) {
+              event.source.postMessage(returnMsg, '*');
+            }
+          },
+          payload.parameter
+        );
+      }
+    }
+
+    while (win) {
+      try {
+        if (win.frames[TCF_LOCATOR_NAME]) {
+          cmpFrame = win;
+          break;
+        }
+      } catch (ignore) {}
+
+      if (win === window.top) {
+        break;
+      }
+      win = win.parent;
+    }
+    if (!cmpFrame) {
+      addFrame();
+      win.__tcfapi = tcfAPIHandler;
+      win.addEventListener('message', postMessageEventHandler, false);
+    }
+  };
+
+  makeStub();
+
+  var uspStubFunction = function() {
+    var arg = arguments;
+    if (typeof window.__uspapi !== uspStubFunction) {
+      setTimeout(function() {
+        if (typeof window.__uspapi !== 'undefined') {
+          window.__uspapi.apply(window.__uspapi, arg);
+        }
+      }, 500);
+    }
+  };
+
+  var checkIfUspIsReady = function() {
+    uspTries++;
+    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+      console.warn('USP is not accessible');
+    } else {
+      clearInterval(uspInterval);
+    }
+  };
+
+  if (typeof window.__uspapi === 'undefined') {
+    window.__uspapi = uspStubFunction;
+    var uspInterval = setInterval(checkIfUspIsReady, 6000);
+  }
+})();
+</script>
+<!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
+<script data-cfasync="false" type="text/javascript">
+  var freestar = freestar || {};
+  freestar.queue = freestar.queue || [];
+  freestar.config = freestar.config || {};
+  freestar.config.disabledProducts = {
+    googleInterstitial: true,
+    videoAdhesion: true,
+    video: true,
+  };
+  freestar.config.enabled_slots = [];
+  freestar.initCallback = function () { (freestar.config.enabled_slots.length === 0) ? freestar.initCallbackCalled = false : freestar.newAdSlots(freestar.config.enabled_slots) }
+</script>
+<script src="https://a.pub.network/ssbwiki-com/pubfig.min.js" data-cfasync="false" async></script>
+<link rel="stylesheet" href="https://wiki.gallery/1_39/css/freestar/ads.css">
+<link rel="stylesheet" href="https://wiki.gallery/1_39/css/freestar/dark.css">
+<link rel="stylesheet" href="https://wiki.gallery/1_39/css/freestar/sticky.css">
+<meta property="og:title" content="SmashWiki"/>
+<meta property="og:url" content="https://www.ssbwiki.com/"/>
+<meta property="og:description" content="SmashWiki is a comprehensive wiki and encyclopedia dedicated to the Super Smash Bros. video game series from Nintendo, with 25,392 articles."/>
+<meta property="article:modified_time" content="2025-04-02T00:00:50Z"/>
+<meta property="article:published_time" content="2025-04-02T00:00:50Z"/>
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"Article","name":"SmashWiki, the Super Smash Bros. wiki","headline":"SmashWiki, the Super Smash Bros. wiki","mainEntityOfPage":"Main Page","identifier":"https:\/\/www.ssbwiki.com\/","url":"https:\/\/www.ssbwiki.com\/","description":"SmashWiki is a comprehensive wiki and encyclopedia dedicated to the Super Smash Bros. video game series from Nintendo, with 25,392 articles.","dateModified":"2025-04-02T00:00:50Z","datePublished":"2025-04-02T00:00:50Z","image":{"@type":"ImageObject"},"author":{"@type":"Organization","name":"SmashWiki","url":"https:\/\/www.ssbwiki.com","logo":{"@type":"ImageObject","caption":"SmashWiki"}},"publisher":{"@type":"Organization","name":"SmashWiki","url":"https:\/\/www.ssbwiki.com","logo":{"@type":"ImageObject","caption":"SmashWiki"}},"potentialAction":{"@type":"SearchAction","target":"https:\/\/www.ssbwiki.com\/index.php?title=Special:Search&search={search_term}","query-input":"required name=search_term"}}</script>
+<meta property="og:type" content="website"/>
+</head>
+<body class="mw-1_39 porple smashwiki desktop rootpage ns-content anon newbie niwa light sitenotice-shown mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Main_Page rootpage-Main_Page skin-monobook action-view"><div id="globalWrapper">
+	<div id="column-content">
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="siteNotice"><div id="mw-dismissablenotice-anonplace"></div><script>(function(){var node=document.getElementById("mw-dismissablenotice-anonplace");if(node){node.outerHTML="\u003Cdiv class=\"mw-dismissable-notice\"\u003E\u003Cdiv class=\"mw-dismissable-notice-close\"\u003E[\u003Ca tabindex=\"0\" role=\"button\"\u003Edismiss\u003C/a\u003E]\u003C/div\u003E\u003Cdiv class=\"mw-dismissable-notice-body\"\u003E\u003Cdiv id=\"localNotice\"\u003E\u003Cdiv class=\"anonnotice\" lang=\"en\" dir=\"ltr\"\u003E\u003Ctable style=\"width:90%; text-align:center; background:#bfefef; border:2px solid #00bfbf; border-spacing:0; margin:0.6em auto 0\"\u003E\n\u003Ctbody\u003E\u003Ctr\u003E\n\u003Ctd style=\"padding-top:3px\"\u003EWelcome to \u003Ca href=\"/SmashWiki:About\" title=\"SmashWiki:About\"\u003ESmashWiki\u003C/a\u003E! \u003Ca href=\"/Special:UserLogin\" title=\"Special:UserLogin\"\u003ELog in\u003C/a\u003E or \u003Ca href=\"/Special:CreateAccount\" title=\"Special:CreateAccount\"\u003Ecreate an account\u003C/a\u003E and join the community, and don't forget to \u003Ca href=\"/SmashWiki:Read_This_First,_Man\" title=\"SmashWiki:Read This First, Man\"\u003Eread this first\u003C/a\u003E!\n\u003C/td\u003E\u003C/tr\u003E\u003C/tbody\u003E\u003C/table\u003E\n\u003Ctable style=\"width:90%; text-align:center; background:rgba(127,127,191,0.25); border:2px solid rgba(127,127,191,1.0); border-collapse:collapse; margin:0.6em auto 0.7em\" cellpadding=\"2\"\u003E\n\u003Ctbody\u003E\u003Ctr\u003E\n\u003Cth style=\"background:rgba(127,127,191,1.0)\"\u003ENotices\n\u003C/th\u003E\u003C/tr\u003E\n\u003Ctr style=\"border:2px solid rgba(127,127,191,1.0)\"\u003E\n\u003Ctd\u003EThe Skill parameter has been removed from Smasher infoboxes, and in its place are the new \"Best historical ranking\" and \"Best tournament result\" parameters. SmashWiki needs help adding these new parameters to Smasher infoboxes, refer to the guidelines \u003Ca href=\"/Template:Infobox_Smasher/doc#Rankings_and_results_information\" title=\"Template:Infobox Smasher/doc\"\u003Ehere\u003C/a\u003E for what should be included in these new parameters.\n\u003C/td\u003E\u003C/tr\u003E\n\u003Ctr style=\"border:2px solid rgba(127,127,191,1.0)\"\u003E\n\u003Ctd\u003EWhen adding results to Smasher pages, include each tournament's entrant number in addition to the player's placement, and use the {{\u003Ca href=\"/Template:Trn\" title=\"Template:Trn\"\u003ETrn\u003C/a\u003E}} template with the matching game specified. Please also fix old results on Smasher pages that do not abide to this standard. Refer to our \u003Ca href=\"/SmashWiki:SMASHER#Tournament_results\" class=\"mw-redirect\" title=\"SmashWiki:SMASHER\"\u003ESmasher article guidelines\u003C/a\u003E to see how results tables should be formatted.\n\u003C/td\u003E\u003C/tr\u003E\n\u003Ctr style=\"border:2px solid rgba(127,127,191,1.0)\"\u003E\n\u003Ctd\u003ECheck out our \u003Ca href=\"/SmashWiki:Project\" title=\"SmashWiki:Project\"\u003Eproject page\u003C/a\u003E for ongoing projects that SmashWiki needs help with.\n\u003C/td\u003E\u003C/tr\u003E\u003C/tbody\u003E\u003C/table\u003E\u003C/div\u003E\u003C/div\u003E\u003C/div\u003E\u003C/div\u003E";}}());</script></div>
+			<div class="mw-indicators">
+			</div>
+			<h1 id="firstHeading" class="firstHeading mw-first-heading" style="display: none"><span class="mw-page-title-main">Main Page</span></h1>
+			<div id="bodyContent" class="monobook-body">
+				<div id="siteSub">From SmashWiki, the Super Smash Bros. wiki</div>
+				<div id="contentSub" ></div>
+				
+				<div id="jump-to-nav"></div><a href="#column-one" class="mw-jump-link">Jump to navigation</a><a href="#searchInput" class="mw-jump-link">Jump to search</a>
+				<!-- start content -->
+				<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div id="adBanner" class="adWrapper" style="margin:0 0 12.5px"><!-- Tag ID: ssbwiki_leaderboard_atf -->
+<div align="center" data-freestar-ad="__320x100 __970x90" id="ssbwiki_leaderboard_atf">
+  <script data-cfasync="false" type="text/javascript">
+    freestar.config.enabled_slots.push({ placementName: "ssbwiki_leaderboard_atf", slotId: "ssbwiki_leaderboard_atf" });
+  </script>
+</div></div><div class="mw-parser-output"><table width="100%" cellpadding="2" cellspacing="5" style="background:none; border-collapse:separate">
+<tbody><tr>
+<td class="mp-box" style="border:2px solid #bfbfdf; background:#f7f7fb; width:100%; padding:0.5em 0 0.5em 0; text-align:center; white-space:nowrap;">
+<div style="font-size:162%; border:none; margin:0 auto; padding:0.1em;"><b>Welcome to <a href="/SmashWiki:About" title="SmashWiki:About">SmashWiki</a></b>,</div>
+<div id="welcomeTagline" style="top:+0.2em; font-size:95%;">the <a href="/Super_Smash_Bros._(series)" title="Super Smash Bros. (series)">Super Smash Bros.</a> <a href="/Help:FAQ#What.27s_a_wiki.3F" title="Help:FAQ">wiki</a> that <a href="/Help:Editing" title="Help:Editing">anyone can edit</a>.</div>
+<div id="articlecount" style="width:100%; text-align:center; font-size:85%;"><a href="/Special:Statistics" title="Special:Statistics">25,392</a> <a href="/Special:AllPages" title="Special:AllPages">articles</a> since July 2006</div>
+</td>
+<td style="border:2px solid rgba(0,235,19,1.0); background:rgba(0,235,19,0.125); padding:0.5em 0 0.5em 0; text-align:center"><a href="/SmashWiki:SmashWiki_Status_System" title="SmashWiki:SmashWiki Status System"><img alt="StatusGreen.png" src="https://ssb.wiki.gallery/images/thumb/3/31/StatusGreen.png/50px-StatusGreen.png" decoding="async" width="50" height="50" class="noresize-wide" srcset="https://ssb.wiki.gallery/images/thumb/3/31/StatusGreen.png/75px-StatusGreen.png 1.5x, https://ssb.wiki.gallery/images/thumb/3/31/StatusGreen.png/100px-StatusGreen.png 2x" data-file-width="256" data-file-height="256" /></a><br /><b>-15%</b>
+</td></tr></tbody></table>
+<table id="mp-body" width="100%" cellpadding="2" cellspacing="5" style="background:none; border-collapse:separate">
+<tbody><tr>
+<td class="mp-box" width="67%" style="border:2px solid #bfbfdf; background:#f7f7fb; vertical-align:top;">
+<table>
+<tbody><tr>
+<td>
+<h2 style="margin:0; background:#ffefbf; font-size:120%; font-weight:bold; border:2px solid #ffbf00; padding:0.2em 0.4em;"><span class="mw-headline" id="Featured_article">Featured article</span></h2>
+</td></tr>
+<tr>
+<td>
+<div class="floatleft"><a href="/Super_Smash_Bros._Slamfest_%2799" title="Super Smash Bros. Slamfest &#39;99"><img alt="Super Smash Bros. Slamfest &#39;99" src="https://ssb.wiki.gallery/images/thumb/5/59/Slamfest99_EdEspinozaCollection_Image6.jpg/250px-Slamfest99_EdEspinozaCollection_Image6.jpg" decoding="async" width="250" height="166" srcset="https://ssb.wiki.gallery/images/thumb/5/59/Slamfest99_EdEspinozaCollection_Image6.jpg/375px-Slamfest99_EdEspinozaCollection_Image6.jpg 1.5x, https://ssb.wiki.gallery/images/thumb/5/59/Slamfest99_EdEspinozaCollection_Image6.jpg/500px-Slamfest99_EdEspinozaCollection_Image6.jpg 2x" data-file-width="3562" data-file-height="2362" /></a></div>
+<p><b>Super Smash Bros. Slamfest '99</b> was an official promotional event held at the <a href="https://en.wikipedia.org/wiki/MGM_Grand_Adventures_Theme_Park" class="extiw" title="wikipedia:MGM Grand Adventures Theme Park">MGM Grand Adventures Theme Park</a> in Las Vegas, Nevada, on April 24th, 1999. Organized by Nintendo of America and public relations firm Golin/Harris, its purpose was to promote the release of <i><a href="/Super_Smash_Bros." title="Super Smash Bros.">Super Smash Bros.</a></i> The event featured a real-life, staged wrestling match between costumed performers dressed as <a href="/Mario" title="Mario">Mario</a>, <a href="/Yoshi" title="Yoshi">Yoshi</a>, <a href="/Pikachu" title="Pikachu">Pikachu</a>, and <a href="/Donkey_Kong" title="Donkey Kong">Donkey Kong</a>, performed in front of a live audience. Additionally, demo kiosks were set up for attendees to preview the game. The costumes used were the same as those seen in the <a href="/List_of_commercials_for_the_Super_Smash_Bros._series#Super_Smash_Bros." title="List of commercials for the Super Smash Bros. series">North American commercial</a> for <i>Super Smash Bros.</i>
+(<i><b><a href="/Super_Smash_Bros._Slamfest_%2799" title="Super Smash Bros. Slamfest &#39;99">more...</a></b></i>)
+</p>
+</td></tr>
+<tr>
+<td>
+<h2 style="margin:0; background:#bfefef; font-size:120%; font-weight:bold; border:2px solid #00bfbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Helping_out">Helping out</span></h2>
+</td></tr>
+<tr>
+<td>
+<div id="MaintenanceLinks" role="navigation" aria-labelledby="maintenance-links-label" style="margin-top:.6em;overflow:hidden;text-align:center;font-weight:bold"><div style="display:inline-block;vertical-align:top;box-sizing:border-box;margin:.2em 0 .8em;width:8em;padding:0 .3em;white-space:nowrap;list-style:none;text-align:center;color:#3f3f5f"><div id="maintenance-links-label" style="background:rgba(127,127,191,0.125); margin:0 1px .3em; border:2px solid rgb(127,127,191); padding:.2em 0; line-height:32px; color:black; --darkcolor:#ccc">Things to do</div><span class="invert-dark">8,677</span></div><ul style="display:inline-block;display:inline-flex;vertical-align:top;box-sizing:border-box;margin:0;max-width:100%;padding:0 .3em;white-space:nowrap;list-style:none;text-align:center"><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#005f3f"><div style="background:rgba(0,191,127,0.125); margin-bottom:.3em; border:2px solid rgb(0,191,127); padding:.2em 0;"><a href="/Category:Proposals" title="Active propositions"><img alt="Active propositions" src="https://ssb.wiki.gallery/images/thumb/b/bd/Proposed.png/32px-Proposed.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/b/bd/Proposed.png/48px-Proposed.png 1.5x, https://ssb.wiki.gallery/images/thumb/b/bd/Proposed.png/64px-Proposed.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">13</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#5f005f"><div style="background:rgba(191,0,191,0.125); margin-bottom:.3em; border:2px solid rgb(191,0,191); padding:.2em 0;"><a href="/Category:Move_suggestions" title="Move suggestions"><img alt="Move suggestions" src="https://ssb.wiki.gallery/images/thumb/d/de/Move.png/32px-Move.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/d/de/Move.png/48px-Move.png 1.5x, https://ssb.wiki.gallery/images/thumb/d/de/Move.png/64px-Move.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">17</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#3f003f"><div style="background:rgba(127,0,127,0.125); margin-bottom:.3em; border:2px solid rgb(127,0,127); padding:.2em 0;"><a href="/Category:Merge_suggestions" title="Merge suggestions"><img alt="Merge suggestions" src="https://ssb.wiki.gallery/images/thumb/9/9c/Merge.png/32px-Merge.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/9/9c/Merge.png/48px-Merge.png 1.5x, https://ssb.wiki.gallery/images/thumb/9/9c/Merge.png/64px-Merge.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">14</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#3f003f"><div style="background:rgba(127,0,127,0.125); margin-bottom:.3em; border:2px solid rgb(127,0,127); padding:.2em 0;"><a href="/Category:Split_suggestions" title="Split suggestions"><img alt="Split suggestions" src="https://ssb.wiki.gallery/images/thumb/4/41/Split.png/32px-Split.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/4/41/Split.png/48px-Split.png 1.5x, https://ssb.wiki.gallery/images/thumb/4/41/Split.png/64px-Split.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">3</span></li></ul><ul style="display:inline-block;display:inline-flex;vertical-align:top;box-sizing:border-box;margin:0;max-width:100%;padding:0 .3em;white-space:nowrap;list-style:none;text-align:center"><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#1f574f"><div style="background:rgba(63,175,159,0.125); margin-bottom:.3em; border:2px solid rgb(63,175,159); padding:.2em 0;"><a href="/Category:Stubs" title="Stubs"><img alt="Stubs" src="https://ssb.wiki.gallery/images/thumb/f/fe/Stub.png/32px-Stub.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/f/fe/Stub.png/48px-Stub.png 1.5x, https://ssb.wiki.gallery/images/thumb/f/fe/Stub.png/64px-Stub.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">336</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#57574f"><div style="background:rgba(175,175,159,0.125); margin-bottom:.3em; border:2px solid rgb(175,175,159); padding:.2em 0;"><a href="/Category:Articles_in_need_of_cleanup" title="General cleanup"><img alt="General cleanup" src="https://ssb.wiki.gallery/images/thumb/1/12/Cleanup.png/32px-Cleanup.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/1/12/Cleanup.png/48px-Cleanup.png 1.5x, https://ssb.wiki.gallery/images/thumb/1/12/Cleanup.png/64px-Cleanup.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">167</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#1f574f"><div style="background:rgba(63,175,159,0.125); margin-bottom:.3em; border:2px solid rgb(63,175,159); padding:.2em 0;"><a href="/Category:Articles_with_incomplete_sections" title="Incomplete sections"><img alt="Incomplete sections" src="https://ssb.wiki.gallery/images/thumb/0/05/Incomplete.png/32px-Incomplete.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/0/05/Incomplete.png/48px-Incomplete.png 1.5x, https://ssb.wiki.gallery/images/thumb/0/05/Incomplete.png/64px-Incomplete.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">319</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#773f0f"><div style="background:rgba(239,127,31,0.125); margin-bottom:.3em; border:2px solid rgb(239,127,31); padding:.2em 0;"><a href="/Category:Articles_in_need_of_tournament_results" title="Tournament results needed"><img alt="Tournament results needed" src="https://ssb.wiki.gallery/images/thumb/b/b0/BulletPoints.png/32px-BulletPoints.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/b/b0/BulletPoints.png/48px-BulletPoints.png 1.5x, https://ssb.wiki.gallery/images/thumb/b/b0/BulletPoints.png/64px-BulletPoints.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">746</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#672737"><div style="background:rgba(207,79,111,0.125); margin-bottom:.3em; border:2px solid rgb(207,79,111); padding:.2em 0;"><a href="/Category:Pages_with_broken_file_links" title="Broken image links"><img alt="Broken image links" src="https://ssb.wiki.gallery/images/thumb/6/6b/BrokenImage.png/32px-BrokenImage.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/6/6b/BrokenImage.png/48px-BrokenImage.png 1.5x, https://ssb.wiki.gallery/images/thumb/6/6b/BrokenImage.png/64px-BrokenImage.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">13</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#4f2f0f"><div style="background:rgba(159,95,31,0.125); margin-bottom:.3em; border:2px solid rgb(159,95,31); padding:.2em 0;"><a href="/Category:Articles_requiring_competitive_expertise" title="Competitive expertise needed"><img alt="Competitive expertise needed" src="https://ssb.wiki.gallery/images/thumb/5/50/Competitive.png/32px-Competitive.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/5/50/Competitive.png/48px-Competitive.png 1.5x, https://ssb.wiki.gallery/images/thumb/5/50/Competitive.png/64px-Competitive.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">5084</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#1f003f"><div style="background:rgba(63,0,127,0.125); margin-bottom:.3em; border:2px solid rgb(63,0,127); padding:.2em 0;"><a href="/Category:Articles_requiring_technical_data" title="Technical data needed"><img alt="Technical data needed" src="https://ssb.wiki.gallery/images/thumb/7/7d/Data.png/32px-Data.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/7/7d/Data.png/48px-Data.png 1.5x, https://ssb.wiki.gallery/images/thumb/7/7d/Data.png/64px-Data.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">556</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#4f1f0f"><div style="background:rgba(159,63,31,0.125); margin-bottom:.3em; border:2px solid rgb(159,63,31); padding:.2em 0;"><a href="/Category:Articles_in_need_of_updating" title="Outdated pages"><img alt="Outdated pages" src="https://ssb.wiki.gallery/images/thumb/9/90/Outdated.png/32px-Outdated.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/9/90/Outdated.png/48px-Outdated.png 1.5x, https://ssb.wiki.gallery/images/thumb/9/90/Outdated.png/64px-Outdated.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">56</span></li></ul><ul style="display:inline-block;display:inline-flex;vertical-align:top;box-sizing:border-box;margin:0;max-width:100%;padding:0 .3em;white-space:nowrap;list-style:none;text-align:center"><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#672737"><div style="background:rgba(207,79,111,0.125); margin-bottom:.3em; border:2px solid rgb(207,79,111); padding:.2em 0;"><a href="/Category:Articles_in_need_of_images" title="Images needed"><img alt="Images needed" src="https://ssb.wiki.gallery/images/thumb/5/52/ImageNeeded.png/32px-ImageNeeded.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/5/52/ImageNeeded.png/48px-ImageNeeded.png 1.5x, https://ssb.wiki.gallery/images/thumb/5/52/ImageNeeded.png/64px-ImageNeeded.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">404</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#672737"><div style="background:rgba(207,79,111,0.125); margin-bottom:.3em; border:2px solid rgb(207,79,111); padding:.2em 0;"><a href="/Category:Low-quality_images" title="Low-quality images"><img alt="Low-quality images" src="https://ssb.wiki.gallery/images/thumb/0/0a/LowQuality.png/32px-LowQuality.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/0/0a/LowQuality.png/48px-LowQuality.png 1.5x, https://ssb.wiki.gallery/images/thumb/0/0a/LowQuality.png/64px-LowQuality.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">285</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#6f1727"><div style="background:rgba(223,47,79,0.125); margin-bottom:.3em; border:2px solid rgb(223,47,79); padding:.2em 0;"><a href="/Category:Articles_in_need_of_videos" title="Videos needed"><img alt="Videos needed" src="https://ssb.wiki.gallery/images/thumb/1/1a/VideoNeeded.png/32px-VideoNeeded.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/1/1a/VideoNeeded.png/48px-VideoNeeded.png 1.5x, https://ssb.wiki.gallery/images/thumb/1/1a/VideoNeeded.png/64px-VideoNeeded.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">17</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#5f5f3f"><div style="background:rgba(191,191,127,0.125); margin-bottom:.3em; border:2px solid rgb(191,191,127); padding:.2em 0;"><a href="/Category:Articles_in_need_of_audio" title="Audio needed"><img alt="Audio needed" src="https://ssb.wiki.gallery/images/thumb/e/ee/Sound.png/32px-Sound.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/e/ee/Sound.png/48px-Sound.png 1.5x, https://ssb.wiki.gallery/images/thumb/e/ee/Sound.png/64px-Sound.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">165</span></li></ul><ul style="display:inline-block;display:inline-flex;vertical-align:top;box-sizing:border-box;margin:0;max-width:100%;padding:0 .3em;white-space:nowrap;list-style:none;text-align:center"><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#572f0f"><div style="background:rgba(175,95,31,0.125); margin-bottom:.3em; border:2px solid rgb(175,95,31); padding:.2em 0;"><a href="/Category:Candidates_for_notability-based_deletion" title="Pages of dubious notability"><img alt="Pages of dubious notability" src="https://ssb.wiki.gallery/images/thumb/c/cb/Unnotable.png/32px-Unnotable.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/c/cb/Unnotable.png/48px-Unnotable.png 1.5x, https://ssb.wiki.gallery/images/thumb/c/cb/Unnotable.png/64px-Unnotable.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">29</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#7f1700"><div style="background:rgba(255,47,0,0.125); margin-bottom:.3em; border:2px solid rgb(255,47,0); padding:.2em 0;"><a href="/Category:Candidates_for_deletion" title="Deletion candidates"><img alt="Deletion candidates" src="https://ssb.wiki.gallery/images/thumb/8/8c/Delete.png/32px-Delete.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/8/8c/Delete.png/48px-Delete.png 1.5x, https://ssb.wiki.gallery/images/thumb/8/8c/Delete.png/64px-Delete.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">30</span></li><li style="float:left;margin:.2em 1px .8em;width:3.6em;color:#7f3f00"><div style="background:rgba(255,127,0,0.125); margin-bottom:.3em; border:2px solid rgb(255,127,0); padding:.2em 0;"><a href="/Category:Candidates_for_speedy_deletion" title="Speedy deletion candidates"><img alt="Speedy deletion candidates" src="https://ssb.wiki.gallery/images/thumb/1/1b/SpeedyDelete.png/32px-SpeedyDelete.png" decoding="async" width="32" height="32" srcset="https://ssb.wiki.gallery/images/thumb/1/1b/SpeedyDelete.png/48px-SpeedyDelete.png 1.5x, https://ssb.wiki.gallery/images/thumb/1/1b/SpeedyDelete.png/64px-SpeedyDelete.png 2x" data-file-width="256" data-file-height="256" /></a></div><span class="invert-dark">423</span></li></ul></div>
+<p>To write a new article, just enter the article title in the box below.
+</p>
+<div class="mw-inputbox-centered" style=""><form name="createbox" class="createbox" action="/index.php" method="get"><input type="hidden" value="edit" name="action" /><input name="title" class="mw-ui-input mw-ui-input-inline mw-inputbox-createbox" placeholder="" required="" size="24" dir="ltr" /> <input type="submit" name="create" class="mw-ui-button mw-ui-progressive" value="Create new article" /></form></div>
+<p><b>Not sure where to start?</b>
+</p>
+<ul><li>If you are new to wikis, check out the <b><a href="/Help:Contents" title="Help:Contents">SmashWiki help pages</a></b>.</li>
+<li>Before creating a new page, please read <b><a href="/Help:New_page" title="Help:New page">the new page help article</a></b> and <b><a href="/Help:Searching" title="Help:Searching">search to see if the page already exists</a></b> first.</li></ul>
+</td></tr>
+<tr>
+<td>
+<h2 style="margin:0; background:#bfefef; font-size:120%; font-weight:bold; border:2px solid #00bfbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Navigation">Navigation</span></h2>
+</td></tr>
+<tr>
+<td><div style="float:left; width:50%;">
+<ul><li><a href="/Category:Games" title="Category:Games">Games</a></li>
+<li><a href="/Category:Characters" title="Category:Characters">Characters</a></li>
+<li><a href="/Category:Stages" title="Category:Stages">Stages</a></li>
+<li><a href="/Category:Items" title="Category:Items">Items</a></li>
+<li><a href="/Trophy" title="Trophy">Trophies</a></li>
+<li><a href="/Category:Music" title="Category:Music">Music</a></li>
+<li><a href="/Category:Modes" title="Category:Modes">Modes</a></li>
+<li><a href="/Category:Smashers" title="Category:Smashers">Smashers</a></li>
+<li><a href="/Category:Attacks" title="Category:Attacks">Attacks</a></li></ul></div>
+<div style="float:left; width:50%; white-space:nowrap;">
+<ul><li><a href="/Category:SmashWiki" title="Category:SmashWiki">Contents</a></li>
+<li><a href="/Special:Categories" title="Special:Categories">Categories</a></li>
+<li><a href="/SmashWiki:Featured_content" title="SmashWiki:Featured content">Featured content</a></li>
+<li><a href="/Special:AllPages" title="Special:AllPages">A–Z index</a></li>
+<li><a href="/SmashWiki:Glossary" title="SmashWiki:Glossary">Glossary</a></li>
+<li><a href="/SmashWiki:About" title="SmashWiki:About">Overview</a></li>
+<li><a href="/Help:Editing" title="Help:Editing">Editing</a></li>
+<li><a href="/Help:FAQ" title="Help:FAQ">FAQ</a></li>
+<li><a href="/Category:Help" title="Category:Help">Help</a></li></ul>
+</div>
+</td></tr>
+<tr>
+<td>
+<h2 style="margin:0; background:#bfefef; font-size:120%; font-weight:bold; border:2px solid #00bfbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Discord_server">Discord server</span></h2>
+</td></tr>
+<tr>
+<td>
+<table>
+<tbody><tr>
+<td><a href="https://discord.gg/s8jkKBK" title="Click to join the Discord server!" target="_blank" rel="nofollow"><img alt="Click to join the Discord server!" src="https://ssb.wiki.gallery/images/0/05/Discord.svg" decoding="async" width="50" height="50" data-file-width="256" data-file-height="256" /></a></td>
+<td><span class="plainlinks"><a target="_blank" rel="nofollow" class="external text" href="https://discord.gg/s8jkKBK">Click here</a></span> to join SmashWiki's Discord server! (<a href="/SmashWiki:Discord_server" title="SmashWiki:Discord server">more information</a>)
+</td></tr></tbody></table>
+</td></tr>
+<tr>
+<td>
+<h2 style="margin:0; background:#bfefef; font-size:120%; font-weight:bold; border:2px solid #00bfbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Twitter_account">Twitter account</span></h2>
+</td></tr>
+<tr>
+<td>
+<table>
+<tbody><tr>
+<td><a href="https://twitter.com/SSBWikiOfficial" title="Click to view the account!" target="_blank" rel="nofollow"><img alt="Click to view the account!" src="https://ssb.wiki.gallery/images/d/db/Twitter.svg" decoding="async" width="50" height="50" data-file-width="256" data-file-height="256" /></a></td>
+<td>Check out <span class="plainlinks"><a target="_blank" rel="nofollow" class="external text" href="https://twitter.com/SSBWikiOfficial">SmashWiki's Twitter account</a></span>! (<a href="/SmashWiki:Twitter" title="SmashWiki:Twitter">more information</a>)
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+</td>
+<td class="mp-box" width="33%" style="border:2px solid #bfbfdf; background:#f7f7fb; vertical-align:top;">
+<table>
+<tbody><tr>
+<td>
+<h2 style="margin:0; background:#bfdfef; font-size:120%; font-weight:bold; border:2px solid #007fbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Smash_Bros._news">Smash Bros. news</span></h2>
+</td></tr>
+<tr>
+<td>
+<table width="100%" class="plainlinks">
+<tbody><tr>
+<td style="font-size:80%;background:rgba(47,47,47,0.25);border:2px solid #2f2f2f;text-align:center"><a href="/Super_Smash_Bros._Ultimate" title="Super Smash Bros. Ultimate"><img alt="Super Smash Bros. Ultimate" src="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/16px-SSBU_Icon.png" decoding="async" width="16" height="16" class="invert-dark" srcset="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/24px-SSBU_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/32px-SSBU_Icon.png 2x" data-file-width="256" data-file-height="256" /></a> Latest <a href="/List_of_updates_(SSBU)" title="List of updates (SSBU)">version</a>: <a href="/List_of_updates_(SSBU)#13.0.4" title="List of updates (SSBU)">13.0.4</a>
+</td></tr></tbody></table><span class="plainlinks" style="float: right;"><small><i><a target="_blank" rel="nofollow" href="https://www.ssbwiki.com/Template:News?action=edit">Add some news</a></i></small></span><div class="plainlinks">
+<p><b>Weekly in-game event:</b> <a href="/Suit_Up!" title="Suit Up!">Suit Up!</a>
+</p>
+<dl><dt>28 February 2026 <a href="/Super_Smash_Bros._Ultimate" title="Super Smash Bros. Ultimate"><img alt="Super Smash Bros. Ultimate" src="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/16px-SSBU_Icon.png" decoding="async" width="16" height="16" class="invert-dark" srcset="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/24px-SSBU_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/32px-SSBU_Icon.png 2x" data-file-width="256" data-file-height="256" /></a><a href="/Super_Smash_Bros._Melee" title="Super Smash Bros. Melee"><img alt="Super Smash Bros. Melee" src="https://ssb.wiki.gallery/images/thumb/e/ea/SSBM_Icon.png/16px-SSBM_Icon.png" decoding="async" width="16" height="16" class="invert-dark" srcset="https://ssb.wiki.gallery/images/thumb/e/ea/SSBM_Icon.png/24px-SSBM_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/e/ea/SSBM_Icon.png/32px-SSBM_Icon.png 2x" data-file-width="256" data-file-height="256" /></a><a href="/Project%2B" title="Project+"><img alt="Project+" src="https://ssb.wiki.gallery/images/thumb/c/cb/P%2B_Icon.png/16px-P%2B_Icon.png" decoding="async" width="16" height="16" srcset="https://ssb.wiki.gallery/images/thumb/c/cb/P%2B_Icon.png/24px-P%2B_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/c/cb/P%2B_Icon.png/32px-P%2B_Icon.png 2x" data-file-width="512" data-file-height="512" /></a></dt>
+<dd>At <a href="/Tournament:Flash_Flood" title="Tournament:Flash Flood">Flash Flood</a>, <span style="white-space:nowrap"><a href="/Smasher:Miya_(Honshu)" title="Smasher:Miya (Honshu)">Miya</a></span>, <span style="white-space:nowrap"><a href="/Smasher:Asimo" title="Smasher:Asimo">Asimo</a></span>, and <span style="white-space:nowrap"><a href="/Smasher:Toon" title="Smasher:Toon">Toon</a></span> take 1st, 2nd, and 3rd place respectively in <i><a href="/Ultimate" class="mw-redirect" title="Ultimate">Ultimate</a></i> singles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Slowking" title="Smasher:Slowking">Slowking</a></span> takes 1st place in <i><a href="/Melee" class="mw-redirect" title="Melee">Melee</a></i> singles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Chaloopy" title="Smasher:Chaloopy">Chaloopy</a></span> takes 1st place in <i><a href="/Project%2B" title="Project+">Project+</a></i> singles.&#32;<span style="white-space:nowrap"><a href="/Smasher:Miya_(Honshu)" title="Smasher:Miya (Honshu)">Miya</a></span> &amp; <span style="white-space:nowrap"><a href="/Smasher:Toon" title="Smasher:Toon">Toon</a></span> take <i><a href="/Ultimate" class="mw-redirect" title="Ultimate">Ultimate</a></i> doubles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Spicy?action=edit&amp;redlink=1" class="new" title="Smasher:Spicy (page does not exist)">Spicy</a></span> &amp; <span style="white-space:nowrap"><a href="/Smasher:Sothe" title="Smasher:Sothe">Sothe</a></span> take <i><a href="/Project%2B" title="Project+">Project+</a></i> doubles.</dd></dl>
+<dl><dt>15 February 2026 <a href="/Super_Smash_Bros._Ultimate" title="Super Smash Bros. Ultimate"><img alt="Super Smash Bros. Ultimate" src="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/16px-SSBU_Icon.png" decoding="async" width="16" height="16" class="invert-dark" srcset="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/24px-SSBU_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/32px-SSBU_Icon.png 2x" data-file-width="256" data-file-height="256" /></a><a href="/Super_Smash_Bros._Brawl" title="Super Smash Bros. Brawl"><img alt="Super Smash Bros. Brawl" src="https://ssb.wiki.gallery/images/thumb/7/7c/SSBB_Icon.png/16px-SSBB_Icon.png" decoding="async" width="16" height="16" srcset="https://ssb.wiki.gallery/images/thumb/7/7c/SSBB_Icon.png/24px-SSBB_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/7/7c/SSBB_Icon.png/32px-SSBB_Icon.png 2x" data-file-width="256" data-file-height="256" /></a><a href="/Super_Smash_Bros._Melee" title="Super Smash Bros. Melee"><img alt="Super Smash Bros. Melee" src="https://ssb.wiki.gallery/images/thumb/e/ea/SSBM_Icon.png/16px-SSBM_Icon.png" decoding="async" width="16" height="16" class="invert-dark" srcset="https://ssb.wiki.gallery/images/thumb/e/ea/SSBM_Icon.png/24px-SSBM_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/e/ea/SSBM_Icon.png/32px-SSBM_Icon.png 2x" data-file-width="256" data-file-height="256" /></a><a href="/Super_Smash_Bros." title="Super Smash Bros."><img alt="Super Smash Bros." src="https://ssb.wiki.gallery/images/thumb/1/1e/SSB64_Icon.png/16px-SSB64_Icon.png" decoding="async" width="16" height="16" srcset="https://ssb.wiki.gallery/images/thumb/1/1e/SSB64_Icon.png/24px-SSB64_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/1/1e/SSB64_Icon.png/32px-SSB64_Icon.png 2x" data-file-width="256" data-file-height="256" /></a></dt>
+<dd>At <a href="/Tournament:GENESIS_X3" title="Tournament:GENESIS X3">GENESIS X3</a>, <span style="white-space:nowrap"><a href="/Smasher:Sonix" title="Smasher:Sonix">Sonix</a></span>, <span style="white-space:nowrap"><a href="/Smasher:Zomba" title="Smasher:Zomba">Zomba</a></span>, and <span style="white-space:nowrap"><a href="/Smasher:Doramigi" title="Smasher:Doramigi">Doramigi</a></span> take 1st, 2nd, and 3rd place respectively in <i><a href="/Ultimate" class="mw-redirect" title="Ultimate">Ultimate</a></i> singles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Chia" title="Smasher:Chia">Chia</a></span> takes 1st place in <i><a href="/Brawl" class="mw-redirect" title="Brawl">Brawl</a></i> singles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Cody_Schwab" title="Smasher:Cody Schwab">Cody Schwab</a></span>, <span style="white-space:nowrap"><a href="/Smasher:Jmook" title="Smasher:Jmook">Jmook</a></span>, and <span style="white-space:nowrap"><a href="/Smasher:Soonsay" title="Smasher:Soonsay">Soonsay</a></span> take 1st, 2nd, and 3rd place respectively in <i><a href="/Melee" class="mw-redirect" title="Melee">Melee</a></i> singles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Isai" title="Smasher:Isai">Isai</a></span> takes 1st place in <i><a href="/Smash_64" class="mw-redirect" title="Smash 64">Smash 64</a></i> singles.&#32;<span style="white-space:nowrap"><a href="/Smasher:%CE%A9Rugal" title="Smasher:ΩRugal">ΩRugal</a></span> &amp; <span style="white-space:nowrap"><a href="/Smasher:Sparg0" title="Smasher:Sparg0">Sparg0</a></span> take <i><a href="/Ultimate" class="mw-redirect" title="Ultimate">Ultimate</a></i> doubles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Jmook" title="Smasher:Jmook">Jmook</a></span> &amp; <span style="white-space:nowrap"><a href="/Smasher:Cody_Schwab" title="Smasher:Cody Schwab">Cody Schwab</a></span> take <i><a href="/Melee" class="mw-redirect" title="Melee">Melee</a></i> doubles&#59;&#32;<span style="white-space:nowrap"><a href="/Smasher:Kysk" title="Smasher:Kysk">kysk</a></span> &amp; <span style="white-space:nowrap"><a href="/Smasher:Falpan" title="Smasher:Falpan">Falpan</a></span> take <i><a href="/Smash_64" class="mw-redirect" title="Smash 64">Smash 64</a></i> doubles.</dd></dl>
+<dl><dt>15 February 2026 <a href="/Super_Smash_Bros._Ultimate" title="Super Smash Bros. Ultimate"><img alt="Super Smash Bros. Ultimate" src="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/16px-SSBU_Icon.png" decoding="async" width="16" height="16" class="invert-dark" srcset="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/24px-SSBU_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/32px-SSBU_Icon.png 2x" data-file-width="256" data-file-height="256" /></a></dt>
+<dd>At <a href="/Tournament:Exodus_2026" title="Tournament:Exodus 2026">Exodus 2026</a>, <span style="white-space:nowrap"><a href="/Smasher:The_Doctor" title="Smasher:The Doctor">The Doctor</a></span>, <span style="white-space:nowrap"><a href="/Smasher:SipMastah" title="Smasher:SipMastah">SipMastah</a></span>, and <span style="white-space:nowrap"><a href="/Smasher:RapMonster" title="Smasher:RapMonster">RapMonster</a></span> take 1st, 2nd, and 3rd place respectively in <i><a href="/Ultimate" class="mw-redirect" title="Ultimate">Ultimate</a></i> singles.&#32;</dd></dl>
+<dl><dt>9 February 2026 <a href="/Super_Smash_Bros._Ultimate" title="Super Smash Bros. Ultimate"><img alt="Super Smash Bros. Ultimate" src="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/16px-SSBU_Icon.png" decoding="async" width="16" height="16" class="invert-dark" srcset="https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/24px-SSBU_Icon.png 1.5x, https://ssb.wiki.gallery/images/thumb/9/9b/SSBU_Icon.png/32px-SSBU_Icon.png 2x" data-file-width="256" data-file-height="256" /></a></dt>
+<dd>At <a href="/Tournament:Cavalier_Clash_7" title="Tournament:Cavalier Clash 7">Cavalier Clash 7</a>, <span style="white-space:nowrap"><a href="/Smasher:Hurt" title="Smasher:Hurt">Hurt</a></span>, <span style="white-space:nowrap"><a href="/Smasher:Asimo" title="Smasher:Asimo">Asimo</a></span>, and <span style="white-space:nowrap"><a href="/Smasher:Acola" title="Smasher:Acola">acola</a></span> take 1st, 2nd, and 3rd place respectively in <i><a href="/Ultimate" class="mw-redirect" title="Ultimate">Ultimate</a></i> singles.&#32;<span style="white-space:nowrap"><a href="/Smasher:Hurt" title="Smasher:Hurt">Hurt</a></span> &amp; <span style="white-space:nowrap"><a href="/Smasher:Miya_(Honshu)" title="Smasher:Miya (Honshu)">Miya</a></span> take <i><a href="/Ultimate" class="mw-redirect" title="Ultimate">Ultimate</a></i> doubles.</dd></dl>
+</div>
+</td></tr>
+<tr>
+<td>
+<h2 style="margin:0; background:#bfdfef; font-size:120%; font-weight:bold; border:2px solid #007fbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Nintendo_and_NIWA_news">Nintendo and NIWA news</span></h2>
+</td></tr>
+<tr>
+<td>
+<p><span style="float:right;"><small><i><a href="/Template:NIWA_News" title="Template:NIWA News">Add some news</a></i></small></span>
+<b>NIWA News</b>
+</p>
+<ul><li><a href="https://chibi-robo.wiki/wiki/" class="extiw" title="chibirobowiki:">Chibi-Robo! Wiki</a> and <a target="_blank" rel="nofollow" class="external text" href="https://fr.splatoonwiki.org/">Inkipédia</a> have joined NIWA.</li></ul>
+<p><b>Major upcoming/recent releases:</b>
+</p>
+<table id="niwa-news">
+<tbody><tr>
+<td style="background:color-mix(in srgb, rgb(0,207,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(0,207,0), rgb(0,0,0) 75%);border:2px solid rgb(0,207,0);"><div class="center"><div class="floatnone"><a href="/Pok%C3%A9mon_(universe)" title="Pokémon (universe)"><img alt="Pokémon (universe)" src="https://ssb.wiki.gallery/images/c/ca/PokemonSymbol.svg" decoding="async" width="30" height="30" class="invert-dark" data-file-width="256" data-file-height="256" /></a></div></div>
+</td>
+<td>March 5&#160;
+</td>
+<td><i><a href="https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Pokopia" class="extiw" title="bulbapedia:Pokémon Pokopia">Pokémon Pokopia</a></i>
+</td></tr>
+<tr>
+<td style="background:color-mix(in srgb, rgb(191,191,191), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(191,191,191), rgb(0,0,0) 75%);border:2px solid rgb(191,191,191);"><div class="center"><div class="floatnone"><a href="/Mega_Man_(universe)" title="Mega Man (universe)"><img alt="Mega Man (universe)" src="https://ssb.wiki.gallery/images/a/ad/MegaManSymbol.svg" decoding="async" width="30" height="30" class="invert-dark" data-file-width="256" data-file-height="256" /></a></div></div>
+</td>
+<td>March 27&#160;
+</td>
+<td><i><a href="https://en.wikipedia.org/wiki/Mega_Man_Star_Force_Legacy_Collection" class="extiw" title="wikipedia:Mega Man Star Force Legacy Collection">Mega Man Star Force Legacy Collection</a></i>
+</td></tr>
+<tr>
+<td style="background:color-mix(in srgb, rgb(79,127,127), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(79,127,127), rgb(0,0,0) 75%);border:2px solid rgb(79,127,127);"><div class="center"><div class="floatnone"><a href="/Tomodachi_(universe)" title="Tomodachi (universe)"><img alt="Tomodachi (universe)" src="https://ssb.wiki.gallery/images/b/bb/TomodachiSymbol.svg" decoding="async" width="30" height="30" class="invert-dark" data-file-width="256" data-file-height="256" /></a></div></div>
+</td>
+<td>April 16&#160;
+</td>
+<td><i><a href="https://miiwiki.org/wiki/Tomodachi_Life:_Living_the_Dream" class="extiw" title="miiwiki:Tomodachi Life: Living the Dream">Tomodachi Life: Living the Dream</a></i>
+</td></tr>
+
+</tbody></table>
+</td></tr>
+<tr>
+<td>
+<h2 style="margin:0; background:#bfdfef; font-size:120%; font-weight:bold; border:2px solid #007fbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Did_you_know...">Did you know...</span></h2>
+</td></tr>
+<tr>
+<td>
+<ul><li>...that <a href="/Downloadable_content_(SSBU)" title="Downloadable content (SSBU)">Fighters Pass Vol. 2</a> was originally supposed to have 5 fighters like Vol. 1, but was increased to 6 when <a href="/Sora_(SSBU)" title="Sora (SSBU)">Sora</a>'s inclusion was negotiated for?</li>
+<li>...that in <i>Ultimate</i>, <a href="/Cloud_(SSBU)" title="Cloud (SSBU)">Cloud</a>'s <a href="/Palutena%27s_Guidance" title="Palutena&#39;s Guidance">Palutena's Guidance</a> changes if the match is in <a href="/Stamina_Mode" title="Stamina Mode">Stamina Mode</a>?</li>
+<li>...that <a href="/Mewtwo_(SSB4)" title="Mewtwo (SSB4)">Mewtwo</a> in <i>Smash 4</i> had the longest time gap between its reveal and release out of any DLC fighter in Smash history, being 5 months and 24 days?</li>
+<li>...that the unused <i>Melee</i> stage <a href="/AKANEIA" title="AKANEIA">AKANEIA</a> was going to be a <a href="/Fire_Emblem_(universe)" title="Fire Emblem (universe)"><i>Fire Emblem</i></a> stage that was never finished, causing the game to crash when it is accessed through the <a href="/Debug_menu_(SSBM)" title="Debug menu (SSBM)">debug menu</a>?</li>
+<li>That <i>Smash 64</i> was initially concieved as <i>Dragon King: The Fighting Game</i>, with the Nintendo characters and <i>Super Smash Bros.</i> name coming later?</li></ul>
+</td></tr>
+<tr>
+<td>
+<h2 style="margin:0; background:#bfefef; font-size:120%; font-weight:bold; border:2px solid #00bfbf; padding:0.2em 0.4em;"><span class="mw-headline" id="Smash_Arena">Smash Arena</span></h2>
+</td></tr>
+<tr>
+<td>
+<table id="sa-box" cellspacing="0" style="width:300px;margin:1em auto 1em auto; text-align:center">
+<tbody><tr>
+<td colspan="3" style="font-size: 8pt; padding: 4pt; line-height: 1.25em; color: #ffffff; background:#2f2f2f; border:solid #000000 2px;"><a href="/File:Discord.svg" class="image"><img alt="Discord.svg" src="https://ssb.wiki.gallery/images/0/05/Discord.svg" decoding="async" width="14" height="14" data-file-width="256" data-file-height="256" /></a>
+</td></tr>
+<tr>
+<td style="width: 50px; background:#3f3f4f; border:solid #5f005f 2px;"><b><a href="/File:BayonettaSymbol.svg" class="image"><img alt="BayonettaSymbol.svg" src="https://ssb.wiki.gallery/images/3/38/BayonettaSymbol.svg" decoding="async" width="50" height="50" data-file-width="256" data-file-height="256" /></a></b>
+</td>
+<td style="font-size: 8pt; padding: 4pt; line-height: 1.25em; color: #ffffff; background:#000000;">LADIES &amp; GENTS! Come to the <b><span class="plainlinks"><a target="_blank" rel="nofollow" class="external text" href="https://discord.gg/XbUYjdt"><span style="color:#ffbf00;">Smash Arena</span></a></span></b> and vote on Round 132: <b><a href="/Bayonetta" title="Bayonetta"><span style="color:#ffbf00">Bayonetta</span></a></b> vs. <b><a href="/Sora" title="Sora"><span style="color:#ffbf00">Sora</span></a></b>!
+</td>
+<td style="width: 50px; background:#ff3f3f; border:solid #3F3F3F 2px;"><b><a href="/File:KingdomHeartsSymbol.svg" class="image"><img alt="KingdomHeartsSymbol.svg" src="https://ssb.wiki.gallery/images/c/ce/KingdomHeartsSymbol.svg" decoding="async" width="50" height="50" data-file-width="256" data-file-height="256" /></a></b>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+<table id="niwa" class="responsive-col" style="font-size:85%;text-align:center;margin:1em auto">
+<tbody><tr>
+<th colspan="12" style="font-size:120%;background:color-mix(in srgb, rgb(127,127,191), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(127,127,191), rgb(0,0,0) 75%);border:2px solid rgb(127,127,191)"><a href="https://www.niwanetwork.org/" class="extiw" title="niwa:">Nintendo Independent Wiki Alliance</a>
+</th></tr>
+<tr>
+<td colspan="2" width="16%" style="background:color-mix(in srgb, rgb(255,239,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,239,0), rgb(0,0,0) 75%);border:2px solid rgb(255,239,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="ARMS" src="https://ssb.wiki.gallery/images/8/85/ARMSSymbol.svg" decoding="async" title="ARMS" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://armswiki.org/wiki/Home" class="extiw" title="armswiki:Home">ARMS Institute</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" width="16%" style="background:color-mix(in srgb, rgb(0,207,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(0,207,0), rgb(0,0,0) 75%);border:2px solid rgb(0,207,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Pokémon" src="https://ssb.wiki.gallery/images/c/ca/PokemonSymbol.svg" decoding="async" title="Pokémon" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://bulbapedia.bulbagarden.net/wiki/Main_Page" class="extiw" title="bulbapedia:Main Page">Bulbapedia</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" width="16%" style="background:color-mix(in srgb, rgb(223,223,159), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(223,223,159), rgb(0,0,0) 75%);border:2px solid rgb(223,223,159)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Chibi-Robo!" src="https://ssb.wiki.gallery/images/5/59/ChibiRoboSymbol.svg" decoding="async" title="Chibi-Robo!" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://chibi-robo.wiki/wiki/Chibi-Robo_Wiki" class="extiw" title="chibirobowiki:Chibi-Robo Wiki">Chibi-Robo Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" width="16%" style="background:color-mix(in srgb, rgb(95,95,207), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(95,95,207), rgb(0,0,0) 75%);border:2px solid rgb(95,95,207)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Dragalia Lost" src="https://ssb.wiki.gallery/images/a/ad/DragaliaLostSymbol.svg" decoding="async" title="Dragalia Lost" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://dragalialost.wiki/w/Main_Page" class="extiw" title="dragalialost:Main Page">Dragalia Lost Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" width="16%" style="background:color-mix(in srgb, rgb(191,63,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(191,63,0), rgb(0,0,0) 75%);border:2px solid rgb(191,63,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Fire Emblem" src="https://ssb.wiki.gallery/images/2/2a/FireEmblemSymbol.svg" decoding="async" title="Fire Emblem" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://fireemblemwiki.org/wiki/Main_Page" class="extiw" title="fireemblem:Main Page">Fire Emblem Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" width="16%" style="background:color-mix(in srgb, rgb(63,0,255), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(63,0,255), rgb(0,0,0) 75%);border:2px solid rgb(63,0,255)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="F-Zero" src="https://ssb.wiki.gallery/images/2/2f/FZeroSymbol.svg" decoding="async" title="F-Zero" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://mutecity.org/wiki/F-Zero_Wiki" class="extiw" title="fzerowiki:F-Zero Wiki">F-Zero Wiki</a>
+</td></tr></tbody></table>
+</td></tr>
+<tr>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,223,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,223,0), rgb(0,0,0) 75%);border:2px solid rgb(255,223,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Golden Sun" src="https://ssb.wiki.gallery/images/8/89/GoldenSunSymbol.svg" decoding="async" title="Golden Sun" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://goldensunwiki.net/wiki/Main_Page" class="extiw" title="goldensun:Main Page">Golden Sun Universe</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(95,159,175), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(95,159,175), rgb(0,0,0) 75%);border:2px solid rgb(95,159,175)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Tetris" src="https://ssb.wiki.gallery/images/f/fe/TetrisSymbol.svg" decoding="async" title="Tetris" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://harddrop.com/wiki/Tetris_Wiki" class="extiw" title="harddrop:Tetris Wiki">Hard Drop Tetris Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(0,127,255), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(0,127,255), rgb(0,0,0) 75%);border:2px solid rgb(0,127,255)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Kid Icarus" src="https://ssb.wiki.gallery/images/5/52/KidIcarusSymbol.svg" decoding="async" title="Kid Icarus" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://www.kidicaruswiki.org/wiki/Main_Page" class="extiw" title="icaruspedia:Main Page">Icaruspedia</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(95,255,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(95,255,0), rgb(0,0,0) 75%);border:2px solid rgb(95,255,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Splatoon" src="https://ssb.wiki.gallery/images/0/08/SplatoonSymbol.svg" decoding="async" title="Splatoon" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://splatoonwiki.org/wiki/Main_Page" class="extiw" title="inkipedia:Main Page">Inkipedia</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(191,175,79), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(191,175,79), rgb(0,0,0) 75%);border:2px solid rgb(191,175,79)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Kingdom Hearts" src="https://ssb.wiki.gallery/images/c/ce/KingdomHeartsSymbol.svg" decoding="async" title="Kingdom Hearts" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://www.khwiki.com/" class="extiw" title="khwiki:">Kingdom Hearts Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,127,175), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,127,175), rgb(0,0,0) 75%);border:2px solid rgb(255,127,175)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Magical Vacation" src="https://ssb.wiki.gallery/images/5/58/MagicalVacationSymbol.svg" decoding="async" title="Magical Vacation" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://kovopedia.com/wiki/" class="extiw" title="kovopedia:">Kovopedia</a>
+</td></tr></tbody></table>
+</td></tr>
+<tr>
+<td colspan="2" style="background:color-mix(in srgb, rgb(0,0,127), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(0,0,127), rgb(0,0,0) 75%);border:2px solid rgb(0,0,127)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Star Fox" src="https://ssb.wiki.gallery/images/b/be/StarFoxSymbol.svg" decoding="async" title="Star Fox" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://starfoxwiki.info/wiki/Lylat_Wiki" class="extiw" title="lylatwiki:Lylat Wiki">Lylat Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,127,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,127,0), rgb(0,0,0) 75%);border:2px solid rgb(255,127,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Metroid" src="https://ssb.wiki.gallery/images/4/41/MetroidSymbol.svg" decoding="async" title="Metroid" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://www.metroidwiki.org/wiki/Main_Page" class="extiw" title="metroidwiki:Main Page">Metroid Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(79,127,127), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(79,127,127), rgb(0,0,0) 75%);border:2px solid rgb(79,127,127)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Mii" src="https://ssb.wiki.gallery/images/a/a3/MiiSymbol.svg" decoding="async" title="Mii" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://miiwiki.org/wiki/Mii_Wiki" class="extiw" title="miiwiki:Mii Wiki">MiiWiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(223,0,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(223,0,0), rgb(0,0,0) 75%);border:2px solid rgb(223,0,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Nintendo" src="https://ssb.wiki.gallery/images/8/83/NintendoSymbol.svg" decoding="async" title="Nintendo" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://niwanetwork.org/wiki/Main_Page" class="extiw" title="nwiki:Main Page">NintendoWiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(191,159,63), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(191,159,63), rgb(0,0,0) 75%);border:2px solid rgb(191,159,63)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Animal Crossing" src="https://ssb.wiki.gallery/images/e/e9/AnimalCrossingSymbol.svg" decoding="async" title="Animal Crossing" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://nookipedia.com/wiki/Main_Page" class="extiw" title="nookipedia:Main Page">Nookipedia</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(0,191,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(0,191,0), rgb(0,0,0) 75%);border:2px solid rgb(0,191,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Pikmin" src="https://ssb.wiki.gallery/images/6/61/PikminSymbol.svg" decoding="async" title="Pikmin" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://www.pikminwiki.com/" class="extiw" title="pikipedia:">Pikipedia</a>
+</td></tr></tbody></table>
+</td></tr>
+<tr>
+<td colspan="2" style="background:color-mix(in srgb, rgb(0,255,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(0,255,0), rgb(0,0,0) 75%);border:2px solid rgb(0,255,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Pikmin" src="https://ssb.wiki.gallery/images/6/61/PikminSymbol.svg" decoding="async" title="Pikmin" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://pikminfanon.com/wiki/Main_Page" class="extiw" title="pikminfanon:Main Page">Pikmin Fanon</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(239,175,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(239,175,0), rgb(0,0,0) 75%);border:2px solid rgb(239,175,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Rhythm Heaven" src="https://ssb.wiki.gallery/images/5/55/RhythmHeavenSymbol.svg" decoding="async" title="Rhythm Heaven" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://rhwiki.net/wiki/Home" class="extiw" title="rhythmheavenwiki:Home">Rhythm Heaven Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,255,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,255,0), rgb(0,0,0) 75%);border:2px solid rgb(255,255,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="The Legendary Starfy" src="https://ssb.wiki.gallery/images/6/64/StarfySymbol.svg" decoding="async" title="The Legendary Starfy" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://starfywiki.org/wiki/Main_Page" class="extiw" title="starfywiki:Main Page">Starfy Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(63,63,223), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(63,63,223), rgb(0,0,0) 75%);border:2px solid rgb(63,63,223)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Strategy guides" src="https://ssb.wiki.gallery/images/c/c2/StrategyWikiSymbol.svg" decoding="async" title="Strategy guides" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://strategywiki.org/wiki/Main_Page" class="extiw" title="strategywiki:Main Page">StrategyWiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,0,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,0,0), rgb(0,0,0) 75%);border:2px solid rgb(255,0,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Super Mario Wiki" src="https://ssb.wiki.gallery/images/3/30/MarioSymbol.svg" decoding="async" title="Super Mario Wiki" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://www.mariowiki.com/" class="extiw" title="mariowiki:">Super Mario Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(95,63,15), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(95,63,15), rgb(0,0,0) 75%);border:2px solid rgb(95,63,15)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Ukikipedia" src="https://ssb.wiki.gallery/images/3/30/MarioSymbol.svg" decoding="async" title="Ukikipedia" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://ukikipedia.net/wiki/" class="extiw" title="ukikipedia:">Ukikipedia</a>
+</td></tr></tbody></table>
+</td></tr>
+<tr>
+<td colspan="2" style="background:color-mix(in srgb, rgb(47,143,255), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(47,143,255), rgb(0,0,0) 75%);border:2px solid rgb(47,143,255)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Drawn to Life" src="https://ssb.wiki.gallery/images/e/ea/DrawnToLifeSymbol.svg" decoding="async" title="Drawn to Life" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://drawntolife.wiki/en/Main_Page" class="extiw" title="wapopedia:Main Page">Wapopedia</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,159,0), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,159,0), rgb(0,0,0) 75%);border:2px solid rgb(255,159,0)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Nintendo Wars" src="https://ssb.wiki.gallery/images/e/e8/NintendoWarsSymbol.svg" decoding="async" title="Nintendo Wars" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://warswiki.org/wiki/Main_Page" class="extiw" title="warswiki:Main Page">Wars Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,191,47), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,191,47), rgb(0,0,0) 75%);border:2px solid rgb(255,191,47)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="EarthBound" src="https://ssb.wiki.gallery/images/5/51/EarthboundSymbol.svg" decoding="async" title="EarthBound" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://wikibound.info/wiki/WikiBound" class="extiw" title="wikibound:WikiBound">WikiBound</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,159,159), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,159,159), rgb(0,0,0) 75%);border:2px solid rgb(255,159,159)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Kirby" src="https://ssb.wiki.gallery/images/0/0e/KirbySymbol.svg" decoding="async" title="Kirby" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://wikirby.com/wiki/Kirby_Wiki" class="extiw" title="wikirby:Kirby Wiki">WiKirby</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(255,0,63), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(255,0,63), rgb(0,0,0) 75%);border:2px solid rgb(255,0,63)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="Xeno" src="https://ssb.wiki.gallery/images/3/35/XenobladeSymbol.svg" decoding="async" title="Xeno" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://www.xenoserieswiki.org/wiki/Main_Page" class="extiw" title="xenoserieswiki:Main Page">Xeno Series Wiki</a>
+</td></tr></tbody></table>
+</td>
+<td colspan="2" style="background:color-mix(in srgb, rgb(127,0,191), rgb(255,255,255) 75%);--darkbg:color-mix(in srgb, rgb(127,0,191), rgb(0,0,0) 75%);border:2px solid rgb(127,0,191)">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="25px"><img alt="The Legend of Zelda" src="https://ssb.wiki.gallery/images/7/74/ZeldaSymbol.svg" decoding="async" title="The Legend of Zelda" width="25" height="25" class="invert-dark" data-file-width="256" data-file-height="256" />
+</td>
+<td style="padding:2px"><a href="https://zeldawiki.wiki/wiki/Main_Page" class="extiw" title="zeldawiki:Main Page">Zelda Wiki</a>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+<!-- 
+NewPP limit report
+Cached time: 20260304082615
+Cache expiry: 3600
+Reduced expiry: true
+Complications: []
+CPU time usage: 0.235 seconds
+Real time usage: 0.289 seconds
+Preprocessor visited node count: 7642/1000000
+Post‐expand include size: 85142/4194304 bytes
+Template argument size: 4742/4194304 bytes
+Highest expansion depth: 15/100
+Expensive parser function count: 30/1000
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 409/5000000 bytes
+Lua time usage: 0.020/15 seconds
+Lua virtual size: 5013504/209715200 bytes
+Lua estimated memory usage: 0 bytes
+ExtLoops count: 0/10000
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  125.529      1 -total
+ 51.47%   64.610      1 Template:News
+ 47.35%   59.433      4 Template:NewsTourney
+ 32.46%   40.751      4 Template:Trn
+ 25.31%   31.774      1 Template:NIWA_bar
+ 23.94%   30.057    102 Template:InterwikiColour
+  8.62%   10.824      9 Template:NewsTourney/singles
+  7.93%    9.956      1 Template:Helping_out
+  7.74%    9.712     31 Template:Sm
+  7.28%    9.141      1 Template:MaintenanceLinks
+-->
+
+<!-- Saved in parser cache with key ssb?hwiki:pcache:idhash:1-0!canonical and timestamp 20260304082615 and revision id 1969888.
+ -->
+</div><div id="adBox" class="adWrapper" style="margin-top:10px"><!-- Tag ID: ssbwiki_incontent_3 -->
+<div align="center" data-freestar-ad="__336x280 __970x250" id="ssbwiki_incontent_3">
+  <script data-cfasync="false" type="text/javascript">
+    freestar.config.enabled_slots.push({ placementName: "ssbwiki_incontent_3", slotId: "ssbwiki_incontent_3" });
+  </script>
+</div></div><div id="cmp-privacy-link" style="height:1.5em"></div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.ssbwiki.com/index.php?title=Main_Page&amp;oldid=1969888">https://www.ssbwiki.com/index.php?title=Main_Page&amp;oldid=1969888</a>"</div></div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="/Category:SmashWiki" title="Category:SmashWiki">SmashWiki</a></li></ul></div></div>
+				<!-- end content -->
+				<div class="visualClear"></div>
+			</div>
+		</div>
+		<div class="visualClear"></div>
+	</div>
+	<div id="column-one" >
+		<h2>Navigation menu</h2>
+		<div role="navigation" class="portlet" id="p-cactions" aria-labelledby="p-cactions-label">
+			<h3 id="p-cactions-label" >Page actions</h3>
+			<div class="pBody">
+				<ul >
+				<li id="ca-nstab-main" class="selected mw-list-item"><a href="/" title="View the content page [c]" accesskey="c">Main page</a></li><li id="ca-talk" class="mw-list-item"><a href="/Talk:Main_Page" rel="discussion" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li><li id="ca-view" class="selected mw-list-item"><a href="/">Read</a></li><li id="ca-viewsource" class="mw-list-item"><a href="/Main_Page?action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li><li id="ca-history" class="mw-list-item"><a href="/Main_Page?action=history" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+				
+				</ul>
+			</div>
+		</div>
+		
+<div role="navigation" class="portlet mw-portlet mw-portlet-cactions-mobile"
+	id="p-cactions-mobile" aria-labelledby="p-cactions-mobile-label">
+	<h3 id="p-cactions-mobile-label" >Page actions</h3>
+	<div class="pBody">
+		<ul ><li id="main-mobile" class="selected mw-list-item"><a href="/" title="Main page">Main page</a></li><li id="talk-mobile" class="mw-list-item"><a href="/Talk:Main_Page" title="Discussion">Discussion</a></li><li id="ca-more" class="mw-list-item"><a href="#p-cactions">More</a></li><li id="ca-tools" class="mw-list-item"><a href="#p-tb" title="Tools">Tools</a></li><li id="ca-languages" class="mw-list-item"><a href="#p-lang" title="Languages">Languages</a></li></ul>
+		
+	</div>
+</div>
+
+		<div role="navigation" class="portlet" id="p-personal" aria-labelledby="p-personal-label">
+			<h3 id="p-personal-label" >Personal tools</h3>
+			<div class="pBody">
+				<ul >
+				<li id="pt-anonuserpage" class="mw-list-item">Not logged in</li><li id="pt-anontalk" class="mw-list-item"><a href="/Special:MyTalk" title="Discussion about edits from this IP address [n]" accesskey="n">Talk</a></li><li id="pt-anoncontribs" class="mw-list-item"><a href="/Special:MyContributions" title="A list of edits made from this IP address [y]" accesskey="y">Contributions</a></li><li id="pt-createaccount" class="mw-list-item"><a href="/index.php?title=Special:CreateAccount&amp;returnto=Main+Page" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login" class="mw-list-item"><a href="/index.php?title=Special:UserLogin&amp;returnto=Main+Page" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="portlet" id="p-logo" role="banner">
+			<a href="/" class="mw-wiki-logo"></a>
+		</div>
+		<div id="sidebar">
+		
+<div role="navigation" class="portlet mw-portlet mw-portlet-Navigation"
+	id="p-Navigation" aria-labelledby="p-Navigation-label">
+	<h3 id="p-Navigation-label" >Navigation</h3>
+	<div class="pBody">
+		<ul ><li id="n-mainpage-description" class="mw-list-item"><a href="/" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-Smash-Bros.-Ultimate" class="mw-list-item"><a href="/Super_Smash_Bros._Ultimate">Smash Bros. Ultimate</a></li><li id="n-Smash-Bros.-4" class="mw-list-item"><a href="/Super_Smash_Bros._4">Smash Bros. 4</a></li><li id="n-Smash-Bros.-Brawl" class="mw-list-item"><a href="/Super_Smash_Bros._Brawl">Smash Bros. Brawl</a></li><li id="n-Smash-Bros.-Melee" class="mw-list-item"><a href="/Super_Smash_Bros._Melee">Smash Bros. Melee</a></li><li id="n-Smash-Bros.-.2864.29" class="mw-list-item"><a href="/Super_Smash_Bros.">Smash Bros. (64)</a></li><li id="n-Fighters" class="mw-list-item"><a href="/Fighter">Fighters</a></li><li id="n-Stages" class="mw-list-item"><a href="/Stage">Stages</a></li><li id="n-Modes" class="mw-list-item"><a href="/Mode">Modes</a></li><li id="n-Items" class="mw-list-item"><a href="/Item">Items</a></li><li id="n-randompage" class="mw-list-item"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li></ul>
+		
+	</div>
+</div>
+
+		<div role="search" class="portlet" id="p-search">
+			<h3 id="p-search-label" ><label for="searchInput">Search</label></h3>
+			<div class="pBody" id="searchBody">
+				<form action="/index.php" id="searchform"><input type="hidden" value="Special:Search" name="title"><input type="search" name="search" placeholder="Search SmashWiki" aria-label="Search SmashWiki" autocapitalize="sentences" title="Search SmashWiki [f]" accesskey="f" id="searchInput"/><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" class="searchButton" id="searchButton"/> <input type="submit" name="fulltext" value="Search" title="Search the pages for this text" class="searchButton mw-fallbackSearchButton" id="mw-searchButton"/></form>
+			</div>
+		</div>
+		
+<div role="navigation" class="portlet mw-portlet mw-portlet-Participate"
+	id="p-Participate" aria-labelledby="p-Participate-label">
+	<h3 id="p-Participate-label" >Participate</h3>
+	<div class="pBody">
+		<ul ><li id="n-Forum" class="mw-list-item"><a href="/Forum:Index">Forum</a></li><li id="n-portal" class="mw-list-item"><a href="/SmashWiki:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges" class="mw-list-item"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-help" class="mw-list-item"><a href="/Help:Contents" title="The place to find out">Help</a></li><li id="n-Glossary" class="mw-list-item"><a href="/SmashWiki:Glossary">Glossary</a></li><li id="n-Admin-noticeboard" class="mw-list-item"><a href="/SmashWiki:Administrators%27_noticeboard">Admin noticeboard</a></li><li id="n-Discord-server" class="mw-list-item"><a href="/SmashWiki:Discord_server">Discord server</a></li><li id="n-Twitter-account" class="mw-list-item"><a href="/SmashWiki:Twitter">Twitter account</a></li></ul>
+		
+	</div>
+</div>
+
+<div role="navigation" class="portlet mw-portlet mw-portlet-tb"
+	id="p-tb" aria-labelledby="p-tb-label">
+	<h3 id="p-tb-label" >Tools</h3>
+	<div class="pBody">
+		<ul ><li id="t-whatlinkshere" class="mw-list-item"><a href="/Special:WhatLinksHere/Main_Page" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="/Special:RecentChangesLinked/Main_Page" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages" class="mw-list-item"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink" class="mw-list-item"><a href="/index.php?title=Main_Page&amp;oldid=1969888" title="Permanent link to this revision of this page">Permanent link</a></li><li id="t-info" class="mw-list-item"><a href="/Main_Page?action=info" title="More information about this page">Page information</a></li></ul>
+		
+	</div>
+</div>
+
+		
+<div role="navigation" class="portlet mw-portlet mw-portlet-lang"
+	id="p-lang" aria-labelledby="p-lang-label">
+	<h3 id="p-lang-label" >Languages</h3>
+	<div class="pBody">
+		<ul ><li class="interlanguage-link interwiki-es mw-list-item"><a href="https://es.ssbwiki.com/wiki/SmashPedia" title="SmashPedia – Spanish" lang="es" hreflang="es" class="interlanguage-link-target">Español</a></li></ul>
+		
+	</div>
+</div>
+
+		</div>
+		<a href="#sidebar" title="Jump to navigation"
+			class="menu-toggle" id="sidebar-toggle"></a>
+		<a href="#p-personal" title="user tools"
+			class="menu-toggle" id="p-personal-toggle"></a>
+		<a href="#globalWrapper" title="back to top"
+			class="menu-toggle" id="globalWrapper-toggle"></a>
+	</div>
+	<!-- end of the left (by default at least) column -->
+	<div class="visualClear"></div>
+	<div id="footer" class="mw-footer" role="contentinfo"
+		>
+		<div id="f-copyrightico" class="footer-icons">
+			<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_self"><img src="//ssb.wiki.gallery/resources/assets/licenses/cc-by-sa.png" alt="Attribution-ShareAlike 4.0 International" width="88" height="31" loading="lazy"/></a>
+		</div>
+		<div id="f-poweredbyico" class="footer-icons">
+			<a href="https://www.mediawiki.org/" target="_self"><img src="//ssb.wiki.gallery/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="//ssb.wiki.gallery/resources/assets/poweredby_mediawiki_132x47.png 1.5x, //ssb.wiki.gallery/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31" loading="lazy"/></a>
+		</div>
+		<ul id="f-list">
+			<li id="lastmod"> This page was last edited on April 2, 2025, at 00:00.</li><li id="copyright">Content is available under <a class="external" rel="nofollow" href="https://creativecommons.org/licenses/by-sa/4.0/">Attribution-ShareAlike 4.0 International</a> unless otherwise noted.</li>
+			<li id="privacy"><a href="https://www.porplemontage.com/privacy">Privacy policy</a></li><li id="about"><a href="/SmashWiki:About">About SmashWiki</a></li><li id="disclaimer"><a href="/SmashWiki:General_disclaimer">Disclaimers</a></li><li id="mobileview"><a href="https://www.ssbwiki.com/index.php?title=Main_Page&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+		</ul>
+	</div>
+</div>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.235","walltime":"0.289","ppvisitednodes":{"value":7642,"limit":1000000},"postexpandincludesize":{"value":85142,"limit":4194304},"templateargumentsize":{"value":4742,"limit":4194304},"expansiondepth":{"value":15,"limit":100},"expensivefunctioncount":{"value":30,"limit":1000},"unstrip-depth":{"value":0,"limit":20},"unstrip-size":{"value":409,"limit":5000000},"timingprofile":["100.00%  125.529      1 -total"," 51.47%   64.610      1 Template:News"," 47.35%   59.433      4 Template:NewsTourney"," 32.46%   40.751      4 Template:Trn"," 25.31%   31.774      1 Template:NIWA_bar"," 23.94%   30.057    102 Template:InterwikiColour","  8.62%   10.824      9 Template:NewsTourney/singles","  7.93%    9.956      1 Template:Helping_out","  7.74%    9.712     31 Template:Sm","  7.28%    9.141      1 Template:MaintenanceLinks"]},"scribunto":{"limitreport-timeusage":{"value":"0.020","limit":"15"},"limitreport-virtmemusage":{"value":5013504,"limit":209715200},"limitreport-estmemusage":0},"loops":{"limitreport-count-limited":{"value":0,"limit":10000}},"cachereport":{"timestamp":"20260304082615","ttl":3600,"transientcontent":true}}});mw.config.set({"wgBackendResponseTime":78});});</script>
+</body>
+<!-- Cached 20260304082617 -->
+</html>
