@@ -163,14 +163,14 @@ export default function Stats() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', backgroundColor: '#111', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', border: '2px solid #444' }}>
                 <Filter size={24} color="var(--smash-red)" />
                 <span style={{ fontWeight: '900', color: 'var(--text-main)', fontSize: '1.2rem', fontFamily: 'var(--font-jp)' }}>
-                    TARGET:
+                    分析対象:
                 </span>
                 <select
                     value={selectedMyFighter}
                     onChange={(e) => setSelectedMyFighter(e.target.value)}
                     style={{ padding: '0.8rem', backgroundColor: '#222', color: 'white', border: '2px solid var(--smash-red)', flex: 1, cursor: 'pointer', outline: 'none', fontSize: '1.1rem', fontWeight: 'bold' }}
                 >
-                    <option value="all">ALL FIGHTERS</option>
+                    <option value="all">全ファイター</option>
                     {myFightersPlayed.map(f => (
                         <option key={f.id} value={f.id}>{f.name}</option>
                     ))}
@@ -180,11 +180,11 @@ export default function Stats() {
             {/* Overview Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                 <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: '#444' }}>
-                    <div style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>TOTAL MATCHES</div>
+                    <div style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>総試合数</div>
                     <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>{totalMatches}</div>
                 </div>
                 <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--smash-yellow)' }}>
-                    <div style={{ fontSize: '1.2rem', color: 'var(--smash-yellow)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>WIN RATE</div>
+                    <div style={{ fontSize: '1.2rem', color: 'var(--smash-yellow)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>勝率</div>
                     <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--smash-yellow)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
                         {totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 0}%
                     </div>
@@ -196,7 +196,7 @@ export default function Stats() {
             {/* GSP History Chart */}
             {gspChartData.length > 0 && (
                 <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '2rem' }}>
-                    <h2 className="section-title" style={{ borderColor: 'var(--win-color)', marginTop: 0 }}>GSP HISTORY</h2>
+                    <h2 className="section-title" style={{ borderColor: 'var(--win-color)', marginTop: 0 }}>世界戦闘力(GSP) 推移</h2>
                     <div style={{ width: '100%', height: 300, marginTop: '2rem' }}>
                         <ResponsiveContainer width="100%" height="100%">
                             <LineChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
@@ -245,21 +245,21 @@ export default function Stats() {
             {/* Fighter Matchups */}
             {opponentStats.length > 0 && (
                 <>
-                    <h2 className="section-title">MATCHUPS</h2>
+                    <h2 className="section-title">対戦カード分析</h2>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
                         {/* Best Matchups */}
                         <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', color: 'var(--win-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>FAVORITE OPPONENTS</h3>
+                            <h3 style={{ fontSize: '1.4rem', color: 'var(--win-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>得意な相手</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 {[...opponentStats].sort((a, b) => b.winRate - a.winRate || b.total - a.total).slice(0, 5).map((stat, i) => (
                                     <div key={`best-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(0, 204, 255, 0.1)', borderLeft: '4px solid var(--win-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <span style={{ fontWeight: '900', color: 'var(--win-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
                                             <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || 'Unknown'}</span>
+                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
                                         </div>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} MATCH</span>
+                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
                                             <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--win-color)', fontSize: '1.2rem' }}>
                                                 {stat.winRate}%
                                             </span>
@@ -271,17 +271,17 @@ export default function Stats() {
 
                         {/* Worst Matchups */}
                         <div className="stat-card" style={{ borderBottomColor: 'var(--lose-color)', padding: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', color: 'var(--lose-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>TOUGH OPPONENTS</h3>
+                            <h3 style={{ fontSize: '1.4rem', color: 'var(--lose-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>苦手な相手</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 {[...opponentStats].sort((a, b) => a.winRate - b.winRate || b.total - a.total).slice(0, 5).map((stat, i) => (
                                     <div key={`worst-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(255, 51, 51, 0.1)', borderLeft: '4px solid var(--lose-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <span style={{ fontWeight: '900', color: 'var(--lose-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
                                             <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || 'Unknown'}</span>
+                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
                                         </div>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} MATCH</span>
+                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
                                             <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--lose-color)', fontSize: '1.2rem' }}>
                                                 {stat.winRate}%
                                             </span>
@@ -295,14 +295,14 @@ export default function Stats() {
                     {/* Kill Move Rankings */}
                     {myKillMoveRanking.length > 0 && (
                         <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', marginTop: '2rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--smash-yellow)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>
-                                <Crosshair size={24} /> TOP KILL MOVES
+                            <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--smash-yellow)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
+                                <Crosshair size={24} /> よく使う撃墜技
                             </h3>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                                 {myKillMoveRanking.map((item, i) => (
                                     <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#111', padding: '1rem 1.5rem', border: '2px solid #444', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
                                         <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem' }}>{i + 1}. {item.name}</span>
-                                        <span style={{ color: 'var(--smash-yellow)', fontWeight: '900', fontSize: '1.3rem', fontFamily: 'var(--font-en)' }}>{item.count} KO</span>
+                                        <span style={{ color: 'var(--smash-yellow)', fontWeight: '900', fontSize: '1.3rem', fontFamily: 'var(--font-en)' }}>{item.count} 回</span>
                                     </div>
                                 ))}
                             </div>
@@ -316,7 +316,7 @@ export default function Stats() {
             {/* Recent History */}
             <div className="animate-enter" style={{ animationDelay: '0.2s' }}>
                 <h2 className="section-title">
-                    RECENT MATCHES
+                    直近の履歴
                 </h2>
                 {filteredHistory.length === 0 ? (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '3rem', backgroundColor: '#111', border: '2px dashed #444', fontWeight: 'bold' }}>
@@ -423,7 +423,7 @@ export default function Stats() {
                                             <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>
                                                 <span>{date.toLocaleDateString('ja-JP')} {date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}</span>
                                                 {match.rules && (
-                                                    <span>{match.rules.stock} STOCKS / {match.rules.time}:00</span>
+                                                    <span>{match.rules.stock} ストック / {match.rules.time}:00</span>
                                                 )}
                                                 {(match.myKillMoves?.length > 0 || match.killMove) && (
                                                     <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -467,8 +467,8 @@ export default function Stats() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '2rem' }}>
                 {/* Cloud Sync */}
                 <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)' }}>
-                    <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>
-                        <Cloud size={24} /> CLOUD SYNC
+                    <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
+                        <Cloud size={24} /> クラウド同期
                     </h2>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.5rem', fontWeight: 'bold' }}>
                         合言葉を設定して、スマートフォンとPC間でデータを同期します。
@@ -488,9 +488,9 @@ export default function Stats() {
                             }}
                             disabled={isSyncing}
                             className="btn-smash"
-                            style={{ padding: '1rem', fontSize: '1.2rem', background: isSyncing ? '#555' : 'var(--win-color)', width: '100%', clipPath: 'none' }}
+                            style={{ padding: '1rem', fontSize: '1.2rem', background: isSyncing ? '#555' : 'var(--win-color)', width: '100%', clipPath: 'none', fontFamily: 'var(--font-jp)' }}
                         >
-                            {isSyncing ? '通信中...' : (syncId ? 'UPDATE SYNC ID' : 'START SYNC')}
+                            {isSyncing ? '通信中...' : (syncId ? '合言葉を変更・更新' : '合言葉を設定して同期')}
                         </button>
                         {syncId && <div style={{ color: 'var(--win-color)', fontSize: '0.9rem', fontWeight: 'bold', textAlign: 'center' }}>✓ 同期オン: {syncId}</div>}
                         {syncError && <div style={{ color: 'var(--smash-red)', fontSize: '0.9rem', fontWeight: 'bold', textAlign: 'center' }}>⚠ {syncError}</div>}
@@ -499,19 +499,19 @@ export default function Stats() {
 
                 {/* Local Backup */}
                 <div className="stat-card" style={{ borderBottomColor: 'var(--text-muted)' }}>
-                    <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-main)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>
-                        <Download size={24} /> BACKUP
+                    <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-main)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
+                        <Download size={24} /> ローカルバックアップ
                     </h2>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.5rem', fontWeight: 'bold' }}>
                         ファイル形式でデータを直接ダウンロード、または復元します。
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <button onClick={handleExport} className="btn-smash" style={{ padding: '1rem', fontSize: '1.2rem', background: '#333', color: '#fff', width: '100%', clipPath: 'none' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><Download size={20} /> EXPORT (SAVE)</div>
+                        <button onClick={handleExport} className="btn-smash" style={{ padding: '1rem', fontSize: '1.1rem', background: '#333', color: '#fff', width: '100%', clipPath: 'none', fontFamily: 'var(--font-jp)' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><Download size={20} /> バックアップを保存</div>
                         </button>
                         <input type="file" accept=".json" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
-                        <button onClick={handleImportClick} className="btn-smash" style={{ padding: '1rem', fontSize: '1.2rem', background: '#333', color: '#fff', width: '100%', clipPath: 'none' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><Upload size={20} /> IMPORT (LOAD)</div>
+                        <button onClick={handleImportClick} className="btn-smash" style={{ padding: '1rem', fontSize: '1.1rem', background: '#333', color: '#fff', width: '100%', clipPath: 'none', fontFamily: 'var(--font-jp)' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><Upload size={20} /> データを読み込む</div>
                         </button>
                     </div>
                 </div>

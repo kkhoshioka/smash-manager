@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
 import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair } from 'lucide-react';
@@ -20,6 +20,14 @@ export default function MatchLogger() {
 
     const [isSelectingMine, setIsSelectingMine] = useState(!prefs.lastMyFighter);
     const myFighterObj = fighters.find(f => f.id === prefs.lastMyFighter);
+
+    useEffect(() => {
+        if (prefs.lastMyFighter && prefs.fighterGsp?.[prefs.lastMyFighter]) {
+            setGsp(prefs.fighterGsp[prefs.lastMyFighter].toString());
+        } else {
+            setGsp('');
+        }
+    }, [prefs.lastMyFighter]);
 
     const frequentOpponents = useMemo(() => {
         const counts = {};
@@ -119,7 +127,7 @@ export default function MatchLogger() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                         <h2 className="section-title" style={{ borderColor: 'var(--smash-yellow)', margin: 0 }}>
                             <User size={28} style={{ marginRight: '0.8rem', color: 'var(--smash-yellow)' }} />
-                            PLAYER 1
+                            1Pファイター
                         </h2>
                         {myFighterObj && !isSelectingMine && (
                             <button
@@ -205,7 +213,7 @@ export default function MatchLogger() {
                 <div style={{ flex: '1 1 300px', minWidth: 0 }}>
                     <h2 className="section-title" style={{ margin: 0, marginBottom: '1rem' }}>
                         <Swords size={28} style={{ marginRight: '0.8rem', color: 'var(--smash-red)' }} />
-                        CHALLENGER
+                        挑戦者
                     </h2>
 
                     {selectedOpponent ? (
@@ -262,7 +270,7 @@ export default function MatchLogger() {
                     }}
                 >
                     {showExtras ? <ChevronUp size={20} /> : <Settings size={20} />}
-                    {showExtras ? 'CLOSE SETTINGS' : 'RULES / GSP / KILL MOVES'}
+                    {showExtras ? '詳細設定を閉じる' : 'ルール・戦闘力・撃墜技'}
                 </button>
 
                 {showExtras && (
@@ -271,7 +279,7 @@ export default function MatchLogger() {
                         {/* Rules */}
                         <div style={{ display: 'flex', gap: '1.5rem', gridColumn: '1 / -1' }}>
                             <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>STOCKS</label>
+                                <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>ストック数</label>
                                 <select
                                     value={rules.stock}
                                     onChange={e => setRules({ ...rules, stock: parseInt(e.target.value) })}
@@ -283,7 +291,7 @@ export default function MatchLogger() {
                                 </select>
                             </div>
                             <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>TIME</label>
+                                <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>タイム</label>
                                 <select
                                     value={rules.time}
                                     onChange={e => setRules({ ...rules, time: parseInt(e.target.value) })}
@@ -298,7 +306,7 @@ export default function MatchLogger() {
 
                         {/* GSP */}
                         <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
-                            <label style={{ display: 'block', fontSize: '1.2rem', color: 'var(--smash-yellow)', marginBottom: '0.5rem', fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>GLOBAL SMASH POWER</label>
+                            <label style={{ display: 'block', fontSize: '1.2rem', color: 'var(--smash-yellow)', marginBottom: '0.5rem', fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>世界戦闘力</label>
                             <input
                                 type="number"
                                 value={gsp}
@@ -398,7 +406,7 @@ export default function MatchLogger() {
                         </div>
 
                         <div style={{ gridColumn: '1 / -1' }}>
-                            <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>MEMO</label>
+                            <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>メモ</label>
                             <textarea
                                 value={notes}
                                 onChange={e => setNotes(e.target.value)}

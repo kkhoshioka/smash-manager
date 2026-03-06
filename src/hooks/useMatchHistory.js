@@ -11,16 +11,17 @@ export function useMatchHistory() {
 
     const [prefs, setPrefs] = useState(() => {
         const saved = localStorage.getItem(PREFS_KEY);
-        // Add default rules if not present (Enforce 3/7)
         const defaultPrefs = {
             lastMyFighter: null,
-            rules: { stock: 3, time: 7 }
+            rules: { stock: 3, time: 7 },
+            fighterGsp: {}
         };
 
         if (saved) {
             const parsed = JSON.parse(saved);
-            // Ensure rules exist even on old saves
+            // Ensure rules and fighterGsp exist even on old saves
             if (!parsed.rules) parsed.rules = { stock: 3, time: 7 };
+            if (!parsed.fighterGsp) parsed.fighterGsp = {};
             return { ...defaultPrefs, ...parsed };
         }
 
@@ -132,7 +133,11 @@ export function useMatchHistory() {
         setPrefs(p => ({
             ...p,
             lastMyFighter: matchData.myFighter || p.lastMyFighter,
-            rules: matchData.rules || p.rules
+            rules: matchData.rules || p.rules,
+            fighterGsp: matchData.gsp ? {
+                ...(p.fighterGsp || {}),
+                [matchData.myFighter]: matchData.gsp
+            } : (p.fighterGsp || {})
         }));
     };
 

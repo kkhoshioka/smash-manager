@@ -37,8 +37,22 @@ body {
   margin: 0;
   font-family: var(--font-jp);
   background-color: var(--bg-color);
-  /* Smash Bros Signature Diagonal Stripe Background */
   background-image:
+    /* Smash thick cross slashes */
+    linear-gradient(110deg,
+      transparent 35%,
+      rgba(223, 36, 38, 0.15) 35%,
+      rgba(223, 36, 38, 0.15) 42%,
+      transparent 42%,
+      transparent 46%,
+      rgba(255, 255, 255, 0.05) 46%,
+      rgba(255, 255, 255, 0.05) 48%,
+      transparent 48%),
+    linear-gradient(-70deg,
+      transparent 60%,
+      rgba(255, 255, 255, 0.03) 60%,
+      rgba(255, 255, 255, 0.03) 65%,
+      transparent 65%),
     repeating-linear-gradient(-45deg,
       rgba(255, 255, 255, 0.02),
       rgba(255, 255, 255, 0.02) 2px,
@@ -88,13 +102,15 @@ button {
 
 .main-content {
   width: 100%;
-  max-width: 1000px;
-  background: var(--bg-panel);
+  max-width: 1400px;
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 12px 12px,
+    var(--bg-panel);
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-main);
   position: relative;
   overflow: visible;
-  padding: 2rem;
+  padding: 2.5rem;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
 }
 
@@ -254,7 +270,9 @@ button {
 
 /* Specialized Stat Cards */
 .stat-card {
-  background: var(--bg-panel-light);
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.01) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0.01) 75%, transparent 75%, transparent) 0 0 / 8px 8px,
+    var(--bg-panel-light);
   border: 1px solid #333;
   padding: 1.5rem;
   position: relative;
