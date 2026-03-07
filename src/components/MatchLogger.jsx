@@ -76,6 +76,18 @@ export default function MatchLogger() {
         return streak;
     }, [history, prefs.lastMyFighter]);
 
+    const matchupStats = useMemo(() => {
+        if (!prefs.lastMyFighter || !selectedOpponent) return null;
+        const matches = history.filter(m => m.myFighter === prefs.lastMyFighter && m.opponentFighter === selectedOpponent.id);
+        const wins = matches.filter(m => m.result === 'win').length;
+        const total = matches.length;
+        const losses = total - wins;
+        const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
+        const recent = matches.slice(-5);
+
+        return { total, wins, losses, winRate, recent };
+    }, [history, prefs.lastMyFighter, selectedOpponent]);
+
     const saveMatch = (result) => {
         if (!prefs.lastMyFighter) {
             alert('自分のファイターを選択してください');
@@ -209,19 +221,19 @@ export default function MatchLogger() {
                                 </span>
                                 {currentStreak > 0 && (
                                     <span style={{
-                                        color: currentStreak >= 5 ? '#ff00ff' : currentStreak >= 3 ? '#ffcc00' : 'var(--win-color)',
+                                        color: currentStreak >= 5 ? '#ff00ff' : currentStreak >= 2 ? '#ffcc00' : 'var(--win-color)',
                                         fontWeight: '900',
                                         fontSize: currentStreak >= 10 ? '1.8rem' : currentStreak >= 5 ? '1.5rem' : '1.2rem',
                                         marginTop: '0.2rem',
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: '0.3rem',
-                                        animation: currentStreak >= 5 ? 'pulse 0.5s infinite' : currentStreak >= 3 ? 'pulse 1s infinite' : 'pulse 2s infinite',
-                                        textShadow: currentStreak >= 5 ? '0 0 10px #ff00ff, 2px 2px 0 #000' : currentStreak >= 3 ? '0 0 10px #ffcc00, 2px 2px 0 #000' : '2px 2px 0 #000',
+                                        animation: currentStreak >= 5 ? 'pulse 0.5s infinite' : currentStreak >= 2 ? 'pulse 1s infinite' : 'pulse 2s infinite',
+                                        textShadow: currentStreak >= 5 ? '0 0 10px #ff00ff, 2px 2px 0 #000' : currentStreak >= 2 ? '0 0 10px #ffcc00, 2px 2px 0 #000' : '2px 2px 0 #000',
                                         transition: 'all 0.3s'
                                     }}>
-                                        <Flame size={currentStreak >= 5 ? 28 : currentStreak >= 3 ? 24 : 20}
-                                            color={currentStreak >= 5 ? '#ff00ff' : currentStreak >= 3 ? '#ffcc00' : 'var(--win-color)'} />
+                                        <Flame size={currentStreak >= 5 ? 28 : currentStreak >= 2 ? 24 : 20}
+                                            color={currentStreak >= 5 ? '#ff00ff' : currentStreak >= 2 ? '#ffcc00' : 'var(--win-color)'} />
                                         現在 {currentStreak} 連勝中！
                                     </span>
                                 )}
@@ -313,6 +325,57 @@ export default function MatchLogger() {
                     )}
                 </div>
             </div>
+
+            {/* Matchup Stats */}
+            {matchupStats && (
+                <div className="animate-enter" style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={{
+                        backgroundColor: '#111',
+                        border: '2px solid #555',
+                        clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                        padding: '1rem 3rem',
+                        textAlign: 'center',
+                        justifyContent: 'center',
+                        display: 'inline-flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                        <div style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 'bold', fontFamily: 'var(--font-jp)' }}>
+                            過去の対戦成績
+                        </div>
+                        {matchupStats.total > 0 ? (
+                            <>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', marginTop: '0.2rem', fontFamily: 'var(--font-jp)', textShadow: '2px 2px 0 #000' }}>
+                                    {matchupStats.total}戦 <span style={{ color: 'var(--win-color)' }}>{matchupStats.wins}勝</span> <span style={{ color: 'var(--lose-color)' }}>{matchupStats.losses}敗</span>
+                                    <span style={{ marginLeft: '1.5rem', fontSize: '1.4rem' }}>
+                                        勝率 <span style={{ color: matchupStats.winRate >= 50 ? 'var(--win-color)' : 'var(--lose-color)' }}>{matchupStats.winRate}%</span>
+                                    </span>
+                                </div>
+                                {matchupStats.recent && matchupStats.recent.length > 0 && (
+                                    <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center', alignItems: 'center' }}>
+                                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginRight: '0.5rem' }}>最近の対戦:</span>
+                                        {matchupStats.recent.map((m, i) => (
+                                            <div key={i} style={{
+                                                width: '24px', height: '24px', borderRadius: '50%',
+                                                backgroundColor: m.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)',
+                                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                color: '#fff', fontSize: '0.8rem', fontWeight: 'bold',
+                                                boxShadow: '1px 1px 0 rgba(0,0,0,0.5)'
+                                            }}>
+                                                {m.result === 'win' ? 'W' : 'L'}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div style={{ fontSize: '1.4rem', fontWeight: 'bold', marginTop: '0.2rem', color: 'var(--text-main)', fontFamily: 'var(--font-jp)' }}>
+                                この組み合わせでの対戦はまだありません
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
 
             <div className="smash-divider" />
 
