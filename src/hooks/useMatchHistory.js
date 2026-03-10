@@ -22,6 +22,7 @@ export function useMatchHistory() {
             // Ensure rules and fighterGsp exist even on old saves
             if (!parsed.rules) parsed.rules = { stock: 3, time: 7 };
             if (!parsed.fighterGsp) parsed.fighterGsp = {};
+            if (!parsed.customKillMoves) parsed.customKillMoves = {};
             return { ...defaultPrefs, ...parsed };
         }
 

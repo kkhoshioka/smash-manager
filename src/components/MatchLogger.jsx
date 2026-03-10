@@ -25,6 +25,50 @@ export default function MatchLogger() {
         setGsp('');
     }, [prefs.lastMyFighter]);
 
+    const [isEditingMyKillMoves, setIsEditingMyKillMoves] = useState(false);
+    const [newCustomKillMove, setNewCustomKillMove] = useState('');
+
+    const handleAddCustomKillMove = () => {
+        if (!newCustomKillMove.trim() || !prefs.lastMyFighter) return;
+        const currentCustom = prefs.customKillMoves?.[prefs.lastMyFighter] || [];
+        if (!currentCustom.includes(newCustomKillMove.trim())) {
+            setPrefs(p => ({
+                ...p,
+                customKillMoves: {
+                    ...(p.customKillMoves || {}),
+                    [prefs.lastMyFighter]: [...currentCustom, newCustomKillMove.trim()]
+                }
+            }));
+        }
+        setNewCustomKillMove('');
+    };
+
+    const handleRemoveCustomKillMove = (move) => {
+        if (!prefs.lastMyFighter) return;
+        const currentCustom = prefs.customKillMoves?.[prefs.lastMyFighter] || [];
+        setPrefs(p => ({
+            ...p,
+            customKillMoves: {
+                ...(p.customKillMoves || {}),
+                [prefs.lastMyFighter]: currentCustom.filter(m => m !== move)
+            }
+        }));
+    };
+
+    const myCombinedKillMoves = useMemo(() => {
+        if (!myFighterObj) return [];
+        const defaults = myFighterObj.killMoves || [];
+        const customs = prefs.customKillMoves?.[prefs.lastMyFighter] || [];
+        return [...new Set([...defaults, ...customs])];
+    }, [myFighterObj, prefs.customKillMoves, prefs.lastMyFighter]);
+
+    const opponentCombinedKillMoves = useMemo(() => {
+        if (!selectedOpponent) return [];
+        const defaults = selectedOpponent.killMoves || [];
+        const customs = prefs.customKillMoves?.[selectedOpponent.id] || [];
+        return [...new Set([...defaults, ...customs])];
+    }, [selectedOpponent, prefs.customKillMoves]);
+
     const latestGspPlaceholder = useMemo(() => {
         if (!prefs.lastMyFighter) return "例: 14,000,000";
 
@@ -455,9 +499,41 @@ export default function MatchLogger() {
                             {/* My Kill Moves */}
                             {myFighterObj && (
                                 <div style={{ backgroundColor: '#111', padding: '1.5rem', borderLeft: '4px solid var(--smash-yellow)' }}>
-                                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--text-main)', marginBottom: '1rem', fontWeight: 'bold' }}>
-                                        <Crosshair size={20} color="var(--smash-yellow)" /> 自分が撃墜した技
-                                    </label>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--text-main)', fontWeight: 'bold' }}>
+                                            <Crosshair size={20} color="var(--smash-yellow)" /> 自分が撃墜した技
+                                        </label>
+                                        <button onClick={() => setIsEditingMyKillMoves(!isEditingMyKillMoves)} style={{ fontSize: '0.9rem', color: 'var(--smash-yellow)', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}>
+                                            {isEditingMyKillMoves ? '完了' : '編集'}
+                                        </button>
+                                    </div>
+
+                                    {isEditingMyKillMoves && (
+                                        <div style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#222', border: '1px solid #444', borderRadius: '4px' }}>
+                                            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.8rem', fontWeight: 'bold' }}>カスタム撃墜技の追加</div>
+                                            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+                                                <input
+                                                    type="text"
+                                                    value={newCustomKillMove}
+                                                    onChange={e => setNewCustomKillMove(e.target.value)}
+                                                    placeholder="新しい撃墜技を入力..."
+                                                    style={{ flex: 1, padding: '0.8rem', fontSize: '1rem', background: '#111', color: 'white', border: '1px solid #555' }}
+                                                />
+                                                <button onClick={handleAddCustomKillMove} style={{ padding: '0 1.5rem', backgroundColor: 'var(--smash-yellow)', color: '#000', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>追加</button>
+                                            </div>
+                                            {(prefs.customKillMoves?.[prefs.lastMyFighter] || []).length > 0 && (
+                                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                                    {(prefs.customKillMoves?.[prefs.lastMyFighter] || []).map(m => (
+                                                        <span key={m} style={{ backgroundColor: '#111', padding: '0.4rem 0.8rem', border: '1px solid #444', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'white' }}>
+                                                            {m}
+                                                            <button onClick={() => handleRemoveCustomKillMove(m)} style={{ color: 'var(--lose-color)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px' }}>×</button>
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {Array.from({ length: rules.stock }).map((_, index) => (
                                             <div key={`my-kill-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -472,10 +548,10 @@ export default function MatchLogger() {
                                                     style={{ flex: 1 }}
                                                 >
                                                     <option value="">指定なし</option>
-                                                    {myFighterObj.killMoves && myFighterObj.killMoves.map((move, mIndex) => (
+                                                    {myCombinedKillMoves.map((move, mIndex) => (
                                                         <option key={mIndex} value={move}>{move}</option>
                                                     ))}
-                                                    {myKillMoves[index] && (!myFighterObj.killMoves || !myFighterObj.killMoves.includes(myKillMoves[index])) && myKillMoves[index] !== 'custom_input' && (
+                                                    {myKillMoves[index] && !myCombinedKillMoves.includes(myKillMoves[index]) && myKillMoves[index] !== 'custom_input' && (
                                                         <option value={myKillMoves[index]}>{myKillMoves[index]}</option>
                                                     )}
                                                     <option value="custom_input">その他...</option>
@@ -515,10 +591,10 @@ export default function MatchLogger() {
                                                     style={{ flex: 1, borderColor: 'var(--smash-red)' }}
                                                 >
                                                     <option value="">指定なし</option>
-                                                    {selectedOpponent.killMoves && selectedOpponent.killMoves.map((move, mIndex) => (
+                                                    {opponentCombinedKillMoves.map((move, mIndex) => (
                                                         <option key={mIndex} value={move}>{move}</option>
                                                     ))}
-                                                    {opponentKillMoves[index] && (!selectedOpponent.killMoves || !selectedOpponent.killMoves.includes(opponentKillMoves[index])) && opponentKillMoves[index] !== 'custom_input' && (
+                                                    {opponentKillMoves[index] && !opponentCombinedKillMoves.includes(opponentKillMoves[index]) && opponentKillMoves[index] !== 'custom_input' && (
                                                         <option value={opponentKillMoves[index]}>{opponentKillMoves[index]}</option>
                                                     )}
                                                     <option value="custom_input">その他...</option>

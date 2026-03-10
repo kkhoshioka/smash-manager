@@ -10,6 +10,7 @@ export default function Stats() {
     const [editingMatchId, setEditingMatchId] = useState(null);
     const [editForm, setEditForm] = useState({});
     const [showAllMatchups, setShowAllMatchups] = useState(false);
+    const [showAllKillMoves, setShowAllKillMoves] = useState(false);
 
     const handleEditClick = (match) => {
         setEditingMatchId(match.id);
@@ -129,8 +130,7 @@ export default function Stats() {
         });
         return Object.entries(counts)
             .sort((a, b) => b[1] - a[1])
-            .map(([name, count]) => ({ name, count }))
-            .slice(0, 10);
+            .map(([name, count]) => ({ name, count }));
     }, [filteredHistory]);
 
     const advancedStats = useMemo(() => {
@@ -144,10 +144,14 @@ export default function Stats() {
         let maxLossStreak = 0;
 
         const timeStats = {
-            morning: { label: '朝', icon: <Sun size={20} />, total: 0, wins: 0 },
-            afternoon: { label: '昼', icon: <Sun size={20} />, total: 0, wins: 0 },
-            evening: { label: '夜', icon: <Moon size={20} />, total: 0, wins: 0 },
-            night: { label: '深夜', icon: <Moon size={20} />, total: 0, wins: 0 },
+            t0_3: { label: '0時〜3時', icon: <Moon size={20} />, total: 0, wins: 0 },
+            t3_6: { label: '3時〜6時', icon: <Moon size={20} />, total: 0, wins: 0 },
+            t6_9: { label: '6時〜9時', icon: <Sun size={20} />, total: 0, wins: 0 },
+            t9_12: { label: '9時〜12時', icon: <Sun size={20} />, total: 0, wins: 0 },
+            t12_15: { label: '12時〜15時', icon: <Sun size={20} />, total: 0, wins: 0 },
+            t15_18: { label: '15時〜18時', icon: <Sun size={20} />, total: 0, wins: 0 },
+            t18_21: { label: '18時〜21時', icon: <Moon size={20} />, total: 0, wins: 0 },
+            t21_24: { label: '21時〜24時', icon: <Moon size={20} />, total: 0, wins: 0 },
         };
 
         const dailyMap = {};
@@ -168,10 +172,14 @@ export default function Stats() {
             const hour = dateObj.getHours();
 
             // Time of day
-            if (hour >= 6 && hour < 12) { timeStats.morning.total++; if (m.result === 'win') timeStats.morning.wins++; }
-            else if (hour >= 12 && hour < 18) { timeStats.afternoon.total++; if (m.result === 'win') timeStats.afternoon.wins++; }
-            else if (hour >= 18 && hour <= 23) { timeStats.evening.total++; if (m.result === 'win') timeStats.evening.wins++; }
-            else { timeStats.night.total++; if (m.result === 'win') timeStats.night.wins++; }
+            if (hour >= 0 && hour < 3) { timeStats.t0_3.total++; if (m.result === 'win') timeStats.t0_3.wins++; }
+            else if (hour >= 3 && hour < 6) { timeStats.t3_6.total++; if (m.result === 'win') timeStats.t3_6.wins++; }
+            else if (hour >= 6 && hour < 9) { timeStats.t6_9.total++; if (m.result === 'win') timeStats.t6_9.wins++; }
+            else if (hour >= 9 && hour < 12) { timeStats.t9_12.total++; if (m.result === 'win') timeStats.t9_12.wins++; }
+            else if (hour >= 12 && hour < 15) { timeStats.t12_15.total++; if (m.result === 'win') timeStats.t12_15.wins++; }
+            else if (hour >= 15 && hour < 18) { timeStats.t15_18.total++; if (m.result === 'win') timeStats.t15_18.wins++; }
+            else if (hour >= 18 && hour < 21) { timeStats.t18_21.total++; if (m.result === 'win') timeStats.t18_21.wins++; }
+            else { timeStats.t21_24.total++; if (m.result === 'win') timeStats.t21_24.wins++; }
 
             // Daily Stats
             const dateStr = dateObj.toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' });
@@ -190,16 +198,16 @@ export default function Stats() {
 
         const getWinRate = (wins, total) => total > 0 ? Math.round((wins / total) * 100) : 0;
 
-        const bestTime = Object.values(timeStats)
+        const top3Times = Object.values(timeStats)
             .filter(t => t.total >= 3)
-            .sort((a, b) => getWinRate(b.wins, b.total) - getWinRate(a.wins, a.total))[0];
+            .sort((a, b) => getWinRate(b.wins, b.total) - getWinRate(a.wins, a.total) || b.total - a.total).slice(0, 3);
 
         return {
             maxStreak,
             maxLossStreak,
             currentStreak,
             timeStats,
-            bestTime,
+            top3Times,
             recentDays
         };
     }, [filteredHistory]);
@@ -272,20 +280,24 @@ export default function Stats() {
                             </div>
                         </div>
 
-                        {/* 2. Best Time to Play */}
-                        {advancedStats.bestTime && (
+                        {/* 2. Best Time to Play (Top 3) */}
+                        {advancedStats.top3Times && advancedStats.top3Times.length > 0 && (
                             <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', padding: '1.5rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-yellow)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
-                                    <Clock size={20} /> 勝率の最も高い時間帯
+                                    <Clock size={20} /> 勝率の最も高い時間帯 TOP3
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <div style={{ backgroundColor: '#222', padding: '0.8rem', borderRadius: '50%', color: 'var(--smash-yellow)' }}>
-                                        {advancedStats.bestTime.icon}
-                                    </div>
-                                    <div>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: '900', fontFamily: 'var(--font-jp)' }}>{advancedStats.bestTime.label}</div>
-                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>勝率: {Math.round((advancedStats.bestTime.wins / advancedStats.bestTime.total) * 100)}% ({advancedStats.bestTime.total}戦)</div>
-                                    </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    {advancedStats.top3Times.map((timeStat, i) => (
+                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <div style={{ backgroundColor: '#222', padding: '0.8rem', borderRadius: '50%', color: 'var(--smash-yellow)' }}>
+                                                {timeStat.icon}
+                                            </div>
+                                            <div>
+                                                <div style={{ fontSize: '1.2rem', fontWeight: '900', fontFamily: 'var(--font-jp)' }}>{i + 1}位: {timeStat.label}</div>
+                                                <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>勝率: {Math.round((timeStat.wins / timeStat.total) * 100)}% ({timeStat.total}戦)</div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         )}
@@ -493,13 +505,43 @@ export default function Stats() {
                                 <Crosshair size={24} /> よく使う撃墜技
                             </h3>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                                {myKillMoveRanking.map((item, i) => (
+                                {myKillMoveRanking.slice(0, showAllKillMoves ? undefined : 5).map((item, i) => (
                                     <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#111', padding: '1rem 1.5rem', border: '2px solid #444', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
                                         <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem' }}>{i + 1}. {item.name}</span>
                                         <span style={{ color: 'var(--smash-yellow)', fontWeight: '900', fontSize: '1.3rem', fontFamily: 'var(--font-en)' }}>{item.count} 回</span>
                                     </div>
                                 ))}
                             </div>
+
+                            {myKillMoveRanking.length > 5 && (
+                                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+                                    <button
+                                        onClick={() => setShowAllKillMoves(!showAllKillMoves)}
+                                        style={{
+                                            backgroundColor: 'transparent',
+                                            color: 'var(--smash-yellow)',
+                                            border: '2px solid var(--smash-yellow)',
+                                            padding: '0.8rem 2rem',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 'bold',
+                                            cursor: 'pointer',
+                                            clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                                            transition: 'all 0.2s',
+                                            fontFamily: 'var(--font-jp)'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.backgroundColor = 'var(--smash-yellow)';
+                                            e.currentTarget.style.color = '#000';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.backgroundColor = 'transparent';
+                                            e.currentTarget.style.color = 'var(--smash-yellow)';
+                                        }}
+                                    >
+                                        {showAllKillMoves ? '▲ 一部のみ表示 (TOP 5)' : '▼ すべての撃墜技を表示'}
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     )}
                 </>
