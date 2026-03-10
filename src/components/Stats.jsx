@@ -19,7 +19,8 @@ export default function Stats() {
             gsp: match.gsp || '',
             myKillMoves: match.myKillMoves ? match.myKillMoves.join(', ') : (match.killMove || ''),
             opponentKillMoves: match.opponentKillMoves ? match.opponentKillMoves.join(', ') : '',
-            notes: match.notes || ''
+            notes: match.notes || '',
+            stage: match.rules?.stage || '戦場タイプ'
         });
     };
 
@@ -30,7 +31,11 @@ export default function Stats() {
                 gsp: editForm.gsp ? parseInt(editForm.gsp, 10) : null,
                 myKillMoves: editForm.myKillMoves && typeof editForm.myKillMoves === 'string' ? editForm.myKillMoves.split(',').map(s => s.trim()).filter(Boolean) : [],
                 opponentKillMoves: editForm.opponentKillMoves && typeof editForm.opponentKillMoves === 'string' ? editForm.opponentKillMoves.split(',').map(s => s.trim()).filter(Boolean) : [],
-                killMove: null
+                killMove: null,
+                rules: {
+                    ...(history.find(m => m.id === editingMatchId)?.rules || {}),
+                    stage: editForm.stage
+                }
             };
             editMatch(editingMatchId, finalEditForm);
             setEditingMatchId(null);
@@ -584,7 +589,7 @@ export default function Stats() {
                                     {editingMatchId === match.id ? (
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                             <div style={{ fontWeight: '900', color: 'var(--smash-yellow)', fontSize: '1.2rem' }}>記録の編集</div>
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
                                                 <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
                                                     <span style={{ color: 'var(--text-muted)' }}>勝敗</span>
                                                     <select name="result" value={editForm.result} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }}>
@@ -595,6 +600,14 @@ export default function Stats() {
                                                 <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
                                                     <span style={{ color: 'var(--text-muted)' }}>世界戦闘力(GSP)</span>
                                                     <input type="number" name="gsp" value={editForm.gsp} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
+                                                </label>
+                                                <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                    <span style={{ color: 'var(--text-muted)' }}>ステージ</span>
+                                                    <select name="stage" value={editForm.stage} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }}>
+                                                        <option value="戦場タイプ">戦場タイプ</option>
+                                                        <option value="終点タイプ">終点タイプ</option>
+                                                        <option value="その他">その他</option>
+                                                    </select>
                                                 </label>
                                             </div>
                                             <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
@@ -659,7 +672,7 @@ export default function Stats() {
                                             <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>
                                                 <span>{date.toLocaleDateString('ja-JP')} {date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}</span>
                                                 {match.rules && (
-                                                    <span>{match.rules.stock} ストック / {match.rules.time}:00</span>
+                                                    <span>{match.rules.stock} ストック / {match.rules.time}:00 {match.rules.stage && `/ ${match.rules.stage}`}</span>
                                                 )}
                                                 {(match.myKillMoves?.length > 0 || match.killMove) && (
                                                     <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>

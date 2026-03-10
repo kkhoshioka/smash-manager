@@ -10,7 +10,7 @@ export default function MatchLogger() {
     const [showExtras, setShowExtras] = useState(true);
     const [gsp, setGsp] = useState('');
     const [notes, setNotes] = useState('');
-    const [rules, setRules] = useState(prefs.rules || { stock: 3, time: 7 });
+    const [rules, setRules] = useState(prefs.rules || { stock: 3, time: 7, stage: '戦場タイプ' });
     const [fighterSearch, setFighterSearch] = useState('');
 
     const [myKillMoves, setMyKillMoves] = useState([]);
@@ -443,8 +443,8 @@ export default function MatchLogger() {
                     <div className="animate-enter stat-card" style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
 
                         {/* Rules */}
-                        <div style={{ display: 'flex', gap: '1.5rem', gridColumn: '1 / -1' }}>
-                            <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', gap: '1.5rem', gridColumn: '1 / -1', flexWrap: 'wrap' }}>
+                            <div style={{ flex: 1, minWidth: '100px' }}>
                                 <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>ストック数</label>
                                 <select
                                     value={rules.stock}
@@ -456,7 +456,7 @@ export default function MatchLogger() {
                                     <option value={3}>3</option>
                                 </select>
                             </div>
-                            <div style={{ flex: 1 }}>
+                            <div style={{ flex: 1, minWidth: '100px' }}>
                                 <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>タイム</label>
                                 <select
                                     value={rules.time}
@@ -466,6 +466,18 @@ export default function MatchLogger() {
                                     <option value={3}>3:00</option>
                                     <option value={5}>5:00</option>
                                     <option value={7}>7:00</option>
+                                </select>
+                            </div>
+                            <div style={{ flex: 1, minWidth: '150px' }}>
+                                <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>ステージ</label>
+                                <select
+                                    value={rules.stage || '戦場タイプ'}
+                                    onChange={e => setRules({ ...rules, stage: e.target.value })}
+                                    style={{ width: '100%', fontSize: '1.1rem' }}
+                                >
+                                    <option value="戦場タイプ">戦場タイプ</option>
+                                    <option value="終点タイプ">終点タイプ</option>
+                                    <option value="その他">その他</option>
                                 </select>
                             </div>
                         </div>
