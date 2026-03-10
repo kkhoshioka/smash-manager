@@ -17,7 +17,11 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
         { id: 'bg-neon', url: '/bg_neon.png', name: 'ネオン・シティ', type: 'preset' },
         { id: 'bg-calm', url: '/bg_calm.png', name: '天空の島', type: 'preset' },
         { id: 'bg-fiery', url: '/bg_fiery.png', name: '灼熱の闘技場', type: 'preset' },
-        { id: 'bg-carbon', url: '/bg_carbon.png', name: 'カーボン・ミニマル', type: 'preset' }
+        { id: 'bg-carbon', url: '/bg_carbon.png', name: 'カーボン・ミニマル', type: 'preset' },
+        { id: 'bg-light-2', url: '/bg_light_2.png', name: '天空の闘技場 1', type: 'preset' },
+        { id: 'bg-light-5', url: '/bg_light_5.png', name: '天空の闘技場 2 (シアン)', type: 'preset' },
+        { id: 'bg-light-6', url: '/bg_light_6.png', name: '天空の闘技場 3 (神秘)', type: 'preset' },
+        { id: 'bg-light-7', url: '/bg_light_7.png', name: '天空の闘技場 4 (スタジアム)', type: 'preset' }
     ];
 
     const handleExport = () => {
