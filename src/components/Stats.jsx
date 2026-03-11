@@ -229,6 +229,37 @@ export default function Stats() {
         };
     }, [filteredHistory]);
 
+    const stageStats = useMemo(() => {
+        const stats = {
+            '戦場タイプ': { total: 0, wins: 0 },
+            '終点タイプ': { total: 0, wins: 0 },
+            'その他': { total: 0, wins: 0 },
+            '不明': { total: 0, wins: 0 } // For old matches without stage data
+        };
+
+        filteredHistory.forEach(m => {
+            const stage = m.rules?.stage || '不明';
+            if (!stats[stage]) {
+                stats[stage] = { total: 0, wins: 0 };
+            }
+            stats[stage].total++;
+            if (m.result === 'win') {
+                stats[stage].wins++;
+            }
+        });
+
+        // Convert to array and filter out empty ones, then sort by total matches
+        return Object.entries(stats)
+            .filter(([_, data]) => data.total > 0)
+            .map(([name, data]) => ({
+                name,
+                total: data.total,
+                wins: data.wins,
+                winRate: Math.round((data.wins / data.total) * 100)
+            }))
+            .sort((a, b) => b.total - a.total);
+    }, [filteredHistory]);
+
     return (
         <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {/* Fighter Filter */}
@@ -368,6 +399,35 @@ export default function Stats() {
 
                     <div className="smash-divider" />
                 </>
+            )}
+
+            {/* Stage Stats */}
+            {stageStats.length > 0 && (
+                <div className="stat-card" style={{ borderBottomColor: '#00ccff', padding: '1.5rem', marginBottom: '2rem' }}>
+                    <h2 className="section-title" style={{ borderColor: '#00ccff', marginTop: 0 }}>ステージ別 勝率</h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                        {stageStats.map((stat, i) => (
+                            <div key={i} style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                backgroundColor: '#111',
+                                padding: '1.5rem',
+                                border: '2px solid #444',
+                                borderTop: `4px solid ${stat.winRate >= 60 ? 'var(--smash-yellow)' : stat.winRate <= 40 ? 'var(--lose-color)' : '#00ccff'}`,
+                                clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)'
+                            }}>
+                                <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{stat.name}</span>
+                                <span style={{ color: stat.winRate >= 60 ? 'var(--smash-yellow)' : stat.winRate <= 40 ? 'var(--lose-color)' : 'var(--text-main)', fontWeight: '900', fontSize: '2rem', fontFamily: 'var(--font-en)' }}>
+                                    {stat.winRate}%
+                                </span>
+                                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold', marginTop: '0.2rem' }}>
+                                    {stat.wins}勝 / {stat.total}戦
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             )}
 
             {/* GSP History Chart */}
