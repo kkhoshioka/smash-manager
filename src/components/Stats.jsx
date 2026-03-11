@@ -79,6 +79,18 @@ export default function Stats() {
         return null;
     }, [selectedMyFighter, prefs.fighterGsp]);
 
+    // Highest GSP for selected fighter
+    const highestGsp = useMemo(() => {
+        if (selectedMyFighter === 'all') return null;
+        let max = 0;
+        filteredHistory.forEach(m => {
+            if (m.gsp && m.gsp > max) {
+                max = m.gsp;
+            }
+        });
+        return max > 0 ? max : null;
+    }, [filteredHistory, selectedMyFighter]);
+
     const opponentStats = useMemo(() => {
         const stats = {};
         filteredHistory.forEach(m => {
@@ -249,11 +261,19 @@ export default function Stats() {
                         {totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 0}%
                     </div>
                 </div>
-                {selectedMyFighter !== 'all' && latestGsp && (
+                {selectedMyFighter !== 'all' && (
                     <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--win-color)' }}>
-                        <div style={{ fontSize: '1.2rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最新戦闘力</div>
+                        <div style={{ fontSize: '1.2rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最高戦闘力</div>
                         <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
-                            {latestGsp.toLocaleString()}
+                            {highestGsp ? highestGsp.toLocaleString() : '-'}
+                        </div>
+                    </div>
+                )}
+                {selectedMyFighter !== 'all' && (
+                    <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--text-muted)' }}>
+                        <div style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最新戦闘力</div>
+                        <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
+                            {latestGsp ? latestGsp.toLocaleString() : '-'}
                         </div>
                     </div>
                 )}
