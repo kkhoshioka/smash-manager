@@ -281,29 +281,29 @@ export default function Stats() {
             </div>
 
             {/* Overview Stats */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-                <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: '#444' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem' }}>
+                <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: '#444', padding: '1rem' }}>
                     <div style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>総試合数</div>
-                    <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>{totalMatches}</div>
+                    <div className="stat-number">{totalMatches}</div>
                 </div>
-                <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--smash-yellow)' }}>
+                <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--smash-yellow)', padding: '1rem' }}>
                     <div style={{ fontSize: '1.2rem', color: 'var(--smash-yellow)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>勝率</div>
-                    <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--smash-yellow)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
+                    <div className="stat-number" style={{ color: 'var(--smash-yellow)' }}>
                         {totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 0}%
                     </div>
                 </div>
                 {selectedMyFighter !== 'all' && (
-                    <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--win-color)' }}>
-                        <div style={{ fontSize: '1.2rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最高戦闘力</div>
-                        <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
+                    <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--win-color)', padding: '1rem', overflowX: 'hidden' }}>
+                        <div style={{ fontSize: '1.1rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最高戦闘力</div>
+                        <div className="stat-number" style={{ fontSize: '2rem' }}>
                             {highestGsp ? highestGsp.toLocaleString() : '-'}
                         </div>
                     </div>
                 )}
                 {selectedMyFighter !== 'all' && (
-                    <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--text-muted)' }}>
-                        <div style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最新戦闘力</div>
-                        <div style={{ fontSize: '3.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '4px 4px 0 #000', fontFamily: 'var(--font-en)' }}>
+                    <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--text-muted)', padding: '1rem', overflowX: 'hidden' }}>
+                        <div style={{ fontSize: '1.1rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最新戦闘力</div>
+                        <div className="stat-number" style={{ fontSize: '2rem' }}>
                             {latestGsp ? latestGsp.toLocaleString() : '-'}
                         </div>
                     </div>
@@ -441,14 +441,15 @@ export default function Stats() {
                                 <XAxis
                                     dataKey="uniqueId"
                                     stroke="var(--text-muted)"
-                                    fontSize={12}
+                                    fontSize={10}
                                     fontWeight="bold"
                                     tickFormatter={(value) => {
                                         const point = gspChartData.find(d => d.uniqueId === value);
                                         return point ? point.date : value;
                                     }}
+                                    interval="preserveStartEnd"
                                 />
-                                <YAxis stroke="var(--text-muted)" fontSize={12} fontWeight="bold" domain={['dataMin - 50000', 'dataMax + 50000']} tickFormatter={(value) => (value / 10000).toFixed(0) + '万'} />
+                                <YAxis stroke="var(--text-muted)" width={45} fontSize={10} fontWeight="bold" domain={['dataMin - 50000', 'dataMax + 50000']} tickFormatter={(value) => (value / 10000).toFixed(0) + '万'} />
                                 <Tooltip
                                     content={({ active, payload }) => {
                                         if (active && payload && payload.length) {
@@ -483,7 +484,7 @@ export default function Stats() {
             {opponentStats.length > 0 && (
                 <>
                     <h2 className="section-title">対戦カード分析</h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
 
                         {/* Frequent Matchups */}
                         <div className="stat-card" style={{ borderBottomColor: 'var(--text-muted)', padding: '1.5rem' }}>
@@ -709,23 +710,18 @@ export default function Stats() {
                                         </div>
                                     ) : (
                                         <>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                                    <span style={{
-                                                        fontWeight: '900',
-                                                        fontFamily: 'var(--font-en)',
-                                                        fontStyle: 'italic',
+                                            <div className="history-item-header">
+                                                <div className="vs-container">
+                                                    <span className="result-text" style={{
                                                         color: isWin ? 'var(--win-color)' : 'var(--lose-color)',
-                                                        fontSize: '2.5rem',
-                                                        textShadow: '3px 3px 0 #000'
                                                     }}>
                                                         {isWin ? 'WIN' : 'LOSE'}
                                                     </span>
-                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', backgroundColor: '#222', padding: '0.5rem 1.5rem', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)' }}>
+                                                    <div className="vs-badge-container">
                                                         <img src={myFighter?.imageUrl} alt={myFighter?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
                                                         <span style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--smash-red)', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>VS</span>
                                                         <img src={opponent?.imageUrl} alt={opponent?.name} style={{ width: '50px', height: '50px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                                        <span style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '2px 2px 0 #000' }}>{opponent?.name}</span>
+                                                        <span className="fighter-name">{opponent?.name}</span>
                                                     </div>
                                                 </div>
 
@@ -733,7 +729,7 @@ export default function Stats() {
                                                 {match.gsp && (
                                                     <div style={{ backgroundColor: '#111', padding: '0.5rem 1.5rem', border: '2px solid #555', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', textAlign: 'center' }}>
                                                         <div style={{ fontSize: '0.9rem', color: 'var(--smash-yellow)', fontWeight: 'bold' }}>GSP</div>
-                                                        <div style={{ fontFamily: 'var(--font-en)', fontSize: '2.2rem', fontWeight: '900', color: 'var(--text-main)' }}>
+                                                        <div style={{ fontFamily: 'var(--font-en)', fontSize: '1.8rem', fontWeight: '900', color: 'var(--text-main)' }}>
                                                             {match.gsp.toLocaleString()}
                                                         </div>
                                                     </div>

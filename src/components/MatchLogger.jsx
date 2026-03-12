@@ -237,7 +237,7 @@ export default function MatchLogger() {
                     {isSelectingMine ? (
                         <div className="animate-enter">
                             <div style={{ position: 'relative', marginBottom: '1rem' }}>
-                                <Search size={20} style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                                <Search size={20} className="desktop-only-icon" style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                                 <input
                                     type="text"
                                     placeholder="キャラクターを検索..."
@@ -257,10 +257,10 @@ export default function MatchLogger() {
                             />
                         </div>
                     ) : (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', backgroundColor: '#111', padding: '1rem', border: '2px solid var(--smash-yellow)', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)' }}>
+                        <div className="vs-badge-container" style={{ border: '2px solid var(--smash-yellow)' }}>
                             <img src={myFighterObj?.imageUrl} alt={myFighterObj?.name} style={{ width: '80px', height: '80px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ fontSize: '2rem', fontWeight: '900', fontStyle: 'italic', textShadow: '3px 3px 0 #000' }}>
+                                <span className="fighter-name">
                                     {myFighterObj?.name || '未選択'}
                                 </span>
                                 {currentStreak > 0 && (
@@ -288,17 +288,14 @@ export default function MatchLogger() {
 
                 {/* Action Buttons */}
                 {!isSelectingMine && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', flex: '0 0 auto', justifyContent: 'center' }}>
+                    <div className="action-btn-container">
                         <button
-                            className="btn-smash"
+                            className="btn-smash action-btn-styled"
                             onClick={() => saveMatch('win')}
                             style={{
                                 background: 'var(--win-color)',
                                 opacity: selectedOpponent ? 1 : 0.3,
-                                pointerEvents: selectedOpponent ? 'auto' : 'none',
-                                minWidth: '220px',
-                                textShadow: '2px 2px 0 #000',
-                                color: '#fff'
+                                pointerEvents: selectedOpponent ? 'auto' : 'none'
                             }}
                         >
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transform: 'skewX(20deg)' }}>
@@ -306,15 +303,12 @@ export default function MatchLogger() {
                             </div>
                         </button>
                         <button
-                            className="btn-smash"
+                            className="btn-smash action-btn-styled"
                             onClick={() => saveMatch('lose')}
                             style={{
                                 background: 'var(--lose-color)',
                                 opacity: selectedOpponent ? 1 : 0.3,
-                                pointerEvents: selectedOpponent ? 'auto' : 'none',
-                                minWidth: '220px',
-                                textShadow: '2px 2px 0 #000',
-                                color: '#fff'
+                                pointerEvents: selectedOpponent ? 'auto' : 'none'
                             }}
                         >
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transform: 'skewX(20deg)' }}>
@@ -332,10 +326,10 @@ export default function MatchLogger() {
                     </h2>
 
                     {selectedOpponent ? (
-                        <div className="animate-enter" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', backgroundColor: '#111', border: '2px solid var(--smash-red)', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)' }}>
+                        <div className="animate-enter vs-badge-container" style={{ justifyContent: 'space-between', border: '2px solid var(--smash-red)' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                                 <img src={selectedOpponent.imageUrl} alt={selectedOpponent.name} style={{ width: '80px', height: '80px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                <span style={{ fontSize: '2rem', fontWeight: '900', fontStyle: 'italic', textShadow: '3px 3px 0 #000' }}>{selectedOpponent.name}</span>
+                                <span className="fighter-name">{selectedOpponent.name}</span>
                             </div>
                             <button
                                 onClick={() => setSelectedOpponent(null)}
@@ -347,7 +341,7 @@ export default function MatchLogger() {
                     ) : (
                         <div className="animate-enter">
                             <div style={{ position: 'relative', marginBottom: '1rem' }}>
-                                <Search size={20} style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                                <Search size={20} className="desktop-only-icon" style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                                 <input
                                     type="text"
                                     placeholder="対戦相手を検索..."

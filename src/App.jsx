@@ -18,24 +18,8 @@ function App() {
   return (
     <div className="app-container">
       <div className="main-content">
-        <header style={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '1.5rem',
-          borderBottom: '4px solid var(--smash-dark-red)',
-          marginBottom: '1rem',
-          background: 'linear-gradient(180deg, #111, var(--bg-panel))'
-        }}>
-          <h1 style={{
-            margin: 0,
-            color: 'var(--text-main)',
-            fontSize: '3.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            textShadow: '4px 4px 0 #000',
-            letterSpacing: '3px'
-          }}>
+        <header className="app-header">
+          <h1 className="app-title">
             <span style={{ color: 'var(--smash-red)' }}>SMASH</span> LOGGER
           </h1>
         </header>
