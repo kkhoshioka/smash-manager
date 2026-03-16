@@ -295,7 +295,7 @@ export default function Stats() {
                 {selectedMyFighter !== 'all' && (
                     <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--win-color)', padding: '1rem', overflowX: 'hidden' }}>
                         <div style={{ fontSize: '1.1rem', color: 'var(--win-color)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最高戦闘力</div>
-                        <div className="stat-number" style={{ fontSize: '2rem' }}>
+                        <div className="stat-number-gsp">
                             {highestGsp ? highestGsp.toLocaleString() : '-'}
                         </div>
                     </div>
@@ -303,7 +303,7 @@ export default function Stats() {
                 {selectedMyFighter !== 'all' && (
                     <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: 'var(--text-muted)', padding: '1rem', overflowX: 'hidden' }}>
                         <div style={{ fontSize: '1.1rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>最新戦闘力</div>
-                        <div className="stat-number" style={{ fontSize: '2rem' }}>
+                        <div className="stat-number-gsp">
                             {latestGsp ? latestGsp.toLocaleString() : '-'}
                         </div>
                     </div>

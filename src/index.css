@@ -401,6 +401,14 @@ select:focus {
   font-family: var(--font-en);
 }
 
+.stat-number-gsp {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--text-main);
+  text-shadow: 4px 4px 0 #000;
+  font-family: var(--font-en);
+}
+
 .result-text {
   font-weight: 900;
   font-family: var(--font-en);
@@ -472,6 +480,11 @@ select:focus {
 
   .stat-number {
     font-size: 2.2rem;
+    text-shadow: 2px 2px 0 #000;
+  }
+
+  .stat-number-gsp {
+    font-size: 2rem;
     text-shadow: 2px 2px 0 #000;
   }
 
