@@ -1,8 +1,8 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar } from 'lucide-react';
-import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart } from 'recharts';
+import { Trophy, Swords, Flame, Clock, CalendarDays, Crosshair, Users, Activity, Sun, Moon } from 'lucide-react';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function Stats() {
     const { history, removeMatch, editMatch, prefs } = useMatchHistory();
@@ -136,6 +136,18 @@ export default function Stats() {
                 };
             });
     }, [filteredHistory]);
+
+    const gspXTicks = useMemo(() => {
+        const ticks = [];
+        let lastDate = null;
+        gspChartData.forEach(d => {
+            if (d.date !== lastDate) {
+                ticks.push(d.uniqueId);
+                lastDate = d.date;
+            }
+        });
+        return ticks;
+    }, [gspChartData]);
 
     const myKillMoveRanking = useMemo(() => {
         const counts = {};
@@ -434,28 +446,44 @@ export default function Stats() {
             {gspChartData.length > 0 && (
                 <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '2rem' }}>
                     <h2 className="section-title" style={{ borderColor: 'var(--win-color)', marginTop: 0 }}>世界戦闘力(GSP) 推移</h2>
-                    <div style={{ width: '100%', height: 300, marginTop: '2rem' }}>
+                    <div style={{ width: '100%', height: 350, marginTop: '2rem' }}>
                         <ResponsiveContainer width="100%" height="100%">
-                            <LineChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
+                            <AreaChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
+                                <defs>
+                                    <linearGradient id="colorGSP" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="var(--win-color)" stopOpacity={0.8}/>
+                                        <stop offset="95%" stopColor="var(--win-color)" stopOpacity={0}/>
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#222" vertical={false} />
                                 <XAxis
                                     dataKey="uniqueId"
                                     stroke="var(--text-muted)"
-                                    fontSize={10}
+                                    fontSize={11}
                                     fontWeight="bold"
+                                    ticks={gspXTicks}
                                     tickFormatter={(value) => {
                                         const point = gspChartData.find(d => d.uniqueId === value);
                                         return point ? point.date : value;
                                     }}
-                                    interval="preserveStartEnd"
+                                    interval={0}
+                                    tickMargin={10}
                                 />
-                                <YAxis stroke="var(--text-muted)" width={45} fontSize={10} fontWeight="bold" domain={['dataMin - 50000', 'dataMax + 50000']} tickFormatter={(value) => (value / 10000).toFixed(0) + '万'} />
+                                <YAxis 
+                                    stroke="var(--text-muted)" 
+                                    width={55} 
+                                    fontSize={11} 
+                                    fontWeight="bold" 
+                                    domain={['dataMin - 100000', 'dataMax + 100000']} 
+                                    tickFormatter={(value) => (value / 10000).toFixed(0) + '万'} 
+                                    tickCount={6}
+                                />
                                 <Tooltip
                                     content={({ active, payload }) => {
                                         if (active && payload && payload.length) {
                                             const data = payload[0].payload;
                                             return (
-                                                <div style={{ backgroundColor: '#111', border: '2px solid var(--win-color)', padding: '15px', color: 'white', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
+                                                <div style={{ backgroundColor: '#111', border: '2px solid var(--win-color)', padding: '15px', color: 'white', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)', boxShadow: '0 8px 16px rgba(0,0,0,0.5)' }}>
                                                     <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--text-muted)', fontSize: '0.9rem' }}>{data.date} {data.time}</p>
                                                     <p style={{ margin: '8px 0', fontSize: '1.4rem', fontWeight: '900', color: 'var(--win-color)', fontFamily: 'var(--font-en)' }}>
                                                         GSP: {data.GSP.toLocaleString()}
@@ -472,9 +500,16 @@ export default function Stats() {
                                         return null;
                                     }}
                                 />
-                                <Legend wrapperStyle={{ paddingTop: '15px' }} />
-                                <Line type="monotone" dataKey="GSP" stroke="var(--win-color)" strokeWidth={4} dot={{ r: 2, fill: '#111', strokeWidth: 2 }} activeDot={{ r: 6, fill: 'var(--win-color)' }} />
-                            </LineChart>
+                                <Area 
+                                    type="linear" 
+                                    dataKey="GSP" 
+                                    stroke="var(--win-color)" 
+                                    strokeWidth={3} 
+                                    fillOpacity={1} 
+                                    fill="url(#colorGSP)"
+                                    activeDot={{ r: 6, fill: '#fff', stroke: 'var(--win-color)', strokeWidth: 3 }} 
+                                />
+                            </AreaChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
