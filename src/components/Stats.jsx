@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Trophy, Swords, Flame, Clock, CalendarDays, Crosshair, Users, Activity, Sun, Moon } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity } from 'lucide-react';
+import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, AreaChart, Area } from 'recharts';
 
 export default function Stats() {
     const { history, removeMatch, editMatch, prefs } = useMatchHistory();
