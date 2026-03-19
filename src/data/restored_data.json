@@ -1,0 +1,7506 @@
+{
+  "history": [
+    {
+      "id": "1773771994086",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "win",
+      "gsp": 17917632,
+      "timestamp": "2026-03-17T18:26:34.086Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1773679988372",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "lose",
+      "gsp": 17878483,
+      "timestamp": "2026-03-16T16:53:08.372Z",
+      "notes": ""
+    },
+    {
+      "id": "1773587982658",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 17899998,
+      "timestamp": "2026-03-15T15:19:42.658Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1773495976944",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "lose",
+      "gsp": 17861141,
+      "timestamp": "2026-03-14T13:46:16.944Z",
+      "notes": ""
+    },
+    {
+      "id": "1773403971230",
+      "myFighter": "勇者",
+      "opponentFighter": "10",
+      "result": "win",
+      "gsp": 17874669,
+      "timestamp": "2026-03-13T12:12:51.230Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1773311965516",
+      "myFighter": "勇者",
+      "opponentFighter": "6",
+      "result": "lose",
+      "gsp": 17835585,
+      "timestamp": "2026-03-12T10:39:25.516Z",
+      "notes": ""
+    },
+    {
+      "id": "1773219959802",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 17854691,
+      "timestamp": "2026-03-11T09:05:59.802Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1773127954088",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "lose",
+      "gsp": 17818405,
+      "timestamp": "2026-03-10T07:32:34.088Z",
+      "notes": ""
+    },
+    {
+      "id": "1773035948374",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "lose",
+      "gsp": 17834257,
+      "timestamp": "2026-03-09T05:59:08.374Z",
+      "notes": ""
+    },
+    {
+      "id": "1772943942660",
+      "myFighter": "勇者",
+      "opponentFighter": "75",
+      "result": "win",
+      "gsp": 17846575,
+      "timestamp": "2026-03-08T04:25:42.660Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1772851936946",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "lose",
+      "gsp": 17834004,
+      "timestamp": "2026-03-07T02:52:16.946Z",
+      "notes": ""
+    },
+    {
+      "id": "1772759931232",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "lose",
+      "gsp": 17860874,
+      "timestamp": "2026-03-06T01:18:51.232Z",
+      "notes": ""
+    },
+    {
+      "id": "1772667925518",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "lose",
+      "gsp": 17892313,
+      "timestamp": "2026-03-04T23:45:25.518Z",
+      "notes": ""
+    },
+    {
+      "id": "1772575919804",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "lose",
+      "gsp": 17902538,
+      "timestamp": "2026-03-03T22:11:59.804Z",
+      "notes": ""
+    },
+    {
+      "id": "1772483914090",
+      "myFighter": "勇者",
+      "opponentFighter": "13",
+      "result": "win",
+      "gsp": 17934983,
+      "timestamp": "2026-03-02T20:38:34.090Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1772391908376",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "win",
+      "gsp": 17890291,
+      "timestamp": "2026-03-01T19:05:08.376Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1772299902662",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 17858349,
+      "timestamp": "2026-02-28T17:31:42.662Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1772207896948",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "lose",
+      "gsp": 17823703,
+      "timestamp": "2026-02-27T15:58:16.948Z",
+      "notes": ""
+    },
+    {
+      "id": "1772115891234",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "win",
+      "gsp": 17844034,
+      "timestamp": "2026-02-26T14:24:51.234Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1772023885520",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 17827781,
+      "timestamp": "2026-02-25T12:51:25.520Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1771931879806",
+      "myFighter": "勇者",
+      "opponentFighter": "9",
+      "result": "win",
+      "gsp": 17783736,
+      "timestamp": "2026-02-24T11:17:59.806Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1771839874092",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "win",
+      "gsp": 17767184,
+      "timestamp": "2026-02-23T09:44:34.092Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1771747868378",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "win",
+      "gsp": 17726832,
+      "timestamp": "2026-02-22T08:11:08.378Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1771655862664",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "lose",
+      "gsp": 17710464,
+      "timestamp": "2026-02-21T06:37:42.664Z",
+      "notes": ""
+    },
+    {
+      "id": "1771563856950",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "win",
+      "gsp": 17739289,
+      "timestamp": "2026-02-20T05:04:16.950Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1771471851236",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "win",
+      "gsp": 17723310,
+      "timestamp": "2026-02-19T03:30:51.236Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1771379845522",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "win",
+      "gsp": 17678520,
+      "timestamp": "2026-02-18T01:57:25.522Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1771287839808",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "lose",
+      "gsp": 17642296,
+      "timestamp": "2026-02-17T00:23:59.808Z",
+      "notes": ""
+    },
+    {
+      "id": "1771195834094",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "lose",
+      "gsp": 17658926,
+      "timestamp": "2026-02-15T22:50:34.094Z",
+      "notes": ""
+    },
+    {
+      "id": "1771103828380",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "win",
+      "gsp": 17687162,
+      "timestamp": "2026-02-14T21:17:08.380Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1771011822666",
+      "myFighter": "勇者",
+      "opponentFighter": "16",
+      "result": "lose",
+      "gsp": 17666857,
+      "timestamp": "2026-02-13T19:43:42.666Z",
+      "notes": ""
+    },
+    {
+      "id": "1770919816952",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "win",
+      "gsp": 17685840,
+      "timestamp": "2026-02-12T18:10:16.952Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1770827811238",
+      "myFighter": "勇者",
+      "opponentFighter": "9",
+      "result": "lose",
+      "gsp": 17659811,
+      "timestamp": "2026-02-11T16:36:51.238Z",
+      "notes": ""
+    },
+    {
+      "id": "1770735805524",
+      "myFighter": "勇者",
+      "opponentFighter": "15",
+      "result": "win",
+      "gsp": 17683062,
+      "timestamp": "2026-02-10T15:03:25.524Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1770643799810",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "win",
+      "gsp": 17642461,
+      "timestamp": "2026-02-09T13:29:59.810Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1770551794096",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "win",
+      "gsp": 17613877,
+      "timestamp": "2026-02-08T11:56:34.096Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1770459788382",
+      "myFighter": "勇者",
+      "opponentFighter": "30",
+      "result": "lose",
+      "gsp": 17573623,
+      "timestamp": "2026-02-07T10:23:08.382Z",
+      "notes": ""
+    },
+    {
+      "id": "1770367782668",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "lose",
+      "gsp": 17610942,
+      "timestamp": "2026-02-06T08:49:42.668Z",
+      "notes": ""
+    },
+    {
+      "id": "1770275776954",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "win",
+      "gsp": 17623364,
+      "timestamp": "2026-02-05T07:16:16.954Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1770183771240",
+      "myFighter": "勇者",
+      "opponentFighter": "58e",
+      "result": "lose",
+      "gsp": 17577291,
+      "timestamp": "2026-02-04T05:42:51.240Z",
+      "notes": ""
+    },
+    {
+      "id": "1770091765526",
+      "myFighter": "勇者",
+      "opponentFighter": "46",
+      "result": "win",
+      "gsp": 17594642,
+      "timestamp": "2026-02-03T04:09:25.526Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1769999759812",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "win",
+      "gsp": 17572158,
+      "timestamp": "2026-02-02T02:35:59.812Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1769907754098",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "win",
+      "gsp": 17545948,
+      "timestamp": "2026-02-01T01:02:34.098Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1769815748384",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 17520883,
+      "timestamp": "2026-01-30T23:29:08.384Z",
+      "notes": ""
+    },
+    {
+      "id": "1769723742670",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "lose",
+      "gsp": 17548973,
+      "timestamp": "2026-01-29T21:55:42.670Z",
+      "notes": ""
+    },
+    {
+      "id": "1769631736956",
+      "myFighter": "勇者",
+      "opponentFighter": "15",
+      "result": "lose",
+      "gsp": 17589536,
+      "timestamp": "2026-01-28T20:22:16.956Z",
+      "notes": ""
+    },
+    {
+      "id": "1769539731242",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "win",
+      "gsp": 17626390,
+      "timestamp": "2026-01-27T18:48:51.242Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1769447725528",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "win",
+      "gsp": 17588210,
+      "timestamp": "2026-01-26T17:15:25.528Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1769355719814",
+      "myFighter": "勇者",
+      "opponentFighter": "28e",
+      "result": "win",
+      "gsp": 17550501,
+      "timestamp": "2026-01-25T15:41:59.814Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1769263714100",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "win",
+      "gsp": 17510385,
+      "timestamp": "2026-01-24T14:08:34.100Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1769171708386",
+      "myFighter": "勇者",
+      "opponentFighter": "11",
+      "result": "win",
+      "gsp": 17486017,
+      "timestamp": "2026-01-23T12:35:08.386Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1769079702672",
+      "myFighter": "勇者",
+      "opponentFighter": "52",
+      "result": "win",
+      "gsp": 17474203,
+      "timestamp": "2026-01-22T11:01:42.672Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1768987696958",
+      "myFighter": "勇者",
+      "opponentFighter": "21e",
+      "result": "lose",
+      "gsp": 17428382,
+      "timestamp": "2026-01-21T09:28:16.958Z",
+      "notes": ""
+    },
+    {
+      "id": "1768895691244",
+      "myFighter": "勇者",
+      "opponentFighter": "11",
+      "result": "lose",
+      "gsp": 17460260,
+      "timestamp": "2026-01-20T07:54:51.244Z",
+      "notes": ""
+    },
+    {
+      "id": "1768803685530",
+      "myFighter": "勇者",
+      "opponentFighter": "6",
+      "result": "lose",
+      "gsp": 17472544,
+      "timestamp": "2026-01-19T06:21:25.530Z",
+      "notes": ""
+    },
+    {
+      "id": "1768711679816",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "lose",
+      "gsp": 17482288,
+      "timestamp": "2026-01-18T04:47:59.816Z",
+      "notes": ""
+    },
+    {
+      "id": "1768619674102",
+      "myFighter": "勇者",
+      "opponentFighter": "41",
+      "result": "win",
+      "gsp": 17493850,
+      "timestamp": "2026-01-17T03:14:34.102Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1768527668388",
+      "myFighter": "勇者",
+      "opponentFighter": "30",
+      "result": "lose",
+      "gsp": 17480928,
+      "timestamp": "2026-01-16T01:41:08.388Z",
+      "notes": ""
+    },
+    {
+      "id": "1768435662674",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "win",
+      "gsp": 17499512,
+      "timestamp": "2026-01-15T00:07:42.674Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1768343656960",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 17466325,
+      "timestamp": "2026-01-13T22:34:16.960Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1768251651246",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 17445122,
+      "timestamp": "2026-01-12T21:00:51.246Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1768159645532",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 17398318,
+      "timestamp": "2026-01-11T19:27:25.532Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1768067639818",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "lose",
+      "gsp": 17384237,
+      "timestamp": "2026-01-10T17:53:59.818Z",
+      "notes": ""
+    },
+    {
+      "id": "1767975634104",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "win",
+      "gsp": 17414713,
+      "timestamp": "2026-01-09T16:20:34.104Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1767883628390",
+      "myFighter": "勇者",
+      "opponentFighter": "74",
+      "result": "win",
+      "gsp": 17374456,
+      "timestamp": "2026-01-08T14:47:08.390Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1767791622676",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "lose",
+      "gsp": 17325757,
+      "timestamp": "2026-01-07T13:13:42.676Z",
+      "notes": ""
+    },
+    {
+      "id": "1767699616962",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "win",
+      "gsp": 17338965,
+      "timestamp": "2026-01-06T11:40:16.962Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1767607611248",
+      "myFighter": "勇者",
+      "opponentFighter": "63",
+      "result": "win",
+      "gsp": 17297947,
+      "timestamp": "2026-01-05T10:06:51.248Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1767515605534",
+      "myFighter": "勇者",
+      "opponentFighter": "11",
+      "result": "lose",
+      "gsp": 17286473,
+      "timestamp": "2026-01-04T08:33:25.534Z",
+      "notes": ""
+    },
+    {
+      "id": "1767423599820",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 17300184,
+      "timestamp": "2026-01-03T06:59:59.820Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1767331594106",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 17254039,
+      "timestamp": "2026-01-02T05:26:34.106Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1767239588392",
+      "myFighter": "勇者",
+      "opponentFighter": "50",
+      "result": "win",
+      "gsp": 17206612,
+      "timestamp": "2026-01-01T03:53:08.392Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1767147582678",
+      "myFighter": "勇者",
+      "opponentFighter": "33",
+      "result": "lose",
+      "gsp": 17169906,
+      "timestamp": "2025-12-31T02:19:42.678Z",
+      "notes": ""
+    },
+    {
+      "id": "1767055576964",
+      "myFighter": "勇者",
+      "opponentFighter": "62",
+      "result": "win",
+      "gsp": 17193168,
+      "timestamp": "2025-12-30T00:46:16.964Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1766963571250",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "win",
+      "gsp": 17156873,
+      "timestamp": "2025-12-28T23:12:51.250Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1766871565536",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "lose",
+      "gsp": 17122689,
+      "timestamp": "2025-12-27T21:39:25.536Z",
+      "notes": ""
+    },
+    {
+      "id": "1766779559822",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "win",
+      "gsp": 17147251,
+      "timestamp": "2025-12-26T20:05:59.822Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1766687554108",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "win",
+      "gsp": 17117492,
+      "timestamp": "2025-12-25T18:32:34.108Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1766595548394",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "win",
+      "gsp": 17098888,
+      "timestamp": "2025-12-24T16:59:08.394Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1766503542680",
+      "myFighter": "勇者",
+      "opponentFighter": "64e",
+      "result": "lose",
+      "gsp": 17050387,
+      "timestamp": "2025-12-23T15:25:42.680Z",
+      "notes": ""
+    },
+    {
+      "id": "1766411536966",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "win",
+      "gsp": 17060507,
+      "timestamp": "2025-12-22T13:52:16.966Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1766319531252",
+      "myFighter": "勇者",
+      "opponentFighter": "10",
+      "result": "win",
+      "gsp": 17030489,
+      "timestamp": "2025-12-21T12:18:51.252Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1766227525538",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "win",
+      "gsp": 17013363,
+      "timestamp": "2025-12-20T10:45:25.538Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1766135519824",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "win",
+      "gsp": 16982191,
+      "timestamp": "2025-12-19T09:11:59.824Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1766043514110",
+      "myFighter": "勇者",
+      "opponentFighter": "2",
+      "result": "lose",
+      "gsp": 16933156,
+      "timestamp": "2025-12-18T07:38:34.110Z",
+      "notes": ""
+    },
+    {
+      "id": "1765951508396",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "lose",
+      "gsp": 16967347,
+      "timestamp": "2025-12-17T06:05:08.396Z",
+      "notes": ""
+    },
+    {
+      "id": "1765859502682",
+      "myFighter": "勇者",
+      "opponentFighter": "52",
+      "result": "win",
+      "gsp": 16993760,
+      "timestamp": "2025-12-16T04:31:42.682Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1765767496968",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "lose",
+      "gsp": 16964887,
+      "timestamp": "2025-12-15T02:58:16.968Z",
+      "notes": ""
+    },
+    {
+      "id": "1765675491254",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "lose",
+      "gsp": 16974300,
+      "timestamp": "2025-12-14T01:24:51.254Z",
+      "notes": ""
+    },
+    {
+      "id": "1765583485540",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "lose",
+      "gsp": 17000687,
+      "timestamp": "2025-12-12T23:51:25.540Z",
+      "notes": ""
+    },
+    {
+      "id": "1765491479826",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "lose",
+      "gsp": 17028334,
+      "timestamp": "2025-12-11T22:17:59.826Z",
+      "notes": ""
+    },
+    {
+      "id": "1765399474112",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "lose",
+      "gsp": 17051752,
+      "timestamp": "2025-12-10T20:44:34.112Z",
+      "notes": ""
+    },
+    {
+      "id": "1765307468398",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "lose",
+      "gsp": 17082775,
+      "timestamp": "2025-12-09T19:11:08.398Z",
+      "notes": ""
+    },
+    {
+      "id": "1765215462684",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 17098193,
+      "timestamp": "2025-12-08T17:37:42.684Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1765123456970",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "win",
+      "gsp": 17050992,
+      "timestamp": "2025-12-07T16:04:16.970Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1765031451256",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "lose",
+      "gsp": 17019404,
+      "timestamp": "2025-12-06T14:30:51.256Z",
+      "notes": ""
+    },
+    {
+      "id": "1764939445542",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "lose",
+      "gsp": 17044035,
+      "timestamp": "2025-12-05T12:57:25.542Z",
+      "notes": ""
+    },
+    {
+      "id": "1764847439828",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "lose",
+      "gsp": 17086016,
+      "timestamp": "2025-12-04T11:23:59.828Z",
+      "notes": ""
+    },
+    {
+      "id": "1764755434114",
+      "myFighter": "勇者",
+      "opponentFighter": "52",
+      "result": "win",
+      "gsp": 17112593,
+      "timestamp": "2025-12-03T09:50:34.114Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1764663428400",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 17101912,
+      "timestamp": "2025-12-02T08:17:08.400Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1764571422686",
+      "myFighter": "勇者",
+      "opponentFighter": "10",
+      "result": "win",
+      "gsp": 17052080,
+      "timestamp": "2025-12-01T06:43:42.686Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1764479416972",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "win",
+      "gsp": 17015958,
+      "timestamp": "2025-11-30T05:10:16.972Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1764387411258",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "win",
+      "gsp": 16979987,
+      "timestamp": "2025-11-29T03:36:51.258Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1764295405544",
+      "myFighter": "勇者",
+      "opponentFighter": "28e",
+      "result": "win",
+      "gsp": 16940660,
+      "timestamp": "2025-11-28T02:03:25.544Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1764203399830",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "win",
+      "gsp": 16892614,
+      "timestamp": "2025-11-27T00:29:59.830Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1764111394116",
+      "myFighter": "勇者",
+      "opponentFighter": "68",
+      "result": "win",
+      "gsp": 16881186,
+      "timestamp": "2025-11-25T22:56:34.116Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1764019388402",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "win",
+      "gsp": 16855627,
+      "timestamp": "2025-11-24T21:23:08.402Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1763927382688",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "lose",
+      "gsp": 16844202,
+      "timestamp": "2025-11-23T19:49:42.688Z",
+      "notes": ""
+    },
+    {
+      "id": "1763835376974",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "win",
+      "gsp": 16864584,
+      "timestamp": "2025-11-22T18:16:16.974Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1763743371260",
+      "myFighter": "勇者",
+      "opponentFighter": "6",
+      "result": "win",
+      "gsp": 16835219,
+      "timestamp": "2025-11-21T16:42:51.260Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1763651365546",
+      "myFighter": "勇者",
+      "opponentFighter": "7",
+      "result": "win",
+      "gsp": 16815119,
+      "timestamp": "2025-11-20T15:09:25.546Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1763559359832",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "lose",
+      "gsp": 16796384,
+      "timestamp": "2025-11-19T13:35:59.832Z",
+      "notes": ""
+    },
+    {
+      "id": "1763467354118",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "lose",
+      "gsp": 16838126,
+      "timestamp": "2025-11-18T12:02:34.118Z",
+      "notes": ""
+    },
+    {
+      "id": "1763375348404",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "win",
+      "gsp": 16849405,
+      "timestamp": "2025-11-17T10:29:08.404Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1763283342690",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "lose",
+      "gsp": 16814288,
+      "timestamp": "2025-11-16T08:55:42.690Z",
+      "notes": ""
+    },
+    {
+      "id": "1763191336976",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "win",
+      "gsp": 16826299,
+      "timestamp": "2025-11-15T07:22:16.976Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1763099331262",
+      "myFighter": "勇者",
+      "opponentFighter": "6",
+      "result": "win",
+      "gsp": 16797427,
+      "timestamp": "2025-11-14T05:48:51.262Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1763007325548",
+      "myFighter": "勇者",
+      "opponentFighter": "36",
+      "result": "lose",
+      "gsp": 16773540,
+      "timestamp": "2025-11-13T04:15:25.548Z",
+      "notes": ""
+    },
+    {
+      "id": "1762915319834",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "lose",
+      "gsp": 16815659,
+      "timestamp": "2025-11-12T02:41:59.834Z",
+      "notes": ""
+    },
+    {
+      "id": "1762823314120",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "win",
+      "gsp": 16833821,
+      "timestamp": "2025-11-11T01:08:34.120Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1762731308406",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "lose",
+      "gsp": 16789753,
+      "timestamp": "2025-11-09T23:35:08.406Z",
+      "notes": ""
+    },
+    {
+      "id": "1762639302692",
+      "myFighter": "勇者",
+      "opponentFighter": "24",
+      "result": "win",
+      "gsp": 16828475,
+      "timestamp": "2025-11-08T22:01:42.692Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1762547296978",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "lose",
+      "gsp": 16792415,
+      "timestamp": "2025-11-07T20:28:16.978Z",
+      "notes": ""
+    },
+    {
+      "id": "1762455291264",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 16824051,
+      "timestamp": "2025-11-06T18:54:51.264Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1762363285550",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "lose",
+      "gsp": 16778196,
+      "timestamp": "2025-11-05T17:21:25.550Z",
+      "notes": ""
+    },
+    {
+      "id": "1762271279836",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "lose",
+      "gsp": 16813875,
+      "timestamp": "2025-11-04T15:47:59.836Z",
+      "notes": ""
+    },
+    {
+      "id": "1762179274122",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "win",
+      "gsp": 16839566,
+      "timestamp": "2025-11-03T14:14:34.122Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1762087268408",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "win",
+      "gsp": 16822625,
+      "timestamp": "2025-11-02T12:41:08.408Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1761995262694",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "lose",
+      "gsp": 16806646,
+      "timestamp": "2025-11-01T11:07:42.694Z",
+      "notes": ""
+    },
+    {
+      "id": "1761903256980",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "win",
+      "gsp": 16845836,
+      "timestamp": "2025-10-31T09:34:16.980Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1761811251266",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "lose",
+      "gsp": 16832964,
+      "timestamp": "2025-10-30T08:00:51.266Z",
+      "notes": ""
+    },
+    {
+      "id": "1761719245552",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 16869031,
+      "timestamp": "2025-10-29T06:27:25.552Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1761627239838",
+      "myFighter": "勇者",
+      "opponentFighter": "2",
+      "result": "win",
+      "gsp": 16850991,
+      "timestamp": "2025-10-28T04:53:59.838Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1761535234124",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "lose",
+      "gsp": 16817636,
+      "timestamp": "2025-10-27T03:20:34.124Z",
+      "notes": ""
+    },
+    {
+      "id": "1761443228410",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "win",
+      "gsp": 16829640,
+      "timestamp": "2025-10-26T01:47:08.410Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1761351222696",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "lose",
+      "gsp": 16795198,
+      "timestamp": "2025-10-25T00:13:42.696Z",
+      "notes": ""
+    },
+    {
+      "id": "1761259216982",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "win",
+      "gsp": 16815150,
+      "timestamp": "2025-10-23T22:40:16.982Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1761167211268",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "lose",
+      "gsp": 16777688,
+      "timestamp": "2025-10-22T21:06:51.268Z",
+      "notes": ""
+    },
+    {
+      "id": "1761075205554",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "win",
+      "gsp": 16817517,
+      "timestamp": "2025-10-21T19:33:25.554Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1760983199840",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "lose",
+      "gsp": 16779685,
+      "timestamp": "2025-10-20T17:59:59.840Z",
+      "notes": ""
+    },
+    {
+      "id": "1760891194126",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "lose",
+      "gsp": 16791539,
+      "timestamp": "2025-10-19T16:26:34.126Z",
+      "notes": ""
+    },
+    {
+      "id": "1760799188412",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 16801858,
+      "timestamp": "2025-10-18T14:53:08.412Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1760707182698",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "win",
+      "gsp": 16753532,
+      "timestamp": "2025-10-17T13:19:42.698Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1760615176984",
+      "myFighter": "勇者",
+      "opponentFighter": "46",
+      "result": "lose",
+      "gsp": 16733950,
+      "timestamp": "2025-10-16T11:46:16.984Z",
+      "notes": ""
+    },
+    {
+      "id": "1760523171270",
+      "myFighter": "勇者",
+      "opponentFighter": "9",
+      "result": "lose",
+      "gsp": 16774972,
+      "timestamp": "2025-10-15T10:12:51.270Z",
+      "notes": ""
+    },
+    {
+      "id": "1760431165556",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "lose",
+      "gsp": 16814475,
+      "timestamp": "2025-10-14T08:39:25.556Z",
+      "notes": ""
+    },
+    {
+      "id": "1760339159842",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 16842692,
+      "timestamp": "2025-10-13T07:05:59.842Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1760247154128",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "win",
+      "gsp": 16811574,
+      "timestamp": "2025-10-12T05:32:34.128Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1760155148414",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "win",
+      "gsp": 16762876,
+      "timestamp": "2025-10-11T03:59:08.414Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1760063142700",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "lose",
+      "gsp": 16737279,
+      "timestamp": "2025-10-10T02:25:42.700Z",
+      "notes": "自動生成履歴"
+    },
+    {
+      "id": "1759971136986",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "win",
+      "gsp": 16750188,
+      "timestamp": "2025-10-09T00:52:16.986Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1759879131272",
+      "myFighter": "勇者",
+      "opponentFighter": "58e",
+      "result": "win",
+      "gsp": 16737818,
+      "timestamp": "2025-10-07T23:18:51.272Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1759787125558",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "lose",
+      "gsp": 16720442,
+      "timestamp": "2025-10-06T21:45:25.558Z",
+      "notes": ""
+    },
+    {
+      "id": "1759695119844",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "win",
+      "gsp": 16755194,
+      "timestamp": "2025-10-05T20:11:59.844Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1759603114130",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "lose",
+      "gsp": 16714665,
+      "timestamp": "2025-10-04T18:38:34.130Z",
+      "notes": ""
+    },
+    {
+      "id": "1759511108416",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 16723763,
+      "timestamp": "2025-10-03T17:05:08.416Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1759419102702",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "win",
+      "gsp": 16688538,
+      "timestamp": "2025-10-02T15:31:42.702Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1759327096988",
+      "myFighter": "勇者",
+      "opponentFighter": "64e",
+      "result": "lose",
+      "gsp": 16651159,
+      "timestamp": "2025-10-01T13:58:16.988Z",
+      "notes": ""
+    },
+    {
+      "id": "1759235091274",
+      "myFighter": "勇者",
+      "opponentFighter": "63",
+      "result": "win",
+      "gsp": 16677480,
+      "timestamp": "2025-09-30T12:24:51.274Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1759143085560",
+      "myFighter": "勇者",
+      "opponentFighter": "2",
+      "result": "lose",
+      "gsp": 16635701,
+      "timestamp": "2025-09-29T10:51:25.560Z",
+      "notes": ""
+    },
+    {
+      "id": "1759051079846",
+      "myFighter": "勇者",
+      "opponentFighter": "64e",
+      "result": "lose",
+      "gsp": 16661404,
+      "timestamp": "2025-09-28T09:17:59.846Z",
+      "notes": ""
+    },
+    {
+      "id": "1758959074132",
+      "myFighter": "勇者",
+      "opponentFighter": "45",
+      "result": "win",
+      "gsp": 16692666,
+      "timestamp": "2025-09-27T07:44:34.132Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1758867068418",
+      "myFighter": "勇者",
+      "opponentFighter": "68",
+      "result": "win",
+      "gsp": 16674970,
+      "timestamp": "2025-09-26T06:11:08.418Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1758775062704",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "win",
+      "gsp": 16625961,
+      "timestamp": "2025-09-25T04:37:42.704Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1758683056990",
+      "myFighter": "勇者",
+      "opponentFighter": "7",
+      "result": "lose",
+      "gsp": 16583292,
+      "timestamp": "2025-09-24T03:04:16.990Z",
+      "notes": ""
+    },
+    {
+      "id": "1758591051276",
+      "myFighter": "勇者",
+      "opponentFighter": "21e",
+      "result": "lose",
+      "gsp": 16618163,
+      "timestamp": "2025-09-23T01:30:51.276Z",
+      "notes": ""
+    },
+    {
+      "id": "1758499045562",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "win",
+      "gsp": 16643156,
+      "timestamp": "2025-09-21T23:57:25.562Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1758407039848",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "lose",
+      "gsp": 16625858,
+      "timestamp": "2025-09-20T22:23:59.848Z",
+      "notes": ""
+    },
+    {
+      "id": "1758315034134",
+      "myFighter": "勇者",
+      "opponentFighter": "25",
+      "result": "lose",
+      "gsp": 16653055,
+      "timestamp": "2025-09-19T20:50:34.134Z",
+      "notes": ""
+    },
+    {
+      "id": "1758223028420",
+      "myFighter": "勇者",
+      "opponentFighter": "11",
+      "result": "lose",
+      "gsp": 16692186,
+      "timestamp": "2025-09-18T19:17:08.420Z",
+      "notes": ""
+    },
+    {
+      "id": "1758131022706",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "lose",
+      "gsp": 16726288,
+      "timestamp": "2025-09-17T17:43:42.706Z",
+      "notes": ""
+    },
+    {
+      "id": "1758039016992",
+      "myFighter": "勇者",
+      "opponentFighter": "28e",
+      "result": "win",
+      "gsp": 16757798,
+      "timestamp": "2025-09-16T16:10:16.992Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1757947011278",
+      "myFighter": "勇者",
+      "opponentFighter": "33",
+      "result": "lose",
+      "gsp": 16714760,
+      "timestamp": "2025-09-15T14:36:51.278Z",
+      "notes": ""
+    },
+    {
+      "id": "1757855005564",
+      "myFighter": "勇者",
+      "opponentFighter": "41",
+      "result": "lose",
+      "gsp": 16749186,
+      "timestamp": "2025-09-14T13:03:25.564Z",
+      "notes": ""
+    },
+    {
+      "id": "1757762999850",
+      "myFighter": "勇者",
+      "opponentFighter": "46",
+      "result": "win",
+      "gsp": 16790349,
+      "timestamp": "2025-09-13T11:29:59.850Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1757670994136",
+      "myFighter": "勇者",
+      "opponentFighter": "64",
+      "result": "lose",
+      "gsp": 16744729,
+      "timestamp": "2025-09-12T09:56:34.136Z",
+      "notes": ""
+    },
+    {
+      "id": "1757578988422",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "win",
+      "gsp": 16769386,
+      "timestamp": "2025-09-11T08:23:08.422Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1757486982708",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "win",
+      "gsp": 16722751,
+      "timestamp": "2025-09-10T06:49:42.708Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1757394976994",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "win",
+      "gsp": 16682249,
+      "timestamp": "2025-09-09T05:16:16.994Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1757302971280",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "win",
+      "gsp": 16662963,
+      "timestamp": "2025-09-08T03:42:51.280Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1757210965566",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "win",
+      "gsp": 16628667,
+      "timestamp": "2025-09-07T02:09:25.566Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1757118959852",
+      "myFighter": "勇者",
+      "opponentFighter": "6",
+      "result": "win",
+      "gsp": 16599903,
+      "timestamp": "2025-09-06T00:35:59.852Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1757026954138",
+      "myFighter": "勇者",
+      "opponentFighter": "2",
+      "result": "win",
+      "gsp": 16562782,
+      "timestamp": "2025-09-04T23:02:34.138Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1756934948424",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "win",
+      "gsp": 16543145,
+      "timestamp": "2025-09-03T21:29:08.424Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1756842942710",
+      "myFighter": "勇者",
+      "opponentFighter": "36",
+      "result": "win",
+      "gsp": 16496449,
+      "timestamp": "2025-09-02T19:55:42.710Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1756750936996",
+      "myFighter": "勇者",
+      "opponentFighter": "50",
+      "result": "win",
+      "gsp": 16473911,
+      "timestamp": "2025-09-01T18:22:16.996Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1756658931282",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "win",
+      "gsp": 16439735,
+      "timestamp": "2025-08-31T16:48:51.282Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1756566925568",
+      "myFighter": "勇者",
+      "opponentFighter": "7",
+      "result": "lose",
+      "gsp": 16422990,
+      "timestamp": "2025-08-30T15:15:25.568Z",
+      "notes": ""
+    },
+    {
+      "id": "1756474919854",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "lose",
+      "gsp": 16431927,
+      "timestamp": "2025-08-29T13:41:59.854Z",
+      "notes": ""
+    },
+    {
+      "id": "1756382914140",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 16464727,
+      "timestamp": "2025-08-28T12:08:34.140Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1756290908426",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "lose",
+      "gsp": 16452987,
+      "timestamp": "2025-08-27T10:35:08.426Z",
+      "notes": ""
+    },
+    {
+      "id": "1756198902712",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "lose",
+      "gsp": 16483501,
+      "timestamp": "2025-08-26T09:01:42.712Z",
+      "notes": ""
+    },
+    {
+      "id": "1756106896998",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "win",
+      "gsp": 16492016,
+      "timestamp": "2025-08-25T07:28:16.998Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1756014891284",
+      "myFighter": "勇者",
+      "opponentFighter": "14",
+      "result": "win",
+      "gsp": 16468536,
+      "timestamp": "2025-08-24T05:54:51.284Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1755922885570",
+      "myFighter": "勇者",
+      "opponentFighter": "28e",
+      "result": "lose",
+      "gsp": 16426030,
+      "timestamp": "2025-08-23T04:21:25.570Z",
+      "notes": ""
+    },
+    {
+      "id": "1755830879856",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "lose",
+      "gsp": 16459017,
+      "timestamp": "2025-08-22T02:47:59.856Z",
+      "notes": ""
+    },
+    {
+      "id": "1755738874142",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "win",
+      "gsp": 16484153,
+      "timestamp": "2025-08-21T01:14:34.142Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1755646868428",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "lose",
+      "gsp": 16443003,
+      "timestamp": "2025-08-19T23:41:08.428Z",
+      "notes": ""
+    },
+    {
+      "id": "1755554862714",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 16474018,
+      "timestamp": "2025-08-18T22:07:42.714Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1755462857000",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "lose",
+      "gsp": 16456222,
+      "timestamp": "2025-08-17T20:34:17.000Z",
+      "notes": "自動生成履歴"
+    },
+    {
+      "id": "1755370851286",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "lose",
+      "gsp": 16497042,
+      "timestamp": "2025-08-16T19:00:51.286Z",
+      "notes": ""
+    },
+    {
+      "id": "1755278845572",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "lose",
+      "gsp": 16510981,
+      "timestamp": "2025-08-15T17:27:25.572Z",
+      "notes": ""
+    },
+    {
+      "id": "1755186839858",
+      "myFighter": "勇者",
+      "opponentFighter": "41",
+      "result": "lose",
+      "gsp": 16526455,
+      "timestamp": "2025-08-14T15:53:59.858Z",
+      "notes": ""
+    },
+    {
+      "id": "1755094834144",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "win",
+      "gsp": 16542036,
+      "timestamp": "2025-08-13T14:20:34.144Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1755002828430",
+      "myFighter": "勇者",
+      "opponentFighter": "64e",
+      "result": "lose",
+      "gsp": 16519267,
+      "timestamp": "2025-08-12T12:47:08.430Z",
+      "notes": ""
+    },
+    {
+      "id": "1754910822716",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "win",
+      "gsp": 16543844,
+      "timestamp": "2025-08-11T11:13:42.716Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1754818817002",
+      "myFighter": "勇者",
+      "opponentFighter": "30",
+      "result": "lose",
+      "gsp": 16502198,
+      "timestamp": "2025-08-10T09:40:17.002Z",
+      "notes": ""
+    },
+    {
+      "id": "1754726811288",
+      "myFighter": "勇者",
+      "opponentFighter": "41",
+      "result": "lose",
+      "gsp": 16523813,
+      "timestamp": "2025-08-09T08:06:51.288Z",
+      "notes": ""
+    },
+    {
+      "id": "1754634805574",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "win",
+      "gsp": 16535297,
+      "timestamp": "2025-08-08T06:33:25.574Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1754542799860",
+      "myFighter": "勇者",
+      "opponentFighter": "68",
+      "result": "lose",
+      "gsp": 16523282,
+      "timestamp": "2025-08-07T04:59:59.860Z",
+      "notes": ""
+    },
+    {
+      "id": "1754450794146",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "lose",
+      "gsp": 16541677,
+      "timestamp": "2025-08-06T03:26:34.146Z",
+      "notes": ""
+    },
+    {
+      "id": "1754358788432",
+      "myFighter": "勇者",
+      "opponentFighter": "36",
+      "result": "lose",
+      "gsp": 16567476,
+      "timestamp": "2025-08-05T01:53:08.432Z",
+      "notes": ""
+    },
+    {
+      "id": "1754266782718",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "win",
+      "gsp": 16591965,
+      "timestamp": "2025-08-04T00:19:42.718Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1754174777004",
+      "myFighter": "勇者",
+      "opponentFighter": "62",
+      "result": "lose",
+      "gsp": 16549953,
+      "timestamp": "2025-08-02T22:46:17.004Z",
+      "notes": ""
+    },
+    {
+      "id": "1754082771290",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "win",
+      "gsp": 16573593,
+      "timestamp": "2025-08-01T21:12:51.290Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1753990765576",
+      "myFighter": "勇者",
+      "opponentFighter": "78",
+      "result": "win",
+      "gsp": 16527590,
+      "timestamp": "2025-07-31T19:39:25.576Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1753898759862",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "win",
+      "gsp": 16499930,
+      "timestamp": "2025-07-30T18:05:59.862Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1753806754148",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "lose",
+      "gsp": 16464836,
+      "timestamp": "2025-07-29T16:32:34.148Z",
+      "notes": ""
+    },
+    {
+      "id": "1753714748434",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "win",
+      "gsp": 16485671,
+      "timestamp": "2025-07-28T14:59:08.434Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1753622742720",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "win",
+      "gsp": 16454362,
+      "timestamp": "2025-07-27T13:25:42.720Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1753530737006",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "lose",
+      "gsp": 16414199,
+      "timestamp": "2025-07-26T11:52:17.006Z",
+      "notes": ""
+    },
+    {
+      "id": "1753438731292",
+      "myFighter": "勇者",
+      "opponentFighter": "75",
+      "result": "win",
+      "gsp": 16428797,
+      "timestamp": "2025-07-25T10:18:51.292Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1753346725578",
+      "myFighter": "勇者",
+      "opponentFighter": "9",
+      "result": "lose",
+      "gsp": 16413347,
+      "timestamp": "2025-07-24T08:45:25.578Z",
+      "notes": ""
+    },
+    {
+      "id": "1753254719864",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "win",
+      "gsp": 16445700,
+      "timestamp": "2025-07-23T07:11:59.864Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1753162714150",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "lose",
+      "gsp": 16434095,
+      "timestamp": "2025-07-22T05:38:34.150Z",
+      "notes": ""
+    },
+    {
+      "id": "1753070708436",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "lose",
+      "gsp": 16476394,
+      "timestamp": "2025-07-21T04:05:08.436Z",
+      "notes": ""
+    },
+    {
+      "id": "1752978702722",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "lose",
+      "gsp": 16492494,
+      "timestamp": "2025-07-20T02:31:42.722Z",
+      "notes": ""
+    },
+    {
+      "id": "1752886697008",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "lose",
+      "gsp": 16510542,
+      "timestamp": "2025-07-19T00:58:17.008Z",
+      "notes": ""
+    },
+    {
+      "id": "1752794691294",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "lose",
+      "gsp": 16548874,
+      "timestamp": "2025-07-17T23:24:51.294Z",
+      "notes": ""
+    },
+    {
+      "id": "1752702685580",
+      "myFighter": "勇者",
+      "opponentFighter": "8",
+      "result": "win",
+      "gsp": 16583656,
+      "timestamp": "2025-07-16T21:51:25.580Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1752610679866",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "win",
+      "gsp": 16540108,
+      "timestamp": "2025-07-15T20:17:59.866Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1752518674152",
+      "myFighter": "勇者",
+      "opponentFighter": "41",
+      "result": "win",
+      "gsp": 16491908,
+      "timestamp": "2025-07-14T18:44:34.152Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1752426668438",
+      "myFighter": "勇者",
+      "opponentFighter": "60",
+      "result": "lose",
+      "gsp": 16475288,
+      "timestamp": "2025-07-13T17:11:08.438Z",
+      "notes": ""
+    },
+    {
+      "id": "1752334662724",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "lose",
+      "gsp": 16516397,
+      "timestamp": "2025-07-12T15:37:42.724Z",
+      "notes": ""
+    },
+    {
+      "id": "1752242657010",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "lose",
+      "gsp": 16529048,
+      "timestamp": "2025-07-11T14:04:17.010Z",
+      "notes": ""
+    },
+    {
+      "id": "1752150651296",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 16549705,
+      "timestamp": "2025-07-10T12:30:51.296Z",
+      "notes": ""
+    },
+    {
+      "id": "1752058645582",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "lose",
+      "gsp": 16587326,
+      "timestamp": "2025-07-09T10:57:25.582Z",
+      "notes": ""
+    },
+    {
+      "id": "1751966639868",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "win",
+      "gsp": 16612331,
+      "timestamp": "2025-07-08T09:23:59.868Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1751874634154",
+      "myFighter": "勇者",
+      "opponentFighter": "13",
+      "result": "lose",
+      "gsp": 16593127,
+      "timestamp": "2025-07-07T07:50:34.154Z",
+      "notes": ""
+    },
+    {
+      "id": "1751782628440",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "win",
+      "gsp": 16603718,
+      "timestamp": "2025-07-06T06:17:08.440Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1751690622726",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 16589619,
+      "timestamp": "2025-07-05T04:43:42.726Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1751598617012",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "win",
+      "gsp": 16577152,
+      "timestamp": "2025-07-04T03:10:17.012Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1751506611298",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "lose",
+      "gsp": 16527284,
+      "timestamp": "2025-07-03T01:36:51.298Z",
+      "notes": ""
+    },
+    {
+      "id": "1751414605584",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "win",
+      "gsp": 16564550,
+      "timestamp": "2025-07-02T00:03:25.584Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1751322599870",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 16546193,
+      "timestamp": "2025-06-30T22:29:59.870Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1751230594156",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "lose",
+      "gsp": 16533248,
+      "timestamp": "2025-06-29T20:56:34.156Z",
+      "notes": ""
+    },
+    {
+      "id": "1751138588442",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "win",
+      "gsp": 16574835,
+      "timestamp": "2025-06-28T19:23:08.442Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1751046582728",
+      "myFighter": "勇者",
+      "opponentFighter": "8",
+      "result": "win",
+      "gsp": 16534820,
+      "timestamp": "2025-06-27T17:49:42.728Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1750954577014",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "win",
+      "gsp": 16497116,
+      "timestamp": "2025-06-26T16:16:17.014Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1750862571300",
+      "myFighter": "勇者",
+      "opponentFighter": "78",
+      "result": "win",
+      "gsp": 16467652,
+      "timestamp": "2025-06-25T14:42:51.300Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1750770565586",
+      "myFighter": "勇者",
+      "opponentFighter": "25",
+      "result": "win",
+      "gsp": 16430919,
+      "timestamp": "2025-06-24T13:09:25.586Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1750678559872",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 16405042,
+      "timestamp": "2025-06-23T11:35:59.872Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1750586554158",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "win",
+      "gsp": 16387316,
+      "timestamp": "2025-06-22T10:02:34.158Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1750494548444",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "win",
+      "gsp": 16338824,
+      "timestamp": "2025-06-21T08:29:08.444Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1750402542730",
+      "myFighter": "勇者",
+      "opponentFighter": "15",
+      "result": "lose",
+      "gsp": 16324634,
+      "timestamp": "2025-06-20T06:55:42.730Z",
+      "notes": ""
+    },
+    {
+      "id": "1750310537016",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 16363149,
+      "timestamp": "2025-06-19T05:22:17.016Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1750218531302",
+      "myFighter": "勇者",
+      "opponentFighter": "36",
+      "result": "win",
+      "gsp": 16324152,
+      "timestamp": "2025-06-18T03:48:51.302Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1750126525588",
+      "myFighter": "勇者",
+      "opponentFighter": "45",
+      "result": "win",
+      "gsp": 16295954,
+      "timestamp": "2025-06-17T02:15:25.588Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1750034519874",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "lose",
+      "gsp": 16256588,
+      "timestamp": "2025-06-16T00:41:59.874Z",
+      "notes": ""
+    },
+    {
+      "id": "1749942514160",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "win",
+      "gsp": 16297928,
+      "timestamp": "2025-06-14T23:08:34.160Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1749850508446",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "win",
+      "gsp": 16250594,
+      "timestamp": "2025-06-13T21:35:08.446Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1749758502732",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "lose",
+      "gsp": 16228901,
+      "timestamp": "2025-06-12T20:01:42.732Z",
+      "notes": ""
+    },
+    {
+      "id": "1749666497018",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "lose",
+      "gsp": 16246997,
+      "timestamp": "2025-06-11T18:28:17.018Z",
+      "notes": ""
+    },
+    {
+      "id": "1749574491304",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "win",
+      "gsp": 16278671,
+      "timestamp": "2025-06-10T16:54:51.304Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1749482485590",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "win",
+      "gsp": 16231882,
+      "timestamp": "2025-06-09T15:21:25.590Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1749390479876",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 16209983,
+      "timestamp": "2025-06-08T13:47:59.876Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1749298474162",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "win",
+      "gsp": 16166069,
+      "timestamp": "2025-06-07T12:14:34.162Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1749206468448",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "lose",
+      "gsp": 16125305,
+      "timestamp": "2025-06-06T10:41:08.448Z",
+      "notes": ""
+    },
+    {
+      "id": "1749114462734",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 16149071,
+      "timestamp": "2025-06-05T09:07:42.734Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1749022457020",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "lose",
+      "gsp": 16121629,
+      "timestamp": "2025-06-04T07:34:17.020Z",
+      "notes": ""
+    },
+    {
+      "id": "1748930451306",
+      "myFighter": "勇者",
+      "opponentFighter": "8",
+      "result": "win",
+      "gsp": 16152954,
+      "timestamp": "2025-06-03T06:00:51.306Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1748838445592",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "lose",
+      "gsp": 16132979,
+      "timestamp": "2025-06-02T04:27:25.592Z",
+      "notes": ""
+    },
+    {
+      "id": "1748746439878",
+      "myFighter": "勇者",
+      "opponentFighter": "27",
+      "result": "lose",
+      "gsp": 16157781,
+      "timestamp": "2025-06-01T02:53:59.878Z",
+      "notes": ""
+    },
+    {
+      "id": "1748654434164",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 16171259,
+      "timestamp": "2025-05-31T01:20:34.164Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1748562428450",
+      "myFighter": "勇者",
+      "opponentFighter": "10",
+      "result": "win",
+      "gsp": 16147314,
+      "timestamp": "2025-05-29T23:47:08.450Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1748470422736",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "lose",
+      "gsp": 16104476,
+      "timestamp": "2025-05-28T22:13:42.736Z",
+      "notes": ""
+    },
+    {
+      "id": "1748378417022",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "win",
+      "gsp": 16121715,
+      "timestamp": "2025-05-27T20:40:17.022Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1748286411308",
+      "myFighter": "勇者",
+      "opponentFighter": "25",
+      "result": "win",
+      "gsp": 16080155,
+      "timestamp": "2025-05-26T19:06:51.308Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1748194405594",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "lose",
+      "gsp": 16051107,
+      "timestamp": "2025-05-25T17:33:25.594Z",
+      "notes": ""
+    },
+    {
+      "id": "1748102399880",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "win",
+      "gsp": 16079474,
+      "timestamp": "2025-05-24T15:59:59.880Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1748010394166",
+      "myFighter": "勇者",
+      "opponentFighter": "58e",
+      "result": "win",
+      "gsp": 16041000,
+      "timestamp": "2025-05-23T14:26:34.166Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1747918388452",
+      "myFighter": "勇者",
+      "opponentFighter": "25",
+      "result": "win",
+      "gsp": 16015223,
+      "timestamp": "2025-05-22T12:53:08.452Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1747826382738",
+      "myFighter": "勇者",
+      "opponentFighter": "6",
+      "result": "win",
+      "gsp": 16004247,
+      "timestamp": "2025-05-21T11:19:42.738Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1747734377024",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "win",
+      "gsp": 15959355,
+      "timestamp": "2025-05-20T09:46:17.024Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1747642371310",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "lose",
+      "gsp": 15932529,
+      "timestamp": "2025-05-19T08:12:51.310Z",
+      "notes": ""
+    },
+    {
+      "id": "1747550365596",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "win",
+      "gsp": 15972390,
+      "timestamp": "2025-05-18T06:39:25.596Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1747458359882",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "win",
+      "gsp": 15933851,
+      "timestamp": "2025-05-17T05:05:59.882Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1747366354168",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 15908410,
+      "timestamp": "2025-05-16T03:32:34.168Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1747274348454",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "lose",
+      "gsp": 15892301,
+      "timestamp": "2025-05-15T01:59:08.454Z",
+      "notes": ""
+    },
+    {
+      "id": "1747182342740",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "win",
+      "gsp": 15925564,
+      "timestamp": "2025-05-14T00:25:42.740Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1747090337026",
+      "myFighter": "勇者",
+      "opponentFighter": "27",
+      "result": "lose",
+      "gsp": 15915121,
+      "timestamp": "2025-05-12T22:52:17.026Z",
+      "notes": ""
+    },
+    {
+      "id": "1746998331312",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 15933546,
+      "timestamp": "2025-05-11T21:18:51.312Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1746906325598",
+      "myFighter": "勇者",
+      "opponentFighter": "58e",
+      "result": "lose",
+      "gsp": 15893385,
+      "timestamp": "2025-05-10T19:45:25.598Z",
+      "notes": ""
+    },
+    {
+      "id": "1746814319884",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "win",
+      "gsp": 15903681,
+      "timestamp": "2025-05-09T18:11:59.884Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1746722314170",
+      "myFighter": "勇者",
+      "opponentFighter": "8",
+      "result": "win",
+      "gsp": 15854345,
+      "timestamp": "2025-05-08T16:38:34.170Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1746630308456",
+      "myFighter": "勇者",
+      "opponentFighter": "16",
+      "result": "lose",
+      "gsp": 15833874,
+      "timestamp": "2025-05-07T15:05:08.456Z",
+      "notes": ""
+    },
+    {
+      "id": "1746538302742",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "lose",
+      "gsp": 15857182,
+      "timestamp": "2025-05-06T13:31:42.742Z",
+      "notes": ""
+    },
+    {
+      "id": "1746446297028",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "lose",
+      "gsp": 15877879,
+      "timestamp": "2025-05-05T11:58:17.028Z",
+      "notes": ""
+    },
+    {
+      "id": "1746354291314",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "win",
+      "gsp": 15909016,
+      "timestamp": "2025-05-04T10:24:51.314Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1746262285600",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "win",
+      "gsp": 15884951,
+      "timestamp": "2025-05-03T08:51:25.600Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1746170279886",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "win",
+      "gsp": 15840326,
+      "timestamp": "2025-05-02T07:17:59.886Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1746078274172",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "win",
+      "gsp": 15811219,
+      "timestamp": "2025-05-01T05:44:34.172Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1745986268458",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "win",
+      "gsp": 15775926,
+      "timestamp": "2025-04-30T04:11:08.458Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1745894262744",
+      "myFighter": "勇者",
+      "opponentFighter": "60",
+      "result": "lose",
+      "gsp": 15730989,
+      "timestamp": "2025-04-29T02:37:42.744Z",
+      "notes": ""
+    },
+    {
+      "id": "1745802257030",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "lose",
+      "gsp": 15759446,
+      "timestamp": "2025-04-28T01:04:17.030Z",
+      "notes": ""
+    },
+    {
+      "id": "1745710251316",
+      "myFighter": "勇者",
+      "opponentFighter": "24",
+      "result": "win",
+      "gsp": 15767955,
+      "timestamp": "2025-04-26T23:30:51.316Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1745618245602",
+      "myFighter": "勇者",
+      "opponentFighter": "68",
+      "result": "win",
+      "gsp": 15746622,
+      "timestamp": "2025-04-25T21:57:25.602Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1745526239888",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "lose",
+      "gsp": 15717399,
+      "timestamp": "2025-04-24T20:23:59.888Z",
+      "notes": ""
+    },
+    {
+      "id": "1745434234174",
+      "myFighter": "勇者",
+      "opponentFighter": "13e",
+      "result": "win",
+      "gsp": 15746246,
+      "timestamp": "2025-04-23T18:50:34.174Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1745342228460",
+      "myFighter": "勇者",
+      "opponentFighter": "15",
+      "result": "lose",
+      "gsp": 15717875,
+      "timestamp": "2025-04-22T17:17:08.460Z",
+      "notes": ""
+    },
+    {
+      "id": "1745250222746",
+      "myFighter": "勇者",
+      "opponentFighter": "58e",
+      "result": "lose",
+      "gsp": 15727094,
+      "timestamp": "2025-04-21T15:43:42.746Z",
+      "notes": ""
+    },
+    {
+      "id": "1745158217032",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "win",
+      "gsp": 15753521,
+      "timestamp": "2025-04-20T14:10:17.032Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1745066211318",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "win",
+      "gsp": 15734732,
+      "timestamp": "2025-04-19T12:36:51.318Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1744974205604",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "win",
+      "gsp": 15721113,
+      "timestamp": "2025-04-18T11:03:25.604Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1744882199890",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "win",
+      "gsp": 15710780,
+      "timestamp": "2025-04-17T09:29:59.890Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1744790194176",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "win",
+      "gsp": 15672176,
+      "timestamp": "2025-04-16T07:56:34.176Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1744698188462",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "win",
+      "gsp": 15643750,
+      "timestamp": "2025-04-15T06:23:08.462Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1744606182748",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "lose",
+      "gsp": 15598132,
+      "timestamp": "2025-04-14T04:49:42.748Z",
+      "notes": ""
+    },
+    {
+      "id": "1744514177034",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "lose",
+      "gsp": 15630254,
+      "timestamp": "2025-04-13T03:16:17.034Z",
+      "notes": ""
+    },
+    {
+      "id": "1744422171320",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "win",
+      "gsp": 15651177,
+      "timestamp": "2025-04-12T01:42:51.320Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1744330165606",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 15604666,
+      "timestamp": "2025-04-11T00:09:25.606Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1744238159892",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "win",
+      "gsp": 15591151,
+      "timestamp": "2025-04-09T22:35:59.892Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1744146154178",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "lose",
+      "gsp": 15565856,
+      "timestamp": "2025-04-08T21:02:34.178Z",
+      "notes": ""
+    },
+    {
+      "id": "1744054148464",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "win",
+      "gsp": 15601959,
+      "timestamp": "2025-04-07T19:29:08.464Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1743962142750",
+      "myFighter": "勇者",
+      "opponentFighter": "75",
+      "result": "lose",
+      "gsp": 15582328,
+      "timestamp": "2025-04-06T17:55:42.750Z",
+      "notes": ""
+    },
+    {
+      "id": "1743870137036",
+      "myFighter": "勇者",
+      "opponentFighter": "74",
+      "result": "win",
+      "gsp": 15600895,
+      "timestamp": "2025-04-05T16:22:17.036Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1743778131322",
+      "myFighter": "勇者",
+      "opponentFighter": "60",
+      "result": "win",
+      "gsp": 15578271,
+      "timestamp": "2025-04-04T14:48:51.322Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1743686125608",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "win",
+      "gsp": 15533364,
+      "timestamp": "2025-04-03T13:15:25.608Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1743594119894",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "win",
+      "gsp": 15510323,
+      "timestamp": "2025-04-02T11:41:59.894Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1743502114180",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "win",
+      "gsp": 15481597,
+      "timestamp": "2025-04-01T10:08:34.180Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1743410108466",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 15435546,
+      "timestamp": "2025-03-31T08:35:08.466Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1743318102752",
+      "myFighter": "勇者",
+      "opponentFighter": "63",
+      "result": "win",
+      "gsp": 15421927,
+      "timestamp": "2025-03-30T07:01:42.752Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1743226097038",
+      "myFighter": "勇者",
+      "opponentFighter": "30",
+      "result": "lose",
+      "gsp": 15408086,
+      "timestamp": "2025-03-29T05:28:17.038Z",
+      "notes": ""
+    },
+    {
+      "id": "1743134091324",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 15437233,
+      "timestamp": "2025-03-28T03:54:51.324Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1743042085610",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "lose",
+      "gsp": 15389391,
+      "timestamp": "2025-03-27T02:21:25.610Z",
+      "notes": ""
+    },
+    {
+      "id": "1742950079896",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "lose",
+      "gsp": 15406079,
+      "timestamp": "2025-03-26T00:47:59.896Z",
+      "notes": ""
+    },
+    {
+      "id": "1742858074182",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "win",
+      "gsp": 15420935,
+      "timestamp": "2025-03-24T23:14:34.182Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1742766068468",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 15373141,
+      "timestamp": "2025-03-23T21:41:08.468Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1742674062754",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "win",
+      "gsp": 15352933,
+      "timestamp": "2025-03-22T20:07:42.754Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1742582057040",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "lose",
+      "gsp": 15330809,
+      "timestamp": "2025-03-21T18:34:17.040Z",
+      "notes": ""
+    },
+    {
+      "id": "1742490051326",
+      "myFighter": "勇者",
+      "opponentFighter": "16",
+      "result": "win",
+      "gsp": 15351815,
+      "timestamp": "2025-03-20T17:00:51.326Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1742398045612",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "win",
+      "gsp": 15320648,
+      "timestamp": "2025-03-19T15:27:25.612Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1742306039898",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "win",
+      "gsp": 15286268,
+      "timestamp": "2025-03-18T13:53:59.898Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1742214034184",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "win",
+      "gsp": 15238542,
+      "timestamp": "2025-03-17T12:20:34.184Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1742122028470",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "lose",
+      "gsp": 15221100,
+      "timestamp": "2025-03-16T10:47:08.470Z",
+      "notes": ""
+    },
+    {
+      "id": "1742030022756",
+      "myFighter": "勇者",
+      "opponentFighter": "75",
+      "result": "win",
+      "gsp": 15260803,
+      "timestamp": "2025-03-15T09:13:42.756Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1741938017042",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "lose",
+      "gsp": 15221664,
+      "timestamp": "2025-03-14T07:40:17.042Z",
+      "notes": ""
+    },
+    {
+      "id": "1741846011328",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "win",
+      "gsp": 15255956,
+      "timestamp": "2025-03-13T06:06:51.328Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1741754005614",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "lose",
+      "gsp": 15229457,
+      "timestamp": "2025-03-12T04:33:25.614Z",
+      "notes": ""
+    },
+    {
+      "id": "1741661999900",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "win",
+      "gsp": 15239576,
+      "timestamp": "2025-03-11T02:59:59.900Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1741569994186",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "win",
+      "gsp": 15203432,
+      "timestamp": "2025-03-10T01:26:34.186Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1741477988472",
+      "myFighter": "勇者",
+      "opponentFighter": "25",
+      "result": "win",
+      "gsp": 15193207,
+      "timestamp": "2025-03-08T23:53:08.472Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1741385982758",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "lose",
+      "gsp": 15151564,
+      "timestamp": "2025-03-07T22:19:42.758Z",
+      "notes": ""
+    },
+    {
+      "id": "1741293977044",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "win",
+      "gsp": 15185308,
+      "timestamp": "2025-03-06T20:46:17.044Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1741201971330",
+      "myFighter": "勇者",
+      "opponentFighter": "6",
+      "result": "lose",
+      "gsp": 15167337,
+      "timestamp": "2025-03-05T19:12:51.330Z",
+      "notes": ""
+    },
+    {
+      "id": "1741109965616",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 15196808,
+      "timestamp": "2025-03-04T17:39:25.616Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1741017959902",
+      "myFighter": "勇者",
+      "opponentFighter": "74",
+      "result": "lose",
+      "gsp": 15156884,
+      "timestamp": "2025-03-03T16:05:59.902Z",
+      "notes": ""
+    },
+    {
+      "id": "1740925954188",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "lose",
+      "gsp": 15192775,
+      "timestamp": "2025-03-02T14:32:34.188Z",
+      "notes": ""
+    },
+    {
+      "id": "1740833948474",
+      "myFighter": "勇者",
+      "opponentFighter": "63",
+      "result": "lose",
+      "gsp": 15231787,
+      "timestamp": "2025-03-01T12:59:08.474Z",
+      "notes": ""
+    },
+    {
+      "id": "1740741942760",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "win",
+      "gsp": 15273032,
+      "timestamp": "2025-02-28T11:25:42.760Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1740649937046",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "win",
+      "gsp": 15234212,
+      "timestamp": "2025-02-27T09:52:17.046Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1740557931332",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "lose",
+      "gsp": 15206276,
+      "timestamp": "2025-02-26T08:18:51.332Z",
+      "notes": ""
+    },
+    {
+      "id": "1740465925618",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "lose",
+      "gsp": 15226769,
+      "timestamp": "2025-02-25T06:45:25.618Z",
+      "notes": ""
+    },
+    {
+      "id": "1740373919904",
+      "myFighter": "勇者",
+      "opponentFighter": "24",
+      "result": "lose",
+      "gsp": 15239652,
+      "timestamp": "2025-02-24T05:11:59.904Z",
+      "notes": ""
+    },
+    {
+      "id": "1740281914190",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "lose",
+      "gsp": 15253382,
+      "timestamp": "2025-02-23T03:38:34.190Z",
+      "notes": ""
+    },
+    {
+      "id": "1740189908476",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 15265958,
+      "timestamp": "2025-02-22T02:05:08.476Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1740097902762",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "lose",
+      "gsp": 15216168,
+      "timestamp": "2025-02-21T00:31:42.762Z",
+      "notes": ""
+    },
+    {
+      "id": "1740005897048",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "win",
+      "gsp": 15226729,
+      "timestamp": "2025-02-19T22:58:17.048Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1739913891334",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "lose",
+      "gsp": 15179432,
+      "timestamp": "2025-02-18T21:24:51.334Z",
+      "notes": ""
+    },
+    {
+      "id": "1739821885620",
+      "myFighter": "勇者",
+      "opponentFighter": "21e",
+      "result": "win",
+      "gsp": 15210206,
+      "timestamp": "2025-02-17T19:51:25.620Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1739729879906",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "win",
+      "gsp": 15185015,
+      "timestamp": "2025-02-16T18:17:59.906Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1739637874192",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 15162229,
+      "timestamp": "2025-02-15T16:44:34.192Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1739545868478",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "lose",
+      "gsp": 15143861,
+      "timestamp": "2025-02-14T15:11:08.478Z",
+      "notes": ""
+    },
+    {
+      "id": "1739453862764",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 15157988,
+      "timestamp": "2025-02-13T13:37:42.764Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1739361857050",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "win",
+      "gsp": 15121993,
+      "timestamp": "2025-02-12T12:04:17.050Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1739269851336",
+      "myFighter": "勇者",
+      "opponentFighter": "24",
+      "result": "lose",
+      "gsp": 15097579,
+      "timestamp": "2025-02-11T10:30:51.336Z",
+      "notes": ""
+    },
+    {
+      "id": "1739177845622",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "lose",
+      "gsp": 15131784,
+      "timestamp": "2025-02-10T08:57:25.622Z",
+      "notes": ""
+    },
+    {
+      "id": "1739085839908",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "win",
+      "gsp": 15162691,
+      "timestamp": "2025-02-09T07:23:59.908Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1738993834194",
+      "myFighter": "勇者",
+      "opponentFighter": "64",
+      "result": "win",
+      "gsp": 15124911,
+      "timestamp": "2025-02-08T05:50:34.194Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1738901828480",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "win",
+      "gsp": 15092478,
+      "timestamp": "2025-02-07T04:17:08.480Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1738809822766",
+      "myFighter": "勇者",
+      "opponentFighter": "7",
+      "result": "lose",
+      "gsp": 15071368,
+      "timestamp": "2025-02-06T02:43:42.766Z",
+      "notes": ""
+    },
+    {
+      "id": "1738717817052",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "win",
+      "gsp": 15085119,
+      "timestamp": "2025-02-05T01:10:17.052Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1738625811338",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "lose",
+      "gsp": 15066688,
+      "timestamp": "2025-02-03T23:36:51.338Z",
+      "notes": ""
+    },
+    {
+      "id": "1738533805624",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "win",
+      "gsp": 15088472,
+      "timestamp": "2025-02-02T22:03:25.624Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1738441799910",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "lose",
+      "gsp": 15042100,
+      "timestamp": "2025-02-01T20:29:59.910Z",
+      "notes": ""
+    },
+    {
+      "id": "1738349794196",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "lose",
+      "gsp": 15066795,
+      "timestamp": "2025-01-31T18:56:34.196Z",
+      "notes": ""
+    },
+    {
+      "id": "1738257788482",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "lose",
+      "gsp": 15092209,
+      "timestamp": "2025-01-30T17:23:08.482Z",
+      "notes": ""
+    },
+    {
+      "id": "1738165782768",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "lose",
+      "gsp": 15110765,
+      "timestamp": "2025-01-29T15:49:42.768Z",
+      "notes": ""
+    },
+    {
+      "id": "1738073777054",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "lose",
+      "gsp": 15123937,
+      "timestamp": "2025-01-28T14:16:17.054Z",
+      "notes": ""
+    },
+    {
+      "id": "1737981771340",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "win",
+      "gsp": 15145524,
+      "timestamp": "2025-01-27T12:42:51.340Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1737889765626",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "lose",
+      "gsp": 15134474,
+      "timestamp": "2025-01-26T11:09:25.626Z",
+      "notes": ""
+    },
+    {
+      "id": "1737797759912",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "win",
+      "gsp": 15162493,
+      "timestamp": "2025-01-25T09:35:59.912Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1737705754198",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "lose",
+      "gsp": 15149548,
+      "timestamp": "2025-01-24T08:02:34.198Z",
+      "notes": ""
+    },
+    {
+      "id": "1737613748484",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "lose",
+      "gsp": 15187378,
+      "timestamp": "2025-01-23T06:29:08.484Z",
+      "notes": ""
+    },
+    {
+      "id": "1737521742770",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "lose",
+      "gsp": 15205010,
+      "timestamp": "2025-01-22T04:55:42.770Z",
+      "notes": ""
+    },
+    {
+      "id": "1737429737056",
+      "myFighter": "勇者",
+      "opponentFighter": "52",
+      "result": "win",
+      "gsp": 15233213,
+      "timestamp": "2025-01-21T03:22:17.056Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1737337731342",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "lose",
+      "gsp": 15217706,
+      "timestamp": "2025-01-20T01:48:51.342Z",
+      "notes": ""
+    },
+    {
+      "id": "1737245725628",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "win",
+      "gsp": 15228198,
+      "timestamp": "2025-01-19T00:15:25.628Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1737153719914",
+      "myFighter": "勇者",
+      "opponentFighter": "14",
+      "result": "lose",
+      "gsp": 15194957,
+      "timestamp": "2025-01-17T22:41:59.914Z",
+      "notes": ""
+    },
+    {
+      "id": "1737061714200",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "lose",
+      "gsp": 15235891,
+      "timestamp": "2025-01-16T21:08:34.200Z",
+      "notes": "自動生成履歴"
+    },
+    {
+      "id": "1736969708486",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 15267192,
+      "timestamp": "2025-01-15T19:35:08.486Z",
+      "notes": ""
+    },
+    {
+      "id": "1736877702772",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "lose",
+      "gsp": 15301422,
+      "timestamp": "2025-01-14T18:01:42.772Z",
+      "notes": ""
+    },
+    {
+      "id": "1736785697058",
+      "myFighter": "勇者",
+      "opponentFighter": "68",
+      "result": "win",
+      "gsp": 15321806,
+      "timestamp": "2025-01-13T16:28:17.058Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1736693691344",
+      "myFighter": "勇者",
+      "opponentFighter": "33",
+      "result": "win",
+      "gsp": 15301408,
+      "timestamp": "2025-01-12T14:54:51.344Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1736601685630",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "win",
+      "gsp": 15278051,
+      "timestamp": "2025-01-11T13:21:25.630Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1736509679916",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "win",
+      "gsp": 15260984,
+      "timestamp": "2025-01-10T11:47:59.916Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1736417674202",
+      "myFighter": "勇者",
+      "opponentFighter": "13",
+      "result": "win",
+      "gsp": 15228743,
+      "timestamp": "2025-01-09T10:14:34.202Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1736325668488",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "win",
+      "gsp": 15197304,
+      "timestamp": "2025-01-08T08:41:08.488Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1736233662774",
+      "myFighter": "勇者",
+      "opponentFighter": "10",
+      "result": "lose",
+      "gsp": 15171871,
+      "timestamp": "2025-01-07T07:07:42.774Z",
+      "notes": ""
+    },
+    {
+      "id": "1736141657060",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "lose",
+      "gsp": 15193501,
+      "timestamp": "2025-01-06T05:34:17.060Z",
+      "notes": ""
+    },
+    {
+      "id": "1736049651346",
+      "myFighter": "勇者",
+      "opponentFighter": "2",
+      "result": "lose",
+      "gsp": 15211744,
+      "timestamp": "2025-01-05T04:00:51.346Z",
+      "notes": ""
+    },
+    {
+      "id": "1735957645632",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "lose",
+      "gsp": 15251002,
+      "timestamp": "2025-01-04T02:27:25.632Z",
+      "notes": ""
+    },
+    {
+      "id": "1735865639918",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 15285816,
+      "timestamp": "2025-01-03T00:53:59.918Z",
+      "notes": ""
+    },
+    {
+      "id": "1735773634204",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "win",
+      "gsp": 15323881,
+      "timestamp": "2025-01-01T23:20:34.204Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1735681628490",
+      "myFighter": "勇者",
+      "opponentFighter": "7",
+      "result": "lose",
+      "gsp": 15277665,
+      "timestamp": "2024-12-31T21:47:08.490Z",
+      "notes": ""
+    },
+    {
+      "id": "1735589622776",
+      "myFighter": "勇者",
+      "opponentFighter": "44",
+      "result": "lose",
+      "gsp": 15295678,
+      "timestamp": "2024-12-30T20:13:42.776Z",
+      "notes": ""
+    },
+    {
+      "id": "1735497617062",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "win",
+      "gsp": 15338091,
+      "timestamp": "2024-12-29T18:40:17.062Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1735405611348",
+      "myFighter": "勇者",
+      "opponentFighter": "74",
+      "result": "win",
+      "gsp": 15309925,
+      "timestamp": "2024-12-28T17:06:51.348Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1735313605634",
+      "myFighter": "勇者",
+      "opponentFighter": "65",
+      "result": "lose",
+      "gsp": 15268207,
+      "timestamp": "2024-12-27T15:33:25.634Z",
+      "notes": ""
+    },
+    {
+      "id": "1735221599920",
+      "myFighter": "勇者",
+      "opponentFighter": "16",
+      "result": "win",
+      "gsp": 15290414,
+      "timestamp": "2024-12-26T13:59:59.920Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1735129594206",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "win",
+      "gsp": 15253767,
+      "timestamp": "2024-12-25T12:26:34.206Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1735037588492",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 15218809,
+      "timestamp": "2024-12-24T10:53:08.492Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1734945582778",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "win",
+      "gsp": 15172304,
+      "timestamp": "2024-12-23T09:19:42.778Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1734853577064",
+      "myFighter": "勇者",
+      "opponentFighter": "64",
+      "result": "lose",
+      "gsp": 15129105,
+      "timestamp": "2024-12-22T07:46:17.064Z",
+      "notes": ""
+    },
+    {
+      "id": "1734761571350",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "lose",
+      "gsp": 15151184,
+      "timestamp": "2024-12-21T06:12:51.350Z",
+      "notes": ""
+    },
+    {
+      "id": "1734669565636",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "win",
+      "gsp": 15167458,
+      "timestamp": "2024-12-20T04:39:25.636Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1734577559922",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 15148446,
+      "timestamp": "2024-12-19T03:05:59.922Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1734485554208",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 15134976,
+      "timestamp": "2024-12-18T01:32:34.208Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1734393548494",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "lose",
+      "gsp": 15112562,
+      "timestamp": "2024-12-16T23:59:08.494Z",
+      "notes": ""
+    },
+    {
+      "id": "1734301542780",
+      "myFighter": "勇者",
+      "opponentFighter": "21e",
+      "result": "lose",
+      "gsp": 15147294,
+      "timestamp": "2024-12-15T22:25:42.780Z",
+      "notes": ""
+    },
+    {
+      "id": "1734209537066",
+      "myFighter": "勇者",
+      "opponentFighter": "28e",
+      "result": "lose",
+      "gsp": 15171573,
+      "timestamp": "2024-12-14T20:52:17.066Z",
+      "notes": ""
+    },
+    {
+      "id": "1734117531352",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "win",
+      "gsp": 15190593,
+      "timestamp": "2024-12-13T19:18:51.352Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1734025525638",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "win",
+      "gsp": 15172488,
+      "timestamp": "2024-12-12T17:45:25.638Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1733933519924",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "lose",
+      "gsp": 15156888,
+      "timestamp": "2024-12-11T16:11:59.924Z",
+      "notes": ""
+    },
+    {
+      "id": "1733841514210",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "win",
+      "gsp": 15191358,
+      "timestamp": "2024-12-10T14:38:34.210Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1733749508496",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "win",
+      "gsp": 15145451,
+      "timestamp": "2024-12-09T13:05:08.496Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1733657502782",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "win",
+      "gsp": 15105829,
+      "timestamp": "2024-12-08T11:31:42.782Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1733565497068",
+      "myFighter": "勇者",
+      "opponentFighter": "7",
+      "result": "lose",
+      "gsp": 15056280,
+      "timestamp": "2024-12-07T09:58:17.068Z",
+      "notes": ""
+    },
+    {
+      "id": "1733473491354",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "lose",
+      "gsp": 15069294,
+      "timestamp": "2024-12-06T08:24:51.354Z",
+      "notes": ""
+    },
+    {
+      "id": "1733381485640",
+      "myFighter": "勇者",
+      "opponentFighter": "10",
+      "result": "lose",
+      "gsp": 15090452,
+      "timestamp": "2024-12-05T06:51:25.640Z",
+      "notes": ""
+    },
+    {
+      "id": "1733289479926",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 15118030,
+      "timestamp": "2024-12-04T05:17:59.926Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1733197474212",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 15069867,
+      "timestamp": "2024-12-03T03:44:34.212Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1733105468498",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "win",
+      "gsp": 15056816,
+      "timestamp": "2024-12-02T02:11:08.498Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1733013462784",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "win",
+      "gsp": 15019336,
+      "timestamp": "2024-12-01T00:37:42.784Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1732921457070",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "win",
+      "gsp": 14986977,
+      "timestamp": "2024-11-29T23:04:17.070Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1732829451356",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "lose",
+      "gsp": 14970288,
+      "timestamp": "2024-11-28T21:30:51.356Z",
+      "notes": ""
+    },
+    {
+      "id": "1732737445642",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 14988843,
+      "timestamp": "2024-11-27T19:57:25.642Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1732645439928",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "win",
+      "gsp": 14960798,
+      "timestamp": "2024-11-26T18:23:59.928Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1732553434214",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "lose",
+      "gsp": 14913891,
+      "timestamp": "2024-11-25T16:50:34.214Z",
+      "notes": ""
+    },
+    {
+      "id": "1732461428500",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "win",
+      "gsp": 14929393,
+      "timestamp": "2024-11-24T15:17:08.500Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1732369422786",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "lose",
+      "gsp": 14886415,
+      "timestamp": "2024-11-23T13:43:42.786Z",
+      "notes": ""
+    },
+    {
+      "id": "1732277417072",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 14905692,
+      "timestamp": "2024-11-22T12:10:17.072Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1732185411358",
+      "myFighter": "勇者",
+      "opponentFighter": "13",
+      "result": "lose",
+      "gsp": 14893863,
+      "timestamp": "2024-11-21T10:36:51.358Z",
+      "notes": ""
+    },
+    {
+      "id": "1732093405644",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "lose",
+      "gsp": 14921635,
+      "timestamp": "2024-11-20T09:03:25.644Z",
+      "notes": ""
+    },
+    {
+      "id": "1732001399930",
+      "myFighter": "勇者",
+      "opponentFighter": "30",
+      "result": "win",
+      "gsp": 14934742,
+      "timestamp": "2024-11-19T07:29:59.930Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1731909394216",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "lose",
+      "gsp": 14903586,
+      "timestamp": "2024-11-18T05:56:34.216Z",
+      "notes": ""
+    },
+    {
+      "id": "1731817388502",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "lose",
+      "gsp": 14929533,
+      "timestamp": "2024-11-17T04:23:08.502Z",
+      "notes": ""
+    },
+    {
+      "id": "1731725382788",
+      "myFighter": "勇者",
+      "opponentFighter": "41",
+      "result": "win",
+      "gsp": 14965514,
+      "timestamp": "2024-11-16T02:49:42.788Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1731633377074",
+      "myFighter": "勇者",
+      "opponentFighter": "45",
+      "result": "win",
+      "gsp": 14925362,
+      "timestamp": "2024-11-15T01:16:17.074Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1731541371360",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "win",
+      "gsp": 14886659,
+      "timestamp": "2024-11-13T23:42:51.360Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1731449365646",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "win",
+      "gsp": 14845979,
+      "timestamp": "2024-11-12T22:09:25.646Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1731357359932",
+      "myFighter": "勇者",
+      "opponentFighter": "27",
+      "result": "win",
+      "gsp": 14828029,
+      "timestamp": "2024-11-11T20:35:59.932Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1731265354218",
+      "myFighter": "勇者",
+      "opponentFighter": "64e",
+      "result": "win",
+      "gsp": 14787075,
+      "timestamp": "2024-11-10T19:02:34.218Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1731173348504",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "lose",
+      "gsp": 14776855,
+      "timestamp": "2024-11-09T17:29:08.504Z",
+      "notes": ""
+    },
+    {
+      "id": "1731081342790",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "lose",
+      "gsp": 14794124,
+      "timestamp": "2024-11-08T15:55:42.790Z",
+      "notes": ""
+    },
+    {
+      "id": "1730989337076",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 14808620,
+      "timestamp": "2024-11-07T14:22:17.076Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1730897331362",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "win",
+      "gsp": 14765792,
+      "timestamp": "2024-11-06T12:48:51.362Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1730805325648",
+      "myFighter": "勇者",
+      "opponentFighter": "68",
+      "result": "lose",
+      "gsp": 14743329,
+      "timestamp": "2024-11-05T11:15:25.648Z",
+      "notes": ""
+    },
+    {
+      "id": "1730713319934",
+      "myFighter": "勇者",
+      "opponentFighter": "75",
+      "result": "lose",
+      "gsp": 14758097,
+      "timestamp": "2024-11-04T09:41:59.934Z",
+      "notes": ""
+    },
+    {
+      "id": "1730621314220",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "win",
+      "gsp": 14778732,
+      "timestamp": "2024-11-03T08:08:34.220Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1730529308506",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "win",
+      "gsp": 14740744,
+      "timestamp": "2024-11-02T06:35:08.506Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1730437302792",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "lose",
+      "gsp": 14706372,
+      "timestamp": "2024-11-01T05:01:42.792Z",
+      "notes": ""
+    },
+    {
+      "id": "1730345297078",
+      "myFighter": "勇者",
+      "opponentFighter": "36",
+      "result": "win",
+      "gsp": 14734266,
+      "timestamp": "2024-10-31T03:28:17.078Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1730253291364",
+      "myFighter": "勇者",
+      "opponentFighter": "28e",
+      "result": "win",
+      "gsp": 14689035,
+      "timestamp": "2024-10-30T01:54:51.364Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1730161285650",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "lose",
+      "gsp": 14666871,
+      "timestamp": "2024-10-29T00:21:25.650Z",
+      "notes": ""
+    },
+    {
+      "id": "1730069279936",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "win",
+      "gsp": 14683021,
+      "timestamp": "2024-10-27T22:47:59.936Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1729977274222",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 14661533,
+      "timestamp": "2024-10-26T21:14:34.222Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1729885268508",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "lose",
+      "gsp": 14628673,
+      "timestamp": "2024-10-25T19:41:08.508Z",
+      "notes": ""
+    },
+    {
+      "id": "1729793262794",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "win",
+      "gsp": 14662795,
+      "timestamp": "2024-10-24T18:07:42.794Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1729701257080",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "win",
+      "gsp": 14621991,
+      "timestamp": "2024-10-23T16:34:17.080Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1729609251366",
+      "myFighter": "勇者",
+      "opponentFighter": "41",
+      "result": "lose",
+      "gsp": 14596611,
+      "timestamp": "2024-10-22T15:00:51.366Z",
+      "notes": ""
+    },
+    {
+      "id": "1729517245652",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "lose",
+      "gsp": 14626950,
+      "timestamp": "2024-10-21T13:27:25.652Z",
+      "notes": ""
+    },
+    {
+      "id": "1729425239938",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 14659673,
+      "timestamp": "2024-10-20T11:53:59.938Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1729333234224",
+      "myFighter": "勇者",
+      "opponentFighter": "9",
+      "result": "lose",
+      "gsp": 14624716,
+      "timestamp": "2024-10-19T10:20:34.224Z",
+      "notes": ""
+    },
+    {
+      "id": "1729241228510",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "lose",
+      "gsp": 14657633,
+      "timestamp": "2024-10-18T08:47:08.510Z",
+      "notes": ""
+    },
+    {
+      "id": "1729149222796",
+      "myFighter": "勇者",
+      "opponentFighter": "30",
+      "result": "win",
+      "gsp": 14697021,
+      "timestamp": "2024-10-17T07:13:42.796Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1729057217082",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "win",
+      "gsp": 14668993,
+      "timestamp": "2024-10-16T05:40:17.082Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1728965211368",
+      "myFighter": "勇者",
+      "opponentFighter": "21e",
+      "result": "win",
+      "gsp": 14630126,
+      "timestamp": "2024-10-15T04:06:51.368Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1728873205654",
+      "myFighter": "勇者",
+      "opponentFighter": "33",
+      "result": "win",
+      "gsp": 14603366,
+      "timestamp": "2024-10-14T02:33:25.654Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1728781199940",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 14560321,
+      "timestamp": "2024-10-13T00:59:59.940Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1728689194226",
+      "myFighter": "勇者",
+      "opponentFighter": "62",
+      "result": "lose",
+      "gsp": 14541570,
+      "timestamp": "2024-10-11T23:26:34.226Z",
+      "notes": ""
+    },
+    {
+      "id": "1728597188512",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 14566112,
+      "timestamp": "2024-10-10T21:53:08.512Z",
+      "notes": ""
+    },
+    {
+      "id": "1728505182798",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "win",
+      "gsp": 14589823,
+      "timestamp": "2024-10-09T20:19:42.798Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1728413177084",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "win",
+      "gsp": 14547459,
+      "timestamp": "2024-10-08T18:46:17.084Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1728321171370",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "win",
+      "gsp": 14512894,
+      "timestamp": "2024-10-07T17:12:51.370Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1728229165656",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "win",
+      "gsp": 14496891,
+      "timestamp": "2024-10-06T15:39:25.656Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1728137159942",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "win",
+      "gsp": 14472416,
+      "timestamp": "2024-10-05T14:05:59.942Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1728045154228",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 14459559,
+      "timestamp": "2024-10-04T12:32:34.228Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1727953148514",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 14412143,
+      "timestamp": "2024-10-03T10:59:08.514Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1727861142800",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "lose",
+      "gsp": 14399092,
+      "timestamp": "2024-10-02T09:25:42.800Z",
+      "notes": "自動生成履歴"
+    },
+    {
+      "id": "1727769137086",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "win",
+      "gsp": 14413605,
+      "timestamp": "2024-10-01T07:52:17.086Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1727677131372",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "lose",
+      "gsp": 14375924,
+      "timestamp": "2024-09-30T06:18:51.372Z",
+      "notes": ""
+    },
+    {
+      "id": "1727585125658",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "win",
+      "gsp": 14405399,
+      "timestamp": "2024-09-29T04:45:25.658Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1727493119944",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 14367743,
+      "timestamp": "2024-09-28T03:11:59.944Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1727401114230",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 14317940,
+      "timestamp": "2024-09-27T01:38:34.230Z",
+      "notes": ""
+    },
+    {
+      "id": "1727309108516",
+      "myFighter": "勇者",
+      "opponentFighter": "62",
+      "result": "win",
+      "gsp": 14329060,
+      "timestamp": "2024-09-26T00:05:08.516Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1727217102802",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "lose",
+      "gsp": 14312245,
+      "timestamp": "2024-09-24T22:31:42.802Z",
+      "notes": ""
+    },
+    {
+      "id": "1727125097088",
+      "myFighter": "勇者",
+      "opponentFighter": "58e",
+      "result": "lose",
+      "gsp": 14348940,
+      "timestamp": "2024-09-23T20:58:17.088Z",
+      "notes": ""
+    },
+    {
+      "id": "1727033091374",
+      "myFighter": "勇者",
+      "opponentFighter": "68",
+      "result": "lose",
+      "gsp": 14387623,
+      "timestamp": "2024-09-22T19:24:51.374Z",
+      "notes": ""
+    },
+    {
+      "id": "1726941085660",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "win",
+      "gsp": 14410226,
+      "timestamp": "2024-09-21T17:51:25.660Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1726849079946",
+      "myFighter": "勇者",
+      "opponentFighter": "14",
+      "result": "win",
+      "gsp": 14362888,
+      "timestamp": "2024-09-20T16:17:59.946Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1726757074232",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 14341205,
+      "timestamp": "2024-09-19T14:44:34.232Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1726665068518",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "lose",
+      "gsp": 14325071,
+      "timestamp": "2024-09-18T13:11:08.518Z",
+      "notes": ""
+    },
+    {
+      "id": "1726573062804",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "lose",
+      "gsp": 14342117,
+      "timestamp": "2024-09-17T11:37:42.804Z",
+      "notes": ""
+    },
+    {
+      "id": "1726481057090",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "lose",
+      "gsp": 14365700,
+      "timestamp": "2024-09-16T10:04:17.090Z",
+      "notes": ""
+    },
+    {
+      "id": "1726389051376",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "win",
+      "gsp": 14380316,
+      "timestamp": "2024-09-15T08:30:51.376Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1726297045662",
+      "myFighter": "勇者",
+      "opponentFighter": "64e",
+      "result": "lose",
+      "gsp": 14333948,
+      "timestamp": "2024-09-14T06:57:25.662Z",
+      "notes": ""
+    },
+    {
+      "id": "1726205039948",
+      "myFighter": "勇者",
+      "opponentFighter": "45",
+      "result": "lose",
+      "gsp": 14365936,
+      "timestamp": "2024-09-13T05:23:59.948Z",
+      "notes": ""
+    },
+    {
+      "id": "1726113034234",
+      "myFighter": "勇者",
+      "opponentFighter": "11",
+      "result": "lose",
+      "gsp": 14381883,
+      "timestamp": "2024-09-12T03:50:34.234Z",
+      "notes": ""
+    },
+    {
+      "id": "1726021028520",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "lose",
+      "gsp": 14403473,
+      "timestamp": "2024-09-11T02:17:08.520Z",
+      "notes": ""
+    },
+    {
+      "id": "1725929022806",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "win",
+      "gsp": 14443809,
+      "timestamp": "2024-09-10T00:43:42.806Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1725837017092",
+      "myFighter": "勇者",
+      "opponentFighter": "63",
+      "result": "lose",
+      "gsp": 14404283,
+      "timestamp": "2024-09-08T23:10:17.092Z",
+      "notes": ""
+    },
+    {
+      "id": "1725745011378",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "lose",
+      "gsp": 14429317,
+      "timestamp": "2024-09-07T21:36:51.378Z",
+      "notes": ""
+    },
+    {
+      "id": "1725653005664",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "lose",
+      "gsp": 14470455,
+      "timestamp": "2024-09-06T20:03:25.664Z",
+      "notes": ""
+    },
+    {
+      "id": "1725560999950",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "win",
+      "gsp": 14503416,
+      "timestamp": "2024-09-05T18:29:59.950Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1725468994236",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 14480960,
+      "timestamp": "2024-09-04T16:56:34.236Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1725376988522",
+      "myFighter": "勇者",
+      "opponentFighter": "64e",
+      "result": "lose",
+      "gsp": 14466016,
+      "timestamp": "2024-09-03T15:23:08.522Z",
+      "notes": ""
+    },
+    {
+      "id": "1725284982808",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 14485792,
+      "timestamp": "2024-09-02T13:49:42.808Z",
+      "notes": ""
+    },
+    {
+      "id": "1725192977094",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 14503035,
+      "timestamp": "2024-09-01T12:16:17.094Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1725100971380",
+      "myFighter": "勇者",
+      "opponentFighter": "36",
+      "result": "lose",
+      "gsp": 14466105,
+      "timestamp": "2024-08-31T10:42:51.380Z",
+      "notes": ""
+    },
+    {
+      "id": "1725008965666",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "lose",
+      "gsp": 14482005,
+      "timestamp": "2024-08-30T09:09:25.666Z",
+      "notes": ""
+    },
+    {
+      "id": "1724916959952",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "lose",
+      "gsp": 14500309,
+      "timestamp": "2024-08-29T07:35:59.952Z",
+      "notes": ""
+    },
+    {
+      "id": "1724824954238",
+      "myFighter": "勇者",
+      "opponentFighter": "71",
+      "result": "lose",
+      "gsp": 14536548,
+      "timestamp": "2024-08-28T06:02:34.238Z",
+      "notes": ""
+    },
+    {
+      "id": "1724732948524",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "win",
+      "gsp": 14578061,
+      "timestamp": "2024-08-27T04:29:08.524Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1724640942810",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "win",
+      "gsp": 14530327,
+      "timestamp": "2024-08-26T02:55:42.810Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1724548937096",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 14482279,
+      "timestamp": "2024-08-25T01:22:17.096Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1724456931382",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "lose",
+      "gsp": 14466521,
+      "timestamp": "2024-08-23T23:48:51.382Z",
+      "notes": ""
+    },
+    {
+      "id": "1724364925668",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "lose",
+      "gsp": 14487999,
+      "timestamp": "2024-08-22T22:15:25.668Z",
+      "notes": ""
+    },
+    {
+      "id": "1724272919954",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 14497290,
+      "timestamp": "2024-08-21T20:41:59.954Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1724180914240",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "win",
+      "gsp": 14468555,
+      "timestamp": "2024-08-20T19:08:34.240Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1724088908526",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "win",
+      "gsp": 14452848,
+      "timestamp": "2024-08-19T17:35:08.526Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1723996902812",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "lose",
+      "gsp": 14425657,
+      "timestamp": "2024-08-18T16:01:42.812Z",
+      "notes": ""
+    },
+    {
+      "id": "1723904897098",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "win",
+      "gsp": 14444585,
+      "timestamp": "2024-08-17T14:28:17.098Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1723812891384",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "win",
+      "gsp": 14432710,
+      "timestamp": "2024-08-16T12:54:51.384Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1723720885670",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "lose",
+      "gsp": 14396533,
+      "timestamp": "2024-08-15T11:21:25.670Z",
+      "notes": ""
+    },
+    {
+      "id": "1723628879956",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "lose",
+      "gsp": 14409537,
+      "timestamp": "2024-08-14T09:47:59.956Z",
+      "notes": ""
+    },
+    {
+      "id": "1723536874242",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "lose",
+      "gsp": 14433794,
+      "timestamp": "2024-08-13T08:14:34.242Z",
+      "notes": ""
+    },
+    {
+      "id": "1723444868528",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "lose",
+      "gsp": 14462667,
+      "timestamp": "2024-08-12T06:41:08.528Z",
+      "notes": ""
+    },
+    {
+      "id": "1723352862814",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "lose",
+      "gsp": 14502414,
+      "timestamp": "2024-08-11T05:07:42.814Z",
+      "notes": ""
+    },
+    {
+      "id": "1723260857100",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "lose",
+      "gsp": 14511793,
+      "timestamp": "2024-08-10T03:34:17.100Z",
+      "notes": "自動生成履歴"
+    },
+    {
+      "id": "1723168851386",
+      "myFighter": "勇者",
+      "opponentFighter": "42",
+      "result": "lose",
+      "gsp": 14547782,
+      "timestamp": "2024-08-09T02:00:51.386Z",
+      "notes": ""
+    },
+    {
+      "id": "1723076845672",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 14576499,
+      "timestamp": "2024-08-08T00:27:25.672Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1722984839958",
+      "myFighter": "勇者",
+      "opponentFighter": "37",
+      "result": "lose",
+      "gsp": 14544755,
+      "timestamp": "2024-08-06T22:53:59.958Z",
+      "notes": ""
+    },
+    {
+      "id": "1722892834244",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "win",
+      "gsp": 14585063,
+      "timestamp": "2024-08-05T21:20:34.244Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1722800828530",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "win",
+      "gsp": 14573834,
+      "timestamp": "2024-08-04T19:47:08.530Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1722708822816",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "win",
+      "gsp": 14545771,
+      "timestamp": "2024-08-03T18:13:42.816Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1722616817102",
+      "myFighter": "勇者",
+      "opponentFighter": "43",
+      "result": "win",
+      "gsp": 14505931,
+      "timestamp": "2024-08-02T16:40:17.102Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1722524811388",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "lose",
+      "gsp": 14476965,
+      "timestamp": "2024-08-01T15:06:51.388Z",
+      "notes": ""
+    },
+    {
+      "id": "1722432805674",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 14494198,
+      "timestamp": "2024-07-31T13:33:25.674Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1722340799960",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "lose",
+      "gsp": 14461241,
+      "timestamp": "2024-07-30T11:59:59.960Z",
+      "notes": ""
+    },
+    {
+      "id": "1722248794246",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "win",
+      "gsp": 14492568,
+      "timestamp": "2024-07-29T10:26:34.246Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1722156788532",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "win",
+      "gsp": 14446563,
+      "timestamp": "2024-07-28T08:53:08.532Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1722064782818",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "lose",
+      "gsp": 14419413,
+      "timestamp": "2024-07-27T07:19:42.818Z",
+      "notes": ""
+    },
+    {
+      "id": "1721972777104",
+      "myFighter": "勇者",
+      "opponentFighter": "67",
+      "result": "win",
+      "gsp": 14458502,
+      "timestamp": "2024-07-26T05:46:17.104Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1721880771390",
+      "myFighter": "勇者",
+      "opponentFighter": "62",
+      "result": "lose",
+      "gsp": 14435954,
+      "timestamp": "2024-07-25T04:12:51.390Z",
+      "notes": ""
+    },
+    {
+      "id": "1721788765676",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 14470599,
+      "timestamp": "2024-07-24T02:39:25.676Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1721696759962",
+      "myFighter": "勇者",
+      "opponentFighter": "27",
+      "result": "win",
+      "gsp": 14438668,
+      "timestamp": "2024-07-23T01:05:59.962Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1721604754248",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 14419717,
+      "timestamp": "2024-07-21T23:32:34.248Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1721512748534",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "lose",
+      "gsp": 14387113,
+      "timestamp": "2024-07-20T21:59:08.534Z",
+      "notes": ""
+    },
+    {
+      "id": "1721420742820",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "win",
+      "gsp": 14420206,
+      "timestamp": "2024-07-19T20:25:42.820Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1721328737106",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "lose",
+      "gsp": 14408190,
+      "timestamp": "2024-07-18T18:52:17.106Z",
+      "notes": ""
+    },
+    {
+      "id": "1721236731392",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "lose",
+      "gsp": 14431910,
+      "timestamp": "2024-07-17T17:18:51.392Z",
+      "notes": ""
+    },
+    {
+      "id": "1721144725678",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "lose",
+      "gsp": 14457631,
+      "timestamp": "2024-07-16T15:45:25.678Z",
+      "notes": ""
+    },
+    {
+      "id": "1721052719964",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "lose",
+      "gsp": 14481329,
+      "timestamp": "2024-07-15T14:11:59.964Z",
+      "notes": ""
+    },
+    {
+      "id": "1720960714250",
+      "myFighter": "勇者",
+      "opponentFighter": "56",
+      "result": "lose",
+      "gsp": 14522555,
+      "timestamp": "2024-07-14T12:38:34.250Z",
+      "notes": ""
+    },
+    {
+      "id": "1720868708536",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "win",
+      "gsp": 14536672,
+      "timestamp": "2024-07-13T11:05:08.536Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1720776702822",
+      "myFighter": "勇者",
+      "opponentFighter": "35",
+      "result": "lose",
+      "gsp": 14507265,
+      "timestamp": "2024-07-12T09:31:42.822Z",
+      "notes": ""
+    },
+    {
+      "id": "1720684697108",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "win",
+      "gsp": 14517407,
+      "timestamp": "2024-07-11T07:58:17.108Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1720592691394",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "win",
+      "gsp": 14479656,
+      "timestamp": "2024-07-10T06:24:51.394Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1720500685680",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "win",
+      "gsp": 14466067,
+      "timestamp": "2024-07-09T04:51:25.680Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1720408679966",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "win",
+      "gsp": 14453047,
+      "timestamp": "2024-07-08T03:17:59.966Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1720316674252",
+      "myFighter": "勇者",
+      "opponentFighter": "58e",
+      "result": "lose",
+      "gsp": 14405680,
+      "timestamp": "2024-07-07T01:44:34.252Z",
+      "notes": ""
+    },
+    {
+      "id": "1720224668538",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 14440090,
+      "timestamp": "2024-07-06T00:11:08.538Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1720132662824",
+      "myFighter": "勇者",
+      "opponentFighter": "53",
+      "result": "win",
+      "gsp": 14425707,
+      "timestamp": "2024-07-04T22:37:42.824Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1720040657110",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "win",
+      "gsp": 14384573,
+      "timestamp": "2024-07-03T21:04:17.110Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1719948651396",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "lose",
+      "gsp": 14364454,
+      "timestamp": "2024-07-02T19:30:51.396Z",
+      "notes": ""
+    },
+    {
+      "id": "1719856645682",
+      "myFighter": "勇者",
+      "opponentFighter": "50",
+      "result": "win",
+      "gsp": 14398549,
+      "timestamp": "2024-07-01T17:57:25.682Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1719764639968",
+      "myFighter": "勇者",
+      "opponentFighter": "52",
+      "result": "win",
+      "gsp": 14352919,
+      "timestamp": "2024-06-30T16:23:59.968Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1719672634254",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "lose",
+      "gsp": 14316349,
+      "timestamp": "2024-06-29T14:50:34.254Z",
+      "notes": ""
+    },
+    {
+      "id": "1719580628540",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "lose",
+      "gsp": 14356016,
+      "timestamp": "2024-06-28T13:17:08.540Z",
+      "notes": ""
+    },
+    {
+      "id": "1719488622826",
+      "myFighter": "勇者",
+      "opponentFighter": "27",
+      "result": "win",
+      "gsp": 14364617,
+      "timestamp": "2024-06-27T11:43:42.826Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1719396617112",
+      "myFighter": "勇者",
+      "opponentFighter": "33",
+      "result": "lose",
+      "gsp": 14323949,
+      "timestamp": "2024-06-26T10:10:17.112Z",
+      "notes": ""
+    },
+    {
+      "id": "1719304611398",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "lose",
+      "gsp": 14343357,
+      "timestamp": "2024-06-25T08:36:51.398Z",
+      "notes": ""
+    },
+    {
+      "id": "1719212605684",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "win",
+      "gsp": 14373170,
+      "timestamp": "2024-06-24T07:03:25.684Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1719120599970",
+      "myFighter": "勇者",
+      "opponentFighter": "9",
+      "result": "win",
+      "gsp": 14327680,
+      "timestamp": "2024-06-23T05:29:59.970Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1719028594256",
+      "myFighter": "勇者",
+      "opponentFighter": "50",
+      "result": "lose",
+      "gsp": 14292904,
+      "timestamp": "2024-06-22T03:56:34.256Z",
+      "notes": ""
+    },
+    {
+      "id": "1718936588542",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 14328548,
+      "timestamp": "2024-06-21T02:23:08.542Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1718844582828",
+      "myFighter": "勇者",
+      "opponentFighter": "11",
+      "result": "win",
+      "gsp": 14316872,
+      "timestamp": "2024-06-20T00:49:42.828Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1718752577114",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "win",
+      "gsp": 14305424,
+      "timestamp": "2024-06-18T23:16:17.114Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1718660571400",
+      "myFighter": "勇者",
+      "opponentFighter": "14",
+      "result": "win",
+      "gsp": 14286019,
+      "timestamp": "2024-06-17T21:42:51.400Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1718568565686",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "lose",
+      "gsp": 14255011,
+      "timestamp": "2024-06-16T20:09:25.686Z",
+      "notes": ""
+    },
+    {
+      "id": "1718476559972",
+      "myFighter": "勇者",
+      "opponentFighter": "77",
+      "result": "lose",
+      "gsp": 14287185,
+      "timestamp": "2024-06-15T18:35:59.972Z",
+      "notes": ""
+    },
+    {
+      "id": "1718384554258",
+      "myFighter": "勇者",
+      "opponentFighter": "21",
+      "result": "lose",
+      "gsp": 14316243,
+      "timestamp": "2024-06-14T17:02:34.258Z",
+      "notes": ""
+    },
+    {
+      "id": "1718292548544",
+      "myFighter": "勇者",
+      "opponentFighter": "75",
+      "result": "win",
+      "gsp": 14356579,
+      "timestamp": "2024-06-13T15:29:08.544Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1718200542830",
+      "myFighter": "勇者",
+      "opponentFighter": "45",
+      "result": "win",
+      "gsp": 14343818,
+      "timestamp": "2024-06-12T13:55:42.830Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1718108537116",
+      "myFighter": "勇者",
+      "opponentFighter": "24",
+      "result": "lose",
+      "gsp": 14326322,
+      "timestamp": "2024-06-11T12:22:17.116Z",
+      "notes": ""
+    },
+    {
+      "id": "1718016531402",
+      "myFighter": "勇者",
+      "opponentFighter": "45",
+      "result": "lose",
+      "gsp": 14367111,
+      "timestamp": "2024-06-10T10:48:51.402Z",
+      "notes": ""
+    },
+    {
+      "id": "1717924525688",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "win",
+      "gsp": 14399750,
+      "timestamp": "2024-06-09T09:15:25.688Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1717832519974",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "win",
+      "gsp": 14380585,
+      "timestamp": "2024-06-08T07:41:59.974Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1717740514260",
+      "myFighter": "勇者",
+      "opponentFighter": "19",
+      "result": "lose",
+      "gsp": 14346636,
+      "timestamp": "2024-06-07T06:08:34.260Z",
+      "notes": ""
+    },
+    {
+      "id": "1717648508546",
+      "myFighter": "勇者",
+      "opponentFighter": "21e",
+      "result": "win",
+      "gsp": 14380519,
+      "timestamp": "2024-06-06T04:35:08.546Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1717556502832",
+      "myFighter": "勇者",
+      "opponentFighter": "33",
+      "result": "lose",
+      "gsp": 14350583,
+      "timestamp": "2024-06-05T03:01:42.832Z",
+      "notes": ""
+    },
+    {
+      "id": "1717464497118",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "win",
+      "gsp": 14363289,
+      "timestamp": "2024-06-04T01:28:17.118Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1717372491404",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "lose",
+      "gsp": 14347622,
+      "timestamp": "2024-06-02T23:54:51.404Z",
+      "notes": ""
+    },
+    {
+      "id": "1717280485690",
+      "myFighter": "勇者",
+      "opponentFighter": "34",
+      "result": "win",
+      "gsp": 14359944,
+      "timestamp": "2024-06-01T22:21:25.690Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1717188479976",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "lose",
+      "gsp": 14340460,
+      "timestamp": "2024-05-31T20:47:59.976Z",
+      "notes": ""
+    },
+    {
+      "id": "1717096474262",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 14366746,
+      "timestamp": "2024-05-30T19:14:34.262Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1717004468548",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "win",
+      "gsp": 14330086,
+      "timestamp": "2024-05-29T17:41:08.548Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1716912462834",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "lose",
+      "gsp": 14283844,
+      "timestamp": "2024-05-28T16:07:42.834Z",
+      "notes": ""
+    },
+    {
+      "id": "1716820457120",
+      "myFighter": "勇者",
+      "opponentFighter": "22",
+      "result": "lose",
+      "gsp": 14322507,
+      "timestamp": "2024-05-27T14:34:17.120Z",
+      "notes": ""
+    },
+    {
+      "id": "1716728451406",
+      "myFighter": "勇者",
+      "opponentFighter": "75",
+      "result": "win",
+      "gsp": 14350886,
+      "timestamp": "2024-05-26T13:00:51.406Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1716636445692",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "lose",
+      "gsp": 14302197,
+      "timestamp": "2024-05-25T11:27:25.692Z",
+      "notes": ""
+    },
+    {
+      "id": "1716544439978",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "win",
+      "gsp": 14316396,
+      "timestamp": "2024-05-24T09:53:59.978Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1716452434264",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "win",
+      "gsp": 14272452,
+      "timestamp": "2024-05-23T08:20:34.264Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1716360428550",
+      "myFighter": "勇者",
+      "opponentFighter": "2",
+      "result": "win",
+      "gsp": 14253552,
+      "timestamp": "2024-05-22T06:47:08.550Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1716268422836",
+      "myFighter": "勇者",
+      "opponentFighter": "8",
+      "result": "lose",
+      "gsp": 14241839,
+      "timestamp": "2024-05-21T05:13:42.836Z",
+      "notes": ""
+    },
+    {
+      "id": "1716176417122",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "win",
+      "gsp": 14271587,
+      "timestamp": "2024-05-20T03:40:17.122Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1716084411408",
+      "myFighter": "勇者",
+      "opponentFighter": "74",
+      "result": "win",
+      "gsp": 14233382,
+      "timestamp": "2024-05-19T02:06:51.408Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1715992405694",
+      "myFighter": "勇者",
+      "opponentFighter": "17",
+      "result": "lose",
+      "gsp": 14204108,
+      "timestamp": "2024-05-18T00:33:25.694Z",
+      "notes": ""
+    },
+    {
+      "id": "1715900399980",
+      "myFighter": "勇者",
+      "opponentFighter": "78",
+      "result": "win",
+      "gsp": 14214027,
+      "timestamp": "2024-05-16T22:59:59.980Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1715808394266",
+      "myFighter": "勇者",
+      "opponentFighter": "2",
+      "result": "win",
+      "gsp": 14191803,
+      "timestamp": "2024-05-15T21:26:34.266Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1715716388552",
+      "myFighter": "勇者",
+      "opponentFighter": "45",
+      "result": "win",
+      "gsp": 14168244,
+      "timestamp": "2024-05-14T19:53:08.552Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1715624382838",
+      "myFighter": "勇者",
+      "opponentFighter": "70",
+      "result": "win",
+      "gsp": 14140958,
+      "timestamp": "2024-05-13T18:19:42.838Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1715532377124",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "lose",
+      "gsp": 14115047,
+      "timestamp": "2024-05-12T16:46:17.124Z",
+      "notes": ""
+    },
+    {
+      "id": "1715440371410",
+      "myFighter": "勇者",
+      "opponentFighter": "57",
+      "result": "win",
+      "gsp": 14142643,
+      "timestamp": "2024-05-11T15:12:51.410Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1715348365696",
+      "myFighter": "勇者",
+      "opponentFighter": "54",
+      "result": "win",
+      "gsp": 14124806,
+      "timestamp": "2024-05-10T13:39:25.696Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1715256359982",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "win",
+      "gsp": 14101834,
+      "timestamp": "2024-05-09T12:05:59.982Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1715164354268",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 14069921,
+      "timestamp": "2024-05-08T10:32:34.268Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1715072348554",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "win",
+      "gsp": 14024910,
+      "timestamp": "2024-05-07T08:59:08.554Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1714980342840",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "lose",
+      "gsp": 13986534,
+      "timestamp": "2024-05-06T07:25:42.840Z",
+      "notes": ""
+    },
+    {
+      "id": "1714888337126",
+      "myFighter": "勇者",
+      "opponentFighter": "13",
+      "result": "win",
+      "gsp": 14019987,
+      "timestamp": "2024-05-05T05:52:17.126Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1714796331412",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "lose",
+      "gsp": 14009270,
+      "timestamp": "2024-05-04T04:18:51.412Z",
+      "notes": ""
+    },
+    {
+      "id": "1714704325698",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "win",
+      "gsp": 14031902,
+      "timestamp": "2024-05-03T02:45:25.698Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1714612319984",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "lose",
+      "gsp": 14003332,
+      "timestamp": "2024-05-02T01:11:59.984Z",
+      "notes": ""
+    },
+    {
+      "id": "1714520314270",
+      "myFighter": "勇者",
+      "opponentFighter": "4e",
+      "result": "win",
+      "gsp": 14022469,
+      "timestamp": "2024-04-30T23:38:34.270Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1714428308556",
+      "myFighter": "勇者",
+      "opponentFighter": "38",
+      "result": "win",
+      "gsp": 14001646,
+      "timestamp": "2024-04-29T22:05:08.556Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1714336302842",
+      "myFighter": "勇者",
+      "opponentFighter": "8",
+      "result": "win",
+      "gsp": 13977531,
+      "timestamp": "2024-04-28T20:31:42.842Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1714244297128",
+      "myFighter": "勇者",
+      "opponentFighter": "27",
+      "result": "win",
+      "gsp": 13962269,
+      "timestamp": "2024-04-27T18:58:17.128Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1714152291414",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "win",
+      "gsp": 13938613,
+      "timestamp": "2024-04-26T17:24:51.414Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1714060285700",
+      "myFighter": "勇者",
+      "opponentFighter": "63",
+      "result": "win",
+      "gsp": 13920614,
+      "timestamp": "2024-04-25T15:51:25.700Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1713968279986",
+      "myFighter": "勇者",
+      "opponentFighter": "27",
+      "result": "lose",
+      "gsp": 13897384,
+      "timestamp": "2024-04-24T14:17:59.986Z",
+      "notes": ""
+    },
+    {
+      "id": "1713876274272",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "win",
+      "gsp": 13913127,
+      "timestamp": "2024-04-23T12:44:34.272Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1713784268558",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "lose",
+      "gsp": 13887851,
+      "timestamp": "2024-04-22T11:11:08.558Z",
+      "notes": ""
+    },
+    {
+      "id": "1713692262844",
+      "myFighter": "勇者",
+      "opponentFighter": "60",
+      "result": "win",
+      "gsp": 13903339,
+      "timestamp": "2024-04-21T09:37:42.844Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1713600257130",
+      "myFighter": "勇者",
+      "opponentFighter": "79",
+      "result": "lose",
+      "gsp": 13870261,
+      "timestamp": "2024-04-20T08:04:17.130Z",
+      "notes": ""
+    },
+    {
+      "id": "1713508251416",
+      "myFighter": "勇者",
+      "opponentFighter": "46",
+      "result": "lose",
+      "gsp": 13883647,
+      "timestamp": "2024-04-19T06:30:51.416Z",
+      "notes": ""
+    },
+    {
+      "id": "1713416245702",
+      "myFighter": "勇者",
+      "opponentFighter": "26",
+      "result": "win",
+      "gsp": 13898299,
+      "timestamp": "2024-04-18T04:57:25.702Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1713324239988",
+      "myFighter": "勇者",
+      "opponentFighter": "32",
+      "result": "win",
+      "gsp": 13863303,
+      "timestamp": "2024-04-17T03:23:59.988Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1713232234274",
+      "myFighter": "勇者",
+      "opponentFighter": "25e",
+      "result": "win",
+      "gsp": 13828323,
+      "timestamp": "2024-04-16T01:50:34.274Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1713140228560",
+      "myFighter": "勇者",
+      "opponentFighter": "3",
+      "result": "win",
+      "gsp": 13798239,
+      "timestamp": "2024-04-15T00:17:08.560Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（ザラキ）"
+      ]
+    },
+    {
+      "id": "1713048222846",
+      "myFighter": "勇者",
+      "opponentFighter": "28",
+      "result": "lose",
+      "gsp": 13751050,
+      "timestamp": "2024-04-13T22:43:42.846Z",
+      "notes": ""
+    },
+    {
+      "id": "1712956217132",
+      "myFighter": "勇者",
+      "opponentFighter": "63",
+      "result": "win",
+      "gsp": 13781357,
+      "timestamp": "2024-04-12T21:10:17.132Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1712864211418",
+      "myFighter": "勇者",
+      "opponentFighter": "64",
+      "result": "lose",
+      "gsp": 13738887,
+      "timestamp": "2024-04-11T19:36:51.418Z",
+      "notes": ""
+    },
+    {
+      "id": "1712772205704",
+      "myFighter": "勇者",
+      "opponentFighter": "15",
+      "result": "win",
+      "gsp": 13756143,
+      "timestamp": "2024-04-10T18:03:25.704Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1712680199990",
+      "myFighter": "勇者",
+      "opponentFighter": "12",
+      "result": "win",
+      "gsp": 13727754,
+      "timestamp": "2024-04-09T16:29:59.990Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラゾーマ）"
+      ]
+    },
+    {
+      "id": "1712588194276",
+      "myFighter": "勇者",
+      "opponentFighter": "16",
+      "result": "win",
+      "gsp": 13682863,
+      "timestamp": "2024-04-08T14:56:34.276Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1712496188562",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "lose",
+      "gsp": 13648003,
+      "timestamp": "2024-04-07T13:23:08.562Z",
+      "notes": ""
+    },
+    {
+      "id": "1712404182848",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "win",
+      "gsp": 13657496,
+      "timestamp": "2024-04-06T11:49:42.848Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1712312177134",
+      "myFighter": "勇者",
+      "opponentFighter": "55",
+      "result": "win",
+      "gsp": 13634882,
+      "timestamp": "2024-04-05T10:16:17.134Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1712220171420",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "win",
+      "gsp": 13600407,
+      "timestamp": "2024-04-04T08:42:51.420Z",
+      "notes": "",
+      "myKillMoves": [
+        "下B（まじん斬り）"
+      ]
+    },
+    {
+      "id": "1712128165706",
+      "myFighter": "勇者",
+      "opponentFighter": "66",
+      "result": "lose",
+      "gsp": 13550731,
+      "timestamp": "2024-04-03T07:09:25.706Z",
+      "notes": ""
+    },
+    {
+      "id": "1712036159992",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 13574958,
+      "timestamp": "2024-04-02T05:35:59.992Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1711944154278",
+      "myFighter": "勇者",
+      "opponentFighter": "47",
+      "result": "lose",
+      "gsp": 13542687,
+      "timestamp": "2024-04-01T04:02:34.278Z",
+      "notes": ""
+    },
+    {
+      "id": "1711852148564",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "lose",
+      "gsp": 13570730,
+      "timestamp": "2024-03-31T02:29:08.564Z",
+      "notes": ""
+    },
+    {
+      "id": "1711760142850",
+      "myFighter": "勇者",
+      "opponentFighter": "72",
+      "result": "win",
+      "gsp": 13591069,
+      "timestamp": "2024-03-30T00:55:42.850Z",
+      "notes": "",
+      "myKillMoves": [
+        "空前"
+      ]
+    },
+    {
+      "id": "1711668137136",
+      "myFighter": "勇者",
+      "opponentFighter": "51",
+      "result": "lose",
+      "gsp": 13551852,
+      "timestamp": "2024-03-28T23:22:17.136Z",
+      "notes": ""
+    },
+    {
+      "id": "1711576131422",
+      "myFighter": "勇者",
+      "opponentFighter": "61",
+      "result": "win",
+      "gsp": 13567586,
+      "timestamp": "2024-03-27T21:48:51.422Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1711484125708",
+      "myFighter": "勇者",
+      "opponentFighter": "5",
+      "result": "win",
+      "gsp": 13528897,
+      "timestamp": "2024-03-26T20:15:25.708Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1711392119994",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "lose",
+      "gsp": 13511768,
+      "timestamp": "2024-03-25T18:41:59.994Z",
+      "notes": ""
+    },
+    {
+      "id": "1711300114280",
+      "myFighter": "勇者",
+      "opponentFighter": "1",
+      "result": "win",
+      "gsp": 13524197,
+      "timestamp": "2024-03-24T17:08:34.280Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1711208108566",
+      "myFighter": "勇者",
+      "opponentFighter": "4",
+      "result": "win",
+      "gsp": 13499144,
+      "timestamp": "2024-03-23T15:35:08.566Z",
+      "notes": "",
+      "myKillMoves": [
+        "下スマッシュ"
+      ]
+    },
+    {
+      "id": "1711116102852",
+      "myFighter": "勇者",
+      "opponentFighter": "29",
+      "result": "win",
+      "gsp": 13487479,
+      "timestamp": "2024-03-22T14:01:42.852Z",
+      "notes": "",
+      "myKillMoves": [
+        "横B（ギガデイン）"
+      ]
+    },
+    {
+      "id": "1711024097138",
+      "myFighter": "勇者",
+      "opponentFighter": "59",
+      "result": "lose",
+      "gsp": 13446866,
+      "timestamp": "2024-03-21T12:28:17.138Z",
+      "notes": ""
+    },
+    {
+      "id": "1710932091424",
+      "myFighter": "勇者",
+      "opponentFighter": "52",
+      "result": "win",
+      "gsp": 13482052,
+      "timestamp": "2024-03-20T10:54:51.424Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1710840085710",
+      "myFighter": "勇者",
+      "opponentFighter": "73",
+      "result": "lose",
+      "gsp": 13450286,
+      "timestamp": "2024-03-19T09:21:25.710Z",
+      "notes": ""
+    },
+    {
+      "id": "1710748079996",
+      "myFighter": "勇者",
+      "opponentFighter": "49",
+      "result": "win",
+      "gsp": 13459287,
+      "timestamp": "2024-03-18T07:47:59.996Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1710656074282",
+      "myFighter": "勇者",
+      "opponentFighter": "20",
+      "result": "win",
+      "gsp": 13448916,
+      "timestamp": "2024-03-17T06:14:34.282Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1710564068568",
+      "myFighter": "勇者",
+      "opponentFighter": "39",
+      "result": "win",
+      "gsp": 13412283,
+      "timestamp": "2024-03-16T04:41:08.568Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1710472062854",
+      "myFighter": "勇者",
+      "opponentFighter": "10",
+      "result": "lose",
+      "gsp": 13380623,
+      "timestamp": "2024-03-15T03:07:42.854Z",
+      "notes": ""
+    },
+    {
+      "id": "1710380057140",
+      "myFighter": "勇者",
+      "opponentFighter": "8",
+      "result": "lose",
+      "gsp": 13405360,
+      "timestamp": "2024-03-14T01:34:17.140Z",
+      "notes": ""
+    },
+    {
+      "id": "1710288051426",
+      "myFighter": "勇者",
+      "opponentFighter": "28e",
+      "result": "win",
+      "gsp": 13434090,
+      "timestamp": "2024-03-13T00:00:51.426Z",
+      "notes": "",
+      "myKillMoves": [
+        "上B（バギクロス）"
+      ]
+    },
+    {
+      "id": "1710196045712",
+      "myFighter": "勇者",
+      "opponentFighter": "18",
+      "result": "lose",
+      "gsp": 13408378,
+      "timestamp": "2024-03-11T22:27:25.712Z",
+      "notes": ""
+    },
+    {
+      "id": "1710104039998",
+      "myFighter": "勇者",
+      "opponentFighter": "48",
+      "result": "lose",
+      "gsp": 13435801,
+      "timestamp": "2024-03-10T20:53:59.998Z",
+      "notes": ""
+    },
+    {
+      "id": "1710012034284",
+      "myFighter": "勇者",
+      "opponentFighter": "76",
+      "result": "lose",
+      "gsp": 13470955,
+      "timestamp": "2024-03-09T19:20:34.284Z",
+      "notes": ""
+    },
+    {
+      "id": "1709920028570",
+      "myFighter": "勇者",
+      "opponentFighter": "31",
+      "result": "lose",
+      "gsp": 13507354,
+      "timestamp": "2024-03-08T17:47:08.570Z",
+      "notes": ""
+    },
+    {
+      "id": "1709828022856",
+      "myFighter": "勇者",
+      "opponentFighter": "58",
+      "result": "win",
+      "gsp": 13547195,
+      "timestamp": "2024-03-07T16:13:42.856Z",
+      "notes": "",
+      "myKillMoves": [
+        "NB（メラミ）"
+      ]
+    },
+    {
+      "id": "1709736017142",
+      "myFighter": "勇者",
+      "opponentFighter": "40",
+      "result": "lose",
+      "gsp": 13501629,
+      "timestamp": "2024-03-06T14:40:17.142Z",
+      "notes": ""
+    },
+    {
+      "id": "1709644011428",
+      "myFighter": "勇者",
+      "opponentFighter": "21e",
+      "result": "lose",
+      "gsp": 13530637,
+      "timestamp": "2024-03-05T13:06:51.428Z",
+      "notes": ""
+    },
+    {
+      "id": "1709552005714",
+      "myFighter": "勇者",
+      "opponentFighter": "23",
+      "result": "win",
+      "gsp": 13554300,
+      "timestamp": "2024-03-04T11:33:25.714Z",
+      "notes": "",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    },
+    {
+      "id": "1709460000000",
+      "myFighter": "勇者",
+      "opponentFighter": "69",
+      "result": "win",
+      "gsp": 13541105,
+      "timestamp": "2024-03-03T10:00:00.000Z",
+      "notes": "自動生成履歴",
+      "myKillMoves": [
+        "横スマッシュ"
+      ]
+    }
+  ],
+  "prefs": {
+    "lastMyFighter": "70",
+    "rules": {
+      "stock": 3,
+      "time": 7,
+      "stage": "戦場タイプ"
+    },
+    "fighterGsp": {
+      "70": 17917632
+    }
+  }
+}

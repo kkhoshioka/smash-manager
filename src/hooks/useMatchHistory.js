@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import restoredData from '../data/restored_data.json';
 
 const STORAGE_KEY = 'smash_logger_history';
 const PREFS_KEY = 'smash_logger_prefs';
@@ -165,6 +166,33 @@ export function useMatchHistory() {
             return false;
         }
     };
+
+    // Temporary restoration logic (FORCED)
+    useEffect(() => {
+        const expansionFlag = 'smash_expansion_v2_done';
+        console.log("Restoration Effect Running. Flag state:", localStorage.getItem(expansionFlag));
+        if (localStorage.getItem(expansionFlag)) return;
+
+        console.log("restoredData:", restoredData);
+        if (restoredData && restoredData.history && restoredData.history.length > 0) {
+            console.log(`Applying match history expansion... Found ${restoredData.history.length} matches.`);
+            setHistory(restoredData.history);
+            if (restoredData.prefs) setPrefs(prev => ({ ...prev, ...restoredData.prefs }));
+            
+            // Set the syncId to ensure it pushes to the cloud
+            const targetSyncId = "おりぶオリジナル";
+            setSyncId(targetSyncId);
+            localStorage.setItem('smash_sync_id', targetSyncId);
+            
+            localStorage.setItem(expansionFlag, 'true');
+            // We use a slight delay for the alert to ensure state updates are visible
+            setTimeout(() => {
+                alert("【履歴拡張】勇者の対戦データを約700試合追加しました。「おりぶオリジナル」としてクラウド同期が行われます。");
+            }, 500);
+        } else {
+            console.warn("Restored data is empty or invalid. History length:", restoredData?.history?.length);
+        }
+    }, [setHistory, setPrefs, setSyncId]);
 
     return {
         history, addMatch, removeMatch, editMatch, prefs, setPrefs, importData,
