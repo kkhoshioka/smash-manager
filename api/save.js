@@ -42,6 +42,22 @@ export default async function handler(req, res) {
             throw new Error(`KV API responded with status ${response.status}`)
         }
 
+        // Daily Backup Logic (JST time)
+        try {
+            const jstDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000).toISOString().split('T')[0];
+            const backupUrl = `${kvUrl}/set/smash_sync_${syncId}_backup_${jstDate}`;
+            await fetch(backupUrl, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${kvToken}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+        } catch (backupError) {
+            console.error('KV Backup Error:', backupError);
+        }
+
         return res.status(200).json({ success: true })
     } catch (error) {
         console.error('KV Save Error:', error)
