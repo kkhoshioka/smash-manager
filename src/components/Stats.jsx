@@ -73,11 +73,17 @@ export default function Stats() {
 
     // Latest GSP for selected fighter
     const latestGsp = useMemo(() => {
-        if (selectedMyFighter !== 'all' && prefs.fighterGsp?.[selectedMyFighter]) {
+        if (selectedMyFighter === 'all') return null;
+        
+        const chronological = [...filteredHistory].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        const latestMatch = chronological.find(m => m.gsp);
+        if (latestMatch) return latestMatch.gsp;
+
+        if (prefs.fighterGsp?.[selectedMyFighter]) {
             return prefs.fighterGsp[selectedMyFighter];
         }
         return null;
-    }, [selectedMyFighter, prefs.fighterGsp]);
+    }, [selectedMyFighter, filteredHistory, prefs.fighterGsp]);
 
     // Highest GSP for selected fighter
     const highestGsp = useMemo(() => {
