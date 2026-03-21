@@ -11,6 +11,7 @@ export default function Stats() {
     const [editForm, setEditForm] = useState({});
     const [showAllMatchups, setShowAllMatchups] = useState(false);
     const [showAllKillMoves, setShowAllKillMoves] = useState(false);
+    const [gspChartRange, setGspChartRange] = useState('all');
 
     const handleEditClick = (match) => {
         setEditingMatchId(match.id);
@@ -127,7 +128,23 @@ export default function Stats() {
     const gspChartData = useMemo(() => {
         const sortedHistory = [...filteredHistory].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
-        return sortedHistory
+        let slicedHistory = sortedHistory;
+        
+        if (gspChartRange === '50') {
+            slicedHistory = sortedHistory.slice(-50);
+        } else if (gspChartRange === '100') {
+            slicedHistory = sortedHistory.slice(-100);
+        } else if (gspChartRange === '7d') {
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+            slicedHistory = sortedHistory.filter(m => new Date(m.timestamp) >= sevenDaysAgo);
+        } else if (gspChartRange === '30d') {
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            slicedHistory = sortedHistory.filter(m => new Date(m.timestamp) >= thirtyDaysAgo);
+        }
+
+        return slicedHistory
             .filter(m => m.gsp)
             .map((m, i) => {
                 const dateObj = new Date(m.timestamp);
@@ -141,7 +158,7 @@ export default function Stats() {
                     result: m.result
                 };
             });
-    }, [filteredHistory]);
+    }, [filteredHistory, gspChartRange]);
 
     const gspXTicks = useMemo(() => {
         const ticks = [];
@@ -451,8 +468,39 @@ export default function Stats() {
             {/* GSP History Chart */}
             {gspChartData.length > 0 && (
                 <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '2rem' }}>
-                    <h2 className="section-title" style={{ borderColor: 'var(--win-color)', marginTop: 0 }}>世界戦闘力(GSP) 推移</h2>
-                    <div style={{ width: '100%', height: 350, marginTop: '2rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+                        <h2 className="section-title" style={{ borderColor: 'var(--win-color)', margin: 0 }}>世界戦闘力(GSP) 推移</h2>
+                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                            {[
+                                { id: 'all', label: '全期間' },
+                                { id: '100', label: '直近100戦' },
+                                { id: '50', label: '直近50戦' },
+                                { id: '30d', label: '30日間' },
+                                { id: '7d', label: '7日間' }
+                            ].map(range => (
+                                <button
+                                    key={range.id}
+                                    onClick={() => setGspChartRange(range.id)}
+                                    style={{
+                                        padding: '0.4rem 0.8rem',
+                                        backgroundColor: gspChartRange === range.id ? 'var(--win-color)' : '#222',
+                                        color: gspChartRange === range.id ? '#000' : 'var(--text-muted)',
+                                        border: '1px solid',
+                                        borderColor: gspChartRange === range.id ? 'var(--win-color)' : '#444',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        fontWeight: 'bold',
+                                        fontSize: '0.9rem',
+                                        fontFamily: 'var(--font-jp)',
+                                        transition: 'all 0.2s'
+                                    }}
+                                >
+                                    {range.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                    <div style={{ width: '100%', height: 350 }}>
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
                                 <defs>
