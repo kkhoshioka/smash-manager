@@ -12,6 +12,8 @@ export default function Stats() {
     const [showAllMatchups, setShowAllMatchups] = useState(false);
     const [showAllKillMoves, setShowAllKillMoves] = useState(false);
     const [gspChartRange, setGspChartRange] = useState('all');
+    const [historyOpponentFilter, setHistoryOpponentFilter] = useState('all');
+    const [historyKillMoveFilter, setHistoryKillMoveFilter] = useState('all');
 
     const handleEditClick = (match) => {
         setEditingMatchId(match.id);
@@ -183,6 +185,28 @@ export default function Stats() {
         return Object.entries(counts)
             .sort((a, b) => b[1] - a[1])
             .map(([name, count]) => ({ name, count }));
+    }, [filteredHistory]);
+
+    const displayedHistory = useMemo(() => {
+        let result = [...filteredHistory].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+        if (historyOpponentFilter !== 'all') {
+            result = result.filter(m => m.opponentFighter === historyOpponentFilter);
+        }
+        if (historyKillMoveFilter !== 'all') {
+            result = result.filter(m => {
+                 const moves = m.myKillMoves || (m.killMove ? [m.killMove] : []);
+                 return moves.includes(historyKillMoveFilter);
+            });
+        }
+        return result;
+    }, [filteredHistory, historyOpponentFilter, historyKillMoveFilter]);
+
+    const uniqueOpponentsInHistory = useMemo(() => {
+        const opps = new Set();
+        filteredHistory.forEach(m => {
+            if (m.opponentFighter) opps.add(m.opponentFighter);
+        });
+        return Array.from(opps).map(id => fighters.find(f => f.id === id)).filter(Boolean);
     }, [filteredHistory]);
 
     const advancedStats = useMemo(() => {
@@ -726,16 +750,50 @@ export default function Stats() {
 
             {/* Recent History */}
             <div className="animate-enter" style={{ animationDelay: '0.2s' }}>
-                <h2 className="section-title">
-                    直近の履歴
-                </h2>
-                {filteredHistory.length === 0 ? (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                    <h2 className="section-title" style={{ margin: 0 }}>直近の履歴</h2>
+                    
+                    {filteredHistory.length > 0 && (
+                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', backgroundColor: '#111', padding: '0.8rem 1.2rem', borderRadius: '8px', border: '1px solid #333' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <Filter size={16} color="var(--text-muted)" />
+                                <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>相手:</span>
+                                <select 
+                                    value={historyOpponentFilter} 
+                                    onChange={(e) => setHistoryOpponentFilter(e.target.value)}
+                                    style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none', minWidth: '120px' }}
+                                >
+                                    <option value="all">すべて</option>
+                                    {uniqueOpponentsInHistory.map(f => (
+                                        <option key={f.id} value={f.id}>{f.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <Crosshair size={16} color="var(--smash-yellow)" />
+                                <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>自技:</span>
+                                <select 
+                                    value={historyKillMoveFilter} 
+                                    onChange={(e) => setHistoryKillMoveFilter(e.target.value)}
+                                    style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none', minWidth: '120px' }}
+                                >
+                                    <option value="all">すべて</option>
+                                    {myKillMoveRanking.map(km => (
+                                        <option key={km.name} value={km.name}>{km.name} ({km.count})</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {displayedHistory.length === 0 ? (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '3rem', backgroundColor: '#111', border: '2px dashed #444', fontWeight: 'bold' }}>
-                        まだ対戦記録がありません。「記録する」タブから最初の試合を登録しましょう！
+                        {filteredHistory.length === 0 ? 'まだ対戦記録がありません。「記録する」タブから最初の試合を登録しましょう！' : 'フィルター条件に一致する試合がありません。'}
                     </p>
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {filteredHistory.slice(0, 50).map((match, index) => {
+                        {displayedHistory.slice(0, 50).map((match, index) => {
                             const myFighter = fighters.find(f => f.id === match.myFighter);
                             const opponent = fighters.find(f => f.id === match.opponentFighter);
                             const isWin = match.result === 'win';
