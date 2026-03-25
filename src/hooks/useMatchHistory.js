@@ -74,10 +74,26 @@ export function useMatchHistory() {
                 if (result.data.prefs) setPrefs(result.data.prefs);
                 if (!isInitialLoad) alert("クラウドからデータを読み込みました！");
             } else {
-                // No data found, let's create initial data in cloud if not initial load
+                // No data found in the cloud for this syncId
                 if (!isInitialLoad) {
-                    await saveToCloud(idToLoad, history, prefs);
-                    alert("新しいクラウド同期の合言葉を登録し、現在のデータをアップロードしました！");
+                    // Check if local device already had data
+                    if (history.length > 0) {
+                        const wantsToUpload = window.confirm(
+                            `新しい合言葉「${idToLoad}」にはまだデータがありません。\n\n現在の端末にある記録（${history.length}件）をこの合言葉にアップロード(引継ぎ)しますか？\n\n【キャンセル】を押すと、現在のデータをリセットし「まっさらな状態」からスタートします。`
+                        );
+                        if (wantsToUpload) {
+                            await saveToCloud(idToLoad, history, prefs);
+                            alert("新しく合言葉を登録し、現在のデータをアップロードしました！");
+                        } else {
+                            setHistory([]);
+                            setPrefs({});
+                            alert("表示データをリセットしました（新しい合言葉でスタートします）。");
+                        }
+                    } else {
+                        // Clean slate upload
+                        await saveToCloud(idToLoad, history, prefs);
+                        alert("新しいクラウド同期の合言葉を登録しました！");
+                    }
                 }
             }
         } catch (err) {
