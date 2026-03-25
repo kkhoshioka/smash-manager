@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useRef } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity } from 'lucide-react';
+import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search } from 'lucide-react';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, AreaChart, Area } from 'recharts';
 
 export default function Stats() {
@@ -14,6 +14,8 @@ export default function Stats() {
     const [gspChartRange, setGspChartRange] = useState('all');
     const [historyOpponentFilter, setHistoryOpponentFilter] = useState('all');
     const [historyKillMoveFilter, setHistoryKillMoveFilter] = useState('all');
+    const [historyMemoFilter, setHistoryMemoFilter] = useState('all');
+    const [historyMemoSearch, setHistoryMemoSearch] = useState('');
 
     const handleEditClick = (match) => {
         setEditingMatchId(match.id);
@@ -198,8 +200,17 @@ export default function Stats() {
                  return moves.includes(historyKillMoveFilter);
             });
         }
+        if (historyMemoFilter === 'has_memo') {
+            result = result.filter(m => m.notes && m.notes.trim() !== '');
+        } else if (historyMemoFilter === 'no_memo') {
+            result = result.filter(m => !m.notes || m.notes.trim() === '');
+        }
+        if (historyMemoSearch.trim() !== '') {
+            const query = historyMemoSearch.toLowerCase();
+            result = result.filter(m => m.notes && m.notes.toLowerCase().includes(query));
+        }
         return result;
-    }, [filteredHistory, historyOpponentFilter, historyKillMoveFilter]);
+    }, [filteredHistory, historyOpponentFilter, historyKillMoveFilter, historyMemoFilter, historyMemoSearch]);
 
     const uniqueOpponentsInHistory = useMemo(() => {
         const opps = new Set();
@@ -782,6 +793,29 @@ export default function Stats() {
                                         <option key={km.name} value={km.name}>{km.name} ({km.count})</option>
                                     ))}
                                 </select>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <FileText size={16} color="var(--text-main)" />
+                                <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>メモ:</span>
+                                <select 
+                                    value={historyMemoFilter} 
+                                    onChange={(e) => setHistoryMemoFilter(e.target.value)}
+                                    style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none' }}
+                                >
+                                    <option value="all">すべて</option>
+                                    <option value="has_memo">あり</option>
+                                    <option value="no_memo">なし</option>
+                                </select>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
+                                <Search size={16} color="var(--text-muted)" />
+                                <input 
+                                    type="text" 
+                                    placeholder="メモ内容を検索..." 
+                                    value={historyMemoSearch}
+                                    onChange={(e) => setHistoryMemoSearch(e.target.value)}
+                                    style={{ padding: '0.4rem', width: '100%', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none' }}
+                                />
                             </div>
                         </div>
                     )}
