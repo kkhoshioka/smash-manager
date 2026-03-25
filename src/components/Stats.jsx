@@ -200,14 +200,22 @@ export default function Stats() {
                  return moves.includes(historyKillMoveFilter);
             });
         }
+        
+        const isSynthetic = (notes) => notes && notes.includes('追加された700試合');
+        const hasText = (notes) => notes && notes.trim() !== '';
+
         if (historyMemoFilter === 'has_memo') {
-            result = result.filter(m => m.notes && m.notes.trim() !== '');
+            result = result.filter(m => hasText(m.notes) && !isSynthetic(m.notes));
         } else if (historyMemoFilter === 'no_memo') {
-            result = result.filter(m => !m.notes || m.notes.trim() === '');
+            result = result.filter(m => (!hasText(m.notes) || isSynthetic(m.notes)) && !isSynthetic(m.notes));
+            // Simplified: result = result.filter(m => !hasText(m.notes)); 
+            // Wait, if it's synthetic we want it EXCLUDED from "no_memo" as well!
+            result = result.filter(m => !hasText(m.notes) && !isSynthetic(m.notes));
         }
+        
         if (historyMemoSearch.trim() !== '') {
             const query = historyMemoSearch.toLowerCase();
-            result = result.filter(m => m.notes && m.notes.toLowerCase().includes(query));
+            result = result.filter(m => hasText(m.notes) && !isSynthetic(m.notes) && m.notes.toLowerCase().includes(query));
         }
         return result;
     }, [filteredHistory, historyOpponentFilter, historyKillMoveFilter, historyMemoFilter, historyMemoSearch]);
