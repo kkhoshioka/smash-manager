@@ -556,15 +556,21 @@ export default function Stats() {
                                 <XAxis
                                     dataKey="uniqueId"
                                     stroke="var(--text-muted)"
-                                    fontSize={11}
-                                    fontWeight="bold"
                                     ticks={gspXTicks}
-                                    tickFormatter={(value) => {
-                                        const point = gspChartData.find(d => d.uniqueId === value);
-                                        return point ? point.date : value;
-                                    }}
                                     interval={0}
-                                    tickMargin={10}
+                                    tick={(props) => {
+                                        const { x, y, payload, index } = props;
+                                        const point = gspChartData.find(d => d.uniqueId === payload.value);
+                                        const text = point ? point.date : payload.value;
+                                        const dy = index % 2 === 0 ? 12 : 26;
+                                        return (
+                                            <g transform={`translate(${x},${y})`}>
+                                                <text x={0} y={0} dy={dy} textAnchor="middle" fill="var(--text-muted)" fontSize={11} fontWeight="bold">
+                                                    {text}
+                                                </text>
+                                            </g>
+                                        );
+                                    }}
                                 />
                                 <YAxis 
                                     stroke="var(--text-muted)" 
