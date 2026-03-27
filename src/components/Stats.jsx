@@ -255,8 +255,9 @@ export default function Stats() {
             // Streaks
             if (m.result === 'win') {
                 currentStreak++;
-                // 勇者(ID:70)の700試合追加の影響による連勝数を10に制限
-                if (m.myFighter === '70' && currentStreak > 10) {
+                // 700試合追加分（フェイクデータ）での連勝数を10に制限する
+                // これにより、今後の実践での10連勝以上の記録は正しく反映される
+                if (m.notes && m.notes.includes('追加された700試合') && currentStreak > 10) {
                     currentStreak = 10;
                 }
                 currentLossStreak = 0;
