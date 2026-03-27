@@ -255,6 +255,10 @@ export default function Stats() {
             // Streaks
             if (m.result === 'win') {
                 currentStreak++;
+                // 勇者(ID:70)の700試合追加の影響による連勝数を10に制限
+                if (m.myFighter === '70' && currentStreak > 10) {
+                    currentStreak = 10;
+                }
                 currentLossStreak = 0;
                 if (currentStreak > maxStreak) maxStreak = currentStreak;
             } else {
