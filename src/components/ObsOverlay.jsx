@@ -101,10 +101,12 @@ export default function ObsOverlay() {
             }
         });
 
+        let streakType = null;
         for (let i = 0; i < filteredHistory.length; i++) {
-            if (filteredHistory[i].result === 'win') {
+            if (i === 0) streakType = filteredHistory[i].result;
+            
+            if (filteredHistory[i].result === streakType) {
                 currentStreak++;
-                // 700試合追加分（フェイクデータ）での連勝数を10に制限する
                 if (filteredHistory[i].notes && filteredHistory[i].notes.includes('追加された700試合') && currentStreak > 10) {
                     currentStreak = 10;
                 }
@@ -113,7 +115,7 @@ export default function ObsOverlay() {
             }
         }
 
-        return { wins, losses: total - wins, total, currentStreak };
+        return { wins, losses: total - wins, total, currentStreak, streakType };
     }, [filteredHistory]);
 
     const currentOpponentFighter = useMemo(() => {
@@ -191,9 +193,9 @@ export default function ObsOverlay() {
                         <span style={{ color: 'var(--lose-color)' }}>{todaysStats.losses}敗</span>
                     </div>
                 </div>
-                {todaysStats.currentStreak >= 2 && (
-                    <div style={{ marginTop: '0.5rem', color: 'var(--smash-red)', fontWeight: '900', fontStyle: 'italic', fontSize: '1.1rem', background: '#222', padding: '0.2rem 0.5rem', display: 'inline-block', clipPath: 'polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%)' }}>
-                        🔥 {todaysStats.currentStreak}連勝中!
+                {todaysStats.currentStreak >= 1 && todaysStats.streakType && (
+                    <div style={{ marginTop: '0.5rem', color: todaysStats.streakType === 'win' ? 'var(--smash-red)' : '#00ccff', fontWeight: '900', fontStyle: 'italic', fontSize: '1.1rem', background: '#222', padding: '0.2rem 0.5rem', display: 'inline-block', clipPath: 'polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%)' }}>
+                        {todaysStats.streakType === 'win' ? '🔥' : '💀'} {todaysStats.currentStreak}{todaysStats.streakType === 'win' ? '連勝中!' : '連敗中...'}
                     </div>
                 )}
             </div>
