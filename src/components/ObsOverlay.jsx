@@ -13,9 +13,9 @@ export default function ObsOverlay() {
             const urlSyncId = params.get('syncId') || params.get('sync');
 
             if (urlSyncId) {
-                // クラウドからデータ取得
+                // クラウドからデータ取得 (OBSのキャッシュを回避するためにタイムスタンプを付与)
                 try {
-                    const response = await fetch(`/api/load?syncId=${encodeURIComponent(urlSyncId)}`);
+                    const response = await fetch(`/api/load?syncId=${encodeURIComponent(urlSyncId)}&t=${Date.now()}`);
                     const result = await response.json();
                     if (result.success && result.data) {
                         if (result.data.history) setHistory(result.data.history);
