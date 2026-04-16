@@ -130,7 +130,9 @@ export default function ObsOverlay() {
         const wins = matches.filter(m => m.result === 'win').length;
         const total = matches.length;
         const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
-        return { wins, losses: total - wins, total, winRate };
+        const recent = matches.slice(0, 5); // filteredHistory is already sorted descending (newest first)
+
+        return { wins, losses: total - wins, total, winRate, recent };
     }, [filteredHistory, currentOpponentFighter, currentMyFighter]);
 
     if (!myFighterObj) {
@@ -207,16 +209,37 @@ export default function ObsOverlay() {
                             
                             {/* If actively selected, show matchup history */}
                             {currentOpponentFighter && currentMatchupStats && (
-                                <span style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-muted)' }}>
-                                    {currentMatchupStats.total > 0 ? (
-                                        <>
-                                            <span style={{color: 'var(--win-color)', fontFamily: 'var(--font-en)', fontSize: '1.1rem'}}>{currentMatchupStats.wins}<span style={{fontSize:'0.8rem',fontFamily:'var(--font-jp)'}}>勝</span></span>
-                                            <span style={{margin:'0 4px'}}>-</span>
-                                            <span style={{color: 'var(--lose-color)', fontFamily: 'var(--font-en)', fontSize: '1.1rem'}}>{currentMatchupStats.losses}<span style={{fontSize:'0.8rem',fontFamily:'var(--font-jp)'}}>敗</span></span>
-                                            <span style={{marginLeft: '0.5rem', fontFamily: 'var(--font-en)', fontSize: '1rem'}}>({currentMatchupStats.winRate}%)</span>
-                                        </>
-                                    ) : <span style={{fontSize: '0.9rem', color: 'var(--smash-yellow)'}}>初対戦！</span>}
-                                </span>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                                    <div style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-muted)' }}>
+                                        {currentMatchupStats.total > 0 ? (
+                                            <>
+                                                <span style={{color: 'var(--win-color)', fontFamily: 'var(--font-en)', fontSize: '1.2rem'}}>{currentMatchupStats.wins}<span style={{fontSize:'0.8rem',fontFamily:'var(--font-jp)'}}>勝</span></span>
+                                                <span style={{margin:'0 4px'}}>-</span>
+                                                <span style={{color: 'var(--lose-color)', fontFamily: 'var(--font-en)', fontSize: '1.2rem'}}>{currentMatchupStats.losses}<span style={{fontSize:'0.8rem',fontFamily:'var(--font-jp)'}}>敗</span></span>
+                                                <span style={{marginLeft: '0.5rem', fontFamily: 'var(--font-en)', fontSize: '1rem'}}>({currentMatchupStats.winRate}%)</span>
+                                            </>
+                                        ) : <span style={{fontSize: '0.9rem', color: 'var(--smash-yellow)'}}>初対戦！</span>}
+                                    </div>
+                                    
+                                    {/* Recent 5 Matches */}
+                                    {currentMatchupStats.recent && currentMatchupStats.recent.length > 0 && (
+                                        <div style={{ display: 'flex', gap: '4px', marginTop: '2px' }}>
+                                            {/* Since latest is at index 0, map handles them from new to old directly correctly, but for visual consistency (old -> new or new -> old), left is usually newest or right is usually newest. Let's make left Newest. */}
+                                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', alignSelf: 'center', marginRight: '4px', lineHeight: 1}}>最新</span>
+                                            {currentMatchupStats.recent.map((m, i) => (
+                                                <div key={i} style={{
+                                                    width: '18px', height: '18px', borderRadius: '4px',
+                                                    backgroundColor: m.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)',
+                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                    color: '#fff', fontSize: '0.75rem', fontWeight: 'bold',
+                                                    boxShadow: '1px 1px 0 rgba(0,0,0,0.5)', fontFamily: 'var(--font-en)'
+                                                }}>
+                                                    {m.result === 'win' ? 'W' : 'L'}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             )}
 
                             {/* If not actively selected, show the last match result */}
