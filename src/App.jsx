@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MatchLogger from './components/MatchLogger';
 import Stats from './components/Stats';
 import Settings from './components/Settings';
+import ObsOverlay from './components/ObsOverlay';
 import { Swords, BarChart2, Settings as SettingsIcon } from 'lucide-react';
 
 function App() {
@@ -14,6 +15,12 @@ function App() {
     document.documentElement.style.setProperty('--bg-image', `url(${backgroundImage})`);
     localStorage.setItem('smashBgImage', backgroundImage);
   }, [backgroundImage]);
+
+  const isObsMode = window.location.search.includes('obs=true') || window.location.hash.includes('obs=true');
+
+  if (isObsMode) {
+    return <ObsOverlay />;
+  }
 
   return (
     <div className="app-container">

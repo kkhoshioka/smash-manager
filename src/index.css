@@ -58,6 +58,10 @@ body::before {
   z-index: -1;
 }
 
+body.obs-mode-body::before {
+  display: none !important;
+}
+
 h1,
 h2,
 h3,
@@ -536,4 +540,41 @@ select:focus {
   .desktop-only-icon {
     display: none;
   }
+}
+
+/* --- OBS Overlay Styles --- */
+.obs-overlay {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85); /* Semi-transparent background for OBS */
+  color: var(--text-main);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.obs-section {
+  padding: 10px 5px;
+  margin-bottom: 5px;
+}
+
+.obs-section:last-child {
+  border-bottom: none !important;
+}
+
+.obs-subtitle {
+  font-family: var(--font-en);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.obs-value {
+  font-family: var(--font-en);
+  font-weight: 900;
+  font-size: 1.8rem;
+  text-shadow: 2px 2px 0 #000;
+  line-height: 1.2;
 }
