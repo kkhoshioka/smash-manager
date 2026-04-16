@@ -65,13 +65,9 @@ export default function ObsOverlay() {
     const currentMyFighter = prefs.lastMyFighter;
     const myFighterObj = currentMyFighter ? fighters.find(f => f.id === currentMyFighter) : null;
 
-    const { filteredHistory, latestOpponentFighter, latestMatch } = useMemo(() => {
+    const filteredHistory = useMemo(() => {
         const filtered = currentMyFighter ? history.filter(m => m.myFighter === currentMyFighter) : history;
-        const sorted = [...filtered].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-        const latestMatch = sorted[0];
-        const latestOpponentFighter = latestMatch ? fighters.find(f => f.id === latestMatch.opponentFighter) : null;
-        
-        return { filteredHistory: sorted, latestOpponentFighter, latestMatch };
+        return [...filtered].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
     }, [history, currentMyFighter]);
 
     const latestGsp = useMemo(() => {
@@ -130,10 +126,21 @@ export default function ObsOverlay() {
         const wins = matches.filter(m => m.result === 'win').length;
         const total = matches.length;
         const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
-        const recent = matches.slice(0, 5); // filteredHistory is already sorted descending (newest first)
 
-        return { wins, losses: total - wins, total, winRate, recent };
+        return { wins, losses: total - wins, total, winRate };
     }, [filteredHistory, currentOpponentFighter, currentMyFighter]);
+
+    const recent3Matches = useMemo(() => {
+        if (currentOpponentFighter) return [];
+        return filteredHistory.slice(0, 3).map(m => {
+            const opponentFighter = fighters.find(f => f.id === m.opponentFighter);
+            const matches = filteredHistory.filter(mh => mh.opponentFighter === m.opponentFighter);
+            const wins = matches.filter(mh => mh.result === 'win').length;
+            const total = matches.length;
+            const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
+            return { ...m, opponentFighterObj: opponentFighter, stats: { wins, losses: total - wins, total, winRate } };
+        });
+    }, [filteredHistory, currentOpponentFighter]);
 
     if (!myFighterObj) {
         return (
@@ -191,25 +198,25 @@ export default function ObsOverlay() {
                 )}
             </div>
 
-            {/* Current or Latest Opponent */}
-            {(currentOpponentFighter || latestOpponentFighter) && (
+            {/* Opponent Section */}
+            {(currentOpponentFighter || recent3Matches.length > 0) && (
                 <div className="obs-section" style={{ borderBottom: '3px solid var(--text-muted)' }}>
-                    <div className="obs-subtitle">{currentOpponentFighter ? '選択中の対戦相手' : '直近の対戦相手'}</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginTop: '0.5rem' }}>
-                        <img 
-                            src={currentOpponentFighter ? currentOpponentFighter.imageUrl : latestOpponentFighter.imageUrl} 
-                            alt={currentOpponentFighter ? currentOpponentFighter.name : latestOpponentFighter.name} 
-                            style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} 
-                            onError={(e) => e.target.style.display = 'none'} 
-                        />
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '2px 2px 0 #000' }}>
-                                {currentOpponentFighter ? currentOpponentFighter.name : latestOpponentFighter.name}
-                            </span>
-                            
-                            {/* If actively selected, show matchup history */}
-                            {currentOpponentFighter && currentMatchupStats && (
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                    <div className="obs-subtitle">{currentOpponentFighter ? '選択中の対戦相手' : '直近の対戦相手 (3試合)'}</div>
+                    
+                    {currentOpponentFighter ? (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginTop: '0.5rem' }}>
+                            <img 
+                                src={currentOpponentFighter.imageUrl} 
+                                alt={currentOpponentFighter.name} 
+                                style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} 
+                                onError={(e) => e.target.style.display = 'none'} 
+                            />
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <span style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '2px 2px 0 #000' }}>
+                                    {currentOpponentFighter.name}
+                                </span>
+                                
+                                {currentMatchupStats && (
                                     <div style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-muted)' }}>
                                         {currentMatchupStats.total > 0 ? (
                                             <>
@@ -220,36 +227,38 @@ export default function ObsOverlay() {
                                             </>
                                         ) : <span style={{fontSize: '0.9rem', color: 'var(--smash-yellow)'}}>初対戦！</span>}
                                     </div>
-                                    
-                                    {/* Recent 5 Matches */}
-                                    {currentMatchupStats.recent && currentMatchupStats.recent.length > 0 && (
-                                        <div style={{ display: 'flex', gap: '4px', marginTop: '2px' }}>
-                                            {/* Since latest is at index 0, map handles them from new to old directly correctly, but for visual consistency (old -> new or new -> old), left is usually newest or right is usually newest. Let's make left Newest. */}
-                                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', alignSelf: 'center', marginRight: '4px', lineHeight: 1}}>最新</span>
-                                            {currentMatchupStats.recent.map((m, i) => (
-                                                <div key={i} style={{
-                                                    width: '18px', height: '18px', borderRadius: '4px',
-                                                    backgroundColor: m.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)',
-                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                    color: '#fff', fontSize: '0.75rem', fontWeight: 'bold',
-                                                    boxShadow: '1px 1px 0 rgba(0,0,0,0.5)', fontFamily: 'var(--font-en)'
-                                                }}>
-                                                    {m.result === 'win' ? 'W' : 'L'}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-
-                            {/* If not actively selected, show the last match result */}
-                            {!currentOpponentFighter && latestMatch && (
-                                <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: latestMatch.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)' }}>
-                                    {latestMatch.result === 'win' ? 'WIN' : 'LOSE'}
-                                </span>
-                            )}
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '0.5rem' }}>
+                            {recent3Matches.map((match, i) => match.opponentFighterObj && (
+                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                                    <img 
+                                        src={match.opponentFighterObj.imageUrl} 
+                                        alt={match.opponentFighterObj.name} 
+                                        style={{ width: '30px', height: '30px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} 
+                                        onError={(e) => e.target.style.display = 'none'} 
+                                    />
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                            <span style={{ fontSize: '1rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '2px 2px 0 #000', lineHeight: 1 }}>
+                                                {match.opponentFighterObj.name}
+                                            </span>
+                                            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', backgroundColor: match.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)', color: '#fff', padding: '1px 5px', borderRadius: '3px', fontFamily: 'var(--font-en)', lineHeight: 1 }}>
+                                                {match.result === 'win' ? 'W' : 'L'}
+                                            </span>
+                                        </div>
+                                        <div style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-muted)' }}>
+                                            <span style={{color: 'var(--win-color)', fontFamily: 'var(--font-en)'}}>{match.stats.wins}勝</span>
+                                            <span style={{margin:'0 3px'}}>-</span>
+                                            <span style={{color: 'var(--lose-color)', fontFamily: 'var(--font-en)'}}>{match.stats.losses}敗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
         </div>
