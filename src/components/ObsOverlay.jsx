@@ -194,8 +194,42 @@ export default function ObsOverlay() {
                     </div>
                 </div>
                 {todaysStats.currentStreak >= 1 && todaysStats.streakType && (
-                    <div style={{ marginTop: '0.5rem', color: todaysStats.streakType === 'win' ? 'var(--smash-red)' : '#00ccff', fontWeight: '900', fontStyle: 'italic', fontSize: '1.1rem', background: '#222', padding: '0.2rem 0.5rem', display: 'inline-block', clipPath: 'polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%)' }}>
-                        {todaysStats.streakType === 'win' ? '🔥' : '💀'} {todaysStats.currentStreak}{todaysStats.streakType === 'win' ? '連勝中!' : '連敗中...'}
+                    <div style={{ 
+                        marginTop: '0.5rem', 
+                        display: 'inline-flex', 
+                        alignItems: 'stretch',
+                        background: todaysStats.streakType === 'win' ? 'linear-gradient(90deg, rgba(0, 204, 255, 0.3) 0%, rgba(0, 204, 255, 0) 100%)' : 'linear-gradient(90deg, rgba(255, 51, 51, 0.3) 0%, rgba(255, 51, 51, 0) 100%)',
+                        borderLeft: todaysStats.streakType === 'win' ? '4px solid var(--win-color)' : '4px solid var(--lose-color)',
+                        padding: '0.2rem 2rem 0.2rem 0.6rem',
+                        clipPath: 'polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%)'
+                    }}>
+                        <span style={{ 
+                            fontFamily: 'var(--font-en)', 
+                            fontSize: '0.85rem', 
+                            color: '#fff', 
+                            fontStyle: 'italic', 
+                            fontWeight: '900', 
+                            opacity: 0.9,
+                            display: 'flex',
+                            alignItems: 'center',
+                            marginRight: '0.6rem',
+                            letterSpacing: '1px',
+                            textShadow: '1px 1px 0 #000'
+                        }}>
+                            {todaysStats.streakType === 'win' ? 'WIN STREAK' : 'LOSE STREAK'}
+                        </span>
+                        <span style={{ 
+                            fontFamily: 'var(--font-en)', 
+                            fontSize: '1.5rem', 
+                            fontWeight: '900', 
+                            color: todaysStats.streakType === 'win' ? 'var(--win-color)' : 'var(--lose-color)',
+                            textShadow: '2px 2px 0 #000',
+                            lineHeight: 1,
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
+                            {todaysStats.currentStreak}
+                        </span>
                     </div>
                 )}
             </div>
