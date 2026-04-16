@@ -169,6 +169,7 @@ export default function MatchLogger() {
         }
 
         setSelectedOpponent(null);
+        setPrefs(p => ({ ...p, currentOpponentForObs: null }));
         setFighterSearch('');
         // Clear input so the updated placeholder shows the new latest GSP
         setGsp('');
@@ -332,7 +333,10 @@ export default function MatchLogger() {
                                 <span className="fighter-name">{selectedOpponent.name}</span>
                             </div>
                             <button
-                                onClick={() => setSelectedOpponent(null)}
+                                onClick={() => {
+                                    setSelectedOpponent(null);
+                                    setPrefs(p => ({ ...p, currentOpponentForObs: null }));
+                                }}
                                 style={{ color: 'var(--smash-red)', fontSize: '1rem', textDecoration: 'underline', padding: '0 1rem' }}
                             >
                                 変更
@@ -356,6 +360,7 @@ export default function MatchLogger() {
                                 selectedId={null}
                                 onSelect={(f) => {
                                     setSelectedOpponent(f);
+                                    setPrefs(p => ({ ...p, currentOpponentForObs: f.id }));
                                     setFighterSearch('');
                                 }}
                             />

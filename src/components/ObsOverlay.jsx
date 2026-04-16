@@ -120,6 +120,19 @@ export default function ObsOverlay() {
         return { wins, losses: total - wins, total, currentStreak };
     }, [filteredHistory]);
 
+    const currentOpponentFighter = useMemo(() => {
+        return prefs.currentOpponentForObs ? fighters.find(f => f.id === prefs.currentOpponentForObs) : null;
+    }, [prefs.currentOpponentForObs]);
+
+    const currentMatchupStats = useMemo(() => {
+        if (!currentOpponentFighter || !currentMyFighter) return null;
+        const matches = filteredHistory.filter(m => m.opponentFighter === currentOpponentFighter.id);
+        const wins = matches.filter(m => m.result === 'win').length;
+        const total = matches.length;
+        const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
+        return { wins, losses: total - wins, total, winRate };
+    }, [filteredHistory, currentOpponentFighter, currentMyFighter]);
+
     if (!myFighterObj) {
         return (
             <div className="obs-overlay" style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -176,17 +189,38 @@ export default function ObsOverlay() {
                 )}
             </div>
 
-            {/* Latest Opponent */}
-            {latestOpponentFighter && (
+            {/* Current or Latest Opponent */}
+            {(currentOpponentFighter || latestOpponentFighter) && (
                 <div className="obs-section" style={{ borderBottom: '3px solid var(--text-muted)' }}>
-                    <div className="obs-subtitle">直近の対戦相手</div>
+                    <div className="obs-subtitle">{currentOpponentFighter ? '選択中の対戦相手' : '直近の対戦相手'}</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginTop: '0.5rem' }}>
-                        <img src={latestOpponentFighter.imageUrl} alt={latestOpponentFighter.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                        <img 
+                            src={currentOpponentFighter ? currentOpponentFighter.imageUrl : latestOpponentFighter.imageUrl} 
+                            alt={currentOpponentFighter ? currentOpponentFighter.name : latestOpponentFighter.name} 
+                            style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} 
+                            onError={(e) => e.target.style.display = 'none'} 
+                        />
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <span style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--text-main)', textShadow: '2px 2px 0 #000' }}>
-                                {latestOpponentFighter.name}
+                                {currentOpponentFighter ? currentOpponentFighter.name : latestOpponentFighter.name}
                             </span>
-                            {latestMatch && (
+                            
+                            {/* If actively selected, show matchup history */}
+                            {currentOpponentFighter && currentMatchupStats && (
+                                <span style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-muted)' }}>
+                                    {currentMatchupStats.total > 0 ? (
+                                        <>
+                                            <span style={{color: 'var(--win-color)', fontFamily: 'var(--font-en)', fontSize: '1.1rem'}}>{currentMatchupStats.wins}<span style={{fontSize:'0.8rem',fontFamily:'var(--font-jp)'}}>勝</span></span>
+                                            <span style={{margin:'0 4px'}}>-</span>
+                                            <span style={{color: 'var(--lose-color)', fontFamily: 'var(--font-en)', fontSize: '1.1rem'}}>{currentMatchupStats.losses}<span style={{fontSize:'0.8rem',fontFamily:'var(--font-jp)'}}>敗</span></span>
+                                            <span style={{marginLeft: '0.5rem', fontFamily: 'var(--font-en)', fontSize: '1rem'}}>({currentMatchupStats.winRate}%)</span>
+                                        </>
+                                    ) : <span style={{fontSize: '0.9rem', color: 'var(--smash-yellow)'}}>初対戦！</span>}
+                                </span>
+                            )}
+
+                            {/* If not actively selected, show the last match result */}
+                            {!currentOpponentFighter && latestMatch && (
                                 <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: latestMatch.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)' }}>
                                     {latestMatch.result === 'win' ? 'WIN' : 'LOSE'}
                                 </span>
