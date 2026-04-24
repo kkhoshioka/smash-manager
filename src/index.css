@@ -578,3 +578,82 @@ select:focus {
   text-shadow: 2px 2px 0 #000;
   line-height: 1.2;
 }
+
+/* New High Impact Streak Badge */
+.obs-streak-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.obs-streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 20px 6px 12px;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+  border-left: 6px solid #fff;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.obs-streak-badge.win {
+  background: linear-gradient(90deg, #0066ff 0%, #00ccff 100%);
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  border-left-color: #00ccff;
+}
+
+.obs-streak-badge.lose {
+  background: linear-gradient(90deg, #880000 0%, #ff3333 100%);
+  box-shadow: 0 0 20px rgba(136, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  border-left-color: #ff3333;
+}
+
+.obs-streak-badge.high-streak {
+  background: linear-gradient(90deg, #ff8c00 0%, #ffcc00 100%);
+  border-left-color: #ffcc00;
+  box-shadow: 0 0 30px rgba(255, 140, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.3);
+  animation: obs-streak-glow 1.5s infinite alternate;
+}
+
+.obs-streak-label {
+  font-family: var(--font-jp);
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #fff;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+  letter-spacing: 2px;
+}
+
+.obs-streak-count {
+  font-family: var(--font-en);
+  font-weight: 900;
+  font-size: 2.8rem;
+  color: #fff;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
+  font-style: italic;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+}
+
+.obs-streak-count::after {
+  content: 'STREAK';
+  font-size: 0.8rem;
+  margin-left: 6px;
+  opacity: 0.7;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+@keyframes obs-streak-glow {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 35px rgba(255, 204, 0, 0.8);
+    transform: scale(1.02);
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { fighters } from '../data/fighters';
+import { Flame, Skull } from 'lucide-react';
 
 export default function ObsOverlay() {
     const [history, setHistory] = useState([]);
@@ -194,42 +195,23 @@ export default function ObsOverlay() {
                     </div>
                 </div>
                 {todaysStats.currentStreak >= 1 && todaysStats.streakType && (
-                    <div style={{ 
-                        marginTop: '0.5rem', 
-                        display: 'inline-flex', 
-                        alignItems: 'stretch',
-                        background: todaysStats.streakType === 'win' ? 'linear-gradient(90deg, rgba(0, 204, 255, 0.3) 0%, rgba(0, 204, 255, 0) 100%)' : 'linear-gradient(90deg, rgba(255, 51, 51, 0.3) 0%, rgba(255, 51, 51, 0) 100%)',
-                        borderLeft: todaysStats.streakType === 'win' ? '4px solid var(--win-color)' : '4px solid var(--lose-color)',
-                        padding: '0.2rem 2rem 0.2rem 0.6rem',
-                        clipPath: 'polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%)'
-                    }}>
-                        <span style={{ 
-                            fontFamily: 'var(--font-en)', 
-                            fontSize: '0.85rem', 
-                            color: '#fff', 
-                            fontStyle: 'italic', 
-                            fontWeight: '900', 
-                            opacity: 0.9,
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginRight: '0.6rem',
-                            letterSpacing: '1px',
-                            textShadow: '1px 1px 0 #000'
-                        }}>
-                            {todaysStats.streakType === 'win' ? 'WIN STREAK' : 'LOSE STREAK'}
-                        </span>
-                        <span style={{ 
-                            fontFamily: 'var(--font-en)', 
-                            fontSize: '1.5rem', 
-                            fontWeight: '900', 
-                            color: todaysStats.streakType === 'win' ? 'var(--win-color)' : 'var(--lose-color)',
-                            textShadow: '2px 2px 0 #000',
-                            lineHeight: 1,
-                            display: 'flex',
-                            alignItems: 'center'
-                        }}>
-                            {todaysStats.currentStreak}
-                        </span>
+                    <div className="obs-streak-container">
+                        <div className={`obs-streak-badge ${todaysStats.streakType === 'win' ? 'win' : 'lose'} ${todaysStats.currentStreak >= 5 ? 'high-streak' : ''}`}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                <span className="obs-streak-label">
+                                    {todaysStats.streakType === 'win' ? '連勝中' : '連敗中'}
+                                </span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    {todaysStats.streakType === 'win' ? 
+                                        <Flame size={24} color="#fff" fill="currentColor" /> : 
+                                        <Skull size={24} color="#fff" fill="currentColor" />
+                                    }
+                                    <span className="obs-streak-count">
+                                        {todaysStats.currentStreak}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
