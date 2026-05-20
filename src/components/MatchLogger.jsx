@@ -106,18 +106,24 @@ export default function MatchLogger() {
         );
     }, [fighterSearch]);
 
-    const currentStreak = useMemo(() => {
-        if (!prefs.lastMyFighter) return 0;
+    const streakInfo = useMemo(() => {
+        if (!prefs.lastMyFighter) return { count: 0, type: null };
         const myFighterHistory = history.filter(m => m.myFighter === prefs.lastMyFighter);
-        let streak = 0;
+        if (myFighterHistory.length === 0) return { count: 0, type: null };
+
+        const type = myFighterHistory[0].result; // 'win' or 'lose'
+        let count = 0;
         for (const m of myFighterHistory) {
-            if (m.result === 'win') {
-                streak++;
-            } else if (m.result === 'lose') {
+            if (m.result === type) {
+                count++;
+                if (m.notes && m.notes.includes('追加された700試合') && count > 10) {
+                    count = 10;
+                }
+            } else {
                 break;
             }
         }
-        return streak;
+        return { count, type };
     }, [history, prefs.lastMyFighter]);
 
     const matchupStats = useMemo(() => {
@@ -264,22 +270,36 @@ export default function MatchLogger() {
                                 <span className="fighter-name">
                                     {myFighterObj?.name || '未選択'}
                                 </span>
-                                {currentStreak > 0 && (
+                                {streakInfo.count > 0 && (
                                     <span style={{
-                                        color: currentStreak >= 5 ? '#ff00ff' : currentStreak >= 2 ? '#ffcc00' : 'var(--win-color)',
+                                        color: streakInfo.type === 'win'
+                                            ? (streakInfo.count >= 5 ? '#ff00ff' : streakInfo.count >= 2 ? '#ffcc00' : 'var(--win-color)')
+                                            : (streakInfo.count >= 5 ? '#ff3300' : streakInfo.count >= 2 ? '#ff6666' : 'var(--lose-color)'),
                                         fontWeight: '900',
-                                        fontSize: currentStreak >= 10 ? '1.8rem' : currentStreak >= 5 ? '1.5rem' : '1.2rem',
+                                        fontSize: streakInfo.count >= 10 ? '2.2rem' : streakInfo.count >= 5 ? '1.8rem' : '1.4rem',
                                         marginTop: '0.2rem',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: '0.3rem',
-                                        animation: currentStreak >= 5 ? 'pulse 0.5s infinite' : currentStreak >= 2 ? 'pulse 1s infinite' : 'pulse 2s infinite',
-                                        textShadow: currentStreak >= 5 ? '0 0 10px #ff00ff, 2px 2px 0 #000' : currentStreak >= 2 ? '0 0 10px #ffcc00, 2px 2px 0 #000' : '2px 2px 0 #000',
+                                        gap: '0.4rem',
+                                        animation: streakInfo.count >= 5 ? 'pulse 0.5s infinite' : streakInfo.count >= 2 ? 'pulse 1s infinite' : 'pulse 2s infinite',
+                                        textShadow: streakInfo.type === 'win'
+                                            ? (streakInfo.count >= 5 ? '0 0 10px #ff00ff, 2px 2px 0 #000' : streakInfo.count >= 2 ? '0 0 10px #ffcc00, 2px 2px 0 #000' : '2px 2px 0 #000')
+                                            : (streakInfo.count >= 5 ? '0 0 10px #ff3300, 2px 2px 0 #000' : streakInfo.count >= 2 ? '0 0 10px #ff6666, 2px 2px 0 #000' : '2px 2px 0 #000'),
                                         transition: 'all 0.3s'
                                     }}>
-                                        <Flame size={currentStreak >= 5 ? 28 : currentStreak >= 2 ? 24 : 20}
-                                            color={currentStreak >= 5 ? '#ff00ff' : currentStreak >= 2 ? '#ffcc00' : 'var(--win-color)'} />
-                                        現在 {currentStreak} 連勝中！
+                                        {streakInfo.type === 'win' ? (
+                                            <>
+                                                <Flame size={streakInfo.count >= 5 ? 32 : streakInfo.count >= 2 ? 28 : 24}
+                                                    color={streakInfo.count >= 5 ? '#ff00ff' : streakInfo.count >= 2 ? '#ffcc00' : 'var(--win-color)'} />
+                                                現在 {streakInfo.count} 連勝中！
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Skull size={streakInfo.count >= 5 ? 32 : streakInfo.count >= 2 ? 28 : 24}
+                                                    color={streakInfo.count >= 5 ? '#ff3300' : streakInfo.count >= 2 ? '#ff6666' : 'var(--lose-color)'} />
+                                                現在 {streakInfo.count} 連敗中！
+                                            </>
+                                        )}
                                     </span>
                                 )}
                             </div>
