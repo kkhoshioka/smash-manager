@@ -276,11 +276,11 @@ export default function MatchLogger() {
                                             ? (streakInfo.count >= 5 ? '#ff00ff' : streakInfo.count >= 2 ? '#ffcc00' : 'var(--win-color)')
                                             : (streakInfo.count >= 5 ? '#ff3300' : streakInfo.count >= 2 ? '#ff6666' : 'var(--lose-color)'),
                                         fontWeight: '900',
-                                        fontSize: streakInfo.count >= 10 ? '2.2rem' : streakInfo.count >= 5 ? '1.8rem' : '1.4rem',
+                                        fontSize: streakInfo.count >= 10 ? '3.0rem' : streakInfo.count >= 5 ? '2.4rem' : '1.8rem',
                                         marginTop: '0.2rem',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: '0.4rem',
+                                        gap: '0.6rem',
                                         animation: streakInfo.count >= 5 ? 'pulse 0.5s infinite' : streakInfo.count >= 2 ? 'pulse 1s infinite' : 'pulse 2s infinite',
                                         textShadow: streakInfo.type === 'win'
                                             ? (streakInfo.count >= 5 ? '0 0 10px #ff00ff, 2px 2px 0 #000' : streakInfo.count >= 2 ? '0 0 10px #ffcc00, 2px 2px 0 #000' : '2px 2px 0 #000')
@@ -289,13 +289,13 @@ export default function MatchLogger() {
                                     }}>
                                         {streakInfo.type === 'win' ? (
                                             <>
-                                                <Flame size={streakInfo.count >= 5 ? 32 : streakInfo.count >= 2 ? 28 : 24}
+                                                <Flame size={streakInfo.count >= 5 ? 40 : streakInfo.count >= 2 ? 34 : 28}
                                                     color={streakInfo.count >= 5 ? '#ff00ff' : streakInfo.count >= 2 ? '#ffcc00' : 'var(--win-color)'} />
                                                 現在 {streakInfo.count} 連勝中！
                                             </>
                                         ) : (
                                             <>
-                                                <Skull size={streakInfo.count >= 5 ? 32 : streakInfo.count >= 2 ? 28 : 24}
+                                                <Skull size={streakInfo.count >= 5 ? 40 : streakInfo.count >= 2 ? 34 : 28}
                                                     color={streakInfo.count >= 5 ? '#ff3300' : streakInfo.count >= 2 ? '#ff6666' : 'var(--lose-color)'} />
                                                 現在 {streakInfo.count} 連敗中！
                                             </>
