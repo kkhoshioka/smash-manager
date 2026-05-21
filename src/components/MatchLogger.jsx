@@ -392,38 +392,26 @@ export default function MatchLogger() {
             {/* Matchup Stats */}
             {matchupStats && (
                 <div className="animate-enter" style={{ display: 'flex', justifyContent: 'center' }}>
-                    <div style={{
-                        backgroundColor: '#111',
-                        border: '2px solid #555',
-                        clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
-                        padding: '1rem 3rem',
-                        textAlign: 'center',
-                        justifyContent: 'center',
-                        display: 'inline-flex',
-                        flexDirection: 'column',
-                        alignItems: 'center'
-                    }}>
-                        <div style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 'bold', fontFamily: 'var(--font-jp)' }}>
+                    <div className="matchup-stats-box">
+                        <div className="matchup-stats-title">
                             過去の対戦成績
                         </div>
                         {matchupStats.total > 0 ? (
                             <>
-                                <div style={{ fontSize: '1.8rem', fontWeight: '900', marginTop: '0.2rem', fontFamily: 'var(--font-jp)', textShadow: '2px 2px 0 #000' }}>
-                                    {matchupStats.total}戦 <span style={{ color: 'var(--win-color)' }}>{matchupStats.wins}勝</span> <span style={{ color: 'var(--lose-color)' }}>{matchupStats.losses}敗</span>
-                                    <span style={{ marginLeft: '1.5rem', fontSize: '1.4rem' }}>
+                                <div className="matchup-stats-main">
+                                    <span>
+                                        {matchupStats.total}戦 <span style={{ color: 'var(--win-color)' }}>{matchupStats.wins}勝</span> <span style={{ color: 'var(--lose-color)' }}>{matchupStats.losses}敗</span>
+                                    </span>
+                                    <span className="matchup-stats-winrate">
                                         勝率 <span style={{ color: matchupStats.winRate >= 50 ? 'var(--win-color)' : 'var(--lose-color)' }}>{matchupStats.winRate}%</span>
                                     </span>
                                 </div>
                                 {matchupStats.recent && matchupStats.recent.length > 0 && (
-                                    <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center', alignItems: 'center' }}>
-                                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginRight: '0.5rem' }}>最近の対戦:</span>
+                                    <div className="matchup-stats-recent-container">
+                                        <span className="matchup-stats-recent-label">最近の対戦:</span>
                                         {matchupStats.recent.map((m, i) => (
-                                            <div key={i} style={{
-                                                width: '24px', height: '24px', borderRadius: '50%',
-                                                backgroundColor: m.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)',
-                                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                color: '#fff', fontSize: '0.8rem', fontWeight: 'bold',
-                                                boxShadow: '1px 1px 0 rgba(0,0,0,0.5)'
+                                            <div key={i} className="matchup-stats-recent-badge" style={{
+                                                backgroundColor: m.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)'
                                             }}>
                                                 {m.result === 'win' ? 'W' : 'L'}
                                             </div>
@@ -432,7 +420,7 @@ export default function MatchLogger() {
                                 )}
                             </>
                         ) : (
-                            <div style={{ fontSize: '1.4rem', fontWeight: 'bold', marginTop: '0.2rem', color: 'var(--text-main)', fontFamily: 'var(--font-jp)' }}>
+                            <div className="matchup-stats-empty">
                                 この組み合わせでの対戦はまだありません
                             </div>
                         )}

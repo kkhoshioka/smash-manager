@@ -657,3 +657,155 @@ select:focus {
     transform: scale(1.02);
   }
 }
+
+/* --- Matchup Stats Section --- */
+.matchup-stats-box {
+  background-color: #111;
+  border: 2px solid #555;
+  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  padding: 1rem 3rem;
+  text-align: center;
+  justify-content: center;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.matchup-stats-title {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  font-weight: 800;
+  font-family: var(--font-jp);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.matchup-stats-title::before,
+.matchup-stats-title::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--smash-yellow);
+  transform: rotate(45deg);
+}
+
+.matchup-stats-main {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-top: 0.2rem;
+  font-family: var(--font-jp);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.matchup-stats-winrate {
+  font-size: 1.8rem;
+  border-left: 2px solid #444;
+  padding-left: 1.5rem;
+}
+
+.matchup-stats-recent-container {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.matchup-stats-recent-label {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.matchup-stats-recent-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 900;
+  font-family: var(--font-en);
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.2);
+  transition: transform 0.2s;
+}
+
+.matchup-stats-recent-badge:hover {
+  transform: scale(1.15);
+}
+
+.matchup-stats-empty {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-top: 0.2rem;
+  color: var(--text-main);
+  font-family: var(--font-jp);
+  padding: 0.5rem 1rem;
+}
+
+/* Mobile Overrides for Matchup Stats */
+@media (max-width: 768px) {
+  .matchup-stats-box {
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    padding: 1rem 1.5rem;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .matchup-stats-title {
+    font-size: 1.1rem;
+  }
+
+  .matchup-stats-main {
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-top: 0.4rem;
+  }
+
+  .matchup-stats-winrate {
+    border-left: none;
+    padding-left: 0;
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 1rem;
+    clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+  }
+
+  .matchup-stats-recent-container {
+    margin-top: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .matchup-stats-recent-label {
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 0.3rem;
+  }
+
+  .matchup-stats-recent-badge {
+    width: 26px;
+    height: 26px;
+    font-size: 0.85rem;
+  }
+
+  .matchup-stats-empty {
+    font-size: 1.2rem;
+  }
+}
