@@ -660,29 +660,39 @@ select:focus {
 
 /* --- Matchup Stats Section --- */
 .matchup-stats-box {
-  background-color: #111;
-  border: 2px solid #555;
-  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
-  padding: 1rem 3rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0c0c0c 100%);
+  border: 2px solid #444;
+  clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+  padding: 1.5rem 4rem;
   text-align: center;
   justify-content: center;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.matchup-stats-box:hover {
+  border-color: var(--smash-yellow);
+  box-shadow: 0 12px 35px rgba(245, 166, 35, 0.2), 0 0 15px rgba(245, 166, 35, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
 }
 
 .matchup-stats-title {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  font-weight: 800;
-  font-family: var(--font-jp);
-  letter-spacing: 1px;
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: 900;
+  font-style: italic;
+  font-family: var(--font-en);
+  text-transform: uppercase;
+  letter-spacing: 2px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.2rem;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .matchup-stats-title::before,
@@ -698,82 +708,97 @@ select:focus {
 .matchup-stats-main {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  font-size: 2.2rem;
+  gap: 2rem;
+  font-size: 2.4rem;
   font-weight: 900;
-  margin-top: 0.2rem;
+  margin-top: 0.4rem;
   font-family: var(--font-jp);
-  text-shadow: 2px 2px 0 #000;
+  text-shadow: 3px 3px 0 #000;
 }
 
 .matchup-stats-winrate {
-  font-size: 1.8rem;
-  border-left: 2px solid #444;
-  padding-left: 1.5rem;
+  font-size: 2rem;
+  border-left: 3px solid #333;
+  padding-left: 2rem;
+  font-style: italic;
 }
 
 .matchup-stats-recent-container {
-  margin-top: 0.6rem;
+  margin-top: 1rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.4rem 1.5rem;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .matchup-stats-recent-label {
   font-size: 1rem;
   color: var(--text-muted);
-  margin-right: 0.5rem;
+  margin-right: 0.6rem;
   font-weight: bold;
 }
 
 .matchup-stats-recent-badge {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 900;
   font-family: var(--font-en);
-  box-shadow: 1px 1px 0 rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.2);
-  transition: transform 0.2s;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,255,255,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
 }
 
 .matchup-stats-recent-badge:hover {
-  transform: scale(1.15);
+  transform: scale(1.2) rotate(5deg);
+  box-shadow: 0 0 10px currentColor, 2px 2px 0 rgba(0,0,0,0.8);
 }
 
 .matchup-stats-empty {
   font-size: 1.6rem;
   font-weight: bold;
-  margin-top: 0.2rem;
-  color: var(--text-main);
+  margin-top: 0.4rem;
+  color: var(--text-muted);
   font-family: var(--font-jp);
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
+  font-style: italic;
 }
 
 /* Mobile Overrides for Matchup Stats */
 @media (max-width: 768px) {
   .matchup-stats-box {
-    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-    padding: 1rem 1.5rem;
+    clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+    padding: 1.2rem 1.5rem;
     width: 100%;
     max-width: 480px;
   }
 
+  .matchup-stats-box:hover {
+    transform: none;
+    border-color: #555;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+
   .matchup-stats-title {
     font-size: 1.1rem;
+    letter-spacing: 1px;
   }
 
   .matchup-stats-main {
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
     font-size: 1.8rem;
     line-height: 1.2;
-    margin-top: 0.4rem;
+    margin-top: 0.5rem;
   }
 
   .matchup-stats-winrate {
@@ -782,13 +807,15 @@ select:focus {
     font-size: 1.5rem;
     margin-top: 0.2rem;
     background: rgba(255, 255, 255, 0.05);
-    padding: 0.2rem 1rem;
-    clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+    padding: 0.3rem 1.2rem;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
   }
 
   .matchup-stats-recent-container {
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
   }
 
   .matchup-stats-recent-label {
@@ -796,16 +823,17 @@ select:focus {
     width: 100%;
     text-align: center;
     margin-right: 0;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
   }
 
   .matchup-stats-recent-badge {
-    width: 26px;
-    height: 26px;
-    font-size: 0.85rem;
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
   }
 
   .matchup-stats-empty {
     font-size: 1.2rem;
+    padding: 0.5rem;
   }
 }
