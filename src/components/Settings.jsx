@@ -1,11 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { Image, Upload, Download, Cloud, Monitor, Database, Settings as SettingsIcon } from 'lucide-react';
 
 export default function Settings({ backgroundImage, onBackgroundChange }) {
     const { history, prefs, importData, syncId, handleSetSyncId, isSyncing, syncError } = useMatchHistory();
+    const [localSyncId, setLocalSyncId] = useState(syncId);
     const fileInputRef = useRef(null);
     const bgUploadRef = useRef(null);
+
+    useEffect(() => {
+        setLocalSyncId(syncId);
+    }, [syncId]);
 
     const backgrounds = [
         { id: 'bg-symbol', url: '/bg_stage.png', name: '特大シンボル (レッド)', type: 'preset' },
@@ -157,18 +162,34 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
                         PCとスマホ間でデータを共有するための「合言葉」を設定します。
                         同じ合言葉を設定した端末同士でデータが自動的に同期されます。
                     </p>
-                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
                         <input
                             type="text"
                             placeholder="例: my-smash-secret-word"
-                            defaultValue={syncId}
-                            onBlur={(e) => handleSetSyncId(e.target.value)}
-                            style={{ flex: 1, padding: '1rem', background: '#111', color: 'white', border: '2px solid #444', fontSize: '1.2rem', fontFamily: 'var(--font-en)' }}
+                            value={localSyncId}
+                            onChange={(e) => setLocalSyncId(e.target.value)}
+                            style={{ flex: '1 1 300px', padding: '1rem', background: '#111', color: 'white', border: '2px solid #444', fontSize: '1.2rem', fontFamily: 'var(--font-en)' }}
                         />
-                        {isSyncing && <span style={{ color: '#00ccff', fontWeight: 'bold' }}>同期中...</span>}
+                        <button
+                            onClick={() => handleSetSyncId(localSyncId)}
+                            className="btn-smash"
+                            disabled={isSyncing}
+                            style={{
+                                background: isSyncing ? '#555' : 'var(--smash-yellow)',
+                                color: isSyncing ? '#ccc' : '#000',
+                                opacity: isSyncing ? 0.7 : 1,
+                                pointerEvents: isSyncing ? 'none' : 'auto',
+                                padding: '1rem 2rem'
+                            }}
+                        >
+                            <div style={{ transform: 'skewX(20deg)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                                <Cloud size={20} className={isSyncing ? "animate-pulse" : ""} />
+                                {isSyncing ? '同期中...' : '同期する'}
+                            </div>
+                        </button>
                     </div>
                     {syncError && <p style={{ color: 'var(--lose-color)', fontWeight: 'bold' }}>同期エラー: {syncError}</p>}
-                    <p style={{ fontSize: '0.9rem', color: '#666' }}>※合言葉を入力してフォーカスを外すと自動で適用・同期されます。</p>
+                    <p style={{ fontSize: '0.9rem', color: '#666' }}>※合言葉を入力し、「同期する」ボタンを押すとデータが同期されます。</p>
                 </div>
             </div>
 
