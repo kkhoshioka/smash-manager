@@ -11,11 +11,20 @@ export default function Stats() {
     const [editForm, setEditForm] = useState({});
     const [showAllMatchups, setShowAllMatchups] = useState(false);
     const [showAllKillMoves, setShowAllKillMoves] = useState(false);
-    const [gspChartRange, setGspChartRange] = useState('all');
+    const [gspChartRange, setGspChartRange] = useState('100'); // Default to 100 matches for clean and fast chart render
     const [historyOpponentFilter, setHistoryOpponentFilter] = useState('all');
     const [historyKillMoveFilter, setHistoryKillMoveFilter] = useState('all');
     const [historyMemoFilter, setHistoryMemoFilter] = useState('all');
     const [historyMemoSearch, setHistoryMemoSearch] = useState('');
+
+    // Progressive loading to eliminate tab transition lag
+    const [isLoaded, setIsLoaded] = useState(false);
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoaded(true);
+        }, 80);
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleEditClick = (match) => {
         setEditingMatchId(match.id);
@@ -80,8 +89,7 @@ export default function Stats() {
     const latestGsp = useMemo(() => {
         if (selectedMyFighter === 'all') return null;
         
-        const chronological = [...filteredHistory].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        const latestMatch = chronological.find(m => m.gsp);
+        const latestMatch = filteredHistory.find(m => m.gsp);
         if (latestMatch) return latestMatch.gsp;
 
         if (prefs.fighterGsp?.[selectedMyFighter]) {
@@ -130,7 +138,7 @@ export default function Stats() {
     }, [opponentStats]);
 
     const gspChartData = useMemo(() => {
-        const sortedHistory = [...filteredHistory].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        const sortedHistory = [...filteredHistory].reverse();
 
         let slicedHistory = sortedHistory;
         
@@ -141,22 +149,28 @@ export default function Stats() {
         } else if (gspChartRange === '7d') {
             const sevenDaysAgo = new Date();
             sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-            slicedHistory = sortedHistory.filter(m => new Date(m.timestamp) >= sevenDaysAgo);
+            const cutoffStr = sevenDaysAgo.toISOString();
+            slicedHistory = sortedHistory.filter(m => m.timestamp >= cutoffStr);
         } else if (gspChartRange === '30d') {
             const thirtyDaysAgo = new Date();
             thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-            slicedHistory = sortedHistory.filter(m => new Date(m.timestamp) >= thirtyDaysAgo);
+            const cutoffStr = thirtyDaysAgo.toISOString();
+            slicedHistory = sortedHistory.filter(m => m.timestamp >= cutoffStr);
         }
 
         return slicedHistory
             .filter(m => m.gsp)
             .map((m, i) => {
                 const dateObj = new Date(m.timestamp);
+                const month = dateObj.getMonth() + 1;
+                const day = dateObj.getDate();
+                const hours = String(dateObj.getHours()).padStart(2, '0');
+                const minutes = String(dateObj.getMinutes()).padStart(2, '0');
                 return {
                     index: i + 1,
                     uniqueId: `${dateObj.getTime()}-${i}`,
-                    date: dateObj.toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric' }),
-                    time: dateObj.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' }),
+                    date: `${month}/${day}`,
+                    time: `${hours}:${minutes}`,
                     GSP: Number(m.gsp),
                     opponent: fighters.find(f => f.id === m.opponentFighter)?.name || 'Unknown',
                     result: m.result
@@ -190,7 +204,7 @@ export default function Stats() {
     }, [filteredHistory]);
 
     const displayedHistory = useMemo(() => {
-        let result = [...filteredHistory].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+        let result = filteredHistory;
         if (historyOpponentFilter !== 'all') {
             result = result.filter(m => m.opponentFighter === historyOpponentFilter);
         }
@@ -207,9 +221,6 @@ export default function Stats() {
         if (historyMemoFilter === 'has_memo') {
             result = result.filter(m => hasText(m.notes) && !isSynthetic(m.notes));
         } else if (historyMemoFilter === 'no_memo') {
-            result = result.filter(m => (!hasText(m.notes) || isSynthetic(m.notes)) && !isSynthetic(m.notes));
-            // Simplified: result = result.filter(m => !hasText(m.notes)); 
-            // Wait, if it's synthetic we want it EXCLUDED from "no_memo" as well!
             result = result.filter(m => !hasText(m.notes) && !isSynthetic(m.notes));
         }
         
@@ -231,7 +242,7 @@ export default function Stats() {
     const advancedStats = useMemo(() => {
         if (filteredHistory.length === 0) return null;
 
-        const chronologicalHistory = [...filteredHistory].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        const chronologicalHistory = [...filteredHistory].reverse();
 
         let currentStreak = 0;
         let maxStreak = 0;
@@ -282,7 +293,9 @@ export default function Stats() {
             else { timeStats.t21_24.total++; if (m.result === 'win') timeStats.t21_24.wins++; }
 
             // Daily Stats
-            const dateStr = dateObj.toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' });
+            const month = dateObj.getMonth() + 1;
+            const day = dateObj.getDate();
+            const dateStr = `${month}月${day}日`;
             if (!dailyMap[dateStr]) {
                 dailyMap[dateStr] = { date: dateStr, total: 0, wins: 0, startGsp: m.gsp || null, endGsp: m.gsp || null };
             }
@@ -395,357 +408,343 @@ export default function Stats() {
 
             <div className="smash-divider" />
 
-            {/* Advanced Stats */}
-            {advancedStats && (
-                <>
-                    <h2 className="section-title">詳細データ分析</h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-                        {/* 1. Win Streak */}
-                        <div className="stat-card" style={{ borderBottomColor: 'var(--smash-red)', padding: '1.5rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
-                                <Flame size={20} /> 連勝記録
+            {!isLoaded ? (
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '6rem 2rem',
+                    backgroundColor: '#111',
+                    border: '2px dashed #333',
+                    clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                    gap: '1.5rem',
+                    color: 'var(--text-muted)'
+                }}>
+                    <div className="progressive-spinner" style={{
+                        width: '40px',
+                        height: '40px',
+                        border: '4px solid #222',
+                        borderTopColor: 'var(--smash-red)',
+                        borderRadius: '50%',
+                        animation: 'spin 1s linear infinite'
+                    }} />
+                    <style>{`
+                        @keyframes spin {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                        }
+                    `}</style>
+                    <span style={{ fontWeight: 'bold', letterSpacing: '1px', fontFamily: 'var(--font-jp)', color: 'var(--text-muted)' }}>戦績データをロード中...</span>
+                </div>
+            ) : (
+                <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    {/* Advanced Stats */}
+                    {advancedStats && (
+                        <>
+                            <h2 className="section-title">詳細データ分析</h2>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+                                {/* 1. Win Streak */}
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--smash-red)', padding: '1.5rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                        <Flame size={20} /> 連勝記録
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                                        <span style={{ color: 'var(--text-muted)' }}>最大連勝</span>
+                                        <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{advancedStats.maxStreak}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                                        <span style={{ color: 'var(--text-muted)' }}>現在の連勝</span>
+                                        <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)', color: advancedStats.currentStreak > 0 ? 'var(--smash-yellow)' : 'inherit' }}>{advancedStats.currentStreak}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>最大連敗</span>
+                                        <span style={{ fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-en)', color: 'var(--lose-color)' }}>{advancedStats.maxLossStreak}</span>
+                                    </div>
+                                </div>
+
+                                {/* 2. Best Time to Play (Top 3) */}
+                                {advancedStats.top3Times && advancedStats.top3Times.length > 0 && (
+                                    <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', padding: '1.5rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-yellow)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                            <Clock size={20} /> 勝率の最も高い時間帯 TOP3
+                                        </div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                            {advancedStats.top3Times.map((timeStat, i) => (
+                                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <div style={{ backgroundColor: '#222', padding: '0.8rem', borderRadius: '50%', color: 'var(--smash-yellow)' }}>
+                                                        {timeStat.icon}
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontSize: '1.2rem', fontWeight: '900', fontFamily: 'var(--font-jp)' }}>{i + 1}位: {timeStat.label}</div>
+                                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>勝率: {Math.round((timeStat.wins / timeStat.total) * 100)}% ({timeStat.total}戦)</div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
-                                <span style={{ color: 'var(--text-muted)' }}>最大連勝</span>
-                                <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{advancedStats.maxStreak}</span>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
-                                <span style={{ color: 'var(--text-muted)' }}>現在の連勝</span>
-                                <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)', color: advancedStats.currentStreak > 0 ? 'var(--smash-yellow)' : 'inherit' }}>{advancedStats.currentStreak}</span>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>最大連敗</span>
-                                <span style={{ fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-en)', color: 'var(--lose-color)' }}>{advancedStats.maxLossStreak}</span>
+
+                            {/* 3. Daily Performance */}
+                            {advancedStats.recentDays.length > 0 && (
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--text-main)', padding: '1.5rem', marginBottom: '2rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                        <CalendarDays size={20} /> 最近の日毎データ (直近7日)
+                                    </div>
+                                    <div style={{ overflowX: 'auto' }}>
+                                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '600px' }}>
+                                            <thead>
+                                                <tr style={{ backgroundColor: '#1a1a1a', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>日付</th>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>試合数</th>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>勝率</th>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>戦闘力 最終推移</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {advancedStats.recentDays.map((day, i) => {
+                                                    const winRate = day.total > 0 ? Math.round((day.wins / day.total) * 100) : 0;
+                                                    const gspDiff = (day.endGsp && day.startGsp) ? day.endGsp - day.startGsp : 0;
+                                                    const gspColor = gspDiff > 0 ? 'var(--win-color)' : (gspDiff < 0 ? 'var(--lose-color)' : 'var(--text-muted)');
+                                                    return (
+                                                        <tr key={i} style={{ borderBottom: '1px solid #333', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
+                                                            <td style={{ padding: '1rem', fontWeight: 'bold' }}>{day.date}</td>
+                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold' }}>{day.total} 戦</td>
+                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: winRate >= 60 ? 'var(--smash-yellow)' : 'inherit' }}>{winRate}%</td>
+                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: gspColor }}>
+                                                                {gspDiff > 0 ? '+' : ''}{gspDiff !== 0 ? gspDiff.toLocaleString() : '-'}
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="smash-divider" />
+                        </>
+                    )}
+
+                    {/* Stage Stats */}
+                    {stageStats.length > 0 && (
+                        <div className="stat-card" style={{ borderBottomColor: '#00ccff', padding: '1.5rem', marginBottom: '2rem' }}>
+                            <h2 className="section-title" style={{ borderColor: '#00ccff', marginTop: 0 }}>ステージ別 勝率</h2>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                                {stageStats.map((stat, i) => (
+                                    <div key={i} style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        backgroundColor: '#111',
+                                        padding: '1.5rem',
+                                        border: '2px solid #444',
+                                        borderTop: `4px solid ${stat.winRate >= 60 ? 'var(--smash-yellow)' : stat.winRate <= 40 ? 'var(--lose-color)' : '#00ccff'}`,
+                                        clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)'
+                                    }}>
+                                        <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{stat.name}</span>
+                                        <span style={{ color: stat.winRate >= 60 ? 'var(--smash-yellow)' : stat.winRate <= 40 ? 'var(--lose-color)' : 'var(--text-main)', fontWeight: '900', fontSize: '2rem', fontFamily: 'var(--font-en)' }}>
+                                            {stat.winRate}%
+                                        </span>
+                                        <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold', marginTop: '0.2rem' }}>
+                                            {stat.wins}勝 / {stat.total}戦
+                                        </span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
+                    )}
 
-                        {/* 2. Best Time to Play (Top 3) */}
-                        {advancedStats.top3Times && advancedStats.top3Times.length > 0 && (
-                            <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', padding: '1.5rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-yellow)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
-                                    <Clock size={20} /> 勝率の最も高い時間帯 TOP3
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                    {advancedStats.top3Times.map((timeStat, i) => (
-                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <div style={{ backgroundColor: '#222', padding: '0.8rem', borderRadius: '50%', color: 'var(--smash-yellow)' }}>
-                                                {timeStat.icon}
-                                            </div>
-                                            <div>
-                                                <div style={{ fontSize: '1.2rem', fontWeight: '900', fontFamily: 'var(--font-jp)' }}>{i + 1}位: {timeStat.label}</div>
-                                                <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>勝率: {Math.round((timeStat.wins / timeStat.total) * 100)}% ({timeStat.total}戦)</div>
-                                            </div>
-                                        </div>
+                    {/* GSP History Chart */}
+                    {gspChartData.length > 0 && (
+                        <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '2rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+                                <h2 className="section-title" style={{ borderColor: 'var(--win-color)', margin: 0 }}>世界戦闘力(GSP) 推移</h2>
+                                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                    {[
+                                        { id: 'all', label: '全期間' },
+                                        { id: '100', label: '直近100戦' },
+                                        { id: '50', label: '直近50戦' },
+                                        { id: '30d', label: '30日間' },
+                                        { id: '7d', label: '7日間' }
+                                    ].map(range => (
+                                        <button
+                                            key={range.id}
+                                            onClick={() => setGspChartRange(range.id)}
+                                            style={{
+                                                padding: '0.4rem 0.8rem',
+                                                backgroundColor: gspChartRange === range.id ? 'var(--win-color)' : '#222',
+                                                color: gspChartRange === range.id ? '#000' : 'var(--text-muted)',
+                                                border: '1px solid',
+                                                borderColor: gspChartRange === range.id ? 'var(--win-color)' : '#444',
+                                                borderRadius: '4px',
+                                                cursor: 'pointer',
+                                                fontWeight: 'bold',
+                                                fontSize: '0.9rem',
+                                                fontFamily: 'var(--font-jp)',
+                                                transition: 'all 0.2s'
+                                            }}
+                                        >
+                                            {range.label}
+                                        </button>
                                     ))}
                                 </div>
                             </div>
-                        )}
-                    </div>
-
-                    {/* 3. Daily Performance */}
-                    {advancedStats.recentDays.length > 0 && (
-                        <div className="stat-card" style={{ borderBottomColor: 'var(--text-main)', padding: '1.5rem', marginBottom: '2rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
-                                <CalendarDays size={20} /> 最近の日毎データ (直近7日)
-                            </div>
-                            <div style={{ overflowX: 'auto' }}>
-                                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '600px' }}>
-                                    <thead>
-                                        <tr style={{ backgroundColor: '#1a1a1a', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>日付</th>
-                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>試合数</th>
-                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>勝率</th>
-                                            <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>戦闘力 最終推移</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {advancedStats.recentDays.map((day, i) => {
-                                            const winRate = day.total > 0 ? Math.round((day.wins / day.total) * 100) : 0;
-                                            const gspDiff = (day.endGsp && day.startGsp) ? day.endGsp - day.startGsp : 0;
-                                            const gspColor = gspDiff > 0 ? 'var(--win-color)' : (gspDiff < 0 ? 'var(--lose-color)' : 'var(--text-muted)');
-                                            return (
-                                                <tr key={i} style={{ borderBottom: '1px solid #333', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
-                                                    <td style={{ padding: '1rem', fontWeight: 'bold' }}>{day.date}</td>
-                                                    <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold' }}>{day.total} 戦</td>
-                                                    <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: winRate >= 60 ? 'var(--smash-yellow)' : 'inherit' }}>{winRate}%</td>
-                                                    <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: gspColor }}>
-                                                        {gspDiff > 0 ? '+' : ''}{gspDiff !== 0 ? gspDiff.toLocaleString() : '-'}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
+                            <div style={{ width: '100%', height: 350 }}>
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <AreaChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
+                                        <defs>
+                                            <linearGradient id="colorGSP" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="var(--win-color)" stopOpacity={0.8}/>
+                                                <stop offset="95%" stopColor="var(--win-color)" stopOpacity={0}/>
+                                            </linearGradient>
+                                        </defs>
+                                        <CartesianGrid strokeDasharray="3 3" stroke="#222" vertical={false} />
+                                        <XAxis
+                                            dataKey="uniqueId"
+                                            stroke="var(--text-muted)"
+                                            ticks={gspXTicks}
+                                            interval={0}
+                                            tick={(props) => {
+                                                const { x, y, payload, index } = props;
+                                                const point = gspChartData.find(d => d.uniqueId === payload.value);
+                                                const text = point ? point.date : payload.value;
+                                                const dy = index % 2 === 0 ? 12 : 26;
+                                                return (
+                                                    <g transform={`translate(${x},${y})`}>
+                                                        <text x={0} y={0} dy={dy} textAnchor="middle" fill="var(--text-muted)" fontSize={11} fontWeight="bold">
+                                                            {text}
+                                                        </text>
+                                                    </g>
+                                                );
+                                            }}
+                                        />
+                                        <YAxis 
+                                            stroke="var(--text-muted)" 
+                                            width={55} 
+                                            fontSize={11} 
+                                            fontWeight="bold" 
+                                            domain={['dataMin - 100000', 'dataMax + 100000']} 
+                                            tickFormatter={(value) => (value / 10000).toFixed(0) + '万'} 
+                                            tickCount={6}
+                                        />
+                                        <Tooltip
+                                            content={({ active, payload }) => {
+                                                if (active && payload && payload.length) {
+                                                    const data = payload[0].payload;
+                                                    return (
+                                                        <div style={{ backgroundColor: '#111', border: '2px solid var(--win-color)', padding: '15px', color: 'white', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)', boxShadow: '0 8px 16px rgba(0,0,0,0.5)' }}>
+                                                            <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--text-muted)', fontSize: '0.9rem' }}>{data.date} {data.time}</p>
+                                                            <p style={{ margin: '8px 0', fontSize: '1.4rem', fontWeight: '900', color: 'var(--win-color)', fontFamily: 'var(--font-en)' }}>
+                                                                GSP: {data.GSP.toLocaleString()}
+                                                            </p>
+                                                            <p style={{ margin: 0, fontSize: '1rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                                <span style={{ color: data.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)', fontFamily: 'var(--font-en)', fontStyle: 'italic' }}>
+                                                                    {data.result === 'win' ? 'WIN' : 'LOSE'}
+                                                                </span>
+                                                                vs {data.opponent}
+                                                            </p>
+                                                        </div>
+                                                    );
+                                                }
+                                                return null;
+                                            }}
+                                        />
+                                        <Area 
+                                            type="linear" 
+                                            dataKey="GSP" 
+                                            stroke="var(--win-color)" 
+                                            strokeWidth={3} 
+                                            fillOpacity={1} 
+                                            fill="url(#colorGSP)"
+                                            activeDot={{ r: 6, fill: '#fff', stroke: 'var(--win-color)', strokeWidth: 3 }} 
+                                        />
+                                    </AreaChart>
+                                </ResponsiveContainer>
                             </div>
                         </div>
                     )}
 
-                    <div className="smash-divider" />
-                </>
-            )}
+                    {/* Fighter Matchups */}
+                    {opponentStats.length > 0 && (
+                        <>
+                            <h2 className="section-title">対戦カード分析</h2>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
 
-            {/* Stage Stats */}
-            {stageStats.length > 0 && (
-                <div className="stat-card" style={{ borderBottomColor: '#00ccff', padding: '1.5rem', marginBottom: '2rem' }}>
-                    <h2 className="section-title" style={{ borderColor: '#00ccff', marginTop: 0 }}>ステージ別 勝率</h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                        {stageStats.map((stat, i) => (
-                            <div key={i} style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                backgroundColor: '#111',
-                                padding: '1.5rem',
-                                border: '2px solid #444',
-                                borderTop: `4px solid ${stat.winRate >= 60 ? 'var(--smash-yellow)' : stat.winRate <= 40 ? 'var(--lose-color)' : '#00ccff'}`,
-                                clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)'
-                            }}>
-                                <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{stat.name}</span>
-                                <span style={{ color: stat.winRate >= 60 ? 'var(--smash-yellow)' : stat.winRate <= 40 ? 'var(--lose-color)' : 'var(--text-main)', fontWeight: '900', fontSize: '2rem', fontFamily: 'var(--font-en)' }}>
-                                    {stat.winRate}%
-                                </span>
-                                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold', marginTop: '0.2rem' }}>
-                                    {stat.wins}勝 / {stat.total}戦
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* GSP History Chart */}
-            {gspChartData.length > 0 && (
-                <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '2rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-                        <h2 className="section-title" style={{ borderColor: 'var(--win-color)', margin: 0 }}>世界戦闘力(GSP) 推移</h2>
-                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            {[
-                                { id: 'all', label: '全期間' },
-                                { id: '100', label: '直近100戦' },
-                                { id: '50', label: '直近50戦' },
-                                { id: '30d', label: '30日間' },
-                                { id: '7d', label: '7日間' }
-                            ].map(range => (
-                                <button
-                                    key={range.id}
-                                    onClick={() => setGspChartRange(range.id)}
-                                    style={{
-                                        padding: '0.4rem 0.8rem',
-                                        backgroundColor: gspChartRange === range.id ? 'var(--win-color)' : '#222',
-                                        color: gspChartRange === range.id ? '#000' : 'var(--text-muted)',
-                                        border: '1px solid',
-                                        borderColor: gspChartRange === range.id ? 'var(--win-color)' : '#444',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontWeight: 'bold',
-                                        fontSize: '0.9rem',
-                                        fontFamily: 'var(--font-jp)',
-                                        transition: 'all 0.2s'
-                                    }}
-                                >
-                                    {range.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    <div style={{ width: '100%', height: 350 }}>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
-                                <defs>
-                                    <linearGradient id="colorGSP" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="var(--win-color)" stopOpacity={0.8}/>
-                                        <stop offset="95%" stopColor="var(--win-color)" stopOpacity={0}/>
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#222" vertical={false} />
-                                <XAxis
-                                    dataKey="uniqueId"
-                                    stroke="var(--text-muted)"
-                                    ticks={gspXTicks}
-                                    interval={0}
-                                    tick={(props) => {
-                                        const { x, y, payload, index } = props;
-                                        const point = gspChartData.find(d => d.uniqueId === payload.value);
-                                        const text = point ? point.date : payload.value;
-                                        const dy = index % 2 === 0 ? 12 : 26;
-                                        return (
-                                            <g transform={`translate(${x},${y})`}>
-                                                <text x={0} y={0} dy={dy} textAnchor="middle" fill="var(--text-muted)" fontSize={11} fontWeight="bold">
-                                                    {text}
-                                                </text>
-                                            </g>
-                                        );
-                                    }}
-                                />
-                                <YAxis 
-                                    stroke="var(--text-muted)" 
-                                    width={55} 
-                                    fontSize={11} 
-                                    fontWeight="bold" 
-                                    domain={['dataMin - 100000', 'dataMax + 100000']} 
-                                    tickFormatter={(value) => (value / 10000).toFixed(0) + '万'} 
-                                    tickCount={6}
-                                />
-                                <Tooltip
-                                    content={({ active, payload }) => {
-                                        if (active && payload && payload.length) {
-                                            const data = payload[0].payload;
-                                            return (
-                                                <div style={{ backgroundColor: '#111', border: '2px solid var(--win-color)', padding: '15px', color: 'white', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)', boxShadow: '0 8px 16px rgba(0,0,0,0.5)' }}>
-                                                    <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--text-muted)', fontSize: '0.9rem' }}>{data.date} {data.time}</p>
-                                                    <p style={{ margin: '8px 0', fontSize: '1.4rem', fontWeight: '900', color: 'var(--win-color)', fontFamily: 'var(--font-en)' }}>
-                                                        GSP: {data.GSP.toLocaleString()}
-                                                    </p>
-                                                    <p style={{ margin: 0, fontSize: '1rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold' }}>
-                                                        <span style={{ color: data.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)', fontFamily: 'var(--font-en)', fontStyle: 'italic' }}>
-                                                            {data.result === 'win' ? 'WIN' : 'LOSE'}
-                                                        </span>
-                                                        vs {data.opponent}
-                                                    </p>
+                                {/* Frequent Matchups */}
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--text-muted)', padding: '1.5rem' }}>
+                                    <h3 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>よく戦う相手</h3>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                        {[...opponentStats].sort((a, b) => b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
+                                            <div key={`freq-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: '#111', borderLeft: '4px solid var(--text-muted)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <span style={{ fontWeight: '900', color: 'var(--text-muted)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
+                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                    <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
                                                 </div>
-                                            );
-                                        }
-                                        return null;
-                                    }}
-                                />
-                                <Area 
-                                    type="linear" 
-                                    dataKey="GSP" 
-                                    stroke="var(--win-color)" 
-                                    strokeWidth={3} 
-                                    fillOpacity={1} 
-                                    fill="url(#colorGSP)"
-                                    activeDot={{ r: 6, fill: '#fff', stroke: 'var(--win-color)', strokeWidth: 3 }} 
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </div>
-                </div>
-            )}
-
-            {/* Fighter Matchups */}
-            {opponentStats.length > 0 && (
-                <>
-                    <h2 className="section-title">対戦カード分析</h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-
-                        {/* Frequent Matchups */}
-                        <div className="stat-card" style={{ borderBottomColor: 'var(--text-muted)', padding: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>よく戦う相手</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {[...opponentStats].sort((a, b) => b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
-                                    <div key={`freq-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: '#111', borderLeft: '4px solid var(--text-muted)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <span style={{ fontWeight: '900', color: 'var(--text-muted)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
-                                            <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
-                                        </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
-                                            <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--text-muted)', fontSize: '1.2rem' }}>
-                                                {stat.winRate}%
-                                            </span>
-                                        </div>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                                    <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
+                                                    <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--text-muted)', fontSize: '1.2rem' }}>
+                                                        {stat.winRate}%
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
+                                </div>
 
-                        {/* Best Matchups */}
-                        <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', color: 'var(--win-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>得意な相手</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {[...opponentStats].sort((a, b) => b.winRate - a.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
-                                    <div key={`best-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(0, 204, 255, 0.1)', borderLeft: '4px solid var(--win-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <span style={{ fontWeight: '900', color: 'var(--win-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
-                                            <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
-                                        </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
-                                            <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--win-color)', fontSize: '1.2rem' }}>
-                                                {stat.winRate}%
-                                            </span>
-                                        </div>
+                                {/* Best Matchups */}
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '1.5rem' }}>
+                                    <h3 style={{ fontSize: '1.4rem', color: 'var(--win-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>得意な相手</h3>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                        {[...opponentStats].sort((a, b) => b.winRate - a.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
+                                            <div key={`best-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(0, 204, 255, 0.1)', borderLeft: '4px solid var(--win-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <span style={{ fontWeight: '900', color: 'var(--win-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
+                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                    <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
+                                                </div>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                                    <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
+                                                    <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--win-color)', fontSize: '1.2rem' }}>
+                                                        {stat.winRate}%
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
+                                </div>
 
-                        {/* Worst Matchups */}
-                        <div className="stat-card" style={{ borderBottomColor: 'var(--lose-color)', padding: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', color: 'var(--lose-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>苦手な相手</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {[...opponentStats].sort((a, b) => a.winRate - b.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
-                                    <div key={`worst-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(255, 51, 51, 0.1)', borderLeft: '4px solid var(--lose-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <span style={{ fontWeight: '900', color: 'var(--lose-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
-                                            <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                            <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
-                                        </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
-                                            <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--lose-color)', fontSize: '1.2rem' }}>
-                                                {stat.winRate}%
-                                            </span>
-                                        </div>
+                                {/* Worst Matchups */}
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--lose-color)', padding: '1.5rem' }}>
+                                    <h3 style={{ fontSize: '1.4rem', color: 'var(--lose-color)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>苦手な相手</h3>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                        {[...opponentStats].sort((a, b) => a.winRate - b.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
+                                            <div key={`worst-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(255, 51, 51, 0.1)', borderLeft: '4px solid var(--lose-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <span style={{ fontWeight: '900', color: 'var(--lose-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
+                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                    <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
+                                                </div>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                                    <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
+                                                    <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--lose-color)', fontSize: '1.2rem' }}>
+                                                        {stat.winRate}%
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Show All Matchups Button */}
-                    {opponentStats.length > 5 && (
-                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
-                            <button
-                                onClick={() => setShowAllMatchups(!showAllMatchups)}
-                                style={{
-                                    backgroundColor: 'transparent',
-                                    color: 'var(--smash-yellow)',
-                                    border: '2px solid var(--smash-yellow)',
-                                    padding: '0.8rem 2rem',
-                                    fontSize: '1.1rem',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
-                                    transition: 'all 0.2s',
-                                    fontFamily: 'var(--font-jp)'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor = 'var(--smash-yellow)';
-                                    e.currentTarget.style.color = '#000';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor = 'transparent';
-                                    e.currentTarget.style.color = 'var(--smash-yellow)';
-                                }}
-                            >
-                                {showAllMatchups ? '▲ 一部のみ表示 (TOP 5)' : '▼ すべてのファイターを表示'}
-                            </button>
-                        </div>
-                    )}
-
-                    {/* Kill Move Rankings */}
-                    {myKillMoveRanking.length > 0 && (
-                        <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', marginTop: '2rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--smash-yellow)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
-                                <Crosshair size={24} /> よく使う撃墜技
-                            </h3>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                                {myKillMoveRanking.slice(0, showAllKillMoves ? undefined : 5).map((item, i) => (
-                                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#111', padding: '1rem 1.5rem', border: '2px solid #444', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                        <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem' }}>{i + 1}. {item.name}</span>
-                                        <span style={{ color: 'var(--smash-yellow)', fontWeight: '900', fontSize: '1.3rem', fontFamily: 'var(--font-en)' }}>{item.count} 回</span>
-                                    </div>
-                                ))}
+                                </div>
                             </div>
 
-                            {myKillMoveRanking.length > 5 && (
+                            {/* Show All Matchups Button */}
+                            {opponentStats.length > 5 && (
                                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
                                     <button
-                                        onClick={() => setShowAllKillMoves(!showAllKillMoves)}
+                                        onClick={() => setShowAllMatchups(!showAllMatchups)}
                                         style={{
                                             backgroundColor: 'transparent',
                                             color: 'var(--smash-yellow)',
@@ -767,224 +766,271 @@ export default function Stats() {
                                             e.currentTarget.style.color = 'var(--smash-yellow)';
                                         }}
                                     >
-                                        {showAllKillMoves ? '▲ 一部のみ表示 (TOP 5)' : '▼ すべての撃墜技を表示'}
+                                        {showAllMatchups ? '▲ 一部のみ表示 (TOP 5)' : '▼ すべてのファイターを表示'}
                                     </button>
                                 </div>
                             )}
-                        </div>
-                    )}
-                </>
-            )}
 
-            <div className="smash-divider" />
-
-            {/* Recent History */}
-            <div className="animate-enter" style={{ animationDelay: '0.2s' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-                    <h2 className="section-title" style={{ margin: 0 }}>直近の履歴</h2>
-                    
-                    {filteredHistory.length > 0 && (
-                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', backgroundColor: '#111', padding: '0.8rem 1.2rem', borderRadius: '8px', border: '1px solid #333' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Filter size={16} color="var(--text-muted)" />
-                                <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>相手:</span>
-                                <select 
-                                    value={historyOpponentFilter} 
-                                    onChange={(e) => setHistoryOpponentFilter(e.target.value)}
-                                    style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none', minWidth: '120px' }}
-                                >
-                                    <option value="all">すべて</option>
-                                    {uniqueOpponentsInHistory.map(f => (
-                                        <option key={f.id} value={f.id}>{f.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Crosshair size={16} color="var(--smash-yellow)" />
-                                <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>自技:</span>
-                                <select 
-                                    value={historyKillMoveFilter} 
-                                    onChange={(e) => setHistoryKillMoveFilter(e.target.value)}
-                                    style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none', minWidth: '120px' }}
-                                >
-                                    <option value="all">すべて</option>
-                                    {myKillMoveRanking.map(km => (
-                                        <option key={km.name} value={km.name}>{km.name} ({km.count})</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <FileText size={16} color="var(--text-main)" />
-                                <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>メモ:</span>
-                                <select 
-                                    value={historyMemoFilter} 
-                                    onChange={(e) => setHistoryMemoFilter(e.target.value)}
-                                    style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none' }}
-                                >
-                                    <option value="all">すべて</option>
-                                    <option value="has_memo">あり</option>
-                                    <option value="no_memo">なし</option>
-                                </select>
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
-                                <Search size={16} color="var(--text-muted)" />
-                                <input 
-                                    type="text" 
-                                    placeholder="メモ内容を検索..." 
-                                    value={historyMemoSearch}
-                                    onChange={(e) => setHistoryMemoSearch(e.target.value)}
-                                    style={{ padding: '0.4rem', width: '100%', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none' }}
-                                />
-                            </div>
-                        </div>
-                    )}
-                </div>
-
-                {displayedHistory.length === 0 ? (
-                    <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '3rem', backgroundColor: '#111', border: '2px dashed #444', fontWeight: 'bold' }}>
-                        {filteredHistory.length === 0 ? 'まだ対戦記録がありません。「記録する」タブから最初の試合を登録しましょう！' : 'フィルター条件に一致する試合がありません。'}
-                    </p>
-                ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {displayedHistory.slice(0, 50).map((match, index) => {
-                            const myFighter = fighters.find(f => f.id === match.myFighter);
-                            const opponent = fighters.find(f => f.id === match.opponentFighter);
-                            const isWin = match.result === 'win';
-                            const date = new Date(match.timestamp);
-
-                            return (
-                                <div
-                                    key={index}
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: '1rem',
-                                        padding: '1.5rem',
-                                        backgroundColor: isWin ? 'rgba(0, 204, 255, 0.1)' : 'rgba(255, 51, 51, 0.1)',
-                                        border: `2px solid ${isWin ? 'var(--win-color)' : 'var(--lose-color)'}`,
-                                        borderLeftWidth: '8px',
-                                        clipPath: 'polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
-                                        position: 'relative'
-                                    }}
-                                >
-                                    {editingMatchId === match.id ? (
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                            <div style={{ fontWeight: '900', color: 'var(--smash-yellow)', fontSize: '1.2rem' }}>記録の編集</div>
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
-                                                <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
-                                                    <span style={{ color: 'var(--text-muted)' }}>勝敗</span>
-                                                    <select name="result" value={editForm.result} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }}>
-                                                        <option value="win">WIN</option>
-                                                        <option value="lose">LOSE</option>
-                                                    </select>
-                                                </label>
-                                                <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
-                                                    <span style={{ color: 'var(--text-muted)' }}>世界戦闘力(GSP)</span>
-                                                    <input type="number" name="gsp" value={editForm.gsp} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
-                                                </label>
-                                                <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
-                                                    <span style={{ color: 'var(--text-muted)' }}>ステージ</span>
-                                                    <select name="stage" value={editForm.stage} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }}>
-                                                        <option value="戦場タイプ">戦場タイプ</option>
-                                                        <option value="終点タイプ">終点タイプ</option>
-                                                        <option value="その他">その他</option>
-                                                    </select>
-                                                </label>
+                            {/* Kill Move Rankings */}
+                            {myKillMoveRanking.length > 0 && (
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', marginTop: '2rem' }}>
+                                    <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--smash-yellow)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
+                                        <Crosshair size={24} /> よく使う撃墜技
+                                    </h3>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                                        {myKillMoveRanking.slice(0, showAllKillMoves ? undefined : 5).map((item, i) => (
+                                            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#111', padding: '1rem 1.5rem', border: '2px solid #444', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
+                                                <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem' }}>{i + 1}. {item.name}</span>
+                                                <span style={{ color: 'var(--smash-yellow)', fontWeight: '900', fontSize: '1.3rem', fontFamily: 'var(--font-en)' }}>{item.count} 回</span>
                                             </div>
-                                            <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
-                                                <span style={{ color: 'var(--text-muted)' }}>自分の撃墜技 (カンマ区切り)</span>
-                                                <input type="text" name="myKillMoves" value={editForm.myKillMoves} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
-                                            </label>
-                                            <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
-                                                <span style={{ color: 'var(--text-muted)' }}>相手の撃墜技 (カンマ区切り)</span>
-                                                <input type="text" name="opponentKillMoves" value={editForm.opponentKillMoves} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
-                                            </label>
-                                            <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
-                                                <span style={{ color: 'var(--text-muted)' }}>メモ</span>
-                                                <textarea name="notes" value={editForm.notes} onChange={handleEditChange} rows="2" style={{ padding: '0.8rem', fontSize: '1rem', background: '#222', color: '#fff', border: '2px solid #555' }} />
-                                            </label>
-                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                                                <button onClick={handleSaveEdit} className="btn-smash" style={{ padding: '1rem', flex: 1, fontSize: '1.2rem' }}><div>保存</div></button>
-                                                <button onClick={handleCancelEdit} style={{ padding: '1rem', flex: 1, backgroundColor: 'transparent', color: 'var(--text-main)', border: '2px solid #555', fontWeight: 'bold' }}>キャンセル</button>
-                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {myKillMoveRanking.length > 5 && (
+                                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+                                            <button
+                                                onClick={() => setShowAllKillMoves(!showAllKillMoves)}
+                                                style={{
+                                                    backgroundColor: 'transparent',
+                                                    color: 'var(--smash-yellow)',
+                                                    border: '2px solid var(--smash-yellow)',
+                                                    padding: '0.8rem 2rem',
+                                                    fontSize: '1.1rem',
+                                                    fontWeight: 'bold',
+                                                    cursor: 'pointer',
+                                                    clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                                                    transition: 'all 0.2s',
+                                                    fontFamily: 'var(--font-jp)'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'var(--smash-yellow)';
+                                                    e.currentTarget.style.color = '#000';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'transparent';
+                                                    e.currentTarget.style.color = 'var(--smash-yellow)';
+                                                }}
+                                            >
+                                                {showAllKillMoves ? '▲ 一部のみ表示 (TOP 5)' : '▼ すべての撃墜技を表示'}
+                                            </button>
                                         </div>
-                                    ) : (
-                                        <>
-                                            <div className="history-item-header">
-                                                <div className="vs-container">
-                                                    <span className="result-text" style={{
-                                                        color: isWin ? 'var(--win-color)' : 'var(--lose-color)',
-                                                    }}>
-                                                        {isWin ? 'WIN' : 'LOSE'}
-                                                    </span>
-                                                    <div className="vs-badge-container">
-                                                        <img src={myFighter?.imageUrl} alt={myFighter?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                                        <span style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--smash-red)', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>VS</span>
-                                                        <img src={opponent?.imageUrl} alt={opponent?.name} style={{ width: '50px', height: '50px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
-                                                        <span className="fighter-name">{opponent?.name}</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* GSP Box */}
-                                                {match.gsp && (
-                                                    <div style={{ backgroundColor: '#111', padding: '0.5rem 1.5rem', border: '2px solid #555', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', textAlign: 'center' }}>
-                                                        <div style={{ fontSize: '0.9rem', color: 'var(--smash-yellow)', fontWeight: 'bold' }}>GSP</div>
-                                                        <div style={{ fontFamily: 'var(--font-en)', fontSize: '1.8rem', fontWeight: '900', color: 'var(--text-main)' }}>
-                                                            {match.gsp.toLocaleString()}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                <div style={{ display: 'flex', gap: '1rem' }}>
-                                                    <button onClick={() => handleEditClick(match)} style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} title="編集" onMouseEnter={(e) => e.currentTarget.style.color = 'var(--win-color)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
-                                                        <Edit2 size={24} />
-                                                    </button>
-                                                    <button onClick={() => removeMatch(match.id)} style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} title="削除" onMouseEnter={(e) => e.currentTarget.style.color = 'var(--smash-red)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
-                                                        <Trash2 size={24} />
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>
-                                                <span>{date.toLocaleDateString('ja-JP')} {date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}</span>
-                                                {match.rules && (
-                                                    <span>{match.rules.stock} ストック / {match.rules.time}:00 {match.rules.stage && `/ ${match.rules.stage}`}</span>
-                                                )}
-                                                {(match.myKillMoves?.length > 0 || match.killMove) && (
-                                                    <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                                        <span style={{ color: 'var(--text-muted)' }}>自KO:</span>
-                                                        {(match.myKillMoves || [match.killMove]).filter(Boolean).map((m, i) => (
-                                                            <span key={`my-${i}`} style={{ backgroundColor: '#222', color: 'var(--smash-yellow)', padding: '2px 8px', border: '1px solid var(--smash-yellow)', fontWeight: 'bold' }}>
-                                                                {m}
-                                                            </span>
-                                                        ))}
-                                                    </span>
-                                                )}
-                                                {match.opponentKillMoves?.length > 0 && (
-                                                    <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                                        <span style={{ color: 'var(--text-muted)' }}>被KO:</span>
-                                                        {match.opponentKillMoves.map((m, i) => (
-                                                            <span key={`opp-${i}`} style={{ backgroundColor: '#222', color: 'var(--smash-red)', padding: '2px 8px', border: '1px solid var(--smash-red)', fontWeight: 'bold' }}>
-                                                                {m}
-                                                            </span>
-                                                        ))}
-                                                    </span>
-                                                )}
-                                            </div>
-
-                                            {match.notes && (
-                                                <div style={{ marginTop: '0.5rem', fontSize: '1rem', color: 'var(--text-main)', backgroundColor: '#0a0a0a', borderLeft: '4px solid var(--text-muted)', padding: '1rem', fontWeight: 'bold' }}>
-                                                    {match.notes}
-                                                </div>
-                                            )}
-                                        </>
                                     )}
                                 </div>
-                            );
-                        })}
+                            )}
+                        </>
+                    )}
+
+                    <div className="smash-divider" />
+
+                    {/* Recent History */}
+                    <div className="animate-enter" style={{ animationDelay: '0.2s' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                            <h2 className="section-title" style={{ margin: 0 }}>直近の履歴</h2>
+                            
+                            {filteredHistory.length > 0 && (
+                                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', backgroundColor: '#111', padding: '0.8rem 1.2rem', borderRadius: '8px', border: '1px solid #333' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                        <Filter size={16} color="var(--text-muted)" />
+                                        <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>相手:</span>
+                                        <select 
+                                            value={historyOpponentFilter} 
+                                            onChange={(e) => setHistoryOpponentFilter(e.target.value)}
+                                            style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none', minWidth: '120px' }}
+                                        >
+                                            <option value="all">すべて</option>
+                                            {uniqueOpponentsInHistory.map(f => (
+                                                <option key={f.id} value={f.id}>{f.name}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                        <Crosshair size={16} color="var(--smash-yellow)" />
+                                        <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>自技:</span>
+                                        <select 
+                                            value={historyKillMoveFilter} 
+                                            onChange={(e) => setHistoryKillMoveFilter(e.target.value)}
+                                            style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none', minWidth: '120px' }}
+                                        >
+                                            <option value="all">すべて</option>
+                                            {myKillMoveRanking.map(km => (
+                                                <option key={km.name} value={km.name}>{km.name} ({km.count})</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                        <FileText size={16} color="var(--text-main)" />
+                                        <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>メモ:</span>
+                                        <select 
+                                            value={historyMemoFilter} 
+                                            onChange={(e) => setHistoryMemoFilter(e.target.value)}
+                                            style={{ padding: '0.4rem', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none' }}
+                                        >
+                                            <option value="all">すべて</option>
+                                            <option value="has_memo">あり</option>
+                                            <option value="no_memo">なし</option>
+                                        </select>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
+                                        <Search size={16} color="var(--text-muted)" />
+                                        <input 
+                                            type="text" 
+                                            placeholder="メモ内容を検索..." 
+                                            value={historyMemoSearch}
+                                            onChange={(e) => setHistoryMemoSearch(e.target.value)}
+                                            style={{ padding: '0.4rem', width: '100%', backgroundColor: '#222', color: '#fff', border: '1px solid #555', borderRadius: '4px', outline: 'none' }}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {displayedHistory.length === 0 ? (
+                            <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '3rem', backgroundColor: '#111', border: '2px dashed #444', fontWeight: 'bold' }}>
+                                {filteredHistory.length === 0 ? 'まだ対戦記録がありません。「記録する」タブから最初の試合を登録しましょう！' : 'フィルター条件に一致する試合がありません。'}
+                            </p>
+                        ) : (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                {displayedHistory.slice(0, 50).map((match, index) => {
+                                    const myFighter = fighters.find(f => f.id === match.myFighter);
+                                    const opponent = fighters.find(f => f.id === match.opponentFighter);
+                                    const isWin = match.result === 'win';
+                                    const date = new Date(match.timestamp);
+
+                                    return (
+                                        <div
+                                            key={index}
+                                            style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                gap: '1rem',
+                                                padding: '1.5rem',
+                                                backgroundColor: isWin ? 'rgba(0, 204, 255, 0.1)' : 'rgba(255, 51, 51, 0.1)',
+                                                border: `2px solid ${isWin ? 'var(--win-color)' : 'var(--lose-color)'}`,
+                                                borderLeftWidth: '8px',
+                                                clipPath: 'polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                                                position: 'relative'
+                                            }}
+                                        >
+                                            {editingMatchId === match.id ? (
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                                    <div style={{ fontWeight: '900', color: 'var(--smash-yellow)', fontSize: '1.2rem' }}>記録の編集</div>
+                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
+                                                        <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                            <span style={{ color: 'var(--text-muted)' }}>勝敗</span>
+                                                            <select name="result" value={editForm.result} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }}>
+                                                                <option value="win">WIN</option>
+                                                                <option value="lose">LOSE</option>
+                                                            </select>
+                                                        </label>
+                                                        <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                            <span style={{ color: 'var(--text-muted)' }}>世界戦闘力(GSP)</span>
+                                                            <input type="number" name="gsp" value={editForm.gsp} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
+                                                        </label>
+                                                        <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                            <span style={{ color: 'var(--text-muted)' }}>ステージ</span>
+                                                            <select name="stage" value={editForm.stage} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }}>
+                                                                <option value="戦場タイプ">戦場タイプ</option>
+                                                                <option value="終点タイプ">終点タイプ</option>
+                                                                <option value="その他">その他</option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                        <span style={{ color: 'var(--text-muted)' }}>自分の撃墜技 (カンマ区切り)</span>
+                                                        <input type="text" name="myKillMoves" value={editForm.myKillMoves} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
+                                                    </label>
+                                                    <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                        <span style={{ color: 'var(--text-muted)' }}>相手の撃墜技 (カンマ区切り)</span>
+                                                        <input type="text" name="opponentKillMoves" value={editForm.opponentKillMoves} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
+                                                    </label>
+                                                    <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
+                                                        <span style={{ color: 'var(--text-muted)' }}>メモ</span>
+                                                        <textarea name="notes" value={editForm.notes} onChange={handleEditChange} rows="2" style={{ padding: '0.8rem', fontSize: '1rem', background: '#222', color: '#fff', border: '2px solid #555' }} />
+                                                    </label>
+                                                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                                                        <button onClick={handleSaveEdit} className="btn-smash" style={{ padding: '1rem', flex: 1, fontSize: '1.2rem' }}><div>保存</div></button>
+                                                        <button onClick={handleCancelEdit} style={{ padding: '1rem', flex: 1, backgroundColor: 'transparent', color: 'var(--text-main)', border: '2px solid #555', fontWeight: 'bold' }}>キャンセル</button>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <div className="history-item-header">
+                                                        <div className="vs-container">
+                                                            <span className="result-text" style={{
+                                                                color: isWin ? 'var(--win-color)' : 'var(--lose-color)',
+                                                            }}>
+                                                                {isWin ? 'WIN' : 'LOSE'}
+                                                            </span>
+                                                            <div className="vs-badge-container">
+                                                                <img src={myFighter?.imageUrl} alt={myFighter?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                                <span style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--smash-red)', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>VS</span>
+                                                                <img src={opponent?.imageUrl} alt={opponent?.name} style={{ width: '50px', height: '50px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                                <span className="fighter-name">{opponent?.name}</span>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* GSP Box */}
+                                                        {match.gsp && (
+                                                            <div style={{ backgroundColor: '#111', padding: '0.5rem 1.5rem', border: '2px solid #555', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', textAlign: 'center' }}>
+                                                                <div style={{ fontSize: '0.9rem', color: 'var(--smash-yellow)', fontWeight: 'bold' }}>GSP</div>
+                                                                <div style={{ fontFamily: 'var(--font-en)', fontSize: '1.8rem', fontWeight: '900', color: 'var(--text-main)' }}>
+                                                                    {match.gsp.toLocaleString()}
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        <div style={{ display: 'flex', gap: '1rem' }}>
+                                                            <button onClick={() => handleEditClick(match)} style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} title="編集" onMouseEnter={(e) => e.currentTarget.style.color = 'var(--win-color)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
+                                                                <Edit2 size={24} />
+                                                            </button>
+                                                            <button onClick={() => removeMatch(match.id)} style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} title="削除" onMouseEnter={(e) => e.currentTarget.style.color = 'var(--smash-red)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
+                                                                <Trash2 size={24} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>
+                                                        <span>{date.getFullYear()}/{date.getMonth() + 1}/{date.getDate()} {String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}</span>
+                                                        {match.rules && (
+                                                            <span>{match.rules.stock} ストック / {match.rules.time}:00 {match.rules.stage && `/ ${match.rules.stage}`}</span>
+                                                        )}
+                                                        {(match.myKillMoves?.length > 0 || match.killMove) && (
+                                                            <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                                                <span style={{ color: 'var(--text-muted)' }}>自KO:</span>
+                                                                {(match.myKillMoves || [match.killMove]).filter(Boolean).map((m, i) => (
+                                                                    <span key={`my-${i}`} style={{ backgroundColor: '#222', color: 'var(--smash-yellow)', padding: '2px 8px', border: '1px solid var(--smash-yellow)', fontWeight: 'bold' }}>
+                                                                        {m}
+                                                                    </span>
+                                                                ))}
+                                                            </span>
+                                                        )}
+                                                        {match.opponentKillMoves?.length > 0 && (
+                                                            <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                                                <span style={{ color: 'var(--text-muted)' }}>被KO:</span>
+                                                                {match.opponentKillMoves.map((m, i) => (
+                                                                    <span key={`opp-${i}`} style={{ backgroundColor: '#222', color: 'var(--smash-red)', padding: '2px 8px', border: '1px solid var(--smash-red)', fontWeight: 'bold' }}>
+                                                                        {m}
+                                                                    </span>
+                                                                ))}
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    {match.notes && (
+                                                        <div style={{ marginTop: '0.5rem', fontSize: '1rem', color: 'var(--text-main)', backgroundColor: '#0a0a0a', borderLeft: '4px solid var(--text-muted)', padding: '1rem', fontWeight: 'bold' }}>
+                                                            {match.notes}
+                                                        </div>
+                                                    )}
+                                                </>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 }
