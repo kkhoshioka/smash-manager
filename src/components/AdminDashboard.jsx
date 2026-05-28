@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Users, Swords, Trophy, Activity, RefreshCw } from 'lucide-react';
+import { fighters } from '../data/fighters';
 
 export default function AdminDashboard({ auth }) {
     const [stats, setStats] = useState(null);
@@ -91,7 +92,11 @@ export default function AdminDashboard({ auth }) {
                 <div style={{ padding: '1rem' }}>
                     {stats?.popularFighters?.length > 0 ? (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            {stats.popularFighters.map((item, index) => (
+                            {stats.popularFighters.map((item, index) => {
+                                const fObj = fighters.find(f => f.id === item.fighter) || fighters.find(f => f.name === item.fighter);
+                                const displayName = fObj ? fObj.name : item.fighter;
+                                const displayImg = fObj ? fObj.imageUrl : `/fighters/${item.fighter}.png`;
+                                return (
                                 <div key={item.fighter} style={{ 
                                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
                                     padding: '0.8rem', backgroundColor: '#1a1e29', borderRadius: '4px',
@@ -105,15 +110,15 @@ export default function AdminDashboard({ auth }) {
                                             #{index + 1}
                                         </span>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                            <img src={`/fighters/${item.fighter}.png`} alt="" style={{ width: '32px', height: '32px', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; }} />
-                                            <span style={{ fontWeight: 'bold', color: 'white' }}>{item.fighter}</span>
+                                            <img src={displayImg} alt="" style={{ width: '32px', height: '32px', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; }} />
+                                            <span style={{ fontWeight: 'bold', color: 'white' }}>{displayName}</span>
                                         </div>
                                     </div>
                                     <div style={{ fontWeight: 'bold', color: 'var(--text-main)' }}>
                                         {item.count.toLocaleString()} 回
                                     </div>
                                 </div>
-                            ))}
+                            )})}
                         </div>
                     ) : (
                         <p style={{ color: 'var(--text-muted)', textAlign: 'center' }}>データがありません</p>
