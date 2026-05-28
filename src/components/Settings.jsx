@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { useAuth } from '../hooks/useAuth';
-import { Image, Upload, Download, Cloud, Monitor, Database, LogIn, UserPlus, LogOut, Copy } from 'lucide-react';
+import { Image, Upload, Download, Cloud, Monitor, Database, LogIn, UserPlus, LogOut, Copy, Eye, EyeOff } from 'lucide-react';
 
 export default function Settings({ backgroundImage, onBackgroundChange }) {
     const { history, prefs, importData, isSyncing, syncError } = useMatchHistory();
@@ -10,6 +10,7 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
     const [isLoginMode, setIsLoginMode] = useState(true);
+    const [showObsUrl, setShowObsUrl] = useState(false);
 
     const fileInputRef = useRef(null);
     const bgUploadRef = useRef(null);
@@ -134,11 +135,16 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
                                 </p>
                                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                                     <input 
-                                        type="text" 
+                                        type={showObsUrl ? "text" : "password"} 
                                         readOnly 
                                         value={`${window.location.origin}/?obsId=${auth.userId}`}
-                                        style={{ flex: 1, padding: '0.8rem', background: '#000', color: '#00ccff', border: '1px solid #00ccff', fontSize: '0.9rem', fontFamily: 'monospace' }}
+                                        style={{ flex: 1, padding: '0.8rem', background: '#000', color: showObsUrl ? '#00ccff' : 'var(--text-muted)', border: '1px solid #00ccff', fontSize: '0.9rem', fontFamily: 'monospace' }}
                                     />
+                                    <button onClick={() => setShowObsUrl(!showObsUrl)} className="btn-smash" style={{ background: '#333', padding: '0 0.8rem' }}>
+                                        <div style={{ transform: 'skewX(20deg)', display: 'flex', alignItems: 'center' }}>
+                                            {showObsUrl ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        </div>
+                                    </button>
                                     <button onClick={copyObsUrl} className="btn-smash" style={{ background: '#00ccff', padding: '0 1rem' }}>
                                         <div style={{ transform: 'skewX(20deg)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                             <Copy size={20} /> コピー
