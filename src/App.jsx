@@ -19,7 +19,7 @@ function App() {
     localStorage.setItem('smashBgImage', backgroundImage);
   }, [backgroundImage]);
 
-  const isObsMode = window.location.search.includes('obs=true') || window.location.hash.includes('obs=true');
+  const isObsMode = window.location.search.includes('obs=true') || window.location.search.includes('obsId=') || window.location.hash.includes('obs=true');
 
   if (isObsMode) {
     return <ObsOverlay />;

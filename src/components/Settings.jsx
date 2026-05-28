@@ -94,7 +94,7 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
     const copyObsUrl = () => {
         if (!auth?.userId) return;
         // Construct full URL including origin
-        const url = `${window.location.origin}/?obsId=${auth.userId}`;
+        const url = `${window.location.origin}/?obs=true&obsId=${auth.userId}`;
         navigator.clipboard.writeText(url)
             .then(() => alert('OBS用URLをコピーしました！'))
             .catch(() => alert('コピーに失敗しました。'));
@@ -137,7 +137,7 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
                                     <input 
                                         type={showObsUrl ? "text" : "password"} 
                                         readOnly 
-                                        value={`${window.location.origin}/?obsId=${auth.userId}`}
+                                        value={`${window.location.origin}/?obs=true&obsId=${auth.userId}`}
                                         style={{ flex: 1, padding: '0.8rem', background: '#000', color: showObsUrl ? '#00ccff' : 'var(--text-muted)', border: '1px solid #00ccff', fontSize: '0.9rem', fontFamily: 'monospace' }}
                                     />
                                     <button onClick={() => setShowObsUrl(!showObsUrl)} className="btn-smash" style={{ background: '#333', padding: '0 0.8rem' }}>
