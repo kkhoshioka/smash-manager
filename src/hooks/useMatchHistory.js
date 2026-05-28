@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import restoredData from '../data/restored_data.json';
+import { useAuth } from './useAuth';
 
 const STORAGE_KEY = 'smash_logger_history';
 const PREFS_KEY = 'smash_logger_prefs';
 
 export function useMatchHistory() {
+    const { auth, logout } = useAuth();
+
     const [history, setHistory] = useState(() => {
         const saved = localStorage.getItem(STORAGE_KEY);
         return saved ? JSON.parse(saved) : [];
@@ -20,7 +23,6 @@ export function useMatchHistory() {
 
         if (saved) {
             const parsed = JSON.parse(saved);
-            // Ensure rules and fighterGsp exist even on old saves
             if (!parsed.rules) parsed.rules = { stock: 3, time: 7 };
             if (!parsed.fighterGsp) parsed.fighterGsp = {};
             if (!parsed.customKillMoves) parsed.customKillMoves = {};
@@ -30,112 +32,118 @@ export function useMatchHistory() {
         return defaultPrefs;
     });
 
-    const [syncId, setSyncId] = useState(() => {
-        return localStorage.getItem('smash_sync_id') || '';
-    });
     const [isSyncing, setIsSyncing] = useState(false);
     const [syncError, setSyncError] = useState(null);
     const isCloudInitialized = useRef(false);
 
-    const saveToCloud = async (currentSyncId, newHistory, newPrefs) => {
-        if (!currentSyncId) return;
+    const saveToCloud = async (currentAuth, newHistory, newPrefs) => {
+        if (!currentAuth || !currentAuth.token) return;
         setIsSyncing(true);
         setSyncError(null);
         try {
             const response = await fetch('/api/save', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentAuth.token}`
+                },
                 body: JSON.stringify({
-                    syncId: currentSyncId,
                     data: { history: newHistory, prefs: newPrefs }
                 }),
             });
             const result = await response.json();
-            if (!result.success) throw new Error(result.error || 'Sync failed');
+            if (!response.ok) {
+                if (response.status === 401) logout();
+                throw new Error(result.error || 'Sync failed');
+            }
         } catch (err) {
             console.error("Cloud Error:", err);
-            setSyncError("クラウド保存に失敗しました。合言葉が間違っているか、データベース未設定です。");
+            setSyncError("クラウド保存に失敗しました。");
         } finally {
             setIsSyncing(false);
         }
     };
 
-    const loadFromCloud = async (idToLoad, isInitialLoad = false) => {
-        if (!idToLoad) return;
+    const loadFromCloud = async (currentAuth, isInitialLoad = false) => {
+        if (!currentAuth || !currentAuth.token) return;
         setIsSyncing(true);
         setSyncError(null);
         try {
-            const response = await fetch(`/api/load?syncId=${idToLoad}`);
+            const response = await fetch('/api/load', {
+                headers: {
+                    'Authorization': `Bearer ${currentAuth.token}`
+                }
+            });
             const result = await response.json();
-            if (!result.success) throw new Error(result.error || 'Load failed');
+            
+            if (!response.ok) {
+                if (response.status === 401) {
+                    logout();
+                    alert("認証の有効期限が切れました。再度ログインしてください。");
+                    return;
+                }
+                throw new Error(result.error || 'Load failed');
+            }
 
             if (result.data) {
                 if (result.data.history) setHistory(result.data.history);
                 if (result.data.prefs) setPrefs(result.data.prefs);
                 if (!isInitialLoad) alert("クラウドからデータを読み込みました！");
             } else {
-                // No data found in the cloud for this syncId
+                // No data found in the cloud for this user
                 if (!isInitialLoad) {
-                    // Check if local device already had data
                     if (history.length > 0) {
                         const wantsToUpload = window.confirm(
-                            `新しい合言葉「${idToLoad}」にはまだデータがありません。\n\n現在の端末にある記録（${history.length}件）をこの合言葉にアップロード(引継ぎ)しますか？\n\n【キャンセル】を押すと、現在のデータをリセットし「まっさらな状態」からスタートします。`
+                            `このアカウントにはまだデータがありません。\n\n現在の端末にある記録（${history.length}件）をアップロード(引継ぎ)しますか？\n\n【キャンセル】を押すと、現在のデータをリセットし「まっさらな状態」からスタートします。`
                         );
                         if (wantsToUpload) {
-                            await saveToCloud(idToLoad, history, prefs);
-                            alert("新しく合言葉を登録し、現在のデータをアップロードしました！");
+                            await saveToCloud(currentAuth, history, prefs);
+                            alert("現在のデータをアップロードしました！");
                         } else {
                             setHistory([]);
                             setPrefs({});
-                            alert("表示データをリセットしました（新しい合言葉でスタートします）。");
+                            alert("表示データをリセットしました（新しいアカウントでスタートします）。");
                         }
                     } else {
-                        // Clean slate upload
-                        await saveToCloud(idToLoad, history, prefs);
-                        alert("新しいクラウド同期の合言葉を登録しました！");
+                        await saveToCloud(currentAuth, history, prefs);
+                    }
+                } else {
+                    // Initial load but no data. If we have local data, we should upload it.
+                    if (history.length > 0) {
+                        await saveToCloud(currentAuth, history, prefs);
                     }
                 }
             }
         } catch (err) {
             console.error("Cloud Error:", err);
-            setSyncError("データの読み込みに失敗しました。合言葉が間違っているか、データベース未設定です。");
+            setSyncError("データの読み込みに失敗しました。");
         } finally {
             setIsSyncing(false);
             if (isInitialLoad) isCloudInitialized.current = true;
         }
     };
 
-    const handleSetSyncId = (newSyncId) => {
-        setSyncId(newSyncId);
-        if (newSyncId) {
-            localStorage.setItem('smash_sync_id', newSyncId);
-            loadFromCloud(newSyncId, false);
-        } else {
-            localStorage.removeItem('smash_sync_id');
-        }
-    };
-
-    // Auto initialize cloud connection on app load
+    // Auto initialize cloud connection when auth changes (e.g. login)
     useEffect(() => {
-        if (syncId) {
-            loadFromCloud(syncId, true);
+        if (auth && auth.token) {
+            loadFromCloud(auth, true);
         } else {
             isCloudInitialized.current = true;
         }
-    }, []);
+    }, [auth?.token]); // Dependency on token to trigger load when logging in
 
     useEffect(() => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
-        // Auto sync if syncId is present and initial cloud fetch has completed
-        if (syncId && isCloudInitialized.current && history.length > 0) {
-            saveToCloud(syncId, history, prefs);
+        // Auto sync
+        if (auth && auth.token && isCloudInitialized.current && history.length > 0) {
+            saveToCloud(auth, history, prefs);
         }
     }, [history]);
 
     useEffect(() => {
         localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
-        if (syncId && isCloudInitialized.current) {
-            saveToCloud(syncId, history, prefs);
+        if (auth && auth.token && isCloudInitialized.current) {
+            saveToCloud(auth, history, prefs);
         }
     }, [prefs]);
 
@@ -147,7 +155,6 @@ export function useMatchHistory() {
         };
         setHistory(prev => [newMatch, ...prev]);
 
-        // Update preferences if myFighter or rules are set
         setPrefs(p => ({
             ...p,
             lastMyFighter: matchData.myFighter || p.lastMyFighter,
@@ -183,35 +190,12 @@ export function useMatchHistory() {
         }
     };
 
-    // Temporary restoration logic (FORCED)
-    useEffect(() => {
-        const expansionFlag = 'smash_expansion_v2_done';
-        console.log("Restoration Effect Running. Flag state:", localStorage.getItem(expansionFlag));
-        if (localStorage.getItem(expansionFlag)) return;
-
-        console.log("restoredData:", restoredData);
-        if (restoredData && restoredData.history && restoredData.history.length > 0) {
-            console.log(`Applying match history expansion... Found ${restoredData.history.length} matches.`);
-            setHistory(restoredData.history);
-            if (restoredData.prefs) setPrefs(prev => ({ ...prev, ...restoredData.prefs }));
-            
-            // Set the syncId to ensure it pushes to the cloud
-            const targetSyncId = "おりぶオリジナル";
-            setSyncId(targetSyncId);
-            localStorage.setItem('smash_sync_id', targetSyncId);
-            
-            localStorage.setItem(expansionFlag, 'true');
-            // We use a slight delay for the alert to ensure state updates are visible
-            setTimeout(() => {
-                alert("【履歴拡張】勇者の対戦データを約700試合追加しました。「おりぶオリジナル」としてクラウド同期が行われます。");
-            }, 500);
-        } else {
-            console.warn("Restored data is empty or invalid. History length:", restoredData?.history?.length);
-        }
-    }, [setHistory, setPrefs, setSyncId]);
+    // Remove legacy expansion logic as it depended on syncId.
+    // If users need it, they can import JSON manually.
 
     return {
         history, addMatch, removeMatch, editMatch, prefs, setPrefs, importData,
-        syncId, handleSetSyncId, isSyncing, syncError
+        isSyncing, syncError,
+        auth, logout // Pass these down so UI can use them if needed
     };
 }

@@ -1,9 +1,11 @@
+import jwt from 'jsonwebtoken';
+
 export default async function handler(req, res) {
     // CORS headers
     res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
     if (req.method === 'OPTIONS') {
         res.status(200).end()
@@ -14,10 +16,30 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' })
     }
 
-    const { syncId } = req.query
+    let targetUserId = null;
 
-    if (!syncId || typeof syncId !== 'string' || syncId.length < 4) {
-        return res.status(400).json({ error: 'Sync ID must be at least 4 characters long.' })
+    // Check if called by OBS
+    if (req.query.obsId) {
+        targetUserId = req.query.obsId;
+    } else {
+        // Otherwise require JWT
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ error: '認証が必要です。ログインし直してください。' });
+        }
+
+        const token = authHeader.split(' ')[1];
+        try {
+            const jwtSecret = process.env.JWT_SECRET || 'smash-logger-secret-key-2026';
+            const decoded = jwt.verify(token, jwtSecret);
+            targetUserId = decoded.userId;
+        } catch (err) {
+            return res.status(401).json({ error: 'トークンが無効または期限切れです。ログインし直してください。' });
+        }
+    }
+
+    if (!targetUserId) {
+        return res.status(400).json({ error: 'ユーザーIDが指定されていません。' });
     }
 
     const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
@@ -28,7 +50,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const url = `${kvUrl}/get/smash_sync_${syncId}`
+        const url = `${kvUrl}/get/smash_data_${targetUserId}`
         const response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -41,10 +63,8 @@ export default async function handler(req, res) {
         }
 
         const json = await response.json()
-        // Vercel KV REST API returns { result: "value" } or { result: {object} }
         let parsedData = json.result
 
-        // Sometimes it returns a string if we sent a string instead of an object, safely parse it
         if (typeof parsedData === 'string') {
             try {
                 parsedData = JSON.parse(parsedData)

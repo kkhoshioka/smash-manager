@@ -9,14 +9,14 @@ export default function ObsOverlay() {
     useEffect(() => {
         // 初期ロード & 定期取得 (クラウド対応)
         const loadLocal = async () => {
-            // URLから合言葉パラメータを取得 (?obs=true&syncId=xxxx)
+            // URLからOBS連携用IDパラメータを取得 (?obsId=xxxx)
             const params = new URLSearchParams(window.location.search);
-            const urlSyncId = params.get('syncId') || params.get('sync');
+            const urlObsId = params.get('obsId') || params.get('obs');
 
-            if (urlSyncId) {
+            if (urlObsId && urlObsId !== 'true') {
                 // クラウドからデータ取得 (OBSのキャッシュを回避するためにタイムスタンプを付与)
                 try {
-                    const response = await fetch(`/api/load?syncId=${encodeURIComponent(urlSyncId)}&t=${Date.now()}`);
+                    const response = await fetch(`/api/load?obsId=${encodeURIComponent(urlObsId)}&t=${Date.now()}`);
                     const result = await response.json();
                     if (result.success && result.data) {
                         if (result.data.history) setHistory(result.data.history);

@@ -1,9 +1,11 @@
+import jwt from 'jsonwebtoken';
+
 export default async function handler(req, res) {
     // CORS headers for local testing if needed
     res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
     if (req.method === 'OPTIONS') {
         res.status(200).end()
@@ -14,10 +16,25 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' })
     }
 
-    const { syncId, data } = req.body
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: '認証が必要です。ログインし直してください。' });
+    }
 
-    if (!syncId || typeof syncId !== 'string' || syncId.length < 4) {
-        return res.status(400).json({ error: 'Sync ID must be at least 4 characters long.' })
+    const token = authHeader.split(' ')[1];
+    let decoded;
+    try {
+        const jwtSecret = process.env.JWT_SECRET || 'smash-logger-secret-key-2026';
+        decoded = jwt.verify(token, jwtSecret);
+    } catch (err) {
+        return res.status(401).json({ error: 'トークンが無効または期限切れです。ログインし直してください。' });
+    }
+
+    const userId = decoded.userId;
+    const { data } = req.body
+
+    if (!data) {
+        return res.status(400).json({ error: 'No data provided.' })
     }
 
     const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
@@ -28,7 +45,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const url = `${kvUrl}/set/smash_sync_${syncId}`
+        const url = `${kvUrl}/set/smash_data_${userId}`
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -45,7 +62,7 @@ export default async function handler(req, res) {
         // Daily Backup Logic (JST time)
         try {
             const jstDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000).toISOString().split('T')[0];
-            const backupUrl = `${kvUrl}/set/smash_sync_${syncId}_backup_${jstDate}`;
+            const backupUrl = `${kvUrl}/set/smash_data_${userId}_backup_${jstDate}`;
             await fetch(backupUrl, {
                 method: 'POST',
                 headers: {

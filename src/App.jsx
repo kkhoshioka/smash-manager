@@ -3,10 +3,13 @@ import MatchLogger from './components/MatchLogger';
 import Stats from './components/Stats';
 import Settings from './components/Settings';
 import ObsOverlay from './components/ObsOverlay';
-import { Swords, BarChart2, Settings as SettingsIcon } from 'lucide-react';
+import AdminDashboard from './components/AdminDashboard';
+import { Swords, BarChart2, Settings as SettingsIcon, ShieldAlert } from 'lucide-react';
+import { useAuth } from './hooks/useAuth';
 
 function App() {
   const [activeTab, setActiveTab] = useState('log');
+  const { auth } = useAuth();
   const [backgroundImage, setBackgroundImage] = useState(() => {
     return localStorage.getItem('smashBgImage') || '/bg_stage.png';
   });
@@ -53,12 +56,22 @@ function App() {
           >
             <SettingsIcon size={20} /> オプション
           </button>
+          {auth?.isAdmin && (
+            <button
+              className={`smash-tab ${activeTab === 'admin' ? 'active' : ''}`}
+              onClick={() => setActiveTab('admin')}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', flex: 1, backgroundColor: activeTab === 'admin' ? 'rgba(255,204,0,0.2)' : 'transparent', color: activeTab === 'admin' ? 'gold' : 'var(--text-muted)' }}
+            >
+              <ShieldAlert size={20} /> 管理者
+            </button>
+          )}
         </div>
 
         <main>
           {activeTab === 'log' && <MatchLogger />}
           {activeTab === 'stats' && <Stats />}
           {activeTab === 'settings' && <Settings backgroundImage={backgroundImage} onBackgroundChange={setBackgroundImage} />}
+          {activeTab === 'admin' && auth?.isAdmin && <AdminDashboard auth={auth} />}
         </main>
       </div>
     </div>
