@@ -992,7 +992,7 @@ export default function Stats() {
                                                     <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>
                                                         <span>{date.getFullYear()}/{date.getMonth() + 1}/{date.getDate()} {String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}</span>
                                                         {match.rules && (
-                                                            <span>{match.rules.stock === 'タイム制' ? 'タイム制' : `${match.rules.stock} ストック`} / {match.rules.time}:00 {match.rules.stage && `/ ${match.rules.stage}`}</span>
+                                                            <span>{['タイム制', '体力制'].includes(match.rules.stock) ? match.rules.stock : `${match.rules.stock} ストック`} / {match.rules.time}:00 {match.rules.stage && `/ ${match.rules.stage}`}</span>
                                                         )}
                                                         {(match.myKillMoves?.length > 0 || match.killMove) && (
                                                             <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>

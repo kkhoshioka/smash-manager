@@ -455,13 +455,14 @@ export default function MatchLogger() {
                                 <label style={{ display: 'block', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 'bold' }}>ストック数</label>
                                 <select
                                     value={rules.stock}
-                                    onChange={e => setRules({ ...rules, stock: e.target.value === 'タイム制' ? 'タイム制' : parseInt(e.target.value) })}
+                                    onChange={e => setRules({ ...rules, stock: isNaN(e.target.value) ? e.target.value : parseInt(e.target.value) })}
                                     style={{ width: '100%', fontSize: '1.1rem' }}
                                 >
                                     <option value={1}>1</option>
                                     <option value={2}>2</option>
                                     <option value={3}>3</option>
                                     <option value="タイム制">タイム制</option>
+                                    <option value="体力制">体力制</option>
                                 </select>
                             </div>
                             <div style={{ flex: 1, minWidth: '100px' }}>
