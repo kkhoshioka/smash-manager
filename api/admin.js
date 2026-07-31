@@ -35,17 +35,38 @@ export default async function handler(req, res) {
         return res.status(403).json({ error: '管理者権限がありません。' });
     }
 
-    const MASTER_BLOB_ID = '019fb923-93e7-756b-a84b-6cece43d6afa';
+    const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
+    const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN
+
+    if (!kvUrl || !kvToken) {
+        return res.status(500).json({ error: 'Database is not configured.' })
+    }
 
     try {
-        // 1. Fetch Master Blob to get all users
-        const masterRes = await fetch(`https://jsonblob.com/api/jsonBlob/${MASTER_BLOB_ID}`);
-        if (!masterRes.ok) throw new Error('Failed to fetch master index');
-        const masterData = await masterRes.json();
+        let cursor = '0';
+        let allKeys = [];
         
-        const users = Object.values(masterData.users || {});
-        
-        if (users.length === 0) {
+        // Scan for keys matching smash_data_* but not containing _backup_
+        // MVP: Limit to a few scans or just one if we only have a few users.
+        let loopCount = 0;
+        do {
+            const scanUrl = `${kvUrl}/scan/${cursor}?match=smash_data_*&count=100`;
+            const scanRes = await fetch(scanUrl, {
+                headers: { Authorization: `Bearer ${kvToken}` }
+            });
+            const scanData = await scanRes.json();
+            
+            if (scanData.result) {
+                cursor = scanData.result[0];
+                const keys = scanData.result[1].filter(k => !k.includes('_backup_'));
+                allKeys.push(...keys);
+            } else {
+                break;
+            }
+            loopCount++;
+        } while (cursor !== '0' && loopCount < 10); // Max 1000 keys for MVP
+
+        if (allKeys.length === 0) {
             return res.status(200).json({
                 success: true,
                 stats: {
@@ -57,40 +78,40 @@ export default async function handler(req, res) {
             });
         }
 
-        // 2. Fetch all individual blobs concurrently
-        const fetchPromises = users.map(async (user) => {
-            try {
-                const res = await fetch(`https://jsonblob.com/api/jsonBlob/${user.blobId}`);
-                if (res.ok) {
-                    return await res.json();
-                }
-            } catch(e) {
-                // ignore failed fetches
-            }
-            return null;
+        // Fetch data using MGET
+        // Vercel KV REST supports MGET: /mget/key1/key2/...
+        const mgetUrl = `${kvUrl}/mget/${allKeys.join('/')}`;
+        const mgetRes = await fetch(mgetUrl, {
+            headers: { Authorization: `Bearer ${kvToken}` }
         });
+        const mgetData = await mgetRes.json();
+        const values = mgetData.result;
 
-        const allData = await Promise.all(fetchPromises);
-
-        // 3. Aggregate Data
+        // Aggregate Data
         let totalMatches = 0;
         let fighterUsage = {};
         let allRecentMatches = [];
 
-        allData.forEach(data => {
-            if (!data) return;
-            if (data.history && Array.isArray(data.history)) {
-                totalMatches += data.history.length;
-                
-                data.history.forEach(match => {
-                    // Count fighters
-                    if (match.myFighter) {
-                        fighterUsage[match.myFighter] = (fighterUsage[match.myFighter] || 0) + 1;
-                    }
+        values.forEach(valStr => {
+            if (!valStr) return;
+            try {
+                let data = valStr;
+                if (typeof data === 'string') data = JSON.parse(data);
+                if (data.history && Array.isArray(data.history)) {
+                    totalMatches += data.history.length;
                     
-                    // Collect recent matches for global feed
-                    allRecentMatches.push(match);
-                });
+                    data.history.forEach(match => {
+                        // Count fighters
+                        if (match.myFighter) {
+                            fighterUsage[match.myFighter] = (fighterUsage[match.myFighter] || 0) + 1;
+                        }
+                        
+                        // Collect recent matches for global feed
+                        allRecentMatches.push(match);
+                    });
+                }
+            } catch (e) {
+                // Parse error, ignore
             }
         });
 
@@ -107,7 +128,7 @@ export default async function handler(req, res) {
         return res.status(200).json({
             success: true,
             stats: {
-                totalUsers: users.length,
+                totalUsers: allKeys.length,
                 totalMatches,
                 popularFighters,
                 recentMatches
