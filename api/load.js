@@ -75,6 +75,11 @@ export default async function handler(req, res) {
 
         const parsedData = await response.json();
 
+        // 空の初期データの場合は null として扱い、クライアント側でアップロードのプロンプトを出させる
+        if (parsedData && Array.isArray(parsedData.history) && parsedData.history.length === 0) {
+            return res.status(200).json({ success: true, data: null })
+        }
+
         return res.status(200).json({ success: true, data: parsedData })
     } catch (error) {
         console.error('Load Error:', error)
