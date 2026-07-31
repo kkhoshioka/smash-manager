@@ -30,47 +30,59 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'パスワードは4文字以上で設定してください。' })
     }
 
-    const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
-    const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN
-
-    if (!kvUrl || !kvToken) {
-        return res.status(500).json({ error: 'Database is not configured.' })
-    }
-
+    const MASTER_BLOB_ID = '019fb923-93e7-756b-a84b-6cece43d6afa';
+    
     try {
         const usernameKey = `smash_user_${encodeURIComponent(nickname.toLowerCase())}`;
         
-        // 1. Check if user already exists
-        const checkRes = await fetch(`${kvUrl}/get/${usernameKey}`, {
-            headers: { Authorization: `Bearer ${kvToken}` },
-        });
-        const checkData = await checkRes.json();
+        // 1. Fetch Master Blob
+        const masterRes = await fetch(`https://jsonblob.com/api/jsonBlob/${MASTER_BLOB_ID}`);
+        if (!masterRes.ok) throw new Error('Failed to fetch master index');
+        const masterData = await masterRes.json();
         
-        if (checkData.result) {
+        if (!masterData.users) masterData.users = {};
+
+        // 2. Check if user already exists
+        if (masterData.users[usernameKey]) {
             return res.status(409).json({ error: 'このID（ニックネーム）はすでに使用されています。' });
         }
 
-        // 2. Hash password and generate UUID
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const userId = randomUUID(); // or generate random string if randomUUID is unavailable in some edge runtime
-        const userData = { nickname, passwordHash: hashedPassword, userId };
-
-        // 3. Save user data
-        const saveRes = await fetch(`${kvUrl}/set/${usernameKey}`, {
+        // 3. Create a NEW blob for this user's data
+        const initialUserData = { history: [], prefs: {} };
+        const newBlobRes = await fetch('https://jsonblob.com/api/jsonBlob', {
             method: 'POST',
-            headers: {
-                Authorization: `Bearer ${kvToken}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(initialUserData)
         });
+        if (!newBlobRes.ok) throw new Error('Failed to create user data blob');
+        
+        // Get the Location header which contains the new Blob ID
+        const locationUrl = newBlobRes.headers.get('location');
+        const blobId = locationUrl.split('/').pop();
 
-        if (!saveRes.ok) throw new Error('Failed to save user');
+        // 4. Hash password and save to master index
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const userId = randomUUID(); 
+        
+        masterData.users[usernameKey] = {
+            nickname,
+            passwordHash: hashedPassword,
+            userId,
+            blobId
+        };
 
-        // 4. Generate JWT
+        // 5. Update Master Blob
+        const updateMasterRes = await fetch(`https://jsonblob.com/api/jsonBlob/${MASTER_BLOB_ID}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(masterData)
+        });
+        if (!updateMasterRes.ok) throw new Error('Failed to update master index');
+
+        // 6. Generate JWT (now includes blobId!)
         const jwtSecret = process.env.JWT_SECRET || 'smash-logger-secret-key-2026';
         const isAdmin = nickname === 'おじ勇者おりぶ';
-        const token = jwt.sign({ userId, nickname, isAdmin }, jwtSecret, { expiresIn: '30d' });
+        const token = jwt.sign({ userId, nickname, blobId, isAdmin }, jwtSecret, { expiresIn: '30d' });
 
         return res.status(200).json({ success: true, token, userId, nickname, isAdmin });
     } catch (error) {
