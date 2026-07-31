@@ -37,29 +37,47 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'No data provided.' })
     }
 
-    const blobId = decoded.blobId;
-    if (!blobId) {
-        return res.status(401).json({ error: '古い認証トークンです。再度ログインしてください。' });
+    const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
+    const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN
+
+    if (!kvUrl || !kvToken) {
+        return res.status(500).json({ error: 'Database is not configured.' })
     }
 
     try {
-        const url = `https://jsonblob.com/api/jsonBlob/${blobId}`;
+        const url = `${kvUrl}/set/smash_data_${userId}`
         const response = await fetch(url, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
+                Authorization: `Bearer ${kvToken}`,
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
             },
             body: JSON.stringify(data),
         })
 
         if (!response.ok) {
-            throw new Error(`JSONBlob API responded with status ${response.status}`)
+            throw new Error(`KV API responded with status ${response.status}`)
+        }
+
+        // Daily Backup Logic (JST time)
+        try {
+            const jstDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000).toISOString().split('T')[0];
+            const backupUrl = `${kvUrl}/set/smash_data_${userId}_backup_${jstDate}`;
+            await fetch(backupUrl, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${kvToken}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+        } catch (backupError) {
+            console.error('KV Backup Error:', backupError);
         }
 
         return res.status(200).json({ success: true })
     } catch (error) {
-        console.error('Save Error:', error)
+        console.error('KV Save Error:', error)
         return res.status(500).json({ error: 'Failed to save data' })
     }
 }
