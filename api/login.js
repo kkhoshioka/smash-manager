@@ -17,7 +17,9 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' })
     }
 
-    const { nickname, password } = req.body
+    let { nickname, password } = req.body
+    
+    if (typeof nickname === 'string') nickname = nickname.trim();
 
     if (!nickname || !password) {
         return res.status(400).json({ error: 'IDとパスワードを入力してください。' })
@@ -37,6 +39,11 @@ export default async function handler(req, res) {
         const userRes = await fetch(`${kvUrl}/get/${usernameKey}`, {
             headers: { Authorization: `Bearer ${kvToken}` },
         });
+        
+        if (!userRes.ok) {
+            throw new Error(`KV REST API Error: ${userRes.status} ${userRes.statusText}`);
+        }
+        
         const userData = await userRes.json();
         
         // Sometimes Vercel KV REST returns result as a stringified JSON if it was saved as string.
@@ -48,7 +55,14 @@ export default async function handler(req, res) {
         if (typeof parsedUser === 'string') {
             try {
                 parsedUser = JSON.parse(parsedUser);
-            } catch(e) {}
+            } catch(e) {
+                console.error("Failed to parse user string:", parsedUser);
+                return res.status(401).json({ error: 'ユーザーデータが破損しています。' });
+            }
+        }
+
+        if (!parsedUser || !parsedUser.passwordHash) {
+            return res.status(401).json({ error: 'IDまたはパスワードが間違っています。' });
         }
 
         // 2. Verify password
@@ -65,6 +79,6 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, token, userId: parsedUser.userId, nickname: parsedUser.nickname, isAdmin });
     } catch (error) {
         console.error('Login Error:', error)
-        return res.status(500).json({ error: 'ログインに失敗しました。' })
+        return res.status(500).json({ error: `ログインに失敗しました: ${error.message}` })
     }
 }

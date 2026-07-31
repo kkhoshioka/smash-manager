@@ -18,9 +18,11 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' })
     }
 
-    const { nickname, password } = req.body
+    let { nickname, password } = req.body
+    
+    if (typeof nickname === 'string') nickname = nickname.trim();
 
-    if (!nickname || typeof nickname !== 'string' || nickname.trim().length === 0) {
+    if (!nickname || typeof nickname !== 'string' || nickname.length === 0) {
         return res.status(400).json({ error: 'ID（ニックネーム）を入力してください。' })
     }
 
@@ -73,6 +75,6 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, token, userId, nickname, isAdmin });
     } catch (error) {
         console.error('Signup Error:', error)
-        return res.status(500).json({ error: '登録に失敗しました。' })
+        return res.status(500).json({ error: `登録に失敗しました: ${error.message}` })
     }
 }
