@@ -86,7 +86,21 @@ export function useMatchHistory() {
             }
 
             if (result.data) {
-                if (result.data.history) setHistory(result.data.history);
+                if (result.data.history) {
+                    // Safety check: Don't silently overwrite local data if local has MORE matches
+                    if (isInitialLoad && history.length > result.data.history.length) {
+                        const wantsCloud = window.confirm(`クラウド上のデータ(${result.data.history.length}件)より、この端末のデータ(${history.length}件)の方が多いようです。\n\nクラウドのデータで上書きしてよろしいですか？\n(「キャンセル」を押すと上書きせず、この端末の最新データをクラウドに保存します)`);
+                        if (wantsCloud) {
+                            setHistory(result.data.history);
+                        } else {
+                            // Save local to cloud to sync them up
+                            await saveToCloud(currentAuth, history, prefs);
+                            return; // Skip setting prefs from cloud to avoid mixing states
+                        }
+                    } else {
+                        setHistory(result.data.history);
+                    }
+                }
                 if (result.data.prefs) setPrefs(result.data.prefs);
                 if (!isInitialLoad) alert("クラウドからデータを読み込みました！");
             } else {
