@@ -90,5 +90,5 @@ export const fighters = [
     imageUrl: fighter.id === '49' ? '/icons/mii_brawler.png' :
         fighter.id === '50' ? '/icons/mii_swordfighter.png' :
             fighter.id === '51' ? '/icons/mii_gunner.png' :
-                `https://raw.githubusercontent.com/adriancosmoem/ssbuicons/main/${fighter.enName}1.png`
+                `https://cdn.jsdelivr.net/gh/adriancosmoem/ssbuicons@main/${fighter.enName}1.png`
 }));
