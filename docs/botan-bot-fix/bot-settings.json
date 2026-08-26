@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(format *)",
+      "Bash(shutdown *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(rd /s *)",
+      "Bash(del /f /s /q *)",
+      "Bash(diskpart *)",
+      "Bash(reg delete *)",
+      "Bash(taskkill /f *)",
+      "Bash(Stop-Process *)",
+      "Bash(Remove-Item *)"
+    ]
+  }
+}
