@@ -54,12 +54,16 @@ export default function ObsOverlay() {
         document.body.style.backgroundImage = 'none';
         document.documentElement.style.setProperty('--bg-image', 'none');
         document.body.classList.add('obs-mode-body');
+        // The app scales its root font down on narrow viewports; an OBS browser
+        // source is usually narrow too, so pin it back to the standard size.
+        document.documentElement.style.fontSize = '16px';
 
         return () => {
             window.removeEventListener('storage', handleStorageChange);
             clearInterval(intervalId);
             document.body.style.backgroundColor = '';
             document.body.classList.remove('obs-mode-body');
+            document.documentElement.style.fontSize = '';
         };
     }, []);
 

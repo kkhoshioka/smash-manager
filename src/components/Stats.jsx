@@ -359,15 +359,15 @@ export default function Stats() {
     return (
         <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {/* Fighter Filter */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', backgroundColor: '#111', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', border: '2px solid #444' }}>
-                <Filter size={24} color="var(--smash-red)" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap', padding: '1rem', backgroundColor: '#111', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', border: '2px solid #444' }}>
+                <Filter size={20} color="var(--smash-red)" />
                 <span style={{ fontWeight: '900', color: 'var(--text-main)', fontSize: '1.2rem', fontFamily: 'var(--font-jp)' }}>
                     分析対象:
                 </span>
                 <select
                     value={selectedMyFighter}
                     onChange={(e) => setSelectedMyFighter(e.target.value)}
-                    style={{ padding: '0.8rem', backgroundColor: '#222', color: 'white', border: '2px solid var(--smash-red)', flex: 1, cursor: 'pointer', outline: 'none', fontSize: '1.1rem', fontWeight: 'bold' }}
+                    style={{ padding: '0.7rem', backgroundColor: '#222', color: 'white', border: '2px solid var(--smash-red)', flex: '1 1 160px', minWidth: 0, cursor: 'pointer', outline: 'none', fontSize: '1.05rem', fontWeight: 'bold' }}
                 >
                     <option value="all">全ファイター</option>
                     {myFightersPlayed.map(f => (
@@ -377,7 +377,7 @@ export default function Stats() {
             </div>
 
             {/* Overview Stats */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.8rem' }}>
                 <div className="stat-card" style={{ textAlign: 'center', borderBottomColor: '#444', padding: '1rem' }}>
                     <div style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>総試合数</div>
                     <div className="stat-number">{totalMatches}</div>
@@ -414,7 +414,7 @@ export default function Stats() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '6rem 2rem',
+                    padding: '3.5rem 1.5rem',
                     backgroundColor: '#111',
                     border: '2px dashed #333',
                     clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
@@ -492,8 +492,8 @@ export default function Stats() {
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
                                         <CalendarDays size={20} /> 最近の日毎データ (直近7日)
                                     </div>
-                                    <div style={{ overflowX: 'auto' }}>
-                                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '600px' }}>
+                                    <div className="table-scroll">
+                                        <table className="data-table">
                                             <thead>
                                                 <tr style={{ backgroundColor: '#1a1a1a', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
                                                     <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>日付</th>
@@ -592,7 +592,7 @@ export default function Stats() {
                                     ))}
                                 </div>
                             </div>
-                            <div style={{ width: '100%', height: 350 }}>
+                            <div className="chart-wrap">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <AreaChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
                                         <defs>
@@ -679,12 +679,12 @@ export default function Stats() {
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {[...opponentStats].sort((a, b) => b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
                                             <div key={`freq-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: '#111', borderLeft: '4px solid var(--text-muted)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0 }}>
                                                     <span style={{ fontWeight: '900', color: 'var(--text-muted)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
-                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '36px', height: '36px', objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
                                                     <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
                                                 </div>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexShrink: 0 }}>
                                                     <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
                                                     <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--text-muted)', fontSize: '1.2rem' }}>
                                                         {stat.winRate}%
@@ -701,12 +701,12 @@ export default function Stats() {
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {[...opponentStats].sort((a, b) => b.winRate - a.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
                                             <div key={`best-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(0, 204, 255, 0.1)', borderLeft: '4px solid var(--win-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0 }}>
                                                     <span style={{ fontWeight: '900', color: 'var(--win-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
-                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '36px', height: '36px', objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
                                                     <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
                                                 </div>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexShrink: 0 }}>
                                                     <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
                                                     <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--win-color)', fontSize: '1.2rem' }}>
                                                         {stat.winRate}%
@@ -723,12 +723,12 @@ export default function Stats() {
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {[...opponentStats].sort((a, b) => a.winRate - b.winRate || b.total - a.total).slice(0, showAllMatchups ? undefined : 5).map((stat, i) => (
                                             <div key={`worst-${stat.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', backgroundColor: 'rgba(255, 51, 51, 0.1)', borderLeft: '4px solid var(--lose-color)', clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0 }}>
                                                     <span style={{ fontWeight: '900', color: 'var(--lose-color)', width: '20px', fontFamily: 'var(--font-en)' }}>{i + 1}</span>
-                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                    <img src={stat.fighterObj?.imageUrl} alt={stat.fighterObj?.name} style={{ width: '36px', height: '36px', objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
                                                     <span style={{ fontWeight: '900', textShadow: '2px 2px 0 #000' }}>{stat.fighterObj?.name || '不明'}</span>
                                                 </div>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexShrink: 0 }}>
                                                     <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>{stat.total} 戦</span>
                                                     <span style={{ fontWeight: '900', fontFamily: 'var(--font-en)', width: '60px', textAlign: 'right', color: 'var(--lose-color)', fontSize: '1.2rem' }}>
                                                         {stat.winRate}%
@@ -828,8 +828,8 @@ export default function Stats() {
                             <h2 className="section-title" style={{ margin: 0 }}>直近の履歴</h2>
                             
                             {filteredHistory.length > 0 && (
-                                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', backgroundColor: '#111', padding: '0.8rem 1.2rem', borderRadius: '8px', border: '1px solid #333' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <div className="history-filter-bar">
+                                    <div>
                                         <Filter size={16} color="var(--text-muted)" />
                                         <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>相手:</span>
                                         <select 
@@ -843,7 +843,7 @@ export default function Stats() {
                                             ))}
                                         </select>
                                     </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div>
                                         <Crosshair size={16} color="var(--smash-yellow)" />
                                         <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>自技:</span>
                                         <select 
@@ -857,7 +857,7 @@ export default function Stats() {
                                             ))}
                                         </select>
                                     </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div>
                                         <FileText size={16} color="var(--text-main)" />
                                         <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.9rem' }}>メモ:</span>
                                         <select 
@@ -870,7 +870,7 @@ export default function Stats() {
                                             <option value="no_memo">なし</option>
                                         </select>
                                     </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
+                                    <div style={{ flex: 1, minWidth: '200px' }}>
                                         <Search size={16} color="var(--text-muted)" />
                                         <input 
                                             type="text" 
@@ -899,11 +899,12 @@ export default function Stats() {
                                     return (
                                         <div
                                             key={index}
+                                            className="history-card"
                                             style={{
                                                 display: 'flex',
                                                 flexDirection: 'column',
-                                                gap: '1rem',
-                                                padding: '1.5rem',
+                                                gap: '0.8rem',
+                                                padding: '1.2rem',
                                                 backgroundColor: isWin ? 'rgba(0, 204, 255, 0.1)' : 'rgba(255, 51, 51, 0.1)',
                                                 border: `2px solid ${isWin ? 'var(--win-color)' : 'var(--lose-color)'}`,
                                                 borderLeftWidth: '8px',
@@ -914,7 +915,7 @@ export default function Stats() {
                                             {editingMatchId === match.id ? (
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                                     <div style={{ fontWeight: '900', color: 'var(--smash-yellow)', fontSize: '1.2rem' }}>記録の編集</div>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
+                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1rem' }}>
                                                         <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
                                                             <span style={{ color: 'var(--text-muted)' }}>勝敗</span>
                                                             <select name="result" value={editForm.result} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }}>
@@ -962,35 +963,35 @@ export default function Stats() {
                                                                 {isWin ? 'WIN' : 'LOSE'}
                                                             </span>
                                                             <div className="vs-badge-container">
-                                                                <img src={myFighter?.imageUrl} alt={myFighter?.name} style={{ width: '40px', height: '40px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                                <img src={myFighter?.imageUrl} alt={myFighter?.name} style={{ width: '38px', height: '38px', objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
                                                                 <span style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--smash-red)', fontStyle: 'italic', fontFamily: 'var(--font-en)' }}>VS</span>
-                                                                <img src={opponent?.imageUrl} alt={opponent?.name} style={{ width: '50px', height: '50px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                                                                <img src={opponent?.imageUrl} alt={opponent?.name} style={{ width: '44px', height: '44px', objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
                                                                 <span className="fighter-name">{opponent?.name}</span>
                                                             </div>
                                                         </div>
 
                                                         {/* GSP Box */}
                                                         {match.gsp && (
-                                                            <div style={{ backgroundColor: '#111', padding: '0.5rem 1.5rem', border: '2px solid #555', clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)', textAlign: 'center' }}>
-                                                                <div style={{ fontSize: '0.9rem', color: 'var(--smash-yellow)', fontWeight: 'bold' }}>GSP</div>
-                                                                <div style={{ fontFamily: 'var(--font-en)', fontSize: '1.8rem', fontWeight: '900', color: 'var(--text-main)' }}>
+                                                            <div className="history-gsp">
+                                                                <div className="history-gsp-label">GSP</div>
+                                                                <div className="history-gsp-value">
                                                                     {match.gsp.toLocaleString()}
                                                                 </div>
                                                             </div>
                                                         )}
 
-                                                        <div style={{ display: 'flex', gap: '1rem' }}>
+                                                        <div className="history-actions">
                                                             <button onClick={() => handleEditClick(match)} style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} title="編集" onMouseEnter={(e) => e.currentTarget.style.color = 'var(--win-color)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
-                                                                <Edit2 size={24} />
+                                                                <Edit2 size={20} />
                                                             </button>
                                                             <button onClick={() => removeMatch(match.id)} style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} title="削除" onMouseEnter={(e) => e.currentTarget.style.color = 'var(--smash-red)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
-                                                                <Trash2 size={24} />
+                                                                <Trash2 size={20} />
                                                             </button>
                                                         </div>
                                                     </div>
 
                                                     <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>
-                                                        <span>{date.getFullYear()}/{date.getMonth() + 1}/{date.getDate()} {String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}</span>
+                                                        <span>{date.getFullYear()}/{date.getMonth() + 1}/{date.getDate()} {String(date.getHours()).padStart(2, '0')}:{String(date.getMinutes()).padStart(2, '0')}</span>
                                                         {match.rules && (
                                                             <span>{['タイム制', '体力制'].includes(match.rules.stock) ? match.rules.stock : `${match.rules.stock} ストック`} / {match.rules.time}:00 {match.rules.stage && `/ ${match.rules.stage}`}</span>
                                                         )}

@@ -38,21 +38,18 @@ function App() {
           <button
             className={`smash-tab ${activeTab === 'log' ? 'active' : ''}`}
             onClick={() => setActiveTab('log')}
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', flex: 1 }}
           >
             <Swords size={20} /> 記録する
           </button>
           <button
             className={`smash-tab ${activeTab === 'stats' ? 'active' : ''}`}
             onClick={() => setActiveTab('stats')}
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', flex: 1 }}
           >
             <BarChart2 size={20} /> 戦績・履歴
           </button>
           <button
             className={`smash-tab ${activeTab === 'settings' ? 'active' : ''}`}
             onClick={() => setActiveTab('settings')}
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', flex: 1 }}
           >
             <SettingsIcon size={20} /> オプション
           </button>
@@ -60,7 +57,7 @@ function App() {
             <button
               className={`smash-tab ${activeTab === 'admin' ? 'active' : ''}`}
               onClick={() => setActiveTab('admin')}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', flex: 1, backgroundColor: activeTab === 'admin' ? 'rgba(255,204,0,0.2)' : 'transparent', color: activeTab === 'admin' ? 'gold' : 'var(--text-muted)' }}
+              style={{ backgroundColor: activeTab === 'admin' ? 'rgba(255,204,0,0.2)' : 'transparent', color: activeTab === 'admin' ? 'gold' : 'var(--text-muted)' }}
             >
               <ShieldAlert size={20} /> 管理者
             </button>

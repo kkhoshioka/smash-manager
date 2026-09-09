@@ -221,14 +221,14 @@ export default function MatchLogger() {
     );
 
     return (
-        <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
-            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
                 {/* My Fighter Section */}
                 <div style={{ flex: '1 1 300px', minWidth: 0 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                         <h2 className="section-title" style={{ borderColor: 'var(--smash-yellow)', margin: 0 }}>
-                            <User size={28} style={{ marginRight: '0.8rem', color: 'var(--smash-yellow)' }} />
+                            <User size={24} style={{ marginRight: '0.5rem', color: 'var(--smash-yellow)' }} />
                             使用ファイター
                         </h2>
                         {myFighterObj && !isSelectingMine && (
@@ -243,14 +243,14 @@ export default function MatchLogger() {
 
                     {isSelectingMine ? (
                         <div className="animate-enter">
-                            <div style={{ position: 'relative', marginBottom: '1rem' }}>
-                                <Search size={20} className="desktop-only-icon" style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                            <div className="search-field">
+                                <Search size={18} className="search-icon" />
                                 <input
                                     type="text"
+                                    className="search-input"
                                     placeholder="キャラクターを検索..."
                                     value={fighterSearch}
                                     onChange={(e) => setFighterSearch(e.target.value)}
-                                    style={{ width: '100%', paddingLeft: '45px' }}
                                 />
                             </div>
                             <FighterGrid
@@ -265,7 +265,7 @@ export default function MatchLogger() {
                         </div>
                     ) : (
                         <div className="vs-badge-container" style={{ border: '2px solid var(--smash-yellow)' }}>
-                            <img src={myFighterObj?.imageUrl} alt={myFighterObj?.name} style={{ width: '80px', height: '80px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                            <img className="fighter-portrait" src={myFighterObj?.imageUrl} alt={myFighterObj?.name} onError={(e) => e.target.style.display = 'none'} />
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <span className="fighter-name">
                                     {myFighterObj?.name || '未選択'}
@@ -276,11 +276,13 @@ export default function MatchLogger() {
                                             ? (streakInfo.count >= 5 ? '#ff00ff' : streakInfo.count >= 2 ? '#ffcc00' : 'var(--win-color)')
                                             : (streakInfo.count >= 5 ? '#ff3300' : streakInfo.count >= 2 ? '#ff6666' : 'var(--lose-color)'),
                                         fontWeight: '900',
-                                        fontSize: streakInfo.count >= 10 ? '3.0rem' : streakInfo.count >= 5 ? '2.4rem' : '1.8rem',
+                                        fontSize: streakInfo.count >= 10 ? 'clamp(1.4rem, 6vw, 2.6rem)' : streakInfo.count >= 5 ? 'clamp(1.25rem, 5vw, 2.1rem)' : 'clamp(1.05rem, 4vw, 1.6rem)',
                                         marginTop: '0.2rem',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: '0.6rem',
+                                        gap: '0.4rem',
+                                        lineHeight: 1.2,
+                                        flexWrap: 'wrap',
                                         animation: streakInfo.count >= 5 ? 'pulse 0.5s infinite' : streakInfo.count >= 2 ? 'pulse 1s infinite' : 'pulse 2s infinite',
                                         textShadow: streakInfo.type === 'win'
                                             ? (streakInfo.count >= 5 ? '0 0 10px #ff00ff, 2px 2px 0 #000' : streakInfo.count >= 2 ? '0 0 10px #ffcc00, 2px 2px 0 #000' : '2px 2px 0 #000')
@@ -289,13 +291,13 @@ export default function MatchLogger() {
                                     }}>
                                         {streakInfo.type === 'win' ? (
                                             <>
-                                                <Flame size={streakInfo.count >= 5 ? 40 : streakInfo.count >= 2 ? 34 : 28}
+                                                <Flame size={streakInfo.count >= 5 ? 32 : streakInfo.count >= 2 ? 28 : 24}
                                                     color={streakInfo.count >= 5 ? '#ff00ff' : streakInfo.count >= 2 ? '#ffcc00' : 'var(--win-color)'} />
                                                 現在 {streakInfo.count} 連勝中！
                                             </>
                                         ) : (
                                             <>
-                                                <Skull size={streakInfo.count >= 5 ? 40 : streakInfo.count >= 2 ? 34 : 28}
+                                                <Skull size={streakInfo.count >= 5 ? 32 : streakInfo.count >= 2 ? 28 : 24}
                                                     color={streakInfo.count >= 5 ? '#ff3300' : streakInfo.count >= 2 ? '#ff6666' : 'var(--lose-color)'} />
                                                 現在 {streakInfo.count} 連敗中！
                                             </>
@@ -309,7 +311,7 @@ export default function MatchLogger() {
 
                 {/* Action Buttons */}
                 {!isSelectingMine && (
-                    <div className="action-btn-container">
+                    <div className={`action-btn-container ${selectedOpponent ? 'is-ready' : ''}`}>
                         <button
                             className="btn-smash action-btn-styled"
                             onClick={() => saveMatch('win')}
@@ -342,14 +344,14 @@ export default function MatchLogger() {
                 {/* Opponent Section */}
                 <div style={{ flex: '1 1 300px', minWidth: 0 }}>
                     <h2 className="section-title" style={{ margin: 0, marginBottom: '1rem' }}>
-                        <Swords size={28} style={{ marginRight: '0.8rem', color: 'var(--smash-red)' }} />
+                        <Swords size={24} style={{ marginRight: '0.5rem', color: 'var(--smash-red)' }} />
                         対戦相手
                     </h2>
 
                     {selectedOpponent ? (
                         <div className="animate-enter vs-badge-container" style={{ justifyContent: 'space-between', border: '2px solid var(--smash-red)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                <img src={selectedOpponent.imageUrl} alt={selectedOpponent.name} style={{ width: '80px', height: '80px', objectFit: 'contain', filter: 'drop-shadow(2px 2px 0 #000)' }} onError={(e) => e.target.style.display = 'none'} />
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: 0 }}>
+                                <img className="fighter-portrait" src={selectedOpponent.imageUrl} alt={selectedOpponent.name} onError={(e) => e.target.style.display = 'none'} />
                                 <span className="fighter-name">{selectedOpponent.name}</span>
                             </div>
                             <button
@@ -364,14 +366,14 @@ export default function MatchLogger() {
                         </div>
                     ) : (
                         <div className="animate-enter">
-                            <div style={{ position: 'relative', marginBottom: '1rem' }}>
-                                <Search size={20} className="desktop-only-icon" style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                            <div className="search-field">
+                                <Search size={18} className="search-icon" />
                                 <input
                                     type="text"
+                                    className="search-input"
                                     placeholder="対戦相手を検索..."
                                     value={fighterSearch}
                                     onChange={(e) => setFighterSearch(e.target.value)}
-                                    style={{ width: '100%', paddingLeft: '45px' }}
                                     autoFocus={!isSelectingMine}
                                 />
                             </div>
@@ -511,7 +513,7 @@ export default function MatchLogger() {
                                     }
                                 }}
                                 placeholder={latestGspPlaceholder}
-                                style={{ width: '100%', fontSize: '1.5rem', padding: '1rem' }}
+                                style={{ width: '100%', fontSize: '1.25rem', padding: '0.8rem' }}
                             />
                         </div>
 
@@ -519,7 +521,7 @@ export default function MatchLogger() {
                         <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             {/* My Kill Moves */}
                             {myFighterObj && (
-                                <div style={{ backgroundColor: '#111', padding: '1.5rem', borderLeft: '4px solid var(--smash-yellow)' }}>
+                                <div style={{ backgroundColor: '#111', padding: '1rem', borderLeft: '4px solid var(--smash-yellow)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                         <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--text-main)', fontWeight: 'bold' }}>
                                             <Crosshair size={20} color="var(--smash-yellow)" /> 自分が撃墜した技
@@ -557,7 +559,7 @@ export default function MatchLogger() {
 
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {Array.from({ length: rules.stock }).map((_, index) => (
-                                            <div key={`my-kill-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <div key={`my-kill-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
                                                 <span style={{ fontSize: '1rem', color: 'var(--smash-yellow)', width: '20px', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{index + 1}</span>
                                                 <select
                                                     value={myKillMoves[index] === 'custom_input' ? 'custom_input' : (myKillMoves[index] || '')}
@@ -566,7 +568,7 @@ export default function MatchLogger() {
                                                         newMoves[index] = e.target.value;
                                                         setMyKillMoves(newMoves);
                                                     }}
-                                                    style={{ flex: 1 }}
+                                                    style={{ flex: '1 1 140px', minWidth: 0 }}
                                                 >
                                                     <option value="">指定なし</option>
                                                     {myCombinedKillMoves.map((move, mIndex) => (
@@ -583,7 +585,7 @@ export default function MatchLogger() {
                                                         placeholder="技名"
                                                         value={customMyKillMoves?.[index] || ''}
                                                         onChange={(e) => setCustomMyKillMoves(prev => ({ ...(prev || {}), [index]: e.target.value }))}
-                                                        style={{ flex: 1 }}
+                                                        style={{ flex: '1 1 120px', minWidth: 0 }}
                                                     />
                                                 )}
                                             </div>
@@ -594,13 +596,13 @@ export default function MatchLogger() {
 
                             {/* Opponent Kill Moves */}
                             {selectedOpponent && (
-                                <div style={{ backgroundColor: '#2a0000', padding: '1.5rem', borderLeft: '4px solid var(--smash-red)' }}>
+                                <div style={{ backgroundColor: '#2a0000', padding: '1rem', borderLeft: '4px solid var(--smash-red)' }}>
                                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: 'bold' }}>
                                         <Skull size={20} /> 相手に撃墜された技
                                     </label>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {Array.from({ length: rules.stock }).map((_, index) => (
-                                            <div key={`opp-kill-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <div key={`opp-kill-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
                                                 <span style={{ fontSize: '1rem', color: 'var(--smash-red)', width: '20px', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{index + 1}</span>
                                                 <select
                                                     value={opponentKillMoves[index] === 'custom_input' ? 'custom_input' : (opponentKillMoves[index] || '')}
@@ -609,7 +611,7 @@ export default function MatchLogger() {
                                                         newMoves[index] = e.target.value;
                                                         setOpponentKillMoves(newMoves);
                                                     }}
-                                                    style={{ flex: 1, borderColor: 'var(--smash-red)' }}
+                                                    style={{ flex: '1 1 140px', minWidth: 0, borderColor: 'var(--smash-red)' }}
                                                 >
                                                     <option value="">指定なし</option>
                                                     {opponentCombinedKillMoves.map((move, mIndex) => (
@@ -626,7 +628,7 @@ export default function MatchLogger() {
                                                         placeholder="技名"
                                                         value={customOpponentKillMoves?.[index] || ''}
                                                         onChange={(e) => setCustomOpponentKillMoves(prev => ({ ...(prev || {}), [index]: e.target.value }))}
-                                                        style={{ flex: 1, borderColor: 'var(--smash-red)' }}
+                                                        style={{ flex: '1 1 120px', minWidth: 0, borderColor: 'var(--smash-red)' }}
                                                     />
                                                 )}
                                             </div>
