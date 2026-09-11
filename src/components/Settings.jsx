@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { useAuth } from '../hooks/useAuth';
-import { Image, Upload, Download, Cloud, Monitor, Database, LogIn, UserPlus, LogOut, Copy, Eye, EyeOff } from 'lucide-react';
+import { Image, Upload, Download, Cloud, Monitor, Database, LogIn, UserPlus, LogOut, Copy, Eye, EyeOff, Sparkles, Check } from 'lucide-react';
 
-export default function Settings({ backgroundImage, onBackgroundChange }) {
+export default function Settings({ backgroundImage, onBackgroundChange, uiStyle, onUiStyleChange }) {
     const { history, prefs, importData, isSyncing, syncError } = useMatchHistory();
     const { auth, login, signup, logout, isLoading, error: authError } = useAuth();
     
@@ -100,9 +100,52 @@ export default function Settings({ backgroundImage, onBackgroundChange }) {
             .catch(() => alert('コピーに失敗しました。'));
     };
 
+    const uiStyles = [
+        {
+            id: 'neo',
+            name: 'NEO (新デザイン)',
+            description: 'ガラス質感・立体的な影・ネオンのアクセント。'
+        },
+        {
+            id: 'classic',
+            name: 'CLASSIC (従来デザイン)',
+            description: '斜めのフレームと太い縁取りの、これまでの見た目。'
+        }
+    ];
+
     return (
         <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            
+
+            {/* UI Theme */}
+            <div className="stat-card" style={{ borderBottomColor: 'var(--smash-red)' }}>
+                <h2 className="section-title" style={{ marginTop: 0 }}>
+                    <Sparkles size={24} style={{ marginRight: '0.5rem', color: 'var(--smash-red)' }} />
+                    デザイン
+                </h2>
+                <div style={{ padding: '0.5rem 0', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                        いつでも切り替えられます。使いにくければ CLASSIC に戻してください。
+                    </p>
+                    <div className="ui-style-picker">
+                        {uiStyles.map(style => (
+                            <button
+                                key={style.id}
+                                onClick={() => onUiStyleChange?.(style.id)}
+                                className={`ui-style-option ${uiStyle === style.id ? 'is-active' : ''}`}
+                            >
+                                <span className="ui-style-option__name">
+                                    {uiStyle === style.id && <Check size={16} />}
+                                    {style.name}
+                                </span>
+                                <span className="ui-style-option__desc">{style.description}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="smash-divider" />
+
             {/* Account & Cloud Sync */}
             <div className="stat-card" style={{ borderBottomColor: '#00ccff' }}>
                 <h2 className="section-title" style={{ borderColor: '#00ccff', marginTop: 0 }}>

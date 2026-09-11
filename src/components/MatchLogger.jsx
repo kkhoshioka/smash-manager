@@ -2,6 +2,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
 import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair, Flame } from 'lucide-react';
+import VipBorderGauge from './VipBorderGauge';
+import { getLatestGsp } from '../data/vipBorder';
 
 export default function MatchLogger() {
     const { addMatch, prefs, setPrefs, history } = useMatchHistory();
@@ -77,14 +79,21 @@ export default function MatchLogger() {
             return prefs.fighterGsp[prefs.lastMyFighter].toLocaleString();
         }
 
-        // Fallback: search history for the most recent match data for this fighter
-        const recentMatch = [...history].reverse().find(m => m.myFighter === prefs.lastMyFighter && m.gsp);
+        // Fallback: newest match with a GSP for this fighter (history is newest-first)
+        const recentMatch = history.find(m => m.myFighter === prefs.lastMyFighter && m.gsp);
         if (recentMatch) {
             return recentMatch.gsp.toLocaleString();
         }
 
         return "例: 14,000,000";
     }, [prefs.lastMyFighter, prefs.fighterGsp, history]);
+
+    // 入力中はその値を、未入力なら保存済みの最新戦闘力をゲージに使う
+    const gaugeGsp = useMemo(() => {
+        const typed = gsp ? parseInt(gsp, 10) : null;
+        if (typed) return typed;
+        return getLatestGsp(prefs.lastMyFighter, prefs, history);
+    }, [gsp, prefs, history]);
 
     const frequentOpponents = useMemo(() => {
         const counts = {};
@@ -307,6 +316,10 @@ export default function MatchLogger() {
                             </div>
                         </div>
                     )}
+
+                    {!isSelectingMine && myFighterObj && (
+                        <VipBorderGauge gsp={gaugeGsp} />
+                    )}
                 </div>
 
                 {/* Action Buttons */}
@@ -435,14 +448,8 @@ export default function MatchLogger() {
             {/* Extras & Rules Dropdown */}
             <div>
                 <button
+                    className="extras-toggle"
                     onClick={() => setShowExtras(!showExtras)}
-                    style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-                        color: 'var(--text-main)', fontSize: '1.2rem', width: '100%', padding: '1rem',
-                        backgroundColor: '#111', border: '2px solid #555', cursor: 'pointer',
-                        clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
-                        fontFamily: 'var(--font-jp)', fontWeight: 'bold'
-                    }}
                 >
                     {showExtras ? <ChevronUp size={20} /> : <Settings size={20} />}
                     {showExtras ? '詳細設定を閉じる' : 'ルール・戦闘力・撃墜技'}
@@ -521,7 +528,7 @@ export default function MatchLogger() {
                         <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             {/* My Kill Moves */}
                             {myFighterObj && (
-                                <div style={{ backgroundColor: '#111', padding: '1rem', borderLeft: '4px solid var(--smash-yellow)' }}>
+                                <div className="killmove-panel is-mine">
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                         <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--text-main)', fontWeight: 'bold' }}>
                                             <Crosshair size={20} color="var(--smash-yellow)" /> 自分が撃墜した技
@@ -596,7 +603,7 @@ export default function MatchLogger() {
 
                             {/* Opponent Kill Moves */}
                             {selectedOpponent && (
-                                <div style={{ backgroundColor: '#2a0000', padding: '1rem', borderLeft: '4px solid var(--smash-red)' }}>
+                                <div className="killmove-panel is-opponent">
                                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: 'bold' }}>
                                         <Skull size={20} /> 相手に撃墜された技
                                     </label>

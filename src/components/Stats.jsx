@@ -2,6 +2,7 @@ import React, { useMemo, useState, useRef } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
 import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search } from 'lucide-react';
+import VipBorderGauge from './VipBorderGauge';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, AreaChart, Area } from 'recharts';
 
 export default function Stats() {
@@ -375,6 +376,10 @@ export default function Stats() {
                     ))}
                 </select>
             </div>
+
+            {selectedMyFighter !== 'all' && latestGsp && (
+                <VipBorderGauge gsp={latestGsp} />
+            )}
 
             {/* Overview Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.8rem' }}>
@@ -899,7 +904,7 @@ export default function Stats() {
                                     return (
                                         <div
                                             key={index}
-                                            className="history-card"
+                                            className={`history-card ${isWin ? 'is-win' : 'is-lose'}`}
                                             style={{
                                                 display: 'flex',
                                                 flexDirection: 'column',
@@ -999,7 +1004,7 @@ export default function Stats() {
                                                             <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                                                                 <span style={{ color: 'var(--text-muted)' }}>自KO:</span>
                                                                 {(match.myKillMoves || [match.killMove]).filter(Boolean).map((m, i) => (
-                                                                    <span key={`my-${i}`} style={{ backgroundColor: '#222', color: 'var(--smash-yellow)', padding: '2px 8px', border: '1px solid var(--smash-yellow)', fontWeight: 'bold' }}>
+                                                                    <span key={`my-${i}`} className="ko-chip is-mine">
                                                                         {m}
                                                                     </span>
                                                                 ))}
@@ -1009,7 +1014,7 @@ export default function Stats() {
                                                             <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                                                                 <span style={{ color: 'var(--text-muted)' }}>被KO:</span>
                                                                 {match.opponentKillMoves.map((m, i) => (
-                                                                    <span key={`opp-${i}`} style={{ backgroundColor: '#222', color: 'var(--smash-red)', padding: '2px 8px', border: '1px solid var(--smash-red)', fontWeight: 'bold' }}>
+                                                                    <span key={`opp-${i}`} className="ko-chip is-opponent">
                                                                         {m}
                                                                     </span>
                                                                 ))}
@@ -1018,7 +1023,7 @@ export default function Stats() {
                                                     </div>
 
                                                     {match.notes && (
-                                                        <div style={{ marginTop: '0.5rem', fontSize: '1rem', color: 'var(--text-main)', backgroundColor: '#0a0a0a', borderLeft: '4px solid var(--text-muted)', padding: '1rem', fontWeight: 'bold' }}>
+                                                        <div className="history-note">
                                                             {match.notes}
                                                         </div>
                                                     )}

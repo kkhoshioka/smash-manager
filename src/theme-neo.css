@@ -1,0 +1,795 @@
+/*
+ * NEO テーマ
+ * ------------------------------------------------------------------
+ * すべてのルールを [data-ui="neo"] の配下に閉じ込めてある。
+ * オプション画面で「クラシック」に切り替えると html の data-ui が変わり、
+ * このファイルは一切効かなくなる（= 元のデザインに即座に戻る）。
+ *
+ * 注意: モバイルの固定 WIN/LOSE バーは position:fixed なので、
+ * その祖先 (.main-content / main / .animate-enter) には
+ * transform・filter・backdrop-filter を付けないこと。付けると
+ * その要素が包含ブロックになり、バーが画面下に固定されなくなる。
+ */
+
+[data-ui='neo'] {
+  /* Surfaces */
+  --neo-bg-0: #06070b;
+  --neo-bg-1: #0c0e15;
+  --neo-surface: rgba(22, 25, 34, 0.58);
+  --neo-surface-2: rgba(255, 255, 255, 0.05);
+  --neo-surface-3: rgba(255, 255, 255, 0.09);
+  --neo-inset: rgba(0, 0, 0, 0.38);
+
+  /* Strokes */
+  --neo-stroke: rgba(255, 255, 255, 0.1);
+  --neo-stroke-strong: rgba(255, 255, 255, 0.2);
+
+  /* Accents */
+  --neo-accent: #ff3b4e;
+  --neo-accent-2: #ff8a3d;
+  --neo-accent-grad: linear-gradient(135deg, #ff3b4e 0%, #ff7a3d 100%);
+  --neo-win: #3ddcff;
+  --neo-lose: #ff4f6d;
+  --neo-gold: #ffc24b;
+
+  /* Elevation: 光は上から。内側のハイライトで立体に見せる */
+  --neo-e1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.35);
+  --neo-e2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 14px 36px rgba(0, 0, 0, 0.5);
+  --neo-e3: 0 30px 70px rgba(0, 0, 0, 0.6);
+  --neo-hi: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* Radii */
+  --neo-r-sm: 10px;
+  --neo-r-md: 14px;
+  --neo-r-lg: 20px;
+  --neo-r-pill: 999px;
+
+  --neo-blur: blur(22px) saturate(150%);
+}
+
+/* ---------------------------------------------------------------- */
+/* 背景                                                              */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] body {
+  background-color: var(--neo-bg-0);
+}
+
+[data-ui='neo'] body::before {
+  filter: brightness(0.4) saturate(115%) blur(4px);
+  transform: scale(1.06);
+}
+
+/* 背景の上に敷くスクリム。パネルのガラス感を出すための下地 */
+[data-ui='neo'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 60% at 50% -10%, rgba(255, 59, 78, 0.16) 0%, transparent 60%),
+    radial-gradient(70% 50% at 100% 100%, rgba(61, 220, 255, 0.1) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(6, 7, 11, 0.35) 0%, rgba(6, 7, 11, 0.82) 100%);
+}
+
+[data-ui='neo'] body.obs-mode-body::after {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* シェル / ヘッダー                                                  */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .app-container {
+  padding: 1.75rem 1.25rem 2.5rem;
+}
+
+[data-ui='neo'] .main-content {
+  max-width: 1400px;
+  background: var(--neo-surface);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-lg);
+  clip-path: none;
+  padding: 2rem;
+  box-shadow: var(--neo-e3), var(--neo-hi);
+  backdrop-filter: var(--neo-blur);
+  overflow: hidden;
+}
+
+[data-ui='neo'] .main-content::before {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 59, 78, 0.9) 25%, rgba(255, 138, 61, 0.9) 60%, transparent 100%);
+  opacity: 0.9;
+}
+
+[data-ui='neo'] .app-header {
+  background: none;
+  border-bottom: 1px solid var(--neo-stroke);
+  padding: 0.5rem 0 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+[data-ui='neo'] .app-title {
+  text-shadow: none;
+  letter-spacing: 4px;
+  filter: drop-shadow(0 4px 18px rgba(255, 59, 78, 0.35));
+}
+
+[data-ui='neo'] .app-title span {
+  background: var(--neo-accent-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+/* ---------------------------------------------------------------- */
+/* タブ: セグメンテッドコントロール                                    */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .smash-tabs {
+  border-bottom: none;
+  background: var(--neo-surface-2);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-pill);
+  padding: 5px;
+  gap: 4px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+[data-ui='neo'] .smash-tab {
+  border-radius: var(--neo-r-pill);
+  clip-path: none;
+  font-style: normal;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.2s ease, background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+[data-ui='neo'] .smash-tab.active {
+  background: var(--neo-accent-grad);
+  clip-path: none;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 59, 78, 0.4), var(--neo-hi);
+  transform: translateY(-1px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ui='neo'] .smash-tab:hover {
+    background: var(--neo-surface-3);
+    color: #fff;
+  }
+
+  [data-ui='neo'] .smash-tab.active:hover {
+    background: var(--neo-accent-grad);
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* 見出し                                                            */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .section-title {
+  border-left: none;
+  padding-left: 0;
+  font-style: normal;
+  letter-spacing: 1px;
+  text-shadow: none;
+  gap: 0.5rem;
+}
+
+[data-ui='neo'] .section-title::before {
+  content: '';
+  width: 4px;
+  align-self: stretch;
+  min-height: 1.1em;
+  margin-right: 0.6rem;
+  border-radius: var(--neo-r-pill);
+  background: var(--neo-accent-grad);
+  box-shadow: 0 0 12px rgba(255, 59, 78, 0.6);
+}
+
+[data-ui='neo'] .smash-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neo-stroke-strong), transparent);
+}
+
+/* ---------------------------------------------------------------- */
+/* ボタン                                                            */
+/* ---------------------------------------------------------------- */
+
+/*
+ * 背景色はコンポーネント側の inline style で色々指定されているので上書きしない。
+ * 代わりに上に光沢レイヤーを重ねて、どの色でも立体的に見えるようにする。
+ */
+[data-ui='neo'] .btn-smash {
+  border-radius: var(--neo-r-md);
+  clip-path: none;
+  font-style: normal;
+  letter-spacing: 1.5px;
+  box-shadow: var(--neo-e1), var(--neo-hi);
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+[data-ui='neo'] .btn-smash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(0, 0, 0, 0.12) 100%);
+  pointer-events: none;
+}
+
+[data-ui='neo'] .btn-smash > div {
+  position: relative;
+  z-index: 1;
+  transform: none !important;
+}
+
+[data-ui='neo'] .btn-smash:active {
+  transform: translateY(2px) scale(0.99);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ui='neo'] .btn-smash:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: var(--neo-e2), var(--neo-hi);
+    background-color: inherit;
+  }
+}
+
+[data-ui='neo'] .action-btn-styled {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  font-size: 1.35rem;
+}
+
+/* WIN / LOSE のアンビエントグロー */
+[data-ui='neo'] .action-btn-container .btn-smash:first-child {
+  box-shadow: var(--neo-e1), var(--neo-hi), 0 10px 30px rgba(61, 220, 255, 0.28);
+}
+
+[data-ui='neo'] .action-btn-container .btn-smash:last-child {
+  box-shadow: var(--neo-e1), var(--neo-hi), 0 10px 30px rgba(255, 79, 109, 0.28);
+}
+
+/* ---------------------------------------------------------------- */
+/* 入力                                                              */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] input,
+[data-ui='neo'] select,
+[data-ui='neo'] textarea {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-sm);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+[data-ui='neo'] input:focus,
+[data-ui='neo'] select:focus,
+[data-ui='neo'] textarea:focus {
+  border-color: rgba(255, 59, 78, 0.8);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(255, 59, 78, 0.18);
+}
+
+[data-ui='neo'] .search-input {
+  border-radius: var(--neo-r-pill);
+}
+
+/* ---------------------------------------------------------------- */
+/* カード                                                            */
+/* ---------------------------------------------------------------- */
+
+/*
+ * border-bottom-color はカードごとに inline style で指定されている（勝率=黄、
+ * GSP=シアン…）。色はそのまま活かしたいので、ここでは太さだけを整える。
+ */
+[data-ui='neo'] .stat-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0.16) 100%);
+  border: 1px solid var(--neo-stroke);
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-radius: var(--neo-r-md);
+  clip-path: none;
+  box-shadow: var(--neo-e1), var(--neo-hi);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+
+[data-ui='neo'] .stat-number,
+[data-ui='neo'] .stat-number-gsp {
+  text-shadow: none;
+  letter-spacing: -0.5px;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+}
+
+/* ---------------------------------------------------------------- */
+/* ファイター選択                                                     */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .fighter-grid {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-md);
+  box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.5);
+  gap: 0.45rem;
+}
+
+[data-ui='neo'] .fighter-icon-btn {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--neo-stroke);
+  border-radius: 12px;
+  clip-path: none;
+  box-shadow: var(--neo-hi);
+  transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1.3), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[data-ui='neo'] .fighter-icon-btn.selected {
+  background: var(--neo-accent-grad);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(255, 59, 78, 0.35), 0 8px 24px rgba(255, 59, 78, 0.45);
+}
+
+[data-ui='neo'] .fighter-icon-btn:active {
+  transform: scale(0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ui='neo'] .fighter-icon-btn:hover {
+    background: var(--neo-surface-3);
+    border-color: var(--neo-stroke-strong);
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: var(--neo-e2), var(--neo-hi);
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* VS バッジ                                                         */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .vs-badge-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--neo-stroke) !important;
+  border-radius: var(--neo-r-md);
+  clip-path: none;
+  padding: 0.7rem 1.1rem;
+  box-shadow: var(--neo-e1), var(--neo-hi);
+  backdrop-filter: blur(10px);
+}
+
+[data-ui='neo'] .fighter-name {
+  font-style: normal;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+[data-ui='neo'] .fighter-portrait {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.7));
+}
+
+[data-ui='neo'] .result-text {
+  font-style: normal;
+  text-shadow: none;
+  letter-spacing: 1px;
+}
+
+/* ---------------------------------------------------------------- */
+/* 対戦成績ボックス                                                   */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .matchup-stats-box {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0.25));
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-lg);
+  clip-path: none;
+  box-shadow: var(--neo-e2), var(--neo-hi);
+  backdrop-filter: blur(14px);
+}
+
+[data-ui='neo'] .matchup-stats-title {
+  font-style: normal;
+  text-shadow: none;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 3px;
+  font-size: 0.95rem;
+}
+
+[data-ui='neo'] .matchup-stats-main {
+  text-shadow: none;
+}
+
+[data-ui='neo'] .matchup-stats-winrate {
+  border-left: 1px solid var(--neo-stroke);
+  font-style: normal;
+  border-radius: var(--neo-r-pill);
+}
+
+[data-ui='neo'] .matchup-stats-recent-container {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-pill);
+  clip-path: none;
+}
+
+[data-ui='neo'] .matchup-stats-recent-badge {
+  box-shadow: var(--neo-e1), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* ---------------------------------------------------------------- */
+/* VIP ゲージ                                                        */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .vip-gauge {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.22));
+  border: 1px solid var(--neo-stroke);
+  border-left: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-md);
+  padding: 0.9rem 1.1rem;
+  box-shadow: var(--neo-e1), var(--neo-hi);
+  backdrop-filter: blur(12px);
+}
+
+[data-ui='neo'] .vip-gauge.is-vip {
+  border-color: rgba(255, 194, 75, 0.45);
+  box-shadow: var(--neo-e1), var(--neo-hi), 0 10px 32px rgba(255, 194, 75, 0.22);
+}
+
+[data-ui='neo'] .vip-gauge__title {
+  color: var(--neo-gold);
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+[data-ui='neo'] .vip-gauge__track {
+  height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: var(--neo-r-pill);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.7);
+  overflow: visible;
+}
+
+[data-ui='neo'] .vip-gauge__fill {
+  border-radius: var(--neo-r-pill);
+  background: linear-gradient(90deg, #3ddcff 0%, #7a6bff 55%, #ffc24b 100%);
+  box-shadow: 0 0 14px rgba(122, 107, 255, 0.5);
+  position: relative;
+}
+
+/* 進行方向に流れるハイライト */
+[data-ui='neo'] .vip-gauge__fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  background-size: 180px 100%;
+  background-repeat: no-repeat;
+  animation: neo-shimmer 2.4s linear infinite;
+}
+
+[data-ui='neo'] .vip-gauge.is-vip .vip-gauge__fill {
+  background: linear-gradient(90deg, #ffc24b, #fff0b8);
+  box-shadow: 0 0 18px rgba(255, 194, 75, 0.55);
+}
+
+[data-ui='neo'] .vip-gauge__marker {
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  right: -1px;
+  transform: translate(50%, -50%) rotate(45deg);
+  border-radius: 2px;
+  background: var(--neo-gold);
+  box-shadow: 0 0 10px rgba(255, 194, 75, 0.8);
+}
+
+[data-ui='neo'] .vip-gauge__current {
+  text-shadow: none;
+  letter-spacing: -0.5px;
+}
+
+[data-ui='neo'] .vip-gauge__result {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-pill);
+  padding: 0.15rem 0.7rem;
+}
+
+[data-ui='neo'] .vip-gauge__result.is-reached {
+  background: linear-gradient(135deg, rgba(255, 194, 75, 0.25), rgba(255, 194, 75, 0.08));
+  border-color: rgba(255, 194, 75, 0.5);
+  color: var(--neo-gold);
+}
+
+@keyframes neo-shimmer {
+  0% {
+    background-position: -180px 0;
+  }
+
+  100% {
+    background-position: calc(100% + 180px) 0;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* 履歴                                                              */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .history-card {
+  border: 1px solid var(--neo-stroke) !important;
+  border-left-width: 1px !important;
+  border-radius: var(--neo-r-md);
+  clip-path: none !important;
+  background-color: rgba(255, 255, 255, 0.035) !important;
+  box-shadow: var(--neo-e1), var(--neo-hi);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+/* 勝敗はカード左端のレールと淡いグローで示す */
+[data-ui='neo'] .history-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: var(--neo-win);
+  box-shadow: 0 0 18px rgba(61, 220, 255, 0.55);
+}
+
+[data-ui='neo'] .history-card.is-lose::before {
+  background: var(--neo-lose);
+  box-shadow: 0 0 18px rgba(255, 79, 109, 0.55);
+}
+
+[data-ui='neo'] .history-card.is-win {
+  background: linear-gradient(100deg, rgba(61, 220, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 45%) !important;
+}
+
+[data-ui='neo'] .history-card.is-lose {
+  background: linear-gradient(100deg, rgba(255, 79, 109, 0.1) 0%, rgba(255, 255, 255, 0.03) 45%) !important;
+}
+
+[data-ui='neo'] .history-gsp {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-sm);
+  clip-path: none;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+[data-ui='neo'] .history-actions button {
+  border-radius: var(--neo-r-sm);
+  border: 1px solid transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ui='neo'] .history-actions button:hover {
+    background: var(--neo-surface-3);
+    border-color: var(--neo-stroke);
+  }
+}
+
+[data-ui='neo'] .history-filter-bar {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-md);
+  backdrop-filter: blur(10px);
+}
+
+[data-ui='neo'] .history-note {
+  background: rgba(0, 0, 0, 0.32);
+  border-left: 2px solid var(--neo-stroke-strong);
+  border-radius: var(--neo-r-sm);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+[data-ui='neo'] .ko-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--neo-r-pill);
+  padding: 2px 10px;
+  font-weight: 700;
+}
+
+[data-ui='neo'] .ko-chip.is-mine {
+  border: 1px solid rgba(255, 194, 75, 0.45);
+  color: var(--neo-gold);
+}
+
+[data-ui='neo'] .ko-chip.is-opponent {
+  border: 1px solid rgba(255, 79, 109, 0.45);
+  color: var(--neo-lose);
+}
+
+/* ---------------------------------------------------------------- */
+/* テーブル                                                          */
+
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .data-table thead tr {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-ui='neo'] .data-table th {
+  border-bottom: 1px solid var(--neo-stroke) !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+[data-ui='neo'] .data-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ---------------------------------------------------------------- */
+/* スクロールバー                                                     */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-ui='neo'] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: var(--neo-r-pill);
+}
+
+[data-ui='neo'] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+  background-clip: content-box;
+}
+
+/* ---------------------------------------------------------------- */
+/* 入場モーション                                                     */
+/* ---------------------------------------------------------------- */
+
+@keyframes neo-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-ui='neo'] .animate-enter {
+  animation: neo-enter 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+/* ---------------------------------------------------------------- */
+/* 詳細設定 / 撃墜技パネル                                            */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .extras-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-md);
+  clip-path: none;
+  box-shadow: var(--neo-hi);
+  transition: background 0.2s, border-color 0.2s, transform 0.18s ease;
+}
+
+[data-ui='neo'] .extras-toggle:active {
+  transform: scale(0.995);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ui='neo'] .extras-toggle:hover {
+    background: var(--neo-surface-3);
+    border-color: var(--neo-stroke-strong);
+  }
+}
+
+[data-ui='neo'] .killmove-panel {
+  border-radius: var(--neo-r-md);
+  border: 1px solid var(--neo-stroke);
+  border-left-width: 3px;
+  padding: 1.1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+[data-ui='neo'] .killmove-panel.is-mine {
+  background: linear-gradient(140deg, rgba(255, 194, 75, 0.1), rgba(0, 0, 0, 0.28));
+  border-left-color: var(--neo-gold);
+}
+
+[data-ui='neo'] .killmove-panel.is-opponent {
+  background: linear-gradient(140deg, rgba(255, 79, 109, 0.12), rgba(0, 0, 0, 0.28));
+  border-left-color: var(--neo-lose);
+}
+
+/* ---------------------------------------------------------------- */
+/* デザイン切り替え                                                   */
+
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .ui-style-option {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-md);
+  box-shadow: var(--neo-hi);
+  transition: transform 0.18s ease, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+[data-ui='neo'] .ui-style-option.is-active {
+  background: linear-gradient(150deg, rgba(255, 59, 78, 0.22), rgba(255, 122, 61, 0.06));
+  border-color: rgba(255, 59, 78, 0.6);
+  box-shadow: var(--neo-e1), var(--neo-hi);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ui='neo'] .ui-style-option:hover {
+    transform: translateY(-2px);
+    border-color: var(--neo-stroke-strong);
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* モバイル                                                          */
+
+/* ---------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  [data-ui='neo'] .app-container {
+    padding: 0;
+    padding-bottom: calc(4.5rem + var(--safe-bottom));
+  }
+
+  [data-ui='neo'] .main-content {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 0.85rem;
+    /* position:fixed の WIN/LOSE バーを画面に固定したままにするため必須 */
+    backdrop-filter: none;
+    background: rgba(10, 12, 18, 0.72);
+  }
+
+  [data-ui='neo'] .app-header {
+    padding: 0.4rem 0 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  [data-ui='neo'] .smash-tabs {
+    border-radius: var(--neo-r-md);
+    padding: 4px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  [data-ui='neo'] .smash-tab {
+    border-radius: var(--neo-r-sm);
+  }
+
+  [data-ui='neo'] .smash-tab.active {
+    transform: none;
+  }
+
+  [data-ui='neo'] .action-btn-container.is-ready {
+    border-top: 1px solid var(--neo-stroke);
+    background: rgba(8, 9, 14, 0.86);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  [data-ui='neo'] .action-btn-styled {
+    font-size: 1.15rem;
+  }
+
+  [data-ui='neo'] .vip-gauge {
+    padding: 0.7rem 0.8rem;
+  }
+}

@@ -7,9 +7,13 @@ import AdminDashboard from './components/AdminDashboard';
 import { Swords, BarChart2, Settings as SettingsIcon, ShieldAlert } from 'lucide-react';
 import { useAuth } from './hooks/useAuth';
 
+export const UI_STYLE_KEY = 'smashUiStyle';
+
 function App() {
   const [activeTab, setActiveTab] = useState('log');
   const { auth } = useAuth();
+  // 'neo' = 新デザイン / 'classic' = 従来デザイン。オプション画面でいつでも戻せる。
+  const [uiStyle, setUiStyle] = useState(() => localStorage.getItem(UI_STYLE_KEY) || 'neo');
   const [backgroundImage, setBackgroundImage] = useState(() => {
     return localStorage.getItem('smashBgImage') || '/bg_stage.png';
   });
@@ -18,6 +22,11 @@ function App() {
     document.documentElement.style.setProperty('--bg-image', `url(${backgroundImage})`);
     localStorage.setItem('smashBgImage', backgroundImage);
   }, [backgroundImage]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-ui', uiStyle);
+    localStorage.setItem(UI_STYLE_KEY, uiStyle);
+  }, [uiStyle]);
 
   const isObsMode = window.location.search.includes('obs=true') || window.location.search.includes('obsId=') || window.location.hash.includes('obs=true');
 
@@ -67,7 +76,7 @@ function App() {
         <main>
           {activeTab === 'log' && <MatchLogger />}
           {activeTab === 'stats' && <Stats />}
-          {activeTab === 'settings' && <Settings backgroundImage={backgroundImage} onBackgroundChange={setBackgroundImage} />}
+          {activeTab === 'settings' && <Settings backgroundImage={backgroundImage} onBackgroundChange={setBackgroundImage} uiStyle={uiStyle} onUiStyleChange={setUiStyle} />}
           {activeTab === 'admin' && auth?.isAdmin && <AdminDashboard auth={auth} />}
         </main>
       </div>
