@@ -1,9 +1,86 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
 import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair, Flame } from 'lucide-react';
 import VipBorderGauge from './VipBorderGauge';
+import FighterHoverCard from './FighterHoverCard';
 import { getLatestGsp } from '../data/vipBorder';
+
+
+/**
+ * ファイター選択グリッド。
+ *
+ * MatchLogger の中で定義するとレンダーごとに別のコンポーネント型になり、
+ * ホバーで state が変わるたびにグリッド全体（86体ぶんの img）が
+ * 作り直されてしまうため、モジュールスコープに置いている。
+ */
+function FighterGrid({
+    fighters: gridFighters,
+    frequentOpponents,
+    fighterSearch,
+    onSelect,
+    selectedId,
+    showRecent = false,
+    mode = 'opponent',
+    onIconEnter,
+    onIconLeave,
+    hoveredFighter,
+    matchupByOpponent,
+    statsByMyFighter,
+    myFighterName
+}) {
+    const handleImgError = (e, f) => {
+        e.target.style.display = 'none';
+        e.target.parentElement.textContent = f.name.substring(0, 2);
+    };
+
+    return (
+        <div className="fighter-grid" onMouseLeave={onIconLeave}>
+            {showRecent && !fighterSearch && frequentOpponents.map(f => (
+                <button
+                    key={`freq-${f.id}`}
+                    className={`fighter-icon-btn ${selectedId === f.id ? 'selected' : ''}`}
+                    onClick={() => onSelect(f)}
+                    onMouseEnter={(e) => onIconEnter(e, f, mode)}
+                    onFocus={(e) => onIconEnter(e, f, mode)}
+                    onBlur={onIconLeave}
+                    aria-label={f.name}
+                    style={selectedId === f.id ? { borderColor: 'var(--smash-yellow)' } : { borderColor: 'var(--smash-red)' }}
+                >
+                    <img src={f.imageUrl} alt={f.name} loading="lazy" onError={(e) => handleImgError(e, f)} />
+                    <div className="fighter-hot-badge">HOT</div>
+                </button>
+            ))}
+
+            {showRecent && !fighterSearch && frequentOpponents.length > 0 && (
+                <div className="fighter-grid__divider" />
+            )}
+
+            {gridFighters.map(f => (
+                <button
+                    key={f.id}
+                    className={`fighter-icon-btn ${selectedId === f.id ? 'selected' : ''}`}
+                    onClick={() => onSelect(f)}
+                    onMouseEnter={(e) => onIconEnter(e, f, mode)}
+                    onFocus={(e) => onIconEnter(e, f, mode)}
+                    onBlur={onIconLeave}
+                    aria-label={f.name}
+                >
+                    <img src={f.imageUrl} alt={f.name} loading="lazy" onError={(e) => handleImgError(e, f)} />
+                </button>
+            ))}
+
+            {hoveredFighter && (
+                <FighterHoverCard
+                    info={hoveredFighter}
+                    matchup={matchupByOpponent[hoveredFighter.fighter.id]}
+                    overall={statsByMyFighter[hoveredFighter.fighter.id]}
+                    myFighterName={myFighterName}
+                />
+            )}
+        </div>
+    );
+}
 
 export default function MatchLogger() {
     const { addMatch, prefs, setPrefs, history } = useMatchHistory();
@@ -26,6 +103,9 @@ export default function MatchLogger() {
     useEffect(() => {
         setGsp('');
     }, [prefs.lastMyFighter]);
+
+    // アイコンにカーソルを乗せたときの成績ポップアップ
+    const [hoveredFighter, setHoveredFighter] = useState(null);
 
     const [isEditingMyKillMoves, setIsEditingMyKillMoves] = useState(false);
     const [newCustomKillMove, setNewCustomKillMove] = useState('');
@@ -135,6 +215,50 @@ export default function MatchLogger() {
         return { count, type };
     }, [history, prefs.lastMyFighter]);
 
+    /**
+     * 使用ファイター視点での、相手ファイター別の対戦成績。
+     * ホバー表示のたびに history を走査しないよう、一度だけまとめて作る。
+     * history は新しい順なので、recent も新しい順で入る。
+     */
+    const matchupByOpponent = useMemo(() => {
+        const map = {};
+        if (!prefs.lastMyFighter) return map;
+
+        history.forEach(m => {
+            if (m.myFighter !== prefs.lastMyFighter || !m.opponentFighter) return;
+            const entry = map[m.opponentFighter] || (map[m.opponentFighter] = { total: 0, wins: 0, losses: 0, recent: [] });
+            entry.total += 1;
+            if (m.result === 'win') entry.wins += 1;
+            else entry.losses += 1;
+            if (entry.recent.length < 5) entry.recent.push(m);
+        });
+
+        Object.values(map).forEach(e => {
+            e.winRate = e.total > 0 ? Math.round((e.wins / e.total) * 100) : 0;
+            // 左が古く右が新しくなるよう並べ替える
+            e.recent.reverse();
+        });
+        return map;
+    }, [history, prefs.lastMyFighter]);
+
+    /** 自分のファイター別の通算成績（使用ファイター選択時のホバー用） */
+    const statsByMyFighter = useMemo(() => {
+        const map = {};
+        history.forEach(m => {
+            if (!m.myFighter) return;
+            const entry = map[m.myFighter] || (map[m.myFighter] = { total: 0, wins: 0, losses: 0, gsp: null });
+            entry.total += 1;
+            if (m.result === 'win') entry.wins += 1;
+            else entry.losses += 1;
+            if (entry.gsp === null && m.gsp) entry.gsp = m.gsp;
+        });
+        Object.entries(map).forEach(([id, e]) => {
+            e.winRate = e.total > 0 ? Math.round((e.wins / e.total) * 100) : 0;
+            if (!e.gsp && prefs.fighterGsp?.[id]) e.gsp = prefs.fighterGsp[id];
+        });
+        return map;
+    }, [history, prefs.fighterGsp]);
+
     const matchupStats = useMemo(() => {
         if (!prefs.lastMyFighter || !selectedOpponent) return null;
         const matches = history.filter(m => m.myFighter === prefs.lastMyFighter && m.opponentFighter === selectedOpponent.id);
@@ -142,7 +266,9 @@ export default function MatchLogger() {
         const total = matches.length;
         const losses = total - wins;
         const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
-        const recent = matches.slice(-5);
+        // history は新しい順。slice(-5) だと「最も古い5件」になってしまうので
+        // 先頭から5件取り、左が古く右が新しくなるよう反転する。
+        const recent = matches.slice(0, 5).reverse();
 
         return { total, wins, losses, winRate, recent };
     }, [history, prefs.lastMyFighter, selectedOpponent]);
@@ -195,39 +321,28 @@ export default function MatchLogger() {
         setCustomOpponentKillMoves({});
     };
 
-    const FighterGrid = ({ onSelect, selectedId, showRecent = false }) => (
-        <div className="fighter-grid">
-            {showRecent && !fighterSearch && frequentOpponents.map(f => (
-                <button
-                    key={`freq-${f.id}`}
-                    className={`fighter-icon-btn ${selectedId === f.id ? 'selected' : ''}`}
-                    onClick={() => onSelect(f)}
-                    title={f.name}
-                    style={selectedId === f.id ? { borderColor: 'var(--smash-yellow)' } : { borderColor: 'var(--smash-red)' }}
-                >
-                    <img src={f.imageUrl} alt={f.name} loading="lazy" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.textContent = f.name.substring(0, 2); }} />
-                    <div style={{ position: 'absolute', top: '-4px', right: '-4px', background: 'linear-gradient(45deg, #ff0000, #ff6b00)', color: 'white', fontSize: '0.6rem', padding: '2px 4px', borderRadius: '3px', fontWeight: '900', fontFamily: 'var(--font-en)', border: '1px solid #000', boxShadow: '1px 1px 0 rgba(0,0,0,0.5)', zIndex: 2, transform: 'skewX(-10deg)' }}>
-                        HOT
-                    </div>
-                </button>
-            ))}
+    /**
+     * ボタンの位置をグリッド内の座標で拾ってポップアップを出す。
+     * position:fixed だと backdrop-filter を持つ祖先が包含ブロックになって
+     * ずれるため、グリッド(position:relative)基準の absolute で配置する。
+     */
+    const handleIconEnter = useCallback((e, fighter, mode) => {
+        const btn = e.currentTarget;
+        const gridWidth = btn.offsetParent ? btn.offsetParent.offsetWidth : 0;
+        const x = btn.offsetLeft + btn.offsetWidth / 2;
+        setHoveredFighter({
+            fighter,
+            mode,
+            // 端で見切れないよう左右をクランプする
+            x: gridWidth ? Math.min(Math.max(x, 96), gridWidth - 96) : x,
+            top: btn.offsetTop,
+            bottom: btn.offsetTop + btn.offsetHeight,
+            // 上に出すとカード(約130px)が見切れる位置なら下に出す
+            below: btn.offsetTop < 140
+        });
+    }, []);
 
-            {showRecent && !fighterSearch && frequentOpponents.length > 0 && (
-                <div style={{ gridColumn: '1 / -1', height: '2px', background: '#333', margin: '0.5rem 0' }} />
-            )}
-
-            {filteredFighters.map(f => (
-                <button
-                    key={f.id}
-                    className={`fighter-icon-btn ${selectedId === f.id ? 'selected' : ''}`}
-                    onClick={() => onSelect(f)}
-                    title={f.name}
-                >
-                    <img src={f.imageUrl} alt={f.name} loading="lazy" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.textContent = f.name.substring(0, 2); }} />
-                </button>
-            ))}
-        </div>
-    );
+    const clearHover = useCallback(() => setHoveredFighter(null), []);
 
     return (
         <div className="match-logger animate-enter">
@@ -266,6 +381,16 @@ export default function MatchLogger() {
                                 />
                             </div>
                             <FighterGrid
+                                mode="mine"
+                                fighters={filteredFighters}
+                                frequentOpponents={frequentOpponents}
+                                fighterSearch={fighterSearch}
+                                onIconEnter={handleIconEnter}
+                                onIconLeave={clearHover}
+                                hoveredFighter={hoveredFighter}
+                                matchupByOpponent={matchupByOpponent}
+                                statsByMyFighter={statsByMyFighter}
+                                myFighterName={myFighterObj?.name}
                                 selectedId={prefs.lastMyFighter}
                                 onSelect={(f) => {
                                     setPrefs(p => ({ ...p, lastMyFighter: f.id }));
@@ -395,6 +520,15 @@ export default function MatchLogger() {
                             </div>
                             <FighterGrid
                                 showRecent={true}
+                                fighters={filteredFighters}
+                                frequentOpponents={frequentOpponents}
+                                fighterSearch={fighterSearch}
+                                onIconEnter={handleIconEnter}
+                                onIconLeave={clearHover}
+                                hoveredFighter={hoveredFighter}
+                                matchupByOpponent={matchupByOpponent}
+                                statsByMyFighter={statsByMyFighter}
+                                myFighterName={myFighterObj?.name}
                                 selectedId={null}
                                 onSelect={(f) => {
                                     setSelectedOpponent(f);
@@ -424,16 +558,35 @@ export default function MatchLogger() {
                                         勝率 <span style={{ color: matchupStats.winRate >= 50 ? 'var(--win-color)' : 'var(--lose-color)' }}>{matchupStats.winRate}%</span>
                                     </span>
                                 </div>
+
+                                {/* 勝敗の比率をそのまま横幅で見せる */}
+                                <div className="matchup-bar" title={`${matchupStats.wins}勝 ${matchupStats.losses}敗`}>
+                                    <div className="matchup-bar__win" style={{ width: `${matchupStats.winRate}%` }} />
+                                    <div className="matchup-bar__lose" style={{ width: `${100 - matchupStats.winRate}%` }} />
+                                </div>
+
                                 {matchupStats.recent && matchupStats.recent.length > 0 && (
-                                    <div className="matchup-stats-recent-container">
-                                        <span className="matchup-stats-recent-label">最近の対戦:</span>
-                                        {matchupStats.recent.map((m, i) => (
-                                            <div key={i} className="matchup-stats-recent-badge" style={{
-                                                backgroundColor: m.result === 'win' ? 'var(--win-color)' : 'var(--lose-color)'
-                                            }}>
-                                                {m.result === 'win' ? 'W' : 'L'}
-                                            </div>
-                                        ))}
+                                    <div className="matchup-form">
+                                        <span className="matchup-form__label">
+                                            直近{matchupStats.recent.length}戦
+                                        </span>
+                                        <div className="matchup-form__pips">
+                                            <span className="matchup-form__edge">古</span>
+                                            {matchupStats.recent.map((m, i) => {
+                                                const d = new Date(m.timestamp);
+                                                const isLatest = i === matchupStats.recent.length - 1;
+                                                return (
+                                                    <span
+                                                        key={i}
+                                                        className={`form-pip is-lg ${m.result === 'win' ? 'is-win' : 'is-lose'} ${isLatest ? 'is-latest' : ''}`}
+                                                        title={`${d.getMonth() + 1}/${d.getDate()} ${m.result === 'win' ? 'WIN' : 'LOSE'}`}
+                                                    >
+                                                        {m.result === 'win' ? 'W' : 'L'}
+                                                    </span>
+                                                );
+                                            })}
+                                            <span className="matchup-form__edge is-new">最新</span>
+                                        </div>
                                     </div>
                                 )}
                             </>

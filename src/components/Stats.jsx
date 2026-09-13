@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useRef } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search } from 'lucide-react';
+import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search, ChevronDown, ChevronUp, Shield } from 'lucide-react';
 import VipBorderGauge from './VipBorderGauge';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, AreaChart, Area } from 'recharts';
 
@@ -12,6 +12,8 @@ export default function Stats() {
     const [editForm, setEditForm] = useState({});
     const [showAllMatchups, setShowAllMatchups] = useState(false);
     const [showAllKillMoves, setShowAllKillMoves] = useState(false);
+    // 詳細データ分析は普段は畳んでおく（邪魔にならないように）
+    const [showAdvanced, setShowAdvanced] = useState(false);
     const [gspChartRange, setGspChartRange] = useState('100'); // Default to 100 matches for clean and fast chart render
     const [historyOpponentFilter, setHistoryOpponentFilter] = useState('all');
     const [historyKillMoveFilter, setHistoryKillMoveFilter] = useState('all');
@@ -204,6 +206,19 @@ export default function Stats() {
             .map(([name, count]) => ({ name, count }));
     }, [filteredHistory]);
 
+    /** 何で倒されているか。自分の撃墜技ランキングと対になる「弱点」データ。 */
+    const opponentKillMoveRanking = useMemo(() => {
+        const counts = {};
+        filteredHistory.forEach(m => {
+            (m.opponentKillMoves || []).forEach(move => {
+                if (move) counts[move] = (counts[move] || 0) + 1;
+            });
+        });
+        return Object.entries(counts)
+            .sort((a, b) => b[1] - a[1])
+            .map(([name, count]) => ({ name, count }));
+    }, [filteredHistory]);
+
     const displayedHistory = useMemo(() => {
         let result = filteredHistory;
         if (historyOpponentFilter !== 'all') {
@@ -262,6 +277,40 @@ export default function Stats() {
         };
 
         const dailyMap = {};
+
+        // 曜日別
+        const weekdayLabels = ['日', '月', '火', '水', '木', '金', '土'];
+        const weekdayStats = weekdayLabels.map(label => ({ label, total: 0, wins: 0 }));
+
+        // 1回の連続プレイ（前の試合から2時間以上空いたら別セッション）の中で
+        // 何戦目かごとの勝率。序盤に弱い/終盤に崩れる、といった傾向が見える。
+        const SESSION_GAP_MS = 2 * 60 * 60 * 1000;
+        const sessionBuckets = [
+            { label: '1〜3戦目', total: 0, wins: 0 },
+            { label: '4〜6戦目', total: 0, wins: 0 },
+            { label: '7〜10戦目', total: 0, wins: 0 },
+            { label: '11戦目以降', total: 0, wins: 0 }
+        ];
+        let prevTime = null;
+        let indexInSession = 0;
+
+        chronologicalHistory.forEach(m => {
+            const t = new Date(m.timestamp).getTime();
+            if (prevTime === null || t - prevTime > SESSION_GAP_MS) indexInSession = 1;
+            else indexInSession += 1;
+            prevTime = t;
+
+            const bucket = indexInSession <= 3 ? sessionBuckets[0]
+                : indexInSession <= 6 ? sessionBuckets[1]
+                    : indexInSession <= 10 ? sessionBuckets[2]
+                        : sessionBuckets[3];
+            bucket.total++;
+            if (m.result === 'win') bucket.wins++;
+
+            const wd = weekdayStats[new Date(m.timestamp).getDay()];
+            wd.total++;
+            if (m.result === 'win') wd.wins++;
+        });
 
         chronologicalHistory.forEach(m => {
             // Streaks
@@ -322,7 +371,9 @@ export default function Stats() {
             currentStreak,
             timeStats,
             top3Times,
-            recentDays
+            recentDays,
+            weekdayStats: weekdayStats.filter(w => w.total > 0),
+            sessionBuckets: sessionBuckets.filter(b => b.total > 0)
         };
     }, [filteredHistory]);
 
@@ -445,94 +496,6 @@ export default function Stats() {
                 </div>
             ) : (
                 <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    {/* Advanced Stats */}
-                    {advancedStats && (
-                        <>
-                            <h2 className="section-title">詳細データ分析</h2>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-                                {/* 1. Win Streak */}
-                                <div className="stat-card" style={{ borderBottomColor: 'var(--smash-red)', padding: '1.5rem' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
-                                        <Flame size={20} /> 連勝記録
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
-                                        <span style={{ color: 'var(--text-muted)' }}>最大連勝</span>
-                                        <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{advancedStats.maxStreak}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
-                                        <span style={{ color: 'var(--text-muted)' }}>現在の連勝</span>
-                                        <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)', color: advancedStats.currentStreak > 0 ? 'var(--smash-yellow)' : 'inherit' }}>{advancedStats.currentStreak}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>最大連敗</span>
-                                        <span style={{ fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-en)', color: 'var(--lose-color)' }}>{advancedStats.maxLossStreak}</span>
-                                    </div>
-                                </div>
-
-                                {/* 2. Best Time to Play (Top 3) */}
-                                {advancedStats.top3Times && advancedStats.top3Times.length > 0 && (
-                                    <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', padding: '1.5rem' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-yellow)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
-                                            <Clock size={20} /> 勝率の最も高い時間帯 TOP3
-                                        </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                            {advancedStats.top3Times.map((timeStat, i) => (
-                                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                                    <div style={{ backgroundColor: '#222', padding: '0.8rem', borderRadius: '50%', color: 'var(--smash-yellow)' }}>
-                                                        {timeStat.icon}
-                                                    </div>
-                                                    <div>
-                                                        <div style={{ fontSize: '1.2rem', fontWeight: '900', fontFamily: 'var(--font-jp)' }}>{i + 1}位: {timeStat.label}</div>
-                                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>勝率: {Math.round((timeStat.wins / timeStat.total) * 100)}% ({timeStat.total}戦)</div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* 3. Daily Performance */}
-                            {advancedStats.recentDays.length > 0 && (
-                                <div className="stat-card" style={{ borderBottomColor: 'var(--text-main)', padding: '1.5rem', marginBottom: '2rem' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
-                                        <CalendarDays size={20} /> 最近の日毎データ (直近7日)
-                                    </div>
-                                    <div className="table-scroll">
-                                        <table className="data-table">
-                                            <thead>
-                                                <tr style={{ backgroundColor: '#1a1a1a', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>日付</th>
-                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>試合数</th>
-                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>勝率</th>
-                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>戦闘力 最終推移</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {advancedStats.recentDays.map((day, i) => {
-                                                    const winRate = day.total > 0 ? Math.round((day.wins / day.total) * 100) : 0;
-                                                    const gspDiff = (day.endGsp && day.startGsp) ? day.endGsp - day.startGsp : 0;
-                                                    const gspColor = gspDiff > 0 ? 'var(--win-color)' : (gspDiff < 0 ? 'var(--lose-color)' : 'var(--text-muted)');
-                                                    return (
-                                                        <tr key={i} style={{ borderBottom: '1px solid #333', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
-                                                            <td style={{ padding: '1rem', fontWeight: 'bold' }}>{day.date}</td>
-                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold' }}>{day.total} 戦</td>
-                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: winRate >= 60 ? 'var(--smash-yellow)' : 'inherit' }}>{winRate}%</td>
-                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: gspColor }}>
-                                                                {gspDiff > 0 ? '+' : ''}{gspDiff !== 0 ? gspDiff.toLocaleString() : '-'}
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            )}
-
-                            <div className="smash-divider" />
-                        </>
-                    )}
 
                     {/* Stage Stats */}
                     {stageStats.length > 0 && (
@@ -778,18 +741,48 @@ export default function Stats() {
                             )}
 
                             {/* Kill Move Rankings */}
+                            {opponentKillMoveRanking.length > 0 && (
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--lose-color)', marginTop: '2rem' }}>
+                                    <h3 style={{ fontSize: '1.4rem', marginBottom: '1.2rem', color: 'var(--lose-color)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
+                                        <Shield size={24} /> やられている技（弱点）
+                                    </h3>
+                                    <div className="killmove-ranking">
+                                        {opponentKillMoveRanking.slice(0, 5).map((item, i) => {
+                                            const max = opponentKillMoveRanking[0].count || 1;
+                                            return (
+                                                <div key={i} className="killmove-ranking__row is-weak">
+                                                    <span className="killmove-ranking__rank">{i + 1}</span>
+                                                    <span className="killmove-ranking__name">{item.name}</span>
+                                                    <div className="killmove-ranking__track">
+                                                        <div className="killmove-ranking__fill" style={{ width: `${Math.round((item.count / max) * 100)}%` }} />
+                                                    </div>
+                                                    <span className="killmove-ranking__count">{item.count}</span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+
                             {myKillMoveRanking.length > 0 && (
                                 <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', marginTop: '2rem' }}>
-                                    <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--smash-yellow)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
+                                    <h3 style={{ fontSize: '1.4rem', marginBottom: '1.2rem', color: 'var(--smash-yellow)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '900', fontStyle: 'italic', fontFamily: 'var(--font-jp)' }}>
                                         <Crosshair size={24} /> よく使う撃墜技
                                     </h3>
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                                        {myKillMoveRanking.slice(0, showAllKillMoves ? undefined : 5).map((item, i) => (
-                                            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#111', padding: '1rem 1.5rem', border: '2px solid #444', clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}>
-                                                <span style={{ color: 'var(--text-main)', fontWeight: 'bold', fontSize: '1.1rem' }}>{i + 1}. {item.name}</span>
-                                                <span style={{ color: 'var(--smash-yellow)', fontWeight: '900', fontSize: '1.3rem', fontFamily: 'var(--font-en)' }}>{item.count} 回</span>
-                                            </div>
-                                        ))}
+                                    <div className="killmove-ranking">
+                                        {myKillMoveRanking.slice(0, showAllKillMoves ? undefined : 5).map((item, i) => {
+                                            const max = myKillMoveRanking[0].count || 1;
+                                            return (
+                                                <div key={i} className="killmove-ranking__row">
+                                                    <span className="killmove-ranking__rank">{i + 1}</span>
+                                                    <span className="killmove-ranking__name">{item.name}</span>
+                                                    <div className="killmove-ranking__track">
+                                                        <div className="killmove-ranking__fill" style={{ width: `${Math.round((item.count / max) * 100)}%` }} />
+                                                    </div>
+                                                    <span className="killmove-ranking__count">{item.count}</span>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
 
                                     {myKillMoveRanking.length > 5 && (
@@ -827,6 +820,175 @@ export default function Stats() {
                     )}
 
                     <div className="smash-divider" />
+
+                    {/* Advanced Stats（既定では畳んでおく） */}
+                    {advancedStats && (
+                        <div className="analysis-section">
+                            <button
+                                className="analysis-toggle"
+                                onClick={() => setShowAdvanced(!showAdvanced)}
+                                aria-expanded={showAdvanced}
+                            >
+                                <span className="analysis-toggle__label">
+                                    <BarChart3 size={18} /> 詳細データ分析
+                                </span>
+                                <span className="analysis-toggle__hint">
+                                    連勝記録 / 時間帯 / 曜日 / 日毎
+                                    {showAdvanced ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                                </span>
+                            </button>
+
+                            {showAdvanced && (
+                                <div className="analysis-body animate-enter">
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
+                                {/* 1. Win Streak */}
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--smash-red)', padding: '1.2rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                        <Flame size={20} /> 連勝記録
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                                        <span style={{ color: 'var(--text-muted)' }}>最大連勝</span>
+                                        <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{advancedStats.maxStreak}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                                        <span style={{ color: 'var(--text-muted)' }}>現在の連勝</span>
+                                        <span style={{ fontSize: '1.8rem', fontWeight: '900', fontFamily: 'var(--font-en)', color: advancedStats.currentStreak > 0 ? 'var(--smash-yellow)' : 'inherit' }}>{advancedStats.currentStreak}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>最大連敗</span>
+                                        <span style={{ fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-en)', color: 'var(--lose-color)' }}>{advancedStats.maxLossStreak}</span>
+                                    </div>
+                                </div>
+
+                                {/* 2. Best Time to Play (Top 3) */}
+                                {advancedStats.top3Times && advancedStats.top3Times.length > 0 && (
+                                    <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', padding: '1.2rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--smash-yellow)', marginBottom: '1rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                            <Clock size={20} /> 勝率の最も高い時間帯 TOP3
+                                        </div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                            {advancedStats.top3Times.map((timeStat, i) => (
+                                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <div style={{ backgroundColor: '#222', padding: '0.8rem', borderRadius: '50%', color: 'var(--smash-yellow)' }}>
+                                                        {timeStat.icon}
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontSize: '1.2rem', fontWeight: '900', fontFamily: 'var(--font-jp)' }}>{i + 1}位: {timeStat.label}</div>
+                                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 'bold' }}>勝率: {Math.round((timeStat.wins / timeStat.total) * 100)}% ({timeStat.total}戦)</div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* 3. Daily Performance */}
+                            {advancedStats.recentDays.length > 0 && (
+                                <div className="stat-card" style={{ borderBottomColor: 'var(--text-main)', padding: '1.2rem', marginBottom: '1rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: '900', fontStyle: 'italic', fontSize: '1.2rem' }}>
+                                        <CalendarDays size={20} /> 最近の日毎データ (直近7日)
+                                    </div>
+                                    <div className="table-scroll">
+                                        <table className="data-table">
+                                            <thead>
+                                                <tr style={{ backgroundColor: '#1a1a1a', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>日付</th>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>試合数</th>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>勝率</th>
+                                                    <th style={{ padding: '0.8rem', borderBottom: '2px solid #444' }}>戦闘力 最終推移</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {advancedStats.recentDays.map((day, i) => {
+                                                    const winRate = day.total > 0 ? Math.round((day.wins / day.total) * 100) : 0;
+                                                    const gspDiff = (day.endGsp && day.startGsp) ? day.endGsp - day.startGsp : 0;
+                                                    const gspColor = gspDiff > 0 ? 'var(--win-color)' : (gspDiff < 0 ? 'var(--lose-color)' : 'var(--text-muted)');
+                                                    return (
+                                                        <tr key={i} style={{ borderBottom: '1px solid #333', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
+                                                            <td style={{ padding: '1rem', fontWeight: 'bold' }}>{day.date}</td>
+                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold' }}>{day.total} 戦</td>
+                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: winRate >= 60 ? 'var(--smash-yellow)' : 'inherit' }}>{winRate}%</td>
+                                                            <td style={{ padding: '1rem', fontFamily: 'var(--font-en)', fontWeight: 'bold', color: gspColor }}>
+                                                                {gspDiff > 0 ? '+' : ''}{gspDiff !== 0 ? gspDiff.toLocaleString() : '-'}
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* 曜日別 / セッション内の位置 */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                                {advancedStats.weekdayStats.length > 0 && (
+                                    <div className="stat-card" style={{ borderBottomColor: 'var(--win-color)', padding: '1.2rem' }}>
+                                        <div className="analysis-card__title" style={{ color: 'var(--win-color)' }}>
+                                            <CalendarDays size={18} /> 曜日別 勝率
+                                        </div>
+                                        <div className="weekday-chart">
+                                            {advancedStats.weekdayStats.map(w => {
+                                                const rate = Math.round((w.wins / w.total) * 100);
+                                                return (
+                                                    <div key={w.label} className="weekday-chart__col" title={`${w.total}戦 ${w.wins}勝`}>
+                                                        <span className="weekday-chart__rate">{rate}%</span>
+                                                        <div className="weekday-chart__track">
+                                                            <div
+                                                                className="weekday-chart__fill"
+                                                                style={{
+                                                                    height: `${rate}%`,
+                                                                    backgroundColor: rate >= 60 ? 'var(--smash-yellow)' : rate >= 50 ? 'var(--win-color)' : 'var(--lose-color)'
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        <span className="weekday-chart__label">{w.label}</span>
+                                                        <span className="weekday-chart__count">{w.total}</span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {advancedStats.sessionBuckets.length > 1 && (
+                                    <div className="stat-card" style={{ borderBottomColor: 'var(--smash-yellow)', padding: '1.2rem' }}>
+                                        <div className="analysis-card__title" style={{ color: 'var(--smash-yellow)' }}>
+                                            <Activity size={18} /> 連続プレイの何戦目か
+                                        </div>
+                                        <p className="analysis-card__note">
+                                            2時間以上空いたら別のプレイとして数えています。
+                                        </p>
+                                        <div className="session-rows">
+                                            {advancedStats.sessionBuckets.map(b => {
+                                                const rate = Math.round((b.wins / b.total) * 100);
+                                                return (
+                                                    <div key={b.label} className="session-row">
+                                                        <span className="session-row__label">{b.label}</span>
+                                                        <div className="session-row__track">
+                                                            <div
+                                                                className="session-row__fill"
+                                                                style={{
+                                                                    width: `${rate}%`,
+                                                                    backgroundColor: rate >= 60 ? 'var(--smash-yellow)' : rate >= 50 ? 'var(--win-color)' : 'var(--lose-color)'
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        <span className="session-row__rate">{rate}%</span>
+                                                        <span className="session-row__count">{b.total}戦</span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                                </div>
+                            )}
+                        </div>
+                    )}
 
                     {/* Recent History */}
                     <div className="animate-enter" style={{ animationDelay: '0.2s' }}>

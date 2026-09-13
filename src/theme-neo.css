@@ -670,7 +670,133 @@
 }
 
 /* ---------------------------------------------------------------- */
+/* 詳細データ分析 / 撃墜技ランキング                                   */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .analysis-section {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-md);
+  box-shadow: var(--neo-hi);
+  overflow: hidden;
+}
+
+[data-ui='neo'] .analysis-toggle {
+  transition: background 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ui='neo'] .analysis-toggle:hover {
+    background: var(--neo-surface-3);
+  }
+}
+
+[data-ui='neo'] .weekday-chart__track,
+[data-ui='neo'] .session-row__track,
+[data-ui='neo'] .killmove-ranking__track {
+  border: none;
+  border-radius: var(--neo-r-sm);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+[data-ui='neo'] .weekday-chart__fill {
+  border-radius: 6px 6px 0 0;
+}
+
+[data-ui='neo'] .session-row__fill,
+[data-ui='neo'] .killmove-ranking__fill {
+  border-radius: var(--neo-r-pill);
+}
+
+[data-ui='neo'] .killmove-ranking__row {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-sm);
+}
+
+/* ---------------------------------------------------------------- */
+/* 対戦成績: バー / フォームガイド / ホバーカード                      */
+
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .matchup-bar {
+  height: 6px;
+  border: none;
+  border-radius: var(--neo-r-pill);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+[data-ui='neo'] .matchup-bar__win {
+  background: linear-gradient(90deg, #3ddcff, #7fe9ff);
+  box-shadow: 0 0 10px rgba(61, 220, 255, 0.5);
+}
+
+[data-ui='neo'] .matchup-bar__lose {
+  background: linear-gradient(90deg, #ff4f6d, #ff7a90);
+}
+
+[data-ui='neo'] .form-pip {
+  border-radius: 8px;
+  box-shadow: var(--neo-e1), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+[data-ui='neo'] .form-pip.is-lg {
+  clip-path: none;
+  border-radius: 9px;
+}
+
+[data-ui='neo'] .form-pip.is-win {
+  background: linear-gradient(160deg, #56e3ff, #1ab5da);
+}
+
+[data-ui='neo'] .form-pip.is-lose {
+  background: linear-gradient(160deg, #ff6b85, #e02b4a);
+}
+
+[data-ui='neo'] .form-pip.is-latest {
+  outline-color: var(--neo-gold);
+  box-shadow: var(--neo-e1), 0 0 14px rgba(255, 194, 75, 0.5);
+}
+
+[data-ui='neo'] .fighter-hover-card {
+  background: rgba(14, 16, 22, 0.96);
+  border: 1px solid var(--neo-stroke-strong);
+  border-radius: var(--neo-r-md);
+  box-shadow: var(--neo-e2), var(--neo-hi);
+  backdrop-filter: blur(10px);
+}
+
+[data-ui='neo'] .fighter-hover-card.is-above::after {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-ui='neo'] .fighter-hover-card.is-below::after {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-ui='neo'] .fighter-hover-card__bar {
+  border: none;
+  border-radius: var(--neo-r-pill);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+[data-ui='neo'] .fighter-hover-card__bar-fill {
+  border-radius: var(--neo-r-pill);
+}
+
+[data-ui='neo'] .fighter-hover-card__bar-fill.is-good {
+  background: linear-gradient(90deg, #3ddcff, #7fe9ff);
+}
+
+[data-ui='neo'] .fighter-hover-card__bar-fill.is-bad {
+  background: linear-gradient(90deg, #ff4f6d, #ff7a90);
+}
+
+/* ---------------------------------------------------------------- */
 /* 詳細設定 / 撃墜技パネル                                            */
+
 /* ---------------------------------------------------------------- */
 
 [data-ui='neo'] .extras-toggle {
