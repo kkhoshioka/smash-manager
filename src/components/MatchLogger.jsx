@@ -230,11 +230,14 @@ export default function MatchLogger() {
     );
 
     return (
-        <div className="animate-enter" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div className="match-logger animate-enter">
 
-            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+            {/* 画面が広いときは、この塊が左カラムになる */}
+            <div className="logger-main">
+
+            <div className="logger-top">
                 {/* My Fighter Section */}
-                <div style={{ flex: '1 1 300px', minWidth: 0 }}>
+                <div className="logger-fighter is-mine">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                         <h2 className="section-title" style={{ borderColor: 'var(--smash-yellow)', margin: 0 }}>
                             <User size={24} style={{ marginRight: '0.5rem', color: 'var(--smash-yellow)' }} />
@@ -355,7 +358,7 @@ export default function MatchLogger() {
                 )}
 
                 {/* Opponent Section */}
-                <div style={{ flex: '1 1 300px', minWidth: 0 }}>
+                <div className="logger-fighter is-opponent">
                     <h2 className="section-title" style={{ margin: 0, marginBottom: '1rem' }}>
                         <Swords size={24} style={{ marginRight: '0.5rem', color: 'var(--smash-red)' }} />
                         対戦相手
@@ -406,7 +409,7 @@ export default function MatchLogger() {
 
             {/* Matchup Stats */}
             {matchupStats && (
-                <div className="animate-enter" style={{ display: 'flex', justifyContent: 'center' }}>
+                <div className="logger-matchup animate-enter">
                     <div className="matchup-stats-box">
                         <div className="matchup-stats-title">
                             過去の対戦成績
@@ -443,10 +446,12 @@ export default function MatchLogger() {
                 </div>
             )}
 
-            <div className="smash-divider" />
+            </div>{/* /logger-main */}
+
+            <div className="smash-divider logger-divider" />
 
             {/* Extras & Rules Dropdown */}
-            <div>
+            <div className="logger-extras">
                 <button
                     className="extras-toggle"
                     onClick={() => setShowExtras(!showExtras)}
@@ -520,6 +525,7 @@ export default function MatchLogger() {
                                     }
                                 }}
                                 placeholder={latestGspPlaceholder}
+                                className="gsp-input"
                                 style={{ width: '100%', fontSize: '1.25rem', padding: '0.8rem' }}
                             />
                         </div>
@@ -651,6 +657,7 @@ export default function MatchLogger() {
                                 value={notes}
                                 onChange={e => setNotes(e.target.value)}
                                 placeholder="立ち回りの反省点、相手の癖など..."
+                                className="notes-input"
                                 style={{ width: '100%', background: '#111', border: '2px solid #444', color: '#fff', padding: '1rem', minHeight: '80px', resize: 'vertical', fontFamily: 'var(--font-jp)', outline: 'none' }}
                             />
                         </div>

@@ -368,6 +368,7 @@ export default function Stats() {
                 <select
                     value={selectedMyFighter}
                     onChange={(e) => setSelectedMyFighter(e.target.value)}
+                    className="stats-filter-select"
                     style={{ padding: '0.7rem', backgroundColor: '#222', color: 'white', border: '2px solid var(--smash-red)', flex: '1 1 160px', minWidth: 0, cursor: 'pointer', outline: 'none', fontSize: '1.05rem', fontWeight: 'bold' }}
                 >
                     <option value="all">全ファイター</option>
@@ -894,7 +895,7 @@ export default function Stats() {
                                 {filteredHistory.length === 0 ? 'まだ対戦記録がありません。「記録する」タブから最初の試合を登録しましょう！' : 'フィルター条件に一致する試合がありません。'}
                             </p>
                         ) : (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div className="history-list">
                                 {displayedHistory.slice(0, 50).map((match, index) => {
                                     const myFighter = fighters.find(f => f.id === match.myFighter);
                                     const opponent = fighters.find(f => f.id === match.opponentFighter);

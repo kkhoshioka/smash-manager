@@ -86,7 +86,6 @@
 }
 
 [data-ui='neo'] .main-content {
-  max-width: 1400px;
   background: var(--neo-surface);
   border: 1px solid var(--neo-stroke);
   border-radius: var(--neo-r-lg);

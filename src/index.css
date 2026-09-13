@@ -117,7 +117,7 @@ svg.lucide {
 
 .main-content {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1680px;
   background: rgba(31, 31, 31, 0.85);
   /* Semi-transparent panel background */
   border: 1px solid var(--border-glass);
@@ -894,6 +894,112 @@ textarea:focus {
   }
 }
 
+/* --- MatchLogger layout --- */
+.match-logger {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.logger-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.logger-top {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.logger-fighter {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
+.logger-matchup {
+  display: flex;
+  justify-content: center;
+}
+
+.logger-extras {
+  min-width: 0;
+}
+
+/* 入力欄が画面幅いっぱいに間延びしないように上限を決める */
+.gsp-input {
+  max-width: 340px;
+}
+
+.notes-input {
+  max-width: 760px;
+}
+
+/* 中〜大画面: WIN/LOSE を2つのファイター欄の下に全幅で置く。
+   中央に縦積みしていたときの、左右の大きな余白がなくなる。 */
+@media (min-width: 900px) {
+  .logger-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .logger-fighter.is-mine {
+    grid-column: 1;
+  }
+
+  .logger-fighter.is-opponent {
+    grid-column: 2;
+  }
+
+  .logger-top .action-btn-container {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .logger-top .action-btn-styled {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* 大画面: 左に「選ぶ」、右に「詳細を書く」の2カラム。
+   縦スクロールなしで記録を完結できるようにする。 */
+@media (min-width: 1240px) {
+  .match-logger {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    align-items: start;
+    column-gap: 2rem;
+  }
+
+  .logger-main {
+    grid-column: 1;
+  }
+
+  .logger-extras {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  /* 2カラムのときは区切り線が不要 */
+  .logger-divider {
+    display: none;
+  }
+
+  .logger-matchup {
+    justify-content: flex-start;
+  }
+
+  .logger-matchup .matchup-stats-box {
+    width: 100%;
+  }
+}
+
 /* --- History: note & KO chips --- */
 .history-note {
   margin-top: 0.5rem;
@@ -1005,6 +1111,46 @@ textarea:focus {
   font-size: 0.8rem;
   line-height: 1.4;
   color: var(--text-muted);
+}
+
+/* --- History list --- */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* --- Wide screens --- */
+@media (min-width: 1400px) {
+  .chart-wrap {
+    height: 420px;
+  }
+}
+
+/* 横長のカードを間延びさせない上限 */
+@media (min-width: 1100px) {
+  .vip-gauge {
+    max-width: 760px;
+  }
+
+  .stats-filter-select {
+    max-width: 420px;
+  }
+}
+
+/* デスクトップでは対戦カードのファイター名を折り返さない */
+@media (min-width: 769px) {
+  .history-item-header .fighter-name {
+    white-space: nowrap;
+  }
+}
+
+/* 履歴は横に伸ばし続けるより2列にしたほうが一覧しやすい */
+@media (min-width: 1500px) {
+  .history-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* --- VIP Border Gauge --- */
