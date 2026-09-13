@@ -117,7 +117,7 @@ svg.lucide {
 
 .main-content {
   width: 100%;
-  max-width: 1680px;
+  max-width: 1920px;
   background: rgba(31, 31, 31, 0.85);
   /* Semi-transparent panel background */
   border: 1px solid var(--border-glass);
@@ -964,39 +964,6 @@ textarea:focus {
   .logger-top .action-btn-styled {
     flex: 1;
     min-width: 0;
-  }
-}
-
-/* 大画面: 左に「選ぶ」、右に「詳細を書く」の2カラム。
-   縦スクロールなしで記録を完結できるようにする。 */
-@media (min-width: 1240px) {
-  .match-logger {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-    align-items: start;
-    column-gap: 2rem;
-  }
-
-  .logger-main {
-    grid-column: 1;
-  }
-
-  .logger-extras {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  /* 2カラムのときは区切り線が不要 */
-  .logger-divider {
-    display: none;
-  }
-
-  .logger-matchup {
-    justify-content: flex-start;
-  }
-
-  .logger-matchup .matchup-stats-box {
-    width: 100%;
   }
 }
 
