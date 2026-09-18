@@ -1121,6 +1121,61 @@ textarea:focus {
   }
 }
 
+/* --- GSP input warning --- */
+.gsp-input.has-warning,
+input.has-warning {
+  border-color: var(--smash-yellow) !important;
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.18);
+}
+
+.gsp-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1px solid var(--smash-yellow);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.gsp-warning__icon {
+  color: var(--smash-yellow);
+  margin-top: 1px;
+}
+
+.gsp-warning__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.gsp-warning__fix {
+  padding: 0.35rem 0.8rem;
+  background: var(--smash-yellow);
+  color: #000;
+  font-weight: 900;
+  font-size: 0.85rem;
+  font-family: var(--font-jp);
+  white-space: nowrap;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.gsp-warning__fix:active {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gsp-warning__fix:hover {
+    filter: brightness(1.1);
+  }
+}
+
 /* --- Stats: collapsible analysis section --- */
 .analysis-section {
   border: 2px solid #333;

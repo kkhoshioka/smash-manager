@@ -670,7 +670,35 @@
 }
 
 /* ---------------------------------------------------------------- */
+/* 戦闘力の入力ミス警告                                                */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .gsp-warning {
+  background: linear-gradient(140deg, rgba(255, 194, 75, 0.18), rgba(255, 194, 75, 0.05));
+  border: 1px solid rgba(255, 194, 75, 0.5);
+  border-radius: var(--neo-r-md);
+  box-shadow: var(--neo-e1), var(--neo-hi);
+}
+
+[data-ui='neo'] .gsp-warning__icon {
+  color: var(--neo-gold);
+}
+
+[data-ui='neo'] .gsp-warning__fix {
+  background: linear-gradient(160deg, #ffd479, var(--neo-gold));
+  border-radius: var(--neo-r-pill);
+  box-shadow: var(--neo-e1), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+[data-ui='neo'] input.has-warning,
+[data-ui='neo'] .gsp-input.has-warning {
+  border-color: rgba(255, 194, 75, 0.8) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(255, 194, 75, 0.2);
+}
+
+/* ---------------------------------------------------------------- */
 /* 詳細データ分析 / 撃墜技ランキング                                   */
+
 /* ---------------------------------------------------------------- */
 
 [data-ui='neo'] .analysis-section {

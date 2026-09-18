@@ -1,10 +1,11 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair, Flame } from 'lucide-react';
+import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair, Flame, AlertTriangle } from 'lucide-react';
 import VipBorderGauge from './VipBorderGauge';
 import FighterHoverCard from './FighterHoverCard';
 import { getLatestGsp } from '../data/vipBorder';
+import { checkGsp, describeGspWarning } from '../data/gspCheck';
 
 
 /**
@@ -168,6 +169,19 @@ export default function MatchLogger() {
         return "例: 14,000,000";
     }, [prefs.lastMyFighter, prefs.fighterGsp, history]);
 
+    /**
+     * 前回（直近の記録）の戦闘力。
+     * prefs.fighterGsp は入力途中で書き換わるので、比較には履歴の値を使う。
+     */
+    const previousGsp = useMemo(() => {
+        if (!prefs.lastMyFighter) return null;
+        const recent = history.find(m => m.myFighter === prefs.lastMyFighter && m.gsp);
+        return recent ? recent.gsp : null;
+    }, [history, prefs.lastMyFighter]);
+
+    /** 入力された戦闘力が前回から離れすぎていないか */
+    const gspWarning = useMemo(() => checkGsp(gsp, previousGsp), [gsp, previousGsp]);
+
     // 入力中はその値を、未入力なら保存済みの最新戦闘力をゲージに使う
     const gaugeGsp = useMemo(() => {
         const typed = gsp ? parseInt(gsp, 10) : null;
@@ -282,6 +296,16 @@ export default function MatchLogger() {
         if (!selectedOpponent) {
             alert('相手ファイターを選択してください');
             return;
+        }
+
+        // 桁の打ち間違いはここで止める（詳細設定を閉じていると警告が見えないため）
+        if (gspWarning) {
+            const ok = window.confirm(
+                `世界戦闘力が ${gspWarning.value.toLocaleString()} になっています。\n` +
+                `${describeGspWarning(gspWarning)}\n\n` +
+                'このまま記録しますか？'
+            );
+            if (!ok) return;
         }
 
         const finalMyKillMoves = myKillMoves.map((move, i) => move === 'custom_input' ? (customMyKillMoves[i] || '') : move).filter(Boolean);
@@ -666,21 +690,52 @@ export default function MatchLogger() {
                                 value={gsp}
                                 onChange={e => {
                                     setGsp(e.target.value);
-                                    if (e.target.value && prefs.lastMyFighter) {
-                                        // Automatically update the preference when typing so we don't lose it
+                                    // 入力途中の値（"1" や "13" など）で上書きしないよう、
+                                    // 戦闘力としてありえる桁数になってから保存する
+                                    const typed = parseInt(e.target.value, 10);
+                                    if (typed >= 1000000 && prefs.lastMyFighter) {
                                         setPrefs(p => ({
                                             ...p,
                                             fighterGsp: {
                                                 ...(p.fighterGsp || {}),
-                                                [prefs.lastMyFighter]: parseInt(e.target.value, 10)
+                                                [prefs.lastMyFighter]: typed
                                             }
                                         }));
                                     }
                                 }}
                                 placeholder={latestGspPlaceholder}
-                                className="gsp-input"
+                                className={`gsp-input ${gspWarning ? 'has-warning' : ''}`}
                                 style={{ width: '100%', fontSize: '1.25rem', padding: '0.8rem' }}
                             />
+
+                            {gspWarning && (
+                                <div className="gsp-warning animate-enter">
+                                    <AlertTriangle size={18} className="gsp-warning__icon" />
+                                    <div className="gsp-warning__body">
+                                        <span>{describeGspWarning(gspWarning)}</span>
+                                        {gspWarning.suggestion && (
+                                            <button
+                                                type="button"
+                                                className="gsp-warning__fix"
+                                                onClick={() => {
+                                                    setGsp(String(gspWarning.suggestion));
+                                                    if (prefs.lastMyFighter) {
+                                                        setPrefs(p => ({
+                                                            ...p,
+                                                            fighterGsp: {
+                                                                ...(p.fighterGsp || {}),
+                                                                [prefs.lastMyFighter]: gspWarning.suggestion
+                                                            }
+                                                        }));
+                                                    }
+                                                }}
+                                            >
+                                                {gspWarning.suggestion.toLocaleString()} に直す
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Kill Move Selection (Dependent on My Fighter and Opponent) */}

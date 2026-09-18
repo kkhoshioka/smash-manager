@@ -1,8 +1,9 @@
 import React, { useMemo, useState, useRef } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
-import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search, ChevronDown, ChevronUp, Shield } from 'lucide-react';
+import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search, ChevronDown, ChevronUp, Shield, AlertTriangle } from 'lucide-react';
 import VipBorderGauge from './VipBorderGauge';
+import { checkGsp, describeGspWarning } from '../data/gspCheck';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, AreaChart, Area } from 'recharts';
 
 export default function Stats() {
@@ -41,8 +42,35 @@ export default function Stats() {
         });
     };
 
+    /**
+     * 編集中の試合の、ひとつ前（時系列で直前）の戦闘力。
+     * 履歴は新しい順に並んでいるので、自分より後ろ＝より古い記録を探す。
+     */
+    const editingPreviousGsp = useMemo(() => {
+        if (!editingMatchId) return null;
+        const index = history.findIndex(m => m.id === editingMatchId);
+        if (index < 0) return null;
+        const target = history[index];
+        const older = history.slice(index + 1).find(m => m.myFighter === target.myFighter && m.gsp);
+        return older ? older.gsp : null;
+    }, [editingMatchId, history]);
+
+    const editGspWarning = useMemo(
+        () => (editingMatchId ? checkGsp(editForm.gsp, editingPreviousGsp) : null),
+        [editingMatchId, editForm.gsp, editingPreviousGsp]
+    );
+
     const handleSaveEdit = () => {
         if (editingMatchId) {
+            // 直す側でも打ち間違えることがあるので、ここでも一度止める
+            if (editGspWarning) {
+                const ok = window.confirm(
+                    `世界戦闘力が ${editGspWarning.value.toLocaleString()} になっています。\n` +
+                    `${describeGspWarning(editGspWarning)}\n\n` +
+                    'このまま保存しますか？'
+                );
+                if (!ok) return;
+            }
             const finalEditForm = {
                 ...editForm,
                 gsp: editForm.gsp ? parseInt(editForm.gsp, 10) : null,
@@ -1093,7 +1121,14 @@ export default function Stats() {
                                                         </label>
                                                         <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
                                                             <span style={{ color: 'var(--text-muted)' }}>世界戦闘力(GSP)</span>
-                                                            <input type="number" name="gsp" value={editForm.gsp} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
+                                                            <input
+                                                                type="number"
+                                                                name="gsp"
+                                                                value={editForm.gsp}
+                                                                onChange={handleEditChange}
+                                                                className={editGspWarning ? 'has-warning' : ''}
+                                                                style={{ padding: '0.8rem', fontSize: '1rem' }}
+                                                            />
                                                         </label>
                                                         <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
                                                             <span style={{ color: 'var(--text-muted)' }}>ステージ</span>
@@ -1104,6 +1139,24 @@ export default function Stats() {
                                                             </select>
                                                         </label>
                                                     </div>
+                                                    {editGspWarning && (
+                                                        <div className="gsp-warning">
+                                                            <AlertTriangle size={18} className="gsp-warning__icon" />
+                                                            <div className="gsp-warning__body">
+                                                                <span>{describeGspWarning(editGspWarning)}</span>
+                                                                {editGspWarning.suggestion && (
+                                                                    <button
+                                                                        type="button"
+                                                                        className="gsp-warning__fix"
+                                                                        onClick={() => setEditForm(prev => ({ ...prev, gsp: String(editGspWarning.suggestion) }))}
+                                                                    >
+                                                                        {editGspWarning.suggestion.toLocaleString()} に直す
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
                                                     <label style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: 'bold' }}>
                                                         <span style={{ color: 'var(--text-muted)' }}>自分の撃墜技 (カンマ区切り)</span>
                                                         <input type="text" name="myKillMoves" value={editForm.myKillMoves} onChange={handleEditChange} style={{ padding: '0.8rem', fontSize: '1rem' }} />
