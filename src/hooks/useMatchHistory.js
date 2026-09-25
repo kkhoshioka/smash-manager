@@ -5,12 +5,31 @@ import { useAuth } from './useAuth';
 const STORAGE_KEY = 'smash_logger_history';
 const PREFS_KEY = 'smash_logger_prefs';
 
+/**
+ * 読み込んだ履歴の型を揃える。
+ * 古い記録に gsp が文字列で入っているものがあり、そのままだと
+ * 差分計算（"123" - 100 は動くが "123" + 100 は文字列連結）で壊れるため、
+ * 入口で数値に正規化しておく。数値にできない値は null 扱い。
+ */
+function normalizeHistory(list) {
+    if (!Array.isArray(list)) return [];
+    return list.map(m => {
+        if (m == null || typeof m !== 'object') return m;
+        if (m.gsp === null || m.gsp === undefined || m.gsp === '') {
+            return m.gsp === undefined ? m : { ...m, gsp: null };
+        }
+        const n = Number(m.gsp);
+        if (typeof m.gsp === 'number' && Number.isFinite(m.gsp)) return m;
+        return { ...m, gsp: Number.isFinite(n) ? n : null };
+    });
+}
+
 export function useMatchHistory() {
     const { auth, logout } = useAuth();
 
     const [history, setHistory] = useState(() => {
         const saved = localStorage.getItem(STORAGE_KEY);
-        return saved ? JSON.parse(saved) : [];
+        return saved ? normalizeHistory(JSON.parse(saved)) : [];
     });
 
     const [prefs, setPrefs] = useState(() => {
@@ -91,14 +110,14 @@ export function useMatchHistory() {
                     if (isInitialLoad && history.length > result.data.history.length) {
                         const wantsCloud = window.confirm(`クラウド上のデータ(${result.data.history.length}件)より、この端末のデータ(${history.length}件)の方が多いようです。\n\nクラウドのデータで上書きしてよろしいですか？\n(「キャンセル」を押すと上書きせず、この端末の最新データをクラウドに保存します)`);
                         if (wantsCloud) {
-                            setHistory(result.data.history);
+                            setHistory(normalizeHistory(result.data.history));
                         } else {
                             // Save local to cloud to sync them up
                             await saveToCloud(currentAuth, history, prefs);
                             return; // Skip setting prefs from cloud to avoid mixing states
                         }
                     } else {
-                        setHistory(result.data.history);
+                        setHistory(normalizeHistory(result.data.history));
                     }
                 }
                 if (result.data.prefs) setPrefs(result.data.prefs);
@@ -192,7 +211,7 @@ export function useMatchHistory() {
         try {
             const data = JSON.parse(dataString);
             if (data.history && Array.isArray(data.history)) {
-                setHistory(data.history);
+                setHistory(normalizeHistory(data.history));
             }
             if (data.prefs) {
                 setPrefs(data.prefs);

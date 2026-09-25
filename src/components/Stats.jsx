@@ -3,6 +3,7 @@ import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
 import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search, ChevronDown, ChevronUp, Shield, AlertTriangle } from 'lucide-react';
 import VipBorderGauge from './VipBorderGauge';
+import VipPlan from './VipPlan';
 import { checkGsp, describeGspWarning } from '../data/gspCheck';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, AreaChart, Area } from 'recharts';
 
@@ -460,6 +461,8 @@ export default function Stats() {
             {selectedMyFighter !== 'all' && latestGsp && (
                 <VipBorderGauge gsp={latestGsp} />
             )}
+
+            {selectedMyFighter !== 'all' && <VipPlan history={filteredHistory} />}
 
             {/* Overview Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.8rem' }}>

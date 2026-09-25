@@ -1121,6 +1121,310 @@ textarea:focus {
   }
 }
 
+/* --- VIP Plan --- */
+.vip-plan {
+  background: linear-gradient(150deg, #191919, #0d0d0d);
+  border: 2px solid #444;
+  border-left: 4px solid var(--smash-red);
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.vip-plan__title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 1.15rem;
+  font-style: normal;
+  letter-spacing: 1px;
+  color: var(--smash-red);
+}
+
+.vip-plan__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
+}
+
+.vip-plan__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.vip-plan__label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.vip-plan__value {
+  font-family: var(--font-en);
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.vip-plan__value.is-good {
+  color: var(--smash-yellow);
+}
+
+.vip-plan__sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+.vip-plan__sub strong {
+  color: var(--text-main);
+  font-family: var(--font-en);
+  font-size: 0.95rem;
+}
+
+/* 損益分岐 */
+.vip-plan__breakeven {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.7rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid #2c2c2c;
+}
+
+.vip-plan__be-head,
+.vip-plan__be-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.vip-plan__be-head strong,
+.vip-plan__be-foot strong {
+  font-family: var(--font-en);
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.is-good { color: var(--win-color); }
+.is-bad { color: var(--lose-color); }
+
+/* 勝率バーと分岐点のマーカー */
+.vip-plan__be-bar {
+  position: relative;
+  height: 12px;
+  margin-bottom: 0.9rem;
+  background: #000;
+  border: 1px solid #333;
+  overflow: visible;
+}
+
+/* 拡大表示していることが分かるよう両端に目盛りを出す */
+.vip-plan__be-tick {
+  position: absolute;
+  top: 100%;
+  margin-top: 2px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: #666;
+}
+
+.vip-plan__be-tick.is-start { left: 0; }
+.vip-plan__be-tick.is-end { right: 0; }
+
+.vip-plan__be-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--win-color), var(--smash-yellow));
+  transition: width 0.5s ease;
+}
+
+.vip-plan__be-mark {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+
+.vip-plan__verdict {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.vip-plan__verdict svg {
+  margin-top: 2px;
+}
+
+/* ブロック */
+.vip-plan__block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vip-plan__block-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 1px;
+}
+
+.vip-plan__proj {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+}
+
+.vip-plan__proj-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.6rem;
+  background: #111;
+  border: 1px solid #333;
+}
+
+.vip-plan__proj-rate {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+.vip-plan__proj-val {
+  font-family: var(--font-en);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--smash-yellow);
+}
+
+/* 対策する相手 */
+.vip-plan__drains {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.vip-plan__drain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3rem 3.5rem auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  background: #111;
+  border: 1px solid #333;
+  border-left: 3px solid var(--lose-color);
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.vip-plan__drain-name {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 確度のバッジ */
+.vip-plan__conf {
+  flex-shrink: 0;
+  padding: 1px 6px;
+  font-size: 0.65rem;
+  font-weight: bold;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+.vip-plan__conf.is-high { color: var(--smash-yellow); }
+.vip-plan__conf.is-medium { color: var(--text-muted); }
+.vip-plan__conf.is-low { color: #666; }
+
+.vip-plan__drain.is-low {
+  border-left-color: #555;
+  opacity: 0.8;
+}
+
+.vip-plan__drain-rate {
+  font-family: var(--font-en);
+  font-size: 1rem;
+  color: var(--lose-color);
+  text-align: right;
+}
+
+.vip-plan__drain-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.vip-plan__drain-swing {
+  font-size: 0.75rem;
+  color: var(--smash-yellow);
+  white-space: nowrap;
+}
+
+.vip-plan__note {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+.vip-plan__note.is-highlight {
+  color: var(--smash-yellow);
+  font-size: 0.85rem;
+}
+
+.vip-plan__note.is-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.6rem 0.7rem;
+  background: rgba(245, 166, 35, 0.1);
+  border: 1px solid rgba(245, 166, 35, 0.5);
+  color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+  .vip-plan {
+    padding: 0.8rem;
+    gap: 0.7rem;
+  }
+
+  .vip-plan__value {
+    font-size: 1.4rem;
+  }
+
+  .vip-plan__drain {
+    grid-template-columns: minmax(0, 1fr) 2.8rem auto;
+  }
+
+  .vip-plan__drain-meta {
+    display: none;
+  }
+}
+
 /* --- GSP input warning --- */
 .gsp-input.has-warning,
 input.has-warning {

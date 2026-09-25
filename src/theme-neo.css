@@ -670,7 +670,78 @@
 }
 
 /* ---------------------------------------------------------------- */
+/* VIP作戦                                                           */
+/* ---------------------------------------------------------------- */
+
+[data-ui='neo'] .vip-plan {
+  background: linear-gradient(150deg, rgba(255, 59, 78, 0.12), rgba(0, 0, 0, 0.28));
+  border: 1px solid var(--neo-stroke);
+  border-left: 3px solid var(--neo-accent);
+  border-radius: var(--neo-r-md);
+  box-shadow: var(--neo-e1), var(--neo-hi);
+  backdrop-filter: blur(12px);
+}
+
+[data-ui='neo'] .vip-plan__title {
+  color: #fff;
+}
+
+[data-ui='neo'] .vip-plan__breakeven {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-sm);
+}
+
+[data-ui='neo'] .vip-plan__be-bar {
+  height: 10px;
+  border: none;
+  border-radius: var(--neo-r-pill);
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+[data-ui='neo'] .vip-plan__be-fill {
+  border-radius: var(--neo-r-pill);
+  background: linear-gradient(90deg, #3ddcff, #7a6bff 60%, #ffc24b);
+  box-shadow: 0 0 12px rgba(122, 107, 255, 0.45);
+}
+
+[data-ui='neo'] .vip-plan__proj-item,
+[data-ui='neo'] .vip-plan__drain {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--neo-stroke);
+  border-radius: var(--neo-r-sm);
+}
+
+[data-ui='neo'] .vip-plan__drain {
+  border-left: 3px solid var(--neo-lose);
+}
+
+[data-ui='neo'] .vip-plan__proj-val,
+[data-ui='neo'] .vip-plan__drain-swing,
+[data-ui='neo'] .vip-plan__note.is-highlight,
+[data-ui='neo'] .vip-plan__value.is-good {
+  color: var(--neo-gold);
+}
+
+[data-ui='neo'] .vip-plan__drain-rate,
+[data-ui='neo'] .is-bad {
+  color: var(--neo-lose);
+}
+
+[data-ui='neo'] .is-good {
+  color: var(--neo-win);
+}
+
+[data-ui='neo'] .vip-plan__note.is-warn {
+  background: linear-gradient(140deg, rgba(255, 194, 75, 0.16), rgba(255, 194, 75, 0.04));
+  border: 1px solid rgba(255, 194, 75, 0.45);
+  border-radius: var(--neo-r-sm);
+}
+
+/* ---------------------------------------------------------------- */
 /* 戦闘力の入力ミス警告                                                */
+
 /* ---------------------------------------------------------------- */
 
 [data-ui='neo'] .gsp-warning {
