@@ -4,6 +4,8 @@ import { fighters } from '../data/fighters';
 import { Crown, Skull, ChevronDown, ChevronUp, User, Swords, Settings, Search, Crosshair, Flame, AlertTriangle } from 'lucide-react';
 import VipBorderGauge from './VipBorderGauge';
 import FighterHoverCard from './FighterHoverCard';
+import KillMoveChips from './KillMoveChips';
+import { countsToList, rankMoves } from '../data/killMoves';
 import { getLatestGsp } from '../data/vipBorder';
 import { checkGsp, describeGspWarning } from '../data/gspCheck';
 
@@ -93,10 +95,9 @@ export default function MatchLogger() {
     const [rules, setRules] = useState(prefs.rules || { stock: 3, time: 7, stage: '戦場タイプ' });
     const [fighterSearch, setFighterSearch] = useState('');
 
-    const [myKillMoves, setMyKillMoves] = useState([]);
-    const [opponentKillMoves, setOpponentKillMoves] = useState([]);
-    const [customMyKillMoves, setCustomMyKillMoves] = useState({});
-    const [customOpponentKillMoves, setCustomOpponentKillMoves] = useState({});
+    // { 技名: 本数 }。チップを押した回数で数える
+    const [myKillCounts, setMyKillCounts] = useState({});
+    const [opponentKillCounts, setOpponentKillCounts] = useState({});
 
     const [isSelectingMine, setIsSelectingMine] = useState(!prefs.lastMyFighter);
     const myFighterObj = fighters.find(f => f.id === prefs.lastMyFighter);
@@ -151,6 +152,31 @@ export default function MatchLogger() {
         const customs = prefs.customKillMoves?.[selectedOpponent.id] || [];
         return [...new Set([...defaults, ...customs])];
     }, [selectedOpponent, prefs.customKillMoves]);
+
+    /** 自分のファイターで、実際に決めている技の回数 */
+    const myMoveFreq = useMemo(() => {
+        const f = {};
+        history.forEach(m => {
+            if (m.myFighter !== prefs.lastMyFighter) return;
+            (m.myKillMoves || []).forEach(v => { if (v) f[v] = (f[v] || 0) + 1; });
+        });
+        return f;
+    }, [history, prefs.lastMyFighter]);
+
+    /**
+     * この相手にやられている技の回数。
+     * 全相手ぶんで代用すると、別キャラの技（クルール戦にDKの技など）が
+     * 候補に混ざってしまうので、必ずこの相手の記録だけを使う。
+     */
+    const opponentMoveFreq = useMemo(() => {
+        if (!selectedOpponent) return {};
+        const freq = {};
+        history.forEach(m => {
+            if (m.opponentFighter !== selectedOpponent.id) return;
+            (m.opponentKillMoves || []).forEach(v => { if (v) freq[v] = (freq[v] || 0) + 1; });
+        });
+        return freq;
+    }, [history, selectedOpponent]);
 
     const latestGspPlaceholder = useMemo(() => {
         if (!prefs.lastMyFighter) return "例: 14,000,000";
@@ -308,8 +334,8 @@ export default function MatchLogger() {
             if (!ok) return;
         }
 
-        const finalMyKillMoves = myKillMoves.map((move, i) => move === 'custom_input' ? (customMyKillMoves[i] || '') : move).filter(Boolean);
-        const finalOpponentKillMoves = opponentKillMoves.map((move, i) => move === 'custom_input' ? (customOpponentKillMoves[i] || '') : move).filter(Boolean);
+        const finalMyKillMoves = countsToList(myKillCounts);
+        const finalOpponentKillMoves = countsToList(opponentKillCounts);
 
         addMatch({
             myFighter: prefs.lastMyFighter,
@@ -339,10 +365,8 @@ export default function MatchLogger() {
         // Clear input so the updated placeholder shows the new latest GSP
         setGsp('');
         setNotes('');
-        setMyKillMoves([]);
-        setOpponentKillMoves([]);
-        setCustomMyKillMoves({});
-        setCustomOpponentKillMoves({});
+        setMyKillCounts({});
+        setOpponentKillCounts({});
     };
 
     /**
@@ -420,7 +444,7 @@ export default function MatchLogger() {
                                     setPrefs(p => ({ ...p, lastMyFighter: f.id }));
                                     setIsSelectingMine(false);
                                     setFighterSearch('');
-                                    setMyKillMoves([]);
+                                    setMyKillCounts({});
                                 }}
                             />
                         </div>
@@ -738,39 +762,55 @@ export default function MatchLogger() {
                             )}
                         </div>
 
-                        {/* Kill Move Selection (Dependent on My Fighter and Opponent) */}
-                        <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        {/* 撃墜技。分析価値の高い「やられた技」を先に置く */}
+                        <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                            {/* Opponent Kill Moves */}
+                            {selectedOpponent && (
+                                <div className="killmove-panel is-opponent">
+                                    <label className="killmove-panel__title is-opponent">
+                                        <Skull size={20} /> 相手に撃墜された技
+                                    </label>
+                                    <KillMoveChips
+                                        variant="opponent"
+                                        moves={rankMoves(opponentCombinedKillMoves, opponentMoveFreq)}
+                                        counts={opponentKillCounts}
+                                        onChange={setOpponentKillCounts}
+                                        max={typeof rules.stock === 'number' ? rules.stock : 3}
+                                    />
+                                </div>
+                            )}
+
                             {/* My Kill Moves */}
                             {myFighterObj && (
                                 <div className="killmove-panel is-mine">
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--text-main)', fontWeight: 'bold' }}>
+                                    <div className="killmove-panel__head">
+                                        <label className="killmove-panel__title">
                                             <Crosshair size={20} color="var(--smash-yellow)" /> 自分が撃墜した技
                                         </label>
-                                        <button onClick={() => setIsEditingMyKillMoves(!isEditingMyKillMoves)} style={{ fontSize: '0.9rem', color: 'var(--smash-yellow)', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}>
-                                            {isEditingMyKillMoves ? '完了' : '編集'}
+                                        <button onClick={() => setIsEditingMyKillMoves(!isEditingMyKillMoves)} className="killmove-panel__edit">
+                                            {isEditingMyKillMoves ? '完了' : '技を編集'}
                                         </button>
                                     </div>
 
                                     {isEditingMyKillMoves && (
-                                        <div style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#222', border: '1px solid #444', borderRadius: '4px' }}>
-                                            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.8rem', fontWeight: 'bold' }}>カスタム撃墜技の追加</div>
-                                            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+                                        <div className="killmove-editor">
+                                            <div className="killmove-editor__label">カスタム撃墜技の追加</div>
+                                            <div className="killmove-editor__row">
                                                 <input
                                                     type="text"
                                                     value={newCustomKillMove}
                                                     onChange={e => setNewCustomKillMove(e.target.value)}
+                                                    onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); handleAddCustomKillMove(); } }}
                                                     placeholder="新しい撃墜技を入力..."
-                                                    style={{ flex: 1, padding: '0.8rem', fontSize: '1rem', background: '#111', color: 'white', border: '1px solid #555' }}
                                                 />
-                                                <button onClick={handleAddCustomKillMove} style={{ padding: '0 1.5rem', backgroundColor: 'var(--smash-yellow)', color: '#000', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>追加</button>
+                                                <button onClick={handleAddCustomKillMove}>追加</button>
                                             </div>
                                             {(prefs.customKillMoves?.[prefs.lastMyFighter] || []).length > 0 && (
-                                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                                <div className="killmove-editor__list">
                                                     {(prefs.customKillMoves?.[prefs.lastMyFighter] || []).map(m => (
-                                                        <span key={m} style={{ backgroundColor: '#111', padding: '0.4rem 0.8rem', border: '1px solid #444', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'white' }}>
+                                                        <span key={m} className="killmove-editor__item">
                                                             {m}
-                                                            <button onClick={() => handleRemoveCustomKillMove(m)} style={{ color: 'var(--lose-color)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px' }}>×</button>
+                                                            <button onClick={() => handleRemoveCustomKillMove(m)}>×</button>
                                                         </span>
                                                     ))}
                                                 </div>
@@ -778,83 +818,13 @@ export default function MatchLogger() {
                                         </div>
                                     )}
 
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                        {Array.from({ length: rules.stock }).map((_, index) => (
-                                            <div key={`my-kill-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                                                <span style={{ fontSize: '1rem', color: 'var(--smash-yellow)', width: '20px', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{index + 1}</span>
-                                                <select
-                                                    value={myKillMoves[index] === 'custom_input' ? 'custom_input' : (myKillMoves[index] || '')}
-                                                    onChange={(e) => {
-                                                        const newMoves = [...myKillMoves];
-                                                        newMoves[index] = e.target.value;
-                                                        setMyKillMoves(newMoves);
-                                                    }}
-                                                    style={{ flex: '1 1 140px', minWidth: 0 }}
-                                                >
-                                                    <option value="">指定なし</option>
-                                                    {myCombinedKillMoves.map((move, mIndex) => (
-                                                        <option key={mIndex} value={move}>{move}</option>
-                                                    ))}
-                                                    {myKillMoves[index] && !myCombinedKillMoves.includes(myKillMoves[index]) && myKillMoves[index] !== 'custom_input' && (
-                                                        <option value={myKillMoves[index]}>{myKillMoves[index]}</option>
-                                                    )}
-                                                    <option value="custom_input">その他...</option>
-                                                </select>
-                                                {myKillMoves[index] === 'custom_input' && (
-                                                    <input
-                                                        type="text"
-                                                        placeholder="技名"
-                                                        value={customMyKillMoves?.[index] || ''}
-                                                        onChange={(e) => setCustomMyKillMoves(prev => ({ ...(prev || {}), [index]: e.target.value }))}
-                                                        style={{ flex: '1 1 120px', minWidth: 0 }}
-                                                    />
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Opponent Kill Moves */}
-                            {selectedOpponent && (
-                                <div className="killmove-panel is-opponent">
-                                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem', color: 'var(--smash-red)', marginBottom: '1rem', fontWeight: 'bold' }}>
-                                        <Skull size={20} /> 相手に撃墜された技
-                                    </label>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                        {Array.from({ length: rules.stock }).map((_, index) => (
-                                            <div key={`opp-kill-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                                                <span style={{ fontSize: '1rem', color: 'var(--smash-red)', width: '20px', fontWeight: '900', fontFamily: 'var(--font-en)' }}>{index + 1}</span>
-                                                <select
-                                                    value={opponentKillMoves[index] === 'custom_input' ? 'custom_input' : (opponentKillMoves[index] || '')}
-                                                    onChange={(e) => {
-                                                        const newMoves = [...opponentKillMoves];
-                                                        newMoves[index] = e.target.value;
-                                                        setOpponentKillMoves(newMoves);
-                                                    }}
-                                                    style={{ flex: '1 1 140px', minWidth: 0, borderColor: 'var(--smash-red)' }}
-                                                >
-                                                    <option value="">指定なし</option>
-                                                    {opponentCombinedKillMoves.map((move, mIndex) => (
-                                                        <option key={mIndex} value={move}>{move}</option>
-                                                    ))}
-                                                    {opponentKillMoves[index] && !opponentCombinedKillMoves.includes(opponentKillMoves[index]) && opponentKillMoves[index] !== 'custom_input' && (
-                                                        <option value={opponentKillMoves[index]}>{opponentKillMoves[index]}</option>
-                                                    )}
-                                                    <option value="custom_input">その他...</option>
-                                                </select>
-                                                {opponentKillMoves[index] === 'custom_input' && (
-                                                    <input
-                                                        type="text"
-                                                        placeholder="技名"
-                                                        value={customOpponentKillMoves?.[index] || ''}
-                                                        onChange={(e) => setCustomOpponentKillMoves(prev => ({ ...(prev || {}), [index]: e.target.value }))}
-                                                        style={{ flex: '1 1 120px', minWidth: 0, borderColor: 'var(--smash-red)' }}
-                                                    />
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
+                                    <KillMoveChips
+                                        variant="mine"
+                                        moves={rankMoves(myCombinedKillMoves, myMoveFreq)}
+                                        counts={myKillCounts}
+                                        onChange={setMyKillCounts}
+                                        max={typeof rules.stock === 'number' ? rules.stock : 3}
+                                    />
                                 </div>
                             )}
                         </div>

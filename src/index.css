@@ -1121,6 +1121,241 @@ textarea:focus {
   }
 }
 
+/* --- Kill move chips --- */
+.killmove-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.killmove-panel__title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--text-main);
+}
+
+.killmove-panel__title.is-opponent {
+  color: var(--smash-red);
+  margin-bottom: 0.7rem;
+}
+
+.killmove-panel__edit {
+  font-size: 0.85rem;
+  color: var(--smash-yellow);
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.kmc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kmc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.kmc__remaining {
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.kmc__reset {
+  color: var(--text-muted);
+  text-decoration: underline;
+  font-size: 0.75rem;
+}
+
+.kmc__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* 押しやすさ優先。指で確実に当たる高さを確保する */
+.kmc__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 40px;
+  padding: 0.4rem 0.8rem;
+  background: #111;
+  border: 1px solid #444;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-family: var(--font-jp);
+  line-height: 1.2;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.kmc__chip:active {
+  transform: scale(0.95);
+}
+
+.kmc__chip:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.kmc--mine .kmc__chip.is-on {
+  background: rgba(245, 166, 35, 0.2);
+  border-color: var(--smash-yellow);
+  color: var(--smash-yellow);
+}
+
+.kmc--opponent .kmc__chip.is-on {
+  background: rgba(255, 51, 51, 0.2);
+  border-color: var(--lose-color);
+  color: var(--lose-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kmc__chip:hover:not(:disabled) {
+    background: #222;
+    border-color: #777;
+  }
+}
+
+.kmc__chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 14rem;
+  white-space: nowrap;
+}
+
+.kmc__chip-count {
+  font-family: var(--font-en);
+  font-weight: 900;
+}
+
+/* × は独立した当たり判定にする */
+.kmc__chip-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-right: -0.3rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+.kmc__chip--other,
+.kmc__chip--more {
+  border-style: dashed;
+  color: var(--text-muted);
+}
+
+.kmc__other {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.kmc__other input {
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+.kmc__other-add,
+.kmc__other-cancel {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: 1px solid #555;
+  color: var(--text-main);
+}
+
+.kmc__other-add {
+  background: var(--smash-yellow);
+  color: #000;
+  border-color: var(--smash-yellow);
+}
+
+/* カスタム技エディタ */
+.killmove-editor {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background: #222;
+  border: 1px solid #444;
+}
+
+.killmove-editor__label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+
+.killmove-editor__row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.killmove-editor__row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.killmove-editor__row button {
+  padding: 0 1.2rem;
+  background: var(--smash-yellow);
+  color: #000;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.killmove-editor__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.killmove-editor__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  background: #111;
+  border: 1px solid #444;
+  font-size: 0.85rem;
+}
+
+.killmove-editor__item button {
+  color: var(--lose-color);
+  font-size: 1.1rem;
+  padding: 0 2px;
+}
+
+@media (max-width: 768px) {
+  .kmc__chip {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .kmc__chip-name {
+    max-width: 10rem;
+  }
+}
+
 /* --- VIP Plan --- */
 .vip-plan {
   background: linear-gradient(150deg, #191919, #0d0d0d);
