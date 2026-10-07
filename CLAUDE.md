@@ -15,9 +15,10 @@
 - **管理**: `api/admin.js`が別途存在。
 
 ## デプロイについて
-- GitHub: `kkhoshioka/smash-manager`(origin/main)
-- Vercel: `npx vercel --prod --yes` で本番デプロイ
-- **`deploy.ps1`のコミットメッセージは使わないこと。** 過去の特定の変更用に書かれた固定文言("Update UI: Add official Final Destination background...")がそのまま残っており、今の変更内容と関係ない。`git add` → 内容に即したコミットメッセージで`git commit` → `git push` → `npx vercel --prod --yes` を手動で行うこと。
+- **コードを修正したら、Bossに確認せず毎回 commit → push(=本番デプロイ)まで進める**(2026-10-08 Bossの明示指示)。push前に `npx vite build` が通ることは確認する。
+- GitHub: `kkhoshioka/smash-manager`(origin/main)。**作業前に必ず `git fetch` → 最新の origin/main に追いつく**(別セッションで更新されていることが多い)。
+- Vercel: GitHub連携で **main への push だけで本番に自動デプロイ**される。`npx vercel` CLIはトークン切れで使えないので不要。結果は `curl -s https://api.github.com/repos/kkhoshioka/smash-manager/commits/<sha>/status` の `Vercel` が `success` かで確認できる。
+- **`deploy.ps1`のコミットメッセージは使わないこと。** 過去の特定の変更用に書かれた固定文言("Update UI: Add official Final Destination background...")がそのまま残っており、今の変更内容と関係ない。`git add` → 内容に即したコミットメッセージで`git commit` → `git push` を手動で行うこと。
 - 他の`deploy_*.ps1`群も同様に、特定の過去タスク用に作られた使い捨てスクリプトの可能性が高いので、中身を確認せずに実行しないこと。
 - ces-managerと同様「都度pushの許可を聞かずにcommit→pushまでやる」方針を適用してよいか(CLAUDE.md §⑧参照)は、**このプロジェクトではまだBossに明示的に確認していない**。念のため初回は確認してから進めるとよい。
 
