@@ -55,8 +55,20 @@ export function useMatchHistory() {
     const [syncError, setSyncError] = useState(null);
     const isCloudInitialized = useRef(false);
 
+    // Latest values for event listeners (avoid stale closures)
+    const historyRef = useRef(history);
+    const prefsRef = useRef(prefs);
+    historyRef.current = history;
+    prefsRef.current = prefs;
+    const pendingSaves = useRef(0);
+    const lastSaveFailed = useRef(false);
+    const isRefreshing = useRef(false);
+    // JSON of the last state known to match the cloud; used to skip echo saves
+    const cloudSnapshot = useRef(null);
+
     const saveToCloud = async (currentAuth, newHistory, newPrefs) => {
         if (!currentAuth || !currentAuth.token) return;
+        pendingSaves.current += 1;
         setIsSyncing(true);
         setSyncError(null);
         try {
@@ -75,11 +87,52 @@ export function useMatchHistory() {
                 if (response.status === 401) logout();
                 throw new Error(result.error || 'Sync failed');
             }
+            lastSaveFailed.current = false;
+            cloudSnapshot.current = JSON.stringify({ history: newHistory, prefs: newPrefs });
         } catch (err) {
             console.error("Cloud Error:", err);
+            lastSaveFailed.current = true;
             setSyncError("クラウド保存に失敗しました。");
         } finally {
+            pendingSaves.current -= 1;
             setIsSyncing(false);
+        }
+    };
+
+    // Silently pull the latest cloud data (e.g. after recording on another device)
+    const refreshFromCloud = async (currentAuth) => {
+        if (!currentAuth || !currentAuth.token || !isCloudInitialized.current) return;
+        if (isRefreshing.current || pendingSaves.current > 0) return;
+        // Local changes never reached the cloud: push them instead of discarding
+        if (lastSaveFailed.current) {
+            await saveToCloud(currentAuth, historyRef.current, prefsRef.current);
+            return;
+        }
+        isRefreshing.current = true;
+        try {
+            const response = await fetch('/api/load', {
+                cache: 'no-store',
+                headers: { 'Authorization': `Bearer ${currentAuth.token}` }
+            });
+            if (!response.ok) {
+                if (response.status === 401) logout();
+                return;
+            }
+            const result = await response.json();
+            const cloud = result.data;
+            // A save started while loading: local is newer, keep it
+            if (!cloud || pendingSaves.current > 0 || lastSaveFailed.current) return;
+            const cloudHistory = cloud.history ? normalizeHistory(cloud.history) : historyRef.current;
+            const cloudPrefs = cloud.prefs || prefsRef.current;
+            const cloudJson = JSON.stringify({ history: cloudHistory, prefs: cloudPrefs });
+            if (cloudJson === JSON.stringify({ history: historyRef.current, prefs: prefsRef.current })) return;
+            cloudSnapshot.current = cloudJson;
+            setHistory(cloudHistory);
+            setPrefs(cloudPrefs);
+        } catch (err) {
+            console.error("Cloud Refresh Error:", err);
+        } finally {
+            isRefreshing.current = false;
         }
     };
 
@@ -89,6 +142,7 @@ export function useMatchHistory() {
         setSyncError(null);
         try {
             const response = await fetch('/api/load', {
+                cache: 'no-store',
                 headers: {
                     'Authorization': `Bearer ${currentAuth.token}`
                 }
@@ -165,17 +219,36 @@ export function useMatchHistory() {
         }
     }, [auth?.token]); // Dependency on token to trigger load when logging in
 
+    // Re-sync whenever the app comes back to the foreground or periodically while open
+    useEffect(() => {
+        if (!auth || !auth.token) return;
+        const onVisible = () => {
+            if (document.visibilityState === 'visible') refreshFromCloud(auth);
+        };
+        document.addEventListener('visibilitychange', onVisible);
+        window.addEventListener('focus', onVisible);
+        const timer = setInterval(onVisible, 60 * 1000);
+        return () => {
+            document.removeEventListener('visibilitychange', onVisible);
+            window.removeEventListener('focus', onVisible);
+            clearInterval(timer);
+        };
+    }, [auth?.token]);
+
+    const isUnchangedFromCloud = () =>
+        cloudSnapshot.current === JSON.stringify({ history: historyRef.current, prefs: prefsRef.current });
+
     useEffect(() => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
         // Auto sync
-        if (auth && auth.token && isCloudInitialized.current && history.length > 0) {
+        if (auth && auth.token && isCloudInitialized.current && history.length > 0 && !isUnchangedFromCloud()) {
             saveToCloud(auth, history, prefs);
         }
     }, [history]);
 
     useEffect(() => {
         localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
-        if (auth && auth.token && isCloudInitialized.current) {
+        if (auth && auth.token && isCloudInitialized.current && !isUnchangedFromCloud()) {
             saveToCloud(auth, history, prefs);
         }
     }, [prefs]);
