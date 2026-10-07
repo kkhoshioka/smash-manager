@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import restoredData from '../data/restored_data.json';
 import { useAuth } from './useAuth';
+import { mergeHistories, mergePrefs, sameHistory } from '../../lib/mergeHistory.js';
 
 const STORAGE_KEY = 'smash_logger_history';
 const PREFS_KEY = 'smash_logger_prefs';
@@ -61,16 +62,34 @@ export function useMatchHistory() {
     historyRef.current = history;
     prefsRef.current = prefs;
     const pendingSaves = useRef(0);
-    const lastSaveFailed = useRef(false);
     const isRefreshing = useRef(false);
     // JSON of the last state known to match the cloud; used to skip echo saves
     const cloudSnapshot = useRef(null);
+
+    // Merge cloud data into this device's data (match by match, nothing is dropped),
+    // apply it locally, and push back anything the cloud was missing.
+    const applyCloudData = async (currentAuth, cloud) => {
+        const localHistory = historyRef.current;
+        const localPrefs = prefsRef.current;
+        const cloudHistory = normalizeHistory(cloud.history || []);
+        const mergedPrefs = mergePrefs(cloud.prefs || localPrefs, localPrefs);
+        const mergedHistory = mergeHistories(cloudHistory, localHistory, mergedPrefs.deletedIds);
+
+        cloudSnapshot.current = JSON.stringify({ history: mergedHistory, prefs: mergedPrefs });
+        if (!sameHistory(mergedHistory, localHistory)) setHistory(mergedHistory);
+        if (JSON.stringify(mergedPrefs) !== JSON.stringify(localPrefs)) setPrefs(mergedPrefs);
+
+        const cloudIsMissingSomething = !sameHistory(mergedHistory, cloudHistory)
+            || mergedPrefs.deletedIds.length !== (cloud.prefs?.deletedIds || []).length;
+        if (cloudIsMissingSomething) await saveToCloud(currentAuth, mergedHistory, mergedPrefs);
+    };
 
     const saveToCloud = async (currentAuth, newHistory, newPrefs) => {
         if (!currentAuth || !currentAuth.token) return;
         pendingSaves.current += 1;
         setIsSyncing(true);
         setSyncError(null);
+        let cloudHasMore = false;
         try {
             const response = await fetch('/api/save', {
                 method: 'POST',
@@ -87,27 +106,26 @@ export function useMatchHistory() {
                 if (response.status === 401) logout();
                 throw new Error(result.error || 'Sync failed');
             }
-            lastSaveFailed.current = false;
-            cloudSnapshot.current = JSON.stringify({ history: newHistory, prefs: newPrefs });
+            // The server merged in matches from other devices: pull them down
+            if (typeof result.count === 'number' && result.count !== newHistory.length) {
+                cloudHasMore = true;
+            } else {
+                cloudSnapshot.current = JSON.stringify({ history: newHistory, prefs: newPrefs });
+            }
         } catch (err) {
             console.error("Cloud Error:", err);
-            lastSaveFailed.current = true;
             setSyncError("クラウド保存に失敗しました。");
         } finally {
             pendingSaves.current -= 1;
             setIsSyncing(false);
         }
+        if (cloudHasMore) refreshFromCloud(currentAuth);
     };
 
     // Silently pull the latest cloud data (e.g. after recording on another device)
     const refreshFromCloud = async (currentAuth) => {
         if (!currentAuth || !currentAuth.token || !isCloudInitialized.current) return;
         if (isRefreshing.current || pendingSaves.current > 0) return;
-        // Local changes never reached the cloud: push them instead of discarding
-        if (lastSaveFailed.current) {
-            await saveToCloud(currentAuth, historyRef.current, prefsRef.current);
-            return;
-        }
         isRefreshing.current = true;
         try {
             const response = await fetch('/api/load', {
@@ -120,15 +138,9 @@ export function useMatchHistory() {
             }
             const result = await response.json();
             const cloud = result.data;
-            // A save started while loading: local is newer, keep it
-            if (!cloud || pendingSaves.current > 0 || lastSaveFailed.current) return;
-            const cloudHistory = cloud.history ? normalizeHistory(cloud.history) : historyRef.current;
-            const cloudPrefs = cloud.prefs || prefsRef.current;
-            const cloudJson = JSON.stringify({ history: cloudHistory, prefs: cloudPrefs });
-            if (cloudJson === JSON.stringify({ history: historyRef.current, prefs: prefsRef.current })) return;
-            cloudSnapshot.current = cloudJson;
-            setHistory(cloudHistory);
-            setPrefs(cloudPrefs);
+            // A save started while loading: let it finish first, the next refresh picks it up
+            if (!cloud || !Array.isArray(cloud.history) || pendingSaves.current > 0) return;
+            await applyCloudData(currentAuth, cloud);
         } catch (err) {
             console.error("Cloud Refresh Error:", err);
         } finally {
@@ -160,21 +172,11 @@ export function useMatchHistory() {
 
             if (result.data) {
                 if (result.data.history) {
-                    // Safety check: Don't silently overwrite local data if local has MORE matches
-                    if (isInitialLoad && history.length > result.data.history.length) {
-                        const wantsCloud = window.confirm(`クラウド上のデータ(${result.data.history.length}件)より、この端末のデータ(${history.length}件)の方が多いようです。\n\nクラウドのデータで上書きしてよろしいですか？\n(「キャンセル」を押すと上書きせず、この端末の最新データをクラウドに保存します)`);
-                        if (wantsCloud) {
-                            setHistory(normalizeHistory(result.data.history));
-                        } else {
-                            // Save local to cloud to sync them up
-                            await saveToCloud(currentAuth, history, prefs);
-                            return; // Skip setting prefs from cloud to avoid mixing states
-                        }
-                    } else {
-                        setHistory(normalizeHistory(result.data.history));
-                    }
+                    // Merge instead of overwriting, so matches only on this device survive
+                    await applyCloudData(currentAuth, result.data);
+                } else if (result.data.prefs) {
+                    setPrefs(result.data.prefs);
                 }
-                if (result.data.prefs) setPrefs(result.data.prefs);
                 if (!isInitialLoad) alert("クラウドからデータを読み込みました！");
             } else {
                 // No data found in the cloud for this user
@@ -274,10 +276,13 @@ export function useMatchHistory() {
 
     const removeMatch = (id) => {
         setHistory(prev => prev.filter(m => m.id !== id));
+        // Remember the deletion so merging with other devices doesn't bring it back
+        setPrefs(p => ({ ...p, deletedIds: [...new Set([...(p.deletedIds || []), id])] }));
     };
 
     const editMatch = (id, updatedData) => {
-        setHistory(prev => prev.map(m => m.id === id ? { ...m, ...updatedData } : m));
+        const updatedAt = new Date().toISOString();
+        setHistory(prev => prev.map(m => m.id === id ? { ...m, ...updatedData, updatedAt } : m));
     };
 
     const importData = (dataString) => {

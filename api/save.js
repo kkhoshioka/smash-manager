@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { mergeHistories, mergePrefs } from '../lib/mergeHistory.js';
 
 export default async function handler(req, res) {
     // CORS headers for local testing if needed
@@ -31,7 +32,7 @@ export default async function handler(req, res) {
     }
 
     const userId = decoded.userId;
-    const { data } = req.body
+    let { data } = req.body
 
     if (!data) {
         return res.status(400).json({ error: 'No data provided.' })
@@ -45,6 +46,27 @@ export default async function handler(req, res) {
     }
 
     try {
+        // Merge with what is already in the cloud instead of overwriting it,
+        // so a device with stale data can't erase matches recorded elsewhere.
+        const currentRes = await fetch(`${kvUrl}/get/smash_data_${userId}`, {
+            headers: { Authorization: `Bearer ${kvToken}` },
+        })
+        if (!currentRes.ok) {
+            throw new Error(`KV API responded with status ${currentRes.status}`)
+        }
+        let current = (await currentRes.json()).result
+        if (typeof current === 'string') {
+            try { current = JSON.parse(current) } catch { current = null }
+        }
+        if (current && Array.isArray(current.history) && Array.isArray(data.history)) {
+            const prefs = mergePrefs(data.prefs, current.prefs)
+            data = {
+                ...data,
+                prefs,
+                history: mergeHistories(data.history, current.history, prefs.deletedIds),
+            }
+        }
+
         const url = `${kvUrl}/set/smash_data_${userId}`
         const response = await fetch(url, {
             method: 'POST',
@@ -75,7 +97,7 @@ export default async function handler(req, res) {
             console.error('KV Backup Error:', backupError);
         }
 
-        return res.status(200).json({ success: true })
+        return res.status(200).json({ success: true, count: Array.isArray(data.history) ? data.history.length : null })
     } catch (error) {
         console.error('KV Save Error:', error)
         return res.status(500).json({ error: 'Failed to save data' })
