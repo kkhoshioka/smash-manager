@@ -73,6 +73,16 @@ function App() {
           )}
         </div>
 
+        {!auth && (
+          <button
+            type="button"
+            onClick={() => setActiveTab('settings')}
+            style={{ display: 'block', width: '100%', margin: '0 0 1rem', padding: '0.8rem 1rem', borderRadius: '12px', border: '1px solid rgba(255,80,80,0.6)', background: 'rgba(255,60,60,0.15)', color: '#ffb3b3', fontWeight: 700, textAlign: 'left', cursor: 'pointer' }}
+          >
+            ⚠️ ログインしていないため、この端末の記録はクラウドに保存されていません。タップしてオプションからログインしてください（この端末の記録はログイン時に自動でクラウドへ送られます）。
+          </button>
+        )}
+
         <main>
           {activeTab === 'log' && <MatchLogger />}
           {activeTab === 'stats' && <Stats />}
