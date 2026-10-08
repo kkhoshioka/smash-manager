@@ -7,7 +7,7 @@ import FighterHoverCard from './FighterHoverCard';
 import KillMoveChips from './KillMoveChips';
 import { countsToList, rankMoves } from '../data/killMoves';
 import { getLatestGsp } from '../data/vipBorder';
-import { checkGsp, describeGspWarning } from '../data/gspCheck';
+import { checkGsp, checkResultMismatch, describeGspWarning } from '../data/gspCheck';
 
 
 /**
@@ -330,6 +330,16 @@ export default function MatchLogger() {
                 `世界戦闘力が ${gspWarning.value.toLocaleString()} になっています。\n` +
                 `${describeGspWarning(gspWarning)}\n\n` +
                 'このまま記録しますか？'
+            );
+            if (!ok) return;
+        }
+
+        // 戦闘力の上がり下がりと勝敗が逆なら、WIN/LOSE の押し間違いを疑う
+        const resultMismatch = checkResultMismatch(gsp, previousGsp, result);
+        if (resultMismatch) {
+            const ok = window.confirm(
+                `${resultMismatch}\n\n` +
+                `本当に ${result === 'win' ? 'WIN' : 'LOSE'} で記録しますか？`
             );
             if (!ok) return;
         }

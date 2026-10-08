@@ -48,6 +48,33 @@ export function checkGsp(value, previous) {
     return { value: current, previous, diff, absDiff, suggestion: null, reason: 'far' };
 }
 
+/**
+ * 勝敗の押し間違いを検出する。
+ * 記録する戦闘力は「その試合のあと」の値なので、勝てば前回より上がり、負ければ下がる。
+ * それと逆になっていたら、WIN/LOSE を押し間違えている可能性が高い。
+ *
+ * @param {number|string|null} value  入力された戦闘力
+ * @param {number|null} previous      前回（直近の記録）の戦闘力
+ * @param {'win'|'lose'} result       押された勝敗
+ * @returns {null | string}           警告不要なら null、必要なら説明文
+ */
+export function checkResultMismatch(value, previous, result) {
+    const current = typeof value === 'string' ? parseInt(value, 10) : value;
+    if (!current || !previous || current === previous) return null;
+
+    const diff = current - previous;
+    const went = diff > 0 ? '上がって' : '下がって';
+    const detail = `前回の記録 ${previous.toLocaleString()} → 今回 ${current.toLocaleString()}（${diff > 0 ? '+' : '−'}${Math.abs(diff).toLocaleString()}）`;
+
+    if (result === 'win' && diff < 0) {
+        return `WIN を選びましたが、世界戦闘力が${went}います。\n${detail}`;
+    }
+    if (result !== 'win' && diff > 0) {
+        return `LOSE を選びましたが、世界戦闘力が${went}います。\n${detail}`;
+    }
+    return null;
+}
+
 /** 確認ダイアログや警告文に使う説明 */
 export function describeGspWarning(check) {
     if (!check) return '';
