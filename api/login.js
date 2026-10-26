@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { getJwtSecret } from '../lib/jwtSecret.js';
 
 export default async function handler(req, res) {
     // CORS headers
@@ -72,7 +73,7 @@ export default async function handler(req, res) {
         }
 
         // 3. Generate JWT
-        const jwtSecret = process.env.JWT_SECRET || 'smash-logger-secret-key-2026';
+        const jwtSecret = getJwtSecret();
         const isAdmin = parsedUser.nickname === 'おじ勇者おりぶ';
         const token = jwt.sign({ userId: parsedUser.userId, nickname: parsedUser.nickname, isAdmin }, jwtSecret, { expiresIn: '30d' });
 

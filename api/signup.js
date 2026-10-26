@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { getJwtSecret } from '../lib/jwtSecret.js';
 import { randomUUID } from 'crypto';
 
 export default async function handler(req, res) {
@@ -68,7 +69,7 @@ export default async function handler(req, res) {
         if (!saveRes.ok) throw new Error('Failed to save user');
 
         // 4. Generate JWT
-        const jwtSecret = process.env.JWT_SECRET || 'smash-logger-secret-key-2026';
+        const jwtSecret = getJwtSecret();
         const isAdmin = nickname === 'おじ勇者おりぶ';
         const token = jwt.sign({ userId, nickname, isAdmin }, jwtSecret, { expiresIn: '30d' });
 

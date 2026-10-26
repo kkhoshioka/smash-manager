@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { getJwtSecret } from '../lib/jwtSecret.js';
 
 export default async function handler(req, res) {
     // CORS headers
@@ -31,7 +32,7 @@ export default async function handler(req, res) {
 
         const token = authHeader.split(' ')[1];
         try {
-            const jwtSecret = process.env.JWT_SECRET || 'smash-logger-secret-key-2026';
+            const jwtSecret = getJwtSecret();
             const decoded = jwt.verify(token, jwtSecret);
             targetUserId = decoded.userId;
         } catch (err) {

@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { getJwtSecret } from '../lib/jwtSecret.js';
 
 export default async function handler(req, res) {
     // CORS headers
@@ -25,7 +26,7 @@ export default async function handler(req, res) {
     const token = authHeader.split(' ')[1];
     let decoded;
     try {
-        const jwtSecret = process.env.JWT_SECRET || 'smash-logger-secret-key-2026';
+        const jwtSecret = getJwtSecret();
         decoded = jwt.verify(token, jwtSecret);
     } catch (err) {
         return res.status(401).json({ error: '無効なトークンです。' });
