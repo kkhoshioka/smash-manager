@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { useMatchHistory } from '../hooks/useMatchHistory';
 import { fighters } from '../data/fighters';
 import { Trash2, Target, BarChart3, Clock, Edit2, Filter, Crosshair, Flame, CalendarDays, Sun, Moon, Calendar, Trophy, Swords, Users, Activity, FileText, Search, ChevronDown, ChevronUp, Shield, AlertTriangle } from 'lucide-react';
@@ -202,6 +202,7 @@ export default function Stats() {
                     index: i + 1,
                     uniqueId: `${dateObj.getTime()}-${i}`,
                     date: `${month}/${day}`,
+                    year: dateObj.getFullYear(),
                     time: `${hours}:${minutes}`,
                     GSP: Number(m.gsp),
                     opponent: fighters.find(f => f.id === m.opponentFighter)?.name || 'Unknown',
@@ -210,17 +211,52 @@ export default function Stats() {
             });
     }, [filteredHistory, gspChartRange]);
 
+    // グラフの実際の横幅（日付ラベルを何個まで並べられるかの計算に使う）
+    const gspChartWrapRef = useRef(null);
+    const [gspChartWidth, setGspChartWidth] = useState(600);
+    useEffect(() => {
+        const el = gspChartWrapRef.current;
+        if (!el || typeof ResizeObserver === 'undefined') return;
+        const observer = new ResizeObserver(([entry]) => setGspChartWidth(entry.contentRect.width));
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [gspChartData.length > 0]);
+
+    /**
+     * 日付ラベル。日付が変わる位置の候補から、隣のラベルと重ならないものだけを残す。
+     * 期間が長いと日付の切り替わりが数百か所になり、全部出すと潰れて読めないため。
+     * 年をまたぐときは、その年の最初のラベルだけ年も付ける。
+     */
     const gspXTicks = useMemo(() => {
+        const n = gspChartData.length;
+        if (n === 0) return { ticks: [], labels: {} };
+
+        const plotWidth = Math.max(gspChartWidth - 55 - 20, 100); // Y軸の幅と左右の余白を除く
+        const xOf = (i) => (n === 1 ? plotWidth / 2 : (i / (n - 1)) * plotWidth);
+        const labelWidth = (text) => text.length * 7 + 10; // 11px太字のおおよその幅＋すき間
+
         const ticks = [];
+        const labels = {};
         let lastDate = null;
-        gspChartData.forEach(d => {
-            if (d.date !== lastDate) {
-                ticks.push(d.uniqueId);
-                lastDate = d.date;
-            }
+        let lastX = -Infinity;
+        let lastWidth = 0;
+        let lastYear = null;
+        gspChartData.forEach((d, i) => {
+            if (d.date === lastDate) return;
+            lastDate = d.date;
+            const year = d.year;
+            const text = lastYear !== null && year !== lastYear ? `${year}/${d.date}` : d.date;
+            const width = labelWidth(text);
+            const x = xOf(i);
+            if (x - lastX < (lastWidth + width) / 2) return;
+            ticks.push(d.uniqueId);
+            labels[d.uniqueId] = text;
+            lastX = x;
+            lastWidth = width;
+            lastYear = year;
         });
-        return ticks;
-    }, [gspChartData]);
+        return { ticks, labels };
+    }, [gspChartData, gspChartWidth]);
 
     const myKillMoveRanking = useMemo(() => {
         const counts = {};
@@ -592,7 +628,7 @@ export default function Stats() {
                                     ))}
                                 </div>
                             </div>
-                            <div className="chart-wrap">
+                            <div className="chart-wrap" ref={gspChartWrapRef}>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <AreaChart data={gspChartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
                                         <defs>
@@ -605,16 +641,14 @@ export default function Stats() {
                                         <XAxis
                                             dataKey="uniqueId"
                                             stroke="var(--text-muted)"
-                                            ticks={gspXTicks}
+                                            ticks={gspXTicks.ticks}
                                             interval={0}
                                             tick={(props) => {
-                                                const { x, y, payload, index } = props;
-                                                const point = gspChartData.find(d => d.uniqueId === payload.value);
-                                                const text = point ? point.date : payload.value;
-                                                const dy = index % 2 === 0 ? 12 : 26;
+                                                const { x, y, payload } = props;
+                                                const text = gspXTicks.labels[payload.value] ?? '';
                                                 return (
                                                     <g transform={`translate(${x},${y})`}>
-                                                        <text x={0} y={0} dy={dy} textAnchor="middle" fill="var(--text-muted)" fontSize={11} fontWeight="bold">
+                                                        <text x={0} y={0} dy={14} textAnchor="middle" fill="var(--text-muted)" fontSize={11} fontWeight="bold">
                                                             {text}
                                                         </text>
                                                     </g>
